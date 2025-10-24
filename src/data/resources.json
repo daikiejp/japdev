@@ -1,0 +1,140 @@
+[
+  {
+    "title": "DevDocs",
+    "desc": "開発者向けのドキュメントをまとめて検索できるサイト",
+    "category": "ドキュメント",
+    "url": "https://devdocs.io"
+  },
+  {
+    "title": "Web.dev",
+    "desc": "Googleによるウェブ開発ガイド",
+    "category": "ドキュメント",
+    "url": "https://web.dev"
+  },
+  {
+    "title": "JavaScript.info",
+    "desc": "詳細なJavaScriptチュートリアル",
+    "category": "チュートリアル",
+    "url": "https://javascript.info"
+  },
+  {
+    "title": "CSS Tricks",
+    "desc": "CSS技術とテクニック",
+    "category": "ブログ",
+    "url": "https://css-tricks.com"
+  },
+  {
+    "title": "FreeCodeCamp",
+    "desc": "無料プログラミングコース",
+    "category": "学習",
+    "url": "https://freecodecamp.org"
+  },
+  {
+    "title": "The Odin Project",
+    "desc": "ウェブ開発を無料で学べるオンライン学習プラットフォーム",
+    "category": "学習",
+    "url": "https://www.theodinproject.com"
+  },
+  {
+    "title": "MDN Web Docs",
+    "desc": "Web技術の総合リファレンス",
+    "category": "ドキュメント",
+    "url": "https://developer.mozilla.org"
+  },
+  {
+    "title": "Qiita",
+    "desc": "開発者向けの技術記事共有サイト",
+    "category": "コミュニティ",
+    "url": "https://qiita.com"
+  },
+  {
+    "title": "Zenn",
+    "desc": "エンジニア向けのブログ・記事プラットフォーム",
+    "category": "コミュニティ",
+    "url": "https://zenn.dev"
+  },
+  {
+    "title": "Dev.to",
+    "desc": "開発者コミュニティとブログ",
+    "category": "コミュニティ",
+    "url": "https://dev.to"
+  },
+  {
+    "title": "Stack Overflow",
+    "desc": "プログラミングQ&Aコミュニティ",
+    "category": "コミュニティ",
+    "url": "https://stackoverflow.com"
+  },
+      {
+    "title": "note",
+    "desc": "文章や写真、コンテンツを投稿・共有できるプラットフォーム",
+    "category": "コミュニティ",
+    "url": "https://note.com"
+  },
+  {
+    "title": "GitHub Docs",
+    "desc": "Gitとバージョン管理ガイド",
+    "category": "ドキュメント",
+    "url": "https://docs.github.com"
+  },
+  {
+    "title": "Flexbox Froggy",
+    "desc": "フレックスボックスをゲームで学ぶサイト",
+    "category": "学習",
+    "url": "https://flexboxfroggy.com"
+  },
+  {
+    "title": "Grid Garden",
+    "desc": "グリッドレイアウトをゲームで学ぶサイト",
+    "category": "学習",
+    "url": "https://cssgridgarden.com"
+  },
+  {
+    "title": "AWS",
+    "desc": "Amazonのクラウドコンピューティングプラットフォーム",
+    "category": "SaaS",
+    "url": "https://aws.amazon.com/jp"
+  },
+  {
+    "title": "Azure",
+    "desc": "Microsoftのクラウドプラットフォーム",
+    "category": "SaaS",
+    "url": "https://azure.microsoft.com/ja-jp"
+  },
+  {
+    "title": "Google Cloud",
+    "desc": "Googleのクラウドサービス全般",
+    "category": "SaaS",
+    "url": "https://cloud.google.com/?hl=ja"
+  },
+  {
+    "title": "Cloudflare",
+    "desc": "CDN・セキュリティ・パフォーマンス改善サービス",
+    "category": "SaaS",
+    "url": "https://www.cloudflare.com/ja-jp"
+  },
+  {
+    "title": "Vercel",
+    "desc": "フロントエンド向けのクラウドデプロイサービス",
+    "category": "SaaS",
+    "url": "https://vercel.com"
+  },
+  {
+    "title": "Netlify",
+    "desc": "静的サイトのデプロイとホスティングサービス",
+    "category": "SaaS",
+    "url": "https://www.netlify.com"
+  },
+  {
+    "title": "Supabase",
+    "desc": "サーバーレスPostgreSQLデータベース",
+    "category": "SaaS",
+    "url": "https://supabase.com"
+  },
+  {
+    "title": "Neon.tech",
+    "desc": "サーバーレスPostgreSQLデータベース",
+    "category": "SaaS",
+    "url": "https://neon.tech"
+  }
+]

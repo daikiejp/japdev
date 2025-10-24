@@ -1,0 +1,100 @@
+---
+import { categories } from '../data/devsheet/index';
+import Layout from '../layouts/Layout.astro';
+import Hero from '../components/Hero.astro';
+import SearchResults from '../components/SearchResults.astro';
+import NavTabs from '../components/NavTabs.astro';
+import GithubStar from '../components/GithubStar.astro';
+
+const searchQuery = Astro.url.searchParams.get('q') || '';
+---
+
+<Layout title="チートシート - JapDev">
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <Hero /> 
+    <SearchResults />
+    <NavTabs />
+    <!-- カテゴリグリッド -->
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+      {categories.map((category) => (
+        <a 
+          href={`/devsheet/${category.id}`}
+          class="category-card bg-white rounded-xl p-6 shadow-sm border border-gray-100 hover:shadow-lg transition-all hover:border-emerald-200 group"
+          data-search={JSON.stringify({ name: category.name, description: category.description })}
+        >
+          <div class="flex items-center gap-4 mb-4">
+            <div class="w-16 h-16 flex items-center justify-center rounded-lg" style={`background: ${category.color}20;`}>
+              <img src={category.logo} alt={category.name} class="w-10 h-10" />
+            </div>
+            <div class="flex-1">
+              <h3 class="text-xl font-bold text-gray-900 group-hover:text-emerald-600 transition-colors">
+                {category.name}
+              </h3>
+              <p class="text-sm text-gray-500">
+                {category.topicsCount} トピック
+              </p>
+            </div>
+          </div>
+          <p class="text-gray-600 text-sm mb-4">
+            {category.description}
+          </p>
+          <div class="flex items-center gap-2 text-emerald-600 font-medium text-sm">
+            <span>詳細を見る</span>
+            <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+            </svg>
+          </div>
+        </a>
+      ))}
+    </div>
+    <GithubStar />
+  </main>
+</Layout>
+
+<script define:vars={{ searchQuery }}>
+  const searchResultsInfo = document.getElementById('search-results-info');
+  const searchQueryEl = document.getElementById('search-query');
+  const searchCountEl = document.getElementById('search-count');
+
+  function performSearch(query) {
+    const trimmedQuery = query.trim().toLowerCase();
+    
+    if (!trimmedQuery) {
+      document.querySelectorAll('.category-card').forEach(item => {
+        item.style.display = '';
+      });
+      searchResultsInfo?.classList.add('hidden');
+      return;
+    }
+
+    searchResultsInfo?.classList.remove('hidden');
+    if (searchQueryEl) searchQueryEl.textContent = query;
+
+    let totalCount = 0;
+
+    document.querySelectorAll('.category-card').forEach(item => {
+      const searchData = item.getAttribute('data-search');
+      if (searchData) {
+        const data = JSON.parse(searchData);
+        const searchText = Object.values(data).join(' ').toLowerCase();
+        
+        if (searchText.includes(trimmedQuery)) {
+          item.style.display = '';
+          totalCount++;
+        } else {
+          item.style.display = 'none';
+        }
+      }
+    });
+
+    if (searchCountEl) searchCountEl.textContent = totalCount.toString();
+  }
+
+  if (searchQuery) {
+    performSearch(searchQuery);
+  }
+
+  window.addEventListener('search-updated', (e) => {
+    performSearch(e.detail.query);
+  });
+</script>

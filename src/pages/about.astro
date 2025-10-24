@@ -1,0 +1,140 @@
+---
+import Layout from '../layouts/Layout.astro';
+import GitHubStar from '../components/GithubStar.astro';
+---
+
+<Layout title="私たちについて - JapDev">
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+    <!-- ヒーローセクション -->
+    <div class="text-center mb-16">
+      <h1 class="text-5xl md:text-6xl font-bold text-gray-900 mb-6">
+        開発者のために、
+        <span class="bg-linear-to-r from-emerald-600 to-teal-600 bg-clip-text text-transparent">開発者が作る</span>
+      </h1>
+      <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+        JapDevは、日々進化する技術の海で迷わないよう、最新の情報を厳選してお届けするプラットフォームです。
+      </p>
+    </div>
+
+    <!-- ミッションセクション -->
+    <div class="mb-20">
+      <div class="bg-white rounded-2xl p-8 md:p-12 shadow-lg border border-gray-100">
+        <div class="grid md:grid-cols-2 gap-12 items-center">
+          <div>
+            <h2 class="text-3xl font-bold text-gray-900 mb-4">私たちのミッション</h2>
+            <p class="text-gray-600 mb-4">
+              開発者コミュニティに価値ある情報を提供し、技術的な成長を支援することが私たちの使命です。
+            </p>
+            <p class="text-gray-600">
+              フレームワーク、ライブラリ、プログラミング言語の最新バージョン情報から、実践的なチートシート、厳選されたリソースまで、開発者が必要とする情報を一箇所にまとめました。
+            </p>
+          </div>
+          <div class="relative">
+            <div class="aspect-square bg-linear-to-br from-emerald-400 to-teal-500 rounded-2xl p-8 flex items-center justify-center">
+              <svg class="w-32 h-32 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+              </svg>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- バリューセクション -->
+    <div class="mb-20">
+      <h2 class="text-3xl font-bold text-gray-900 text-center mb-12">私たちの価値観</h2>
+      <div class="grid md:grid-cols-3 gap-8">
+        <div class="bg-white rounded-xl p-8 shadow-sm border border-gray-100 hover:shadow-lg transition-all hover:border-emerald-200">
+          <div class="w-12 h-12 bg-linear-to-br from-emerald-500 to-teal-600 rounded-lg flex items-center justify-center mb-4">
+            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+            </svg>
+          </div>
+          <h3 class="text-xl font-bold text-gray-900 mb-3">スピード</h3>
+          <p class="text-gray-600">
+            技術は日々進化しています。私たちは最新情報を迅速にキャッチし、即座にコミュニティに共有します。
+          </p>
+        </div>
+
+        <div class="bg-white rounded-xl p-8 shadow-sm border border-gray-100 hover:shadow-lg transition-all hover:border-emerald-200">
+          <div class="w-12 h-12 bg-linear-to-br from-emerald-500 to-teal-600 rounded-lg flex items-center justify-center mb-4">
+            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+          </div>
+          <h3 class="text-xl font-bold text-gray-900 mb-3">品質</h3>
+          <p class="text-gray-600">
+            情報の正確性と信頼性を最優先します。すべてのコンテンツは慎重に精査され、検証されています。
+          </p>
+        </div>
+
+        <div class="bg-white rounded-xl p-8 shadow-sm border border-gray-100 hover:shadow-lg transition-all hover:border-emerald-200">
+          <div class="w-12 h-12 bg-linear-to-br from-emerald-500 to-teal-600 rounded-lg flex items-center justify-center mb-4">
+            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+            </svg>
+          </div>
+          <h3 class="text-xl font-bold text-gray-900 mb-3">コミュニティ</h3>
+          <p class="text-gray-600">
+            開発者コミュニティの成長を支援し、知識の共有を促進することで、共に成長していきます。
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 私たちの提供内容 -->
+    <div class="mb-20">
+      <h2 class="text-3xl font-bold text-gray-900 text-center mb-12">提供するコンテンツ</h2>
+      <div class="grid md:grid-cols-2 gap-6">
+        <div class="bg-white rounded-xl p-6 border border-emerald-100">
+          <h3 class="text-xl font-bold text-gray-900 mb-3 flex items-center gap-2">
+            <svg class="w-6 h-6 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
+            </svg>
+            最新バージョン情報
+          </h3>
+          <p class="text-gray-600">
+            React、Vue、TypeScriptなど、主要なフレームワークとライブラリの最新バージョンと変更履歴を毎日更新。
+          </p>
+        </div>
+
+        <div class="bg-white rounded-xl p-6 border border-blue-100">
+          <h3 class="text-xl font-bold text-gray-900 mb-3 flex items-center gap-2">
+            <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+            </svg>
+            チートシート
+          </h3>
+          <p class="text-gray-600">
+           初級から上級まで、実務で役立つ知識を素早く確認できるチートシート集。分かりやすいサンプルコード付きで、開発効率をサポート。
+          </p>
+        </div>
+
+        <div class="bg-white rounded-xl p-6 border border-purple-100">
+          <h3 class="text-xl font-bold text-gray-900 mb-3 flex items-center gap-2">
+            <svg class="w-6 h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z" />
+            </svg>
+            厳選リソース
+          </h3>
+          <p class="text-gray-600">
+            開発に役立つドキュメント、学習サイト、コミュニティなど、信頼できるリソースを厳選して紹介。
+          </p>
+        </div>
+
+        <div class="bg-white rounded-xl p-6 border border-orange-100">
+          <h3 class="text-xl font-bold text-gray-900 mb-3 flex items-center gap-2">
+            <svg class="w-6 h-6 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+            </svg>
+            トレンドリポジトリ
+          </h3>
+          <p class="text-gray-600">
+            GitHubで注目を集めている人気リポジトリをトラッキング。新しい技術トレンドをいち早くキャッチ。
+          </p>
+        </div>
+      </div>
+    </div>
+    <GitHubStar />
+  </main>
+</Layout>

@@ -1,0 +1,150 @@
+---
+import "../styles/global.css";
+import resources from '../data/resources.json';
+import Layout from '../layouts/Layout.astro';
+import Hero from '../components/Hero.astro';
+import SearchResults from '../components/SearchResults.astro';
+import NavTabs from '../components/NavTabs.astro';
+import GithubStar from '../components/GithubStar.astro';
+
+const searchQuery = Astro.url.searchParams.get('q') || '';
+
+const groupedResources = resources.reduce((acc, resource) => {
+  if (!acc[resource.category]) {
+    acc[resource.category] = [];
+  }
+  acc[resource.category].push(resource);
+  return acc;
+}, {} as Record<string, typeof resources>);
+---
+
+<Layout title="リソース - JapDev">
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8"> 
+    <Hero />
+    <SearchResults />
+    <NavTabs />
+    <!-- リソースセクション -->
+    <div class="space-y-6 mb-12">
+      {Object.entries(groupedResources).map(([category, items]) => (
+        <div class="category-wrapper bg-white rounded-xl shadow-sm border border-gray-100">
+          <button 
+            class="category-toggle w-full flex items-center justify-between p-6 text-left hover:bg-gray-50 transition-colors"
+            data-category={category}
+          >
+            <div class="flex items-center gap-3">
+              <span class="w-10 h-10 bg-linear-to-br from-emerald-500 to-teal-600 rounded-lg flex items-center justify-center text-white font-bold">
+                {items.length}
+              </span>
+              <h3 class="text-xl font-bold text-gray-900">{category}</h3>
+            </div>
+            <svg class="w-6 h-6 text-gray-400 transition-transform category-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+            </svg>
+          </button>
+          <div class="category-content open" data-category={category}>
+            <div class="grid md:grid-cols-2 gap-4 p-6">
+              {items.map((r) => (
+              <a href={r.url} alt={r.title} target="_blank">
+                <div class="resource-item p-4 border border-gray-200 rounded-lg hover:border-emerald-200 hover:shadow-md transition-all group"
+                     data-search={JSON.stringify({ title: r.title, desc: r.desc, category: r.category })}>
+                  <div class="flex items-start justify-between">
+                    <div class="flex-1">
+                      <h4 class="font-bold text-gray-900 mb-1 group-hover:text-emerald-600 transition-colors">{r.title}</h4>
+                      <p class="text-sm text-gray-600">{r.desc}</p>
+                    </div>
+                    <svg class="w-5 h-5 text-gray-400 group-hover:text-emerald-600 transition-colors shrink-0 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                    </svg>
+                  </div>
+                </div>
+              </a>
+              ))}
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+    <GithubStar />
+  </main>
+</Layout>
+
+<script define:vars={{ searchQuery }}>
+  const categoryToggles = document.querySelectorAll('.category-toggle');
+  
+  categoryToggles.forEach(toggle => {
+    toggle.addEventListener('click', () => {
+      const category = toggle.getAttribute('data-category');
+      const content = document.querySelector(`.category-content[data-category="${category}"]`);
+      const arrow = toggle.querySelector('.category-arrow');
+      
+      content?.classList.toggle('open');
+      arrow?.classList.toggle('rotate-180');
+    });
+  });
+
+  const searchResultsInfo = document.getElementById('search-results-info');
+  const searchQueryEl = document.getElementById('search-query');
+  const searchCountEl = document.getElementById('search-count');
+
+  function performSearch(query) {
+    const trimmedQuery = query.trim().toLowerCase();
+    
+    if (!trimmedQuery) {
+      document.querySelectorAll('.resource-item').forEach(item => {
+        item.style.display = '';
+      });
+      document.querySelectorAll('.category-wrapper').forEach(wrapper => {
+        wrapper.style.display = '';
+      });
+      searchResultsInfo?.classList.add('hidden');
+      return;
+    }
+
+    searchResultsInfo?.classList.remove('hidden');
+    if (searchQueryEl) searchQueryEl.textContent = query;
+
+    let totalCount = 0;
+
+    document.querySelectorAll('.resource-item').forEach(item => {
+      const searchData = item.getAttribute('data-search');
+      if (searchData) {
+        const data = JSON.parse(searchData);
+        const searchText = Object.values(data).join(' ').toLowerCase();
+        
+        if (searchText.includes(trimmedQuery)) {
+          item.style.display = '';
+          totalCount++;
+        } else {
+          item.style.display = 'none';
+        }
+      }
+    });
+
+    document.querySelectorAll('.category-content').forEach(content => {
+      const visibleItems = content.querySelectorAll('.resource-item:not([style*="display: none"])');
+      const category = content.getAttribute('data-category');
+      const categoryWrapper = content.closest('.category-wrapper');
+      
+      if (visibleItems.length === 0) {
+        if (categoryWrapper) categoryWrapper.style.display = 'none';
+      } else {
+        if (categoryWrapper) categoryWrapper.style.display = '';
+        content.classList.add('open');
+        const toggle = content.previousElementSibling;
+        toggle?.querySelector('.category-arrow')?.classList.add('rotate-180');
+      }
+    });
+
+    if (searchCountEl) searchCountEl.textContent = totalCount.toString();
+  }
+
+  if (searchQuery) {
+    performSearch(searchQuery);
+  }
+
+  window.addEventListener('search-updated', (e) => {
+    performSearch(e.detail.query);
+  });
+</script>
+
+
