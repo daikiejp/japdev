@@ -1,0 +1,42 @@
+[
+  {
+    "name": "shadcn/ui",
+    "stars": "98.3k",
+    "desc": "美しく設計されたコンポーネント",
+    "lang": "TypeScript",
+    "trend": "+2.3k",
+    "url": "https://github.com/shadcn/ui"
+  },
+  {
+    "name": "vercel/next.js",
+    "stars": "135k",
+    "desc": "Reactフレームワーク",
+    "lang": "JavaScript",
+    "trend": "+1.8k",
+    "url": "https://github.com/vercel/next.js"
+  },
+  {
+    "name": "microsoft/vscode",
+    "stars": "178k",
+    "desc": "コードエディタ",
+    "lang": "TypeScript",
+    "trend": "+1.5k",
+    "url": "https://github.com/microsoft/vscode"
+  },
+  {
+    "name": "vuejs/core",
+    "stars": "52k",
+    "desc": "プログレッシブフレームワーク",
+    "lang": "TypeScript",
+    "trend": "+890",
+    "url": "https://github.com/vuejs/core"
+  },
+  {
+    "name": "facebook/react",
+    "stars": "240k",
+    "desc": "UIライブラリ",
+    "lang": "JavaScript",
+    "trend": "+2.1k",
+    "url": "https://github.com/facebook/react"
+  }
+]

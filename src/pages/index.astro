@@ -1,16 +1,115 @@
 ---
-import '../styles/global.css'
+import "../styles/global.css";
+import articles from '../data/articles.json';
+import Layout from '../layouts/Layout.astro';
+import Hero from '../components/Hero.astro';
+import SearchResults from '../components/SearchResults.astro';
+import NavTabs from '../components/NavTabs.astro';
+import GithubStar from '../components/GithubStar.astro';
+
+const searchQuery = Astro.url.searchParams.get('q') || '';
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<Layout title="JapDev - 開発者向け情報サイト">
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <Hero />    
+    <SearchResults />
+    <NavTabs />
+    <!-- 記事セクション -->
+    <div class="grid md:grid-cols-2 gap-6 mb-12">
+      {articles.map((a) => (
+        <div class="article-item bg-white rounded-xl overflow-hidden shadow-sm border border-gray-100 hover:shadow-lg transition-all hover:border-emerald-200 group cursor-pointer"
+             data-search={JSON.stringify({ title: a.title, description: a.description, tags: a.tags.join(' '), author: a.author })}>
+         <a href={a.url} alt={a.title} target="_blank">
+          <div class="relative h-48 overflow-hidden">
+            <img src={a.image} alt={a.title} class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
+            <div class="absolute top-3 left-3">
+              <span class="px-3 py-1 bg-white/90 backdrop-blur-sm text-emerald-700 rounded-full font-medium text-sm">
+                {a.source}
+              </span>
+            </div>
+          </div>
+          <div class="p-6">
+            <h3 class="text-lg font-bold text-gray-900 group-hover:text-emerald-600 transition-colors mb-3">
+              {a.title}
+            </h3>
+            <p class="text-gray-600 text-sm mb-4 line-clamp-2">{a.description}</p>
+            <div class="flex items-center justify-between mb-4">
+              <div class="flex items-center gap-3 text-sm text-gray-500">
+                <span class="flex items-center gap-1">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2z" />
+                </svg>
+                  {a.date}
+                </span>
+                <span class="flex items-center gap-1">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                  </svg>
+                  {a.author}
+                </span>
+              </div>
+            </div>
+            <div class="flex flex-wrap gap-2">
+              {a.tags.map((tag) => (
+                <span class="px-2 py-1 bg-emerald-50 text-emerald-700 text-xs rounded-md font-medium">
+                  {tag}
+                </span>
+              ))}
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+    <GithubStar />
+  </main>
+</Layout>
+
+<script define:vars={{ searchQuery }}>
+  const searchResultsInfo = document.getElementById('search-results-info');
+  const searchQueryEl = document.getElementById('search-query');
+  const searchCountEl = document.getElementById('search-count');
+
+  function performSearch(query) {
+    const trimmedQuery = query.trim().toLowerCase();
+    
+    if (!trimmedQuery) {
+      document.querySelectorAll('.article-item').forEach(item => {
+        item.style.display = '';
+      });
+      searchResultsInfo?.classList.add('hidden');
+      return;
+    }
+
+    searchResultsInfo?.classList.remove('hidden');
+    if (searchQueryEl) searchQueryEl.textContent = query;
+
+    let totalCount = 0;
+
+    document.querySelectorAll('.article-item').forEach(item => {
+      const searchData = item.getAttribute('data-search');
+      if (searchData) {
+        const data = JSON.parse(searchData);
+        const searchText = Object.values(data).join(' ').toLowerCase();
+        
+        if (searchText.includes(trimmedQuery)) {
+          item.style.display = '';
+          totalCount++;
+        } else {
+          item.style.display = 'none';
+        }
+      }
+    });
+
+    if (searchCountEl) searchCountEl.textContent = totalCount.toString();
+  }
+
+  if (searchQuery) {
+    performSearch(searchQuery);
+  }
+
+  window.addEventListener('search-updated', (e) => {
+    performSearch(e.detail.query);
+  });
+</script>

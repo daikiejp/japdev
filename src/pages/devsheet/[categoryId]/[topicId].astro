@@ -1,0 +1,234 @@
+---
+import { categories, getCategoryTopics, getTopicContent } from '../../../data/devsheet/index';
+import Layout from '../../../layouts/Layout.astro';
+import DevSheetSidebar from '../../../components/DevSheetSidebar.astro';
+import CodeBlock from '../../../components/CodeBlock.astro';
+
+export async function getStaticPaths() {
+  const paths = [];
+  
+  for (const category of categories) {
+    try {
+      const topics = await getCategoryTopics(category.id);
+      
+      for (const topic of topics) {
+        paths.push({
+          params: {
+            categoryId: category.id,
+            topicId: topic.id,
+          },
+          props: {
+            category,
+            topic,
+          },
+        });
+      }
+    } catch (error) {
+      console.error(`Error generating paths for ${category.id}:`, error);
+    }
+  }
+  
+  return paths;
+}
+
+const { categoryId, topicId } = Astro.params;
+const { category, topic } = Astro.props;
+
+if (!category || !topic) {
+  return Astro.redirect('/devsheet');
+}
+
+const sections = await getTopicContent(categoryId, topicId);
+const allTopics = await getCategoryTopics(categoryId);
+const topicsWithSections = allTopics.map(t => {
+  if (t.id === topicId) {
+    return {
+      ...t,
+      sections: sections.map(s => ({ id: s.id, title: s.title }))
+    };
+  }
+  return t;
+});
+
+const categoryWithTopics = {
+  ...category,
+  topics: topicsWithSections
+};
+---
+
+<Layout title={`${topic.name} - ${category.name} - JapDev`} hasSidebar="true">
+  <div class="flex pt-16">
+    <!-- サイドバー -->
+    <DevSheetSidebar 
+      category={categoryWithTopics} 
+      currentTopicId={topicId} 
+    />
+
+    <!-- メインコンテンツ -->
+    <main class="flex-1 lg:ml-64 min-h-screen">
+      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <!-- パンくずリスト -->
+        <nav class="flex items-center gap-2 text-sm text-gray-600 mb-6">
+          <a href="/devsheet" class="hover:text-emerald-600 transition-colors">チートシート</a>
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+          </svg>
+          <a href={`/devsheet`} class="hover:text-emerald-600 transition-colors">{category.name}</a>
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+          </svg>
+          <span class="text-gray-900 font-medium">{topic.name}</span>
+        </nav>
+
+        <!-- トピックヘッダー -->
+        <div class="mb-8">
+          <div class="flex items-center gap-3 mb-3">
+            <div class="w-12 h-12 flex items-center justify-center rounded-lg" style={`background: ${category.color}20;`}>
+              <img src={category.logo} alt={category.name} class="w-8 h-8" />
+            </div>
+            <div>
+              <h1 class="text-3xl font-bold text-gray-900">{topic.name}</h1>
+              <p class="text-gray-600">{category.name}</p>
+            </div>
+          </div>
+          {topic.description && (
+            <p class="text-gray-600 mt-2">{topic.description}</p>
+          )}
+        </div>
+
+        <!-- セクション -->
+        {sections.length > 0 ? (
+          <div class="space-y-12">
+            {sections.map((section) => (
+              <section id={section.id} class="scroll-mt-20">
+                <div class="mb-6">
+                  <div class="flex items-center justify-between group">
+                    <h2 class="text-2xl font-bold text-gray-900">{section.title}</h2>
+                    <button 
+                      class="share-link-btn group-hover:opacity-100 transition-opacity p-2 hover:bg-gray-100 rounded-lg"
+                      data-section-id={section.id}
+                      title="リンクをコピー"
+                    >
+                      <svg class="w-5 h-5 text-gray-500 hover:text-emerald-600 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" />
+                      </svg>
+                    </button>
+                  </div>
+                  {section.description && (
+                    <p class="text-gray-600">{section.description}</p>
+                  )}
+                </div>
+
+                <!-- コードブロックセクション -->
+                <div class="space-y-4">
+                  {section.codeBlocks.map((codeBlock) => (
+                    <CodeBlock codeBlock={codeBlock} />
+                  ))}
+                </div>
+              </section>
+            ))}
+          </div>
+        ) : (
+          <div class="text-center py-12">
+            <p class="text-gray-500">このトピックにはまだコンテンツがありません。</p>
+          </div>
+        )}
+
+        <!-- ナビゲーションフッター -->
+        <div class="mt-12 pt-8 border-t border-gray-200">
+          <div class="flex items-center justify-between">
+            {(() => {
+              const currentIndex = allTopics.findIndex(t => t.id === topicId);
+              const prevTopic = currentIndex > 0 ? allTopics[currentIndex - 1] : null;
+              const nextTopic = currentIndex < allTopics.length - 1 ? allTopics[currentIndex + 1] : null;
+
+              return (
+                <>
+                  {prevTopic ? (
+                    <a 
+                      href={`/devsheet/${categoryId}/${prevTopic.id}`}
+                      class="flex items-center gap-2 px-4 py-2 text-gray-600 hover:text-emerald-600 transition-colors group"
+                    >
+                      <svg class="w-5 h-5 group-hover:-translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                      </svg>
+                      <div class="text-left">
+                        <div class="text-xs text-gray-500">前へ</div>
+                        <div class="font-medium">{prevTopic.name}</div>
+                      </div>
+                    </a>
+                  ) : (
+                    <div></div>
+                  )}
+
+                  {nextTopic ? (
+                    <a 
+                      href={`/devsheet/${categoryId}/${nextTopic.id}`}
+                      class="flex items-center gap-2 px-4 py-2 text-gray-600 hover:text-emerald-600 transition-colors group"
+                    >
+                      <div class="text-right">
+                        <div class="text-xs text-gray-500">次へ</div>
+                        <div class="font-medium">{nextTopic.name}</div>
+                      </div>
+                      <svg class="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                      </svg>
+                    </a>
+                  ) : (
+                    <div></div>
+                  )}
+                </>
+              );
+            })()}
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+</Layout>
+
+<style>
+  html {
+    scroll-behavior: smooth;
+  }
+</style>
+
+<script>
+  document.querySelectorAll('.share-link-btn').forEach(button => {
+    button.addEventListener('click', async function() {
+      const sectionId = this.getAttribute('data-section-id');
+      if (!sectionId) return;
+      
+      const url = `${window.location.origin}${window.location.pathname}#${sectionId}`;
+      
+      try {
+        await navigator.clipboard.writeText(url);
+        
+        const originalHTML = this.innerHTML;
+        this.innerHTML = `
+          <svg class="w-5 h-5 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+          </svg>
+        `;
+        this.classList.add('opacity-100');
+        
+        const tooltip = document.createElement('div');
+        tooltip.className = 'fixed bg-gray-900 text-white text-sm px-3 py-2 rounded-lg shadow-lg z-50';
+        tooltip.textContent = 'リンクをコピーしました！';
+        tooltip.style.left = `${this.getBoundingClientRect().left - 60}px`;
+        tooltip.style.top = `${this.getBoundingClientRect().bottom + 8}px`;
+        document.body.appendChild(tooltip);
+        
+        setTimeout(() => {
+          this.innerHTML = originalHTML;
+          tooltip.remove();
+        }, 2000);
+        
+      } catch (err) {
+        console.error('Failed to copy:', err);
+        
+        prompt('このリンクをコピーしてください:', url);
+      }
+    });
+  });
+</script>

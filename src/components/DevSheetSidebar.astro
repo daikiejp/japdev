@@ -1,0 +1,308 @@
+---
+interface Props {
+  category: {
+    id: string;
+    name: string;
+    logo: string;
+    color: string;
+    topics: Array<{
+      id: string;
+      name: string;
+      description?: string;
+      sections?: Array<{
+        id: string;
+        title: string;
+      }>;
+    }>;
+  };
+  currentTopicId: string;
+  currentSectionId?: string;
+}
+
+const { category, currentTopicId, currentSectionId } = Astro.props;
+const currentTopic = category.topics.find(t => t.id === currentTopicId);
+---
+<!-- サイドバー -->
+<aside class="devsheet-sidebar fixed left-0 top-16 h-[calc(100vh-4rem)] w-64 bg-white border-r border-gray-200 overflow-y-auto z-40 hidden lg:block">
+  <div class="p-4">
+    <!-- カテゴリーヘッダー -->
+    <a href="/devsheet" class="flex items-center gap-2 text-gray-600 hover:text-emerald-600 mb-4 transition-colors">
+      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+      </svg>
+      <span class="text-sm font-medium">チートシート一覧</span>
+    </a>
+
+    <div class="flex items-center gap-3 mb-6 pb-4 border-b border-gray-200">
+      <div class="w-10 h-10 flex items-center justify-center rounded-lg" style={`background: ${category.color}20;`}>
+        <img src={category.logo} alt={category.name} class="w-6 h-6" />
+      </div>
+      <div>
+        <h2 class="font-bold text-gray-900">{category.name}</h2>
+        <p class="text-xs text-gray-500">{category.topics.length} トピック</p>
+      </div>
+    </div>
+
+    <!-- トピックナビゲーション -->
+    <nav class="space-y-1">
+      {category.topics.map((topic) => (
+        <div class="topic-group">
+          <a 
+            href={`/devsheet/${category.id}/${topic.id}`}
+            class={`topic-link flex items-center justify-between px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
+              currentTopicId === topic.id 
+                ? 'bg-emerald-50 text-emerald-700' 
+                : 'text-gray-700 hover:bg-gray-50'
+            }`}
+          >
+            <span>{topic.name}</span>
+            <svg 
+              class={`w-4 h-4 transition-transform ${currentTopicId === topic.id ? 'rotate-90' : ''}`}
+              fill="none" 
+              stroke="currentColor" 
+              viewBox="0 0 24 24"
+            >
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+            </svg>
+          </a>
+          
+          {currentTopicId === topic.id && currentTopic && currentTopic.sections && currentTopic.sections.length > 0 && (
+            <div class="ml-4 mt-1 space-y-1 border-l-2 border-gray-200 pl-3">
+              {currentTopic.sections.map((section) => (
+                <a 
+                  href={`#${section.id}`}
+                  class={`section-link block px-3 py-1.5 text-sm rounded transition-colors ${
+                    currentSectionId === section.id
+                      ? 'text-emerald-600 font-medium'
+                      : 'text-gray-600 hover:text-emerald-600'
+                  }`}
+                >
+                  {section.title}
+                </a>
+              ))}
+            </div>
+          )}
+        </div>
+      ))}
+    </nav>
+  </div>
+</aside>
+
+<!-- モバイルサイドバー切り替え -->
+<button 
+  id="mobile-sidebar-toggle"
+  class="lg:hidden fixed bottom-4 right-4 w-12 h-12 bg-emerald-600 text-white rounded-full shadow-lg flex items-center justify-center z-50 hover:bg-emerald-700 transition-colors"
+>
+  <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+  </svg>
+</button>
+
+<!-- モバイルサイドバーオーバーレイ -->
+<div id="mobile-sidebar-overlay" class="lg:hidden fixed inset-0 bg-black bg-opacity-50 z-40 hidden"></div>
+
+<!-- モバイルサイドバー -->
+<aside id="mobile-sidebar" class="lg:hidden fixed left-0 top-0 h-full w-64 bg-white shadow-xl z-50 transform -translate-x-full transition-transform duration-300 overflow-y-auto">
+  <div class="p-4">
+    <div class="flex items-center justify-between mb-4">
+      <h2 class="font-bold text-gray-900">メニュー</h2>
+      <button id="mobile-sidebar-close" class="text-gray-600 hover:text-gray-900">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      </button>
+    </div>
+
+    <a href="/devsheet" class="flex items-center gap-2 text-gray-600 hover:text-emerald-600 mb-4 transition-colors">
+      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+      </svg>
+      <span class="text-sm font-medium">チートシート一覧</span>
+    </a>
+
+    <div class="flex items-center gap-3 mb-6 pb-4 border-b border-gray-200">
+      <div class="w-10 h-10 flex items-center justify-center rounded-lg" style={`background: ${category.color}20;`}>
+        <img src={category.logo} alt={category.name} class="w-6 h-6" />
+      </div>
+      <div>
+        <h3 class="font-bold text-gray-900">{category.name}</h3>
+        <p class="text-xs text-gray-500">{category.topics.length} トピック</p>
+      </div>
+    </div>
+
+    <nav class="space-y-1">
+      {category.topics.map((topic) => (
+        <div class="topic-group">
+          <a 
+            href={`/devsheet/${category.id}/${topic.id}`}
+            class={`topic-link flex items-center justify-between px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
+              currentTopicId === topic.id 
+                ? 'bg-emerald-50 text-emerald-700' 
+                : 'text-gray-700 hover:bg-gray-50'
+            }`}
+          >
+            <span>{topic.name}</span>
+            <svg 
+              class={`w-4 h-4 transition-transform ${currentTopicId === topic.id ? 'rotate-90' : ''}`}
+              fill="none" 
+              stroke="currentColor" 
+              viewBox="0 0 24 24"
+            >
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+            </svg>
+          </a>
+          
+          {currentTopicId === topic.id && currentTopic && currentTopic.sections && currentTopic.sections.length > 0 && (
+            <div class="ml-4 mt-1 space-y-1 border-l-2 border-gray-200 pl-3">
+              {currentTopic.sections.map((section) => (
+                <a 
+                  href={`#${section.id}`}
+                  class={`section-link block px-3 py-1.5 text-sm rounded transition-colors ${
+                    currentSectionId === section.id
+                      ? 'text-emerald-600 font-medium'
+                      : 'text-gray-600 hover:text-emerald-600'
+                  }`}
+                  data-mobile-link
+                >
+                  {section.title}
+                </a>
+              ))}
+            </div>
+          )}
+        </div>
+      ))}
+    </nav>
+  </div>
+</aside>
+
+<script>
+  const mobileToggle = document.getElementById('mobile-sidebar-toggle');
+  const mobileSidebar = document.getElementById('mobile-sidebar');
+  const mobileOverlay = document.getElementById('mobile-sidebar-overlay');
+  const mobileClose = document.getElementById('mobile-sidebar-close');
+
+  function openMobileSidebar() {
+    mobileSidebar?.classList.remove('-translate-x-full');
+    mobileOverlay?.classList.remove('hidden');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeMobileSidebar() {
+    mobileSidebar?.classList.add('-translate-x-full');
+    mobileOverlay?.classList.add('hidden');
+    document.body.style.overflow = '';
+  }
+
+  mobileToggle?.addEventListener('click', openMobileSidebar);
+  mobileClose?.addEventListener('click', closeMobileSidebar);
+  mobileOverlay?.addEventListener('click', closeMobileSidebar);
+
+  document.querySelectorAll('[data-mobile-link]').forEach(link => {
+    link.addEventListener('click', () => {
+      setTimeout(closeMobileSidebar, 300);
+    });
+  });
+
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+      e.preventDefault();
+      const targetId = this.getAttribute('href')?.slice(1);
+      if (targetId) {
+        const targetElement = document.getElementById(targetId);
+        if (targetElement) {
+          const offsetTop = targetElement.offsetTop - 80;
+          window.scrollTo({
+            top: offsetTop,
+            behavior: 'smooth'
+          });
+        }
+      }
+    });
+  });
+
+  const sections = document.querySelectorAll('section[id]');
+  const sectionLinks = document.querySelectorAll('.section-link');
+
+  function highlightActiveSection() {
+    let currentSection = '';
+    const scrollPosition = window.scrollY + 100;
+    
+    sections.forEach(section => {
+      const sectionTop = section.offsetTop;
+      const sectionHeight = section.offsetHeight;
+      if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
+        currentSection = section.getAttribute('id') || '';
+      }
+    });
+
+    sectionLinks.forEach(link => {
+      const href = link.getAttribute('href');
+      if (href === `#${currentSection}`) {
+        link.classList.add('text-emerald-600', 'font-medium');
+        link.classList.remove('text-gray-600');
+      } else {
+        link.classList.remove('text-emerald-600', 'font-medium');
+        link.classList.add('text-gray-600');
+      }
+    });
+  }
+
+  let ticking = false;
+  window.addEventListener('scroll', () => {
+    if (!ticking) {
+      window.requestAnimationFrame(() => {
+        highlightActiveSection();
+        ticking = false;
+      });
+      ticking = true;
+    }
+  });
+
+  highlightActiveSection();
+</script>
+
+<style>
+  .devsheet-sidebar {
+    scrollbar-width: thin;
+    scrollbar-color: #d1d5db transparent;
+  }
+
+  .devsheet-sidebar::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  .devsheet-sidebar::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .devsheet-sidebar::-webkit-scrollbar-thumb {
+    background-color: #d1d5db;
+    border-radius: 3px;
+  }
+
+  .devsheet-sidebar::-webkit-scrollbar-thumb:hover {
+    background-color: #9ca3af;
+  }
+
+  #mobile-sidebar {
+    scrollbar-width: thin;
+    scrollbar-color: #d1d5db transparent;
+  }
+
+  #mobile-sidebar::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  #mobile-sidebar::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  #mobile-sidebar::-webkit-scrollbar-thumb {
+    background-color: #d1d5db;
+    border-radius: 3px;
+  }
+
+  #mobile-sidebar::-webkit-scrollbar-thumb:hover {
+    background-color: #9ca3af;
+  }
+</style>

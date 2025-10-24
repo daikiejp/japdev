@@ -1,0 +1,28 @@
+[
+  {
+    "title": "【結論】TypeScriptの型定義はtypeよりinterfaceを使うべき理由",
+    "source": "Zenn",
+    "url": "https://zenn.dev/bmth/articles/interface-props-extends",
+    "date": "2025-10-20",
+    "tags": ["React", "TypeScript"],
+    "image": "https://res.cloudinary.com/zenn/image/fetch/s--7Jje9Auw--/c_limit%2Cf_auto%2Cfl_progressive%2Cq_auto%2Cw_1200/https://storage.googleapis.com/zenn-user-upload/deployed-images/5724ca5e44b773e353d79b0b.png%3Fsha%3D67f6a03ec112c9e086b1d6dc5259f27f0e923cb9",
+    "description": "TypeScriptでコンポーネントのPropsやオブジェクトの型を定義するとき、typeとinterfaceのどちらを使うべきか、一度は悩んだことがあるのではないでしょうか。",
+    "author": "じょうげん"
+  },
+  {
+    "title": "アサヒビール停止で痛感：ランサムウェアは「工場」ではなく「業務フロー」を止める",
+    "source": "Qiita",
+    "url": "https://qiita.com/comty/items/e1f1f82b89278c1a7e8d",
+    "date": "2025-10-20",
+    "tags": [
+      "Security",
+      "CSIRT",
+      "ランサムウェア",
+      "ゼロトラスト",
+      "インシデント対応"
+    ],
+    "image": "https://qiita-user-contents.imgix.net/https%3A%2F%2Fqiita-image-store.s3.ap-northeast-1.amazonaws.com%2F0%2F4006596%2F69b8112f-ef72-48a0-92da-a8a02ecd8f35.png?ixlib=rb-4.0.0&auto=format&gif-q=60&q=75&w=1400&fit=max&s=e24befc502f9a07dcf2beb1c4a3002fe",
+    "description": "アサヒグループは2025年9月29日にサイバー攻撃があったと発表しました。（サイバー攻撃によるシステム障害発生について）",
+    "author": "こむてぃ"
+  }
+]

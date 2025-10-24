@@ -1,0 +1,101 @@
+---
+const currentPath = Astro.url.pathname;
+const searchQuery = Astro.url.searchParams.get('q') || '';
+---
+<!-- ヘッダー -->
+<header class="bg-white/80 backdrop-blur-lg border-b border-gray-200 sticky top-0 z-50">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex items-center justify-between h-16">
+      <a href="/" class="flex items-center gap-3">
+        <div class="w-10 h-10 bg-linear-to-br from-emerald-500 to-teal-600 rounded-lg flex items-center justify-center">
+          <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+          </svg>
+        </div>
+        <div>
+          <h1 class="text-xl font-bold text-teal-500">JapDev</h1>
+          <p class="text-xs text-gray-500">開発者向け情報サイト</p>
+        </div>
+      </a>
+      
+      <div class="hidden md:flex items-center gap-6">
+        <nav class="flex items-center gap-4">
+          <a href="/" class={`text-md font-medium ${currentPath === '/' ? 'text-emerald-600' : 'text-gray-600 hover:text-emerald-600'}`}>
+            ホーム
+          </a>
+          <a href="/about" class={`text-md font-medium ${currentPath === '/about' ? 'text-emerald-600' : 'text-gray-600 hover:text-emerald-600'}`}>
+            私たちについて
+          </a>
+        </nav>
+        <form action={currentPath} method="get" class="relative">
+          <svg class="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+          </svg>
+          <input
+            type="text"
+            id="global-search"
+            name="q"
+            value={searchQuery}
+            placeholder="検索..."
+            class="pl-10 pr-4 py-2 bg-gray-100 rounded-lg text-md focus:outline-none focus:ring-2 focus:ring-emerald-500 w-64"
+          />
+        </form>
+        <!--<button class="px-4 py-2 bg-gradient-to-r from-emerald-500 to-teal-600 text-white rounded-lg font-medium hover:shadow-lg transition-all">
+          購読する
+        </button> -->
+      </div>
+
+      <button id="mobile-menu-btn" class="md:hidden">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <div id="mobile-menu" class="hidden md:hidden bg-white border-b border-gray-200 p-4">
+    <nav class="flex flex-col gap-3 mb-3">
+      <a href="/" class={`text-sm font-medium ${currentPath === '/' ? 'text-emerald-600' : 'text-gray-600'}`}>
+        ホーム
+      </a>
+      <a href="/about" class={`text-sm font-medium ${currentPath === '/about' ? 'text-emerald-600' : 'text-gray-600'}`}>
+        私たちについて
+      </a>
+    </nav>
+    <form action={currentPath} method="get">
+      <input
+        type="text"
+        id="mobile-search"
+        name="q"
+        value={searchQuery}
+        placeholder="検索..."
+        class="w-full px-4 py-2 bg-gray-100 rounded-lg text-sm mb-3"
+      />
+    </form>
+    <!-- <button class="w-full px-4 py-2 bg-gradient-to-r from-emerald-500 to-teal-600 text-white rounded-lg font-medium">
+      購読する
+    </button> -->
+  </div>
+</header>
+
+<script>
+  document.getElementById('mobile-menu-btn')?.addEventListener('click', () => {
+    const menu = document.getElementById('mobile-menu');
+    menu?.classList.toggle('hidden');
+  });
+
+  const globalSearch = document.getElementById('global-search') as HTMLInputElement;
+  const mobileSearch = document.getElementById('mobile-search') as HTMLInputElement;
+
+  globalSearch?.addEventListener('input', (e) => {
+    const query = (e.target as HTMLInputElement).value;
+    if (mobileSearch) mobileSearch.value = query;
+    window.dispatchEvent(new CustomEvent('search-updated', { detail: { query } }));
+  });
+
+  mobileSearch?.addEventListener('input', (e) => {
+    const query = (e.target as HTMLInputElement).value;
+    if (globalSearch) globalSearch.value = query;
+    window.dispatchEvent(new CustomEvent('search-updated', { detail: { query } }));
+  });
+</script>
