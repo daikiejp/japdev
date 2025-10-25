@@ -1,5 +1,5 @@
 ---
-import { categories, getCategoryTopics, getTopicContent } from '../../../data/devsheet/index';
+import { categories, getCategoryTopics, getTopicContent } from '../../../utils/devsheet';
 import Layout from '../../../layouts/Layout.astro';
 import DevSheetSidebar from '../../../components/DevSheetSidebar.astro';
 import CodeBlock from '../../../components/CodeBlock.astro';
@@ -73,7 +73,7 @@ const categoryWithTopics = {
           <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
           </svg>
-          <a href={`/devsheet`} class="hover:text-emerald-600 transition-colors">{category.name}</a>
+          <a href={`/devsheet/${categoryId}`} class="hover:text-emerald-600 transition-colors">{category.name}</a>
           <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
           </svg>

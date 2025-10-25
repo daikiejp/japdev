@@ -1,0 +1,15 @@
+[
+  {
+    "id": "semantic-tags",
+    "title": "セマンティックタグ",
+    "description": "意味のあるHTMLタグを使用する",
+    "codeBlocks": [
+      {
+        "language": "html",
+        "filename": "semantic.html",
+        "code": "<header>\n    <nav>\n        <ul>\n            <li><a href=\"/\">ホーム</a></li>\n            <li><a href=\"/about\">私たちについて</a></li>\n            <li><a href=\"/contact\">お問い合わせ</a></li>\n        </ul>\n    </nav>\n</header>\n\n<main>\n    <article>\n        <h1>記事タイトル</h1>\n        <p class=\"meta\">\n            <time datetime=\"2025-10-24\">2025年10月24日</time>\n            著者: 太郎\n        </p>\n        <p>記事の内容がここに入ります...</p>\n    </article>\n    \n    <aside>\n        <h2>関連情報</h2>\n        <ul>\n            <li><a href=\"#\">関連記事1</a></li>\n            <li><a href=\"#\">関連記事2</a></li>\n        </ul>\n    </aside>\n</main>\n\n<footer>\n    <p>&copy; 2025 会社名. All rights reserved.</p>\n</footer>",
+        "highlightLines": [1, 2, 8, 9, 11, 12, 19, 21, 27, 28, 30, 32]
+      }
+    ]
+  }
+]

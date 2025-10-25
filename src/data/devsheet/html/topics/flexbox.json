@@ -1,0 +1,48 @@
+[
+  {
+    "id": "flex-basics",
+    "title": "Flexboxの基本",
+    "description": "Flexboxレイアウトの基本的な使い方",
+    "codeBlocks": [
+      {
+        "title": "基本的なFlexコンテナ",
+        "language": "html",
+        "filename": "flexbox-basic.html",
+        "code": "",
+        "tabs": [
+          {
+            "label": "HTML",
+            "code": "<div class=\"flex-container\">\n    <div class=\"flex-item\">アイテム 1</div>\n    <div class=\"flex-item\">アイテム 2</div>\n    <div class=\"flex-item\">アイテム 3</div>\n</div>",
+            "language": "html"
+          },
+          {
+            "label": "CSS",
+            "code": ".flex-container {\n    display: flex;\n    justify-content: space-between;\n    align-items: center;\n    gap: 1rem;\n    padding: 1rem;\n    background: #f0f0f0;\n}\n\n.flex-item {\n    flex: 1;\n    padding: 1rem;\n    background: white;\n    border-radius: 8px;\n    box-shadow: 0 2px 4px rgba(0,0,0,0.1);\n}",
+            "language": "css"
+          }
+        ]
+      },
+      {
+        "title": "Flex方向とラッピング",
+        "language": "css",
+        "filename": "flex-direction.css",
+        "code": "/* 横並び（デフォルト） */\n.flex-row {\n    display: flex;\n    flex-direction: row;\n}\n\n/* 縦並び */\n.flex-column {\n    display: flex;\n    flex-direction: column;\n}\n\n/* 折り返しあり */\n.flex-wrap {\n    display: flex;\n    flex-wrap: wrap;\n    gap: 1rem;\n}\n\n/* 折り返しなし（デフォルト） */\n.flex-nowrap {\n    display: flex;\n    flex-wrap: nowrap;\n}",
+        "highlightLines": [2, 8, 14, 21]
+      }
+    ]
+  },
+  {
+    "id": "flex-alignment",
+    "title": "配置とスペース",
+    "description": "要素の配置とスペース調整の方法",
+    "codeBlocks": [
+      {
+        "title": "主軸と交差軸の配置",
+        "language": "css",
+        "filename": "flex-alignment.css",
+        "code": "/* 主軸方向の配置 */\n.justify-start {\n    display: flex;\n    justify-content: flex-start; /* 左揃え */\n}\n\n.justify-center {\n    display: flex;\n    justify-content: center; /* 中央揃え */\n}\n\n.justify-end {\n    display: flex;\n    justify-content: flex-end; /* 右揃え */\n}\n\n.justify-between {\n    display: flex;\n    justify-content: space-between; /* 両端揃え */\n}\n\n.justify-around {\n    display: flex;\n    justify-content: space-around; /* 均等配置 */\n}\n\n/* 交差軸方向の配置 */\n.align-start {\n    display: flex;\n    align-items: flex-start; /* 上揃え */\n}\n\n.align-center {\n    display: flex;\n    align-items: center; /* 中央揃え */\n}\n\n.align-end {\n    display: flex;\n    align-items: flex-end; /* 下揃え */\n}",
+        "highlightLines": [4, 9, 14, 19, 24, 30, 35, 40]
+      }
+    ]
+  }
+]

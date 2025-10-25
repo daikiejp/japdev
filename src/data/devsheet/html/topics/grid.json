@@ -1,0 +1,27 @@
+[
+  {
+    "id": "grid-basics",
+    "title": "Gridの基本",
+    "description": "CSS Gridレイアウトの基礎",
+    "codeBlocks": [
+      {
+        "title": "基本的なGridレイアウト",
+        "language": "html",
+        "filename": "grid-basic.html",
+        "code": "",
+        "tabs": [
+          {
+            "label": "HTML",
+            "code": "<div class=\"grid-container\">\n    <div class=\"grid-item\">1</div>\n    <div class=\"grid-item\">2</div>\n    <div class=\"grid-item\">3</div>\n    <div class=\"grid-item\">4</div>\n    <div class=\"grid-item\">5</div>\n    <div class=\"grid-item\">6</div>\n</div>",
+            "language": "html"
+          },
+          {
+            "label": "CSS",
+            "code": ".grid-container {\n    display: grid;\n    grid-template-columns: repeat(3, 1fr);\n    gap: 1rem;\n    padding: 1rem;\n}\n\n.grid-item {\n    padding: 2rem;\n    background: #e0e0e0;\n    border-radius: 8px;\n    text-align: center;\n}",
+            "language": "css"
+          }
+        ]
+      }
+    ]
+  }
+]

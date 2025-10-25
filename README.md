@@ -4,6 +4,7 @@
 
 ![JapDev](https://img.shields.io/badge/JapDev-開発者向け-10b981)
 ![Astro](https://img.shields.io/badge/Astro-5.15-FF5D01)
+![Version](https://img.shields.io/badge/version-2.0.0-blue)
 ![License](https://img.shields.io/badge/license-MIT-blue)
 
 日本の開発者のための最新情報、チートシート、リソースを提供するプラットフォーム
@@ -18,12 +19,14 @@
 
 - [概要](#概要)
 - [主な機能](#主な機能)
+- [新機能 v2.0.0](#新機能-v200)
 - [技術スタック](#技術スタック)
 - [セットアップ](#セットアップ)
 - [プロジェクト構造](#プロジェクト構造)
 - [使い方](#使い方)
 - [コンテンツの追加](#コンテンツの追加)
 - [デプロイ](#デプロイ)
+- [Changelog](#changelog)
 - [コントリビューション](#コントリビューション)
 - [ライセンス](#ライセンス)
 
@@ -53,31 +56,62 @@
 - フレームワーク、ライブラリの最新版情報
 - リリースノートへの直接リンク
 - NEW/LTSバッジ表示
+- **⭐ GitHubスター数の表示（K表記）**
 - GitHubリポジトリへのリンク
 
 ### 📖 チートシート（DevSheet）
-- **モジュラー設計**で高速パフォーマンス
+- **完全JSON駆動のモジュラー設計**で高速パフォーマンス
+- **TypeScript型定義とデータの分離**
 - HTML、CSS、JavaScript、React、TypeScriptなど
 - **Shiki**を使用したシンタックスハイライト
 - コードのワンクリックコピー
 - 行のハイライト機能
 - タブ切り替えでの複数コード例
 - セクションへのディープリンク共有
+- **カテゴリページでトピック一覧を直接表示**（リダイレクトなし）
 
 ### 🌟 リソース
 - カテゴリ別の開発リソース
 - ドキュメント、チュートリアル、SaaSツール
 - アコーディオン式の表示
 
-### 📈 人気リポジトリ
-- トレンドのGitHubリポジトリ
-- スター数とトレンド情報
-- プログラミング言語表示
-
 ### 🔍 検索機能
 - 全セクションでリアルタイム検索
 - タイトル、説明、タグでのフィルタリング
 - 検索結果のカウント表示
+
+---
+
+## 新機能 v2.0.0
+
+### 🎉 メジャーアップデート
+
+#### アーキテクチャの改善
+- ✅ **データとロジックの完全分離**
+  - TypeScript型定義: `src/types/devsheet.ts`
+  - ビジネスロジック: `src/utils/devsheet.ts`
+  - データ: `src/data/devsheet/**/*.json`
+- ✅ **完全JSON駆動のコンテンツ管理**
+  - すべてのチートシートデータがJSON形式に
+  - TypeScriptファイルの削除（`.ts` → `.json`）
+  - 簡単な編集とメンテナンス
+
+#### UX改善
+- ✅ **カテゴリページの改善**
+  - トピック一覧を直接表示
+  - リダイレクトの削除で高速化
+  - 美しいカードレイアウト
+- ✅ **バージョンページの機能強化**
+  - GitHubスター数の表示（54.1K形式）
+  - 視覚的に魅力的な表示
+
+#### パフォーマンス
+- ✅ **ビルド時間の短縮**
+  - モジュラーデータ読み込み
+  - 必要なデータのみを動的インポート
+- ✅ **メンテナンス性の向上**
+  - クリーンなファイル構造
+  - 再利用可能なユーティリティ関数
 
 ---
 
@@ -88,6 +122,7 @@
 - **[Astro 5.15](https://astro.build/)** - 静的サイトジェネレーター
 - **[Tailwind CSS](https://tailwindcss.com/)** - ユーティリティファーストCSSフレームワーク
 - **[Shiki](https://shiki.style/)** - シンタックスハイライター
+- **[TypeScript](https://www.typescriptlang.org/)** - 型安全性
 
 ### 主な特徴
 
@@ -96,6 +131,7 @@
 - 🌙 **モダンUI** - Tailwind CSSによる美しいデザイン
 - 🔍 **SEO最適化** - メタタグ、構造化データ
 - ♿ **アクセシビリティ** - WCAG準拠
+- 📦 **モジュラー** - スケーラブルな設計
 
 ---
 
@@ -141,34 +177,36 @@ npm run preview
 ```
 japdev/
 ├── public/                     # 静的ファイル
-│   └── favicon.svg
+│   ├── favicon.svg
+│   └── logos/                  # カテゴリロゴ
 ├── src/
 │   ├── components/            # Astroコンポーネント
 │   │   ├── Header.astro       # ヘッダー（ナビゲーション、検索）
-│   │   ├── Hero.astro         # ヒーロー（トップセクション、キャッチコピー）
+│   │   ├── Hero.astro         # ヒーロー（トップセクション）
 │   │   ├── Footer.astro       # フッター
 │   │   ├── NavTabs.astro      # タブナビゲーション
 │   │   ├── SearchResults.astro # 検索結果表示
 │   │   ├── GithubStar.astro   # GitHubスターボタン
 │   │   ├── DevSheetSidebar.astro # チートシートサイドバー
 │   │   └── CodeBlock.astro    # コードブロック（ハイライト）
-│   ├── data/                  # データファイル
+│   ├── types/                 # 型定義
+│   │   └── devsheet.ts        # チートシートの型定義
+│   ├── utils/                 # ユーティリティ関数
+│   │   └── devsheet.ts        # チートシート関連のヘルパー
+│   ├── data/                  # データファイル（JSON）
 │   │   ├── articles.json      # 記事データ
-│   │   ├── versions.json      # バージョン情報
+│   │   ├── versions.json      # バージョン情報（stars含む）
 │   │   ├── resources.json     # リソースデータ
 │   │   ├── repos.json         # リポジトリデータ
-│   │   └── devsheet/          # チートシートデータ（モジュラー）
-│   │       ├── index.ts       # メタデータと型定義
-│   │       └── categories/    # カテゴリ別データ
-│   │           ├── html/
-│   │           │   ├── topics.ts
-│   │           │   └── topics/
-│   │           │       ├── fundamentals.ts
-│   │           │       ├── flexbox.ts
-│   │           │       └── ...
-│   │           ├── javascript/
-│   │           ├── react/
-│   │           └── ...
+│   │   └── devsheet/          # チートシートデータ
+│   │       ├── categories.json # カテゴリ一覧
+│   │       └── html/
+│   │           ├── topics.json      # トピック一覧
+│   │           └── topics/          # トピック詳細
+│   │               ├── fundamentals.json
+│   │               ├── flexbox.json
+│   │               ├── grid.json
+│   │               └── semantics.json
 │   ├── layouts/
 │   │   └── Layout.astro       # ベースレイアウト
 │   ├── pages/                 # ページファイル（ルーティング）
@@ -178,8 +216,8 @@ japdev/
 │   │   ├── devsheet.astro     # チートシート一覧
 │   │   ├── devsheet/
 │   │   │   └── [categoryId]/
-│   │   │       ├── index.astro
-│   │   │       └── [topicId].astro
+│   │   │       ├── index.astro      # トピック一覧
+│   │   │       └── [topicId].astro  # トピック詳細
 │   │   ├── resources.astro    # リソース
 │   │   └── repos.astro        # リポジトリ
 │   └── styles/
@@ -201,22 +239,24 @@ japdev/
 
 #### 📚 チートシート `/devsheet`
 - **一覧ページ**: すべてのカテゴリ（HTML、CSS、JavaScriptなど）
-- **カテゴリページ**: `/devsheet/html/fundamentals`など
+- **カテゴリページ** `/devsheet/html`: トピック一覧を美しいカードで表示
+- **トピックページ** `/devsheet/html/fundamentals`: 詳細なコード例とドキュメント
 - **機能**:
   - サイドバーナビゲーション（デスクトップ固定、モバイルドロワー）
   - シンタックスハイライト付きコードブロック
   - コードコピーボタン
   - セクションへのディープリンク共有
   - スムーズスクロール
+  - 前/次のトピックへのナビゲーション
 
 #### 🔄 最新バージョン `/versions`
-フレームワーク、ライブラリの最新バージョン情報とchangelogへのリンク。
+- フレームワーク、ライブラリの最新バージョン情報
+- GitHubスター数の表示（K形式）
+- changelogへのリンク
+- NEW/LTSバッジ
 
 #### 🌟 リソース `/resources`
 カテゴリ別の開発リソース（ドキュメント、学習サイト、SaaSツールなど）。
-
-#### 📈 人気リポジトリ `/repos`
-トレンドのGitHubリポジトリとスター数、週間トレンド情報。
 
 ---
 
@@ -250,6 +290,7 @@ japdev/
   "date": "2025-10-01",
   "description": "説明",
   "status": "new",
+  "stars": 54050,
   "repoUrl": "GitHubリポジトリURL",
   "changelogUrl": "ChangelogURL"
 }
@@ -257,55 +298,96 @@ japdev/
 
 ### チートシートカテゴリの追加
 
-1. **メタデータを追加** (`src/data/devsheet/index.ts`):
+#### 1. カテゴリメタデータを追加
 
-```typescript
+`src/data/devsheet/categories.json` を編集:
+
+```json
 {
-  id: "python",
-  name: "Python",
-  logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg",
-  description: "Pythonの基礎から応用まで",
-  color: "#3776AB",
-  topicsCount: 3
+  "id": "python",
+  "name": "Python",
+  "logo": "/logos/python.svg",
+  "description": "Pythonの基礎から応用まで",
+  "color": "#3776AB",
+  "topicsCount": 3
 }
 ```
 
-2. **トピックリストを作成** (`categories/python/topics.ts`):
+#### 2. トピックリストを作成
 
-```typescript
-import type { DevSheetTopic } from '../../index';
+`src/data/devsheet/python/topics.json` を作成:
 
-export const topics: DevSheetTopic[] = [
+```json
+[
   {
-    id: "basics",
-    name: "基礎",
-    description: "Pythonの基本構文"
+    "id": "basics",
+    "name": "基礎",
+    "description": "Pythonの基本構文"
+  },
+  {
+    "id": "functions",
+    "name": "関数",
+    "description": "関数の定義と使い方"
   }
-];
+]
 ```
 
-3. **コンテンツを作成** (`categories/python/topics/basics.ts`):
+#### 3. トピックコンテンツを作成
 
-```typescript
-import type { DevSheetSection } from '../../../index';
+`src/data/devsheet/python/topics/basics.json` を作成:
 
-export const sections: DevSheetSection[] = [
+```json
+[
   {
-    id: "variables",
-    title: "変数",
-    description: "変数の宣言と使い方",
-    codeBlocks: [
+    "id": "variables",
+    "title": "変数",
+    "description": "変数の宣言と使い方",
+    "codeBlocks": [
       {
-        language: "python",
-        filename: "variables.py",
-        code: `# 変数の宣言
-name = "太郎"
-age = 25`,
-        highlightLines: [2, 3]
+        "title": "変数の基本",
+        "language": "python",
+        "filename": "variables.py",
+        "code": "# 変数の宣言\nname = \"太郎\"\nage = 25\nprint(f\"{name}は{age}歳です\")",
+        "highlightLines": [2, 3]
       }
     ]
   }
-];
+]
+```
+
+#### 4. コードブロックの高度な機能
+
+**タブ付きコード例**:
+
+```json
+{
+  "title": "HTMLとCSSの例",
+  "language": "html",
+  "filename": "index.html",
+  "code": "",
+  "tabs": [
+    {
+      "label": "HTML",
+      "code": "<div class=\"container\">\n  <h1>Hello</h1>\n</div>",
+      "language": "html"
+    },
+    {
+      "label": "CSS",
+      "code": ".container {\n  padding: 1rem;\n  background: #f0f0f0;\n}",
+      "language": "css"
+    }
+  ]
+}
+```
+
+**行のハイライト**:
+
+```json
+{
+  "language": "javascript",
+  "code": "const x = 10;\nconst y = 20;\nconst sum = x + y;\nconsole.log(sum);",
+  "highlightLines": [3]
+}
 ```
 
 ### リソースの追加
@@ -348,6 +430,68 @@ npx wrangler pages deploy dist
 
 ---
 
+## Changelog
+
+### v2.0.0 (2025-10-25) 🎉
+
+#### 🏗️ アーキテクチャの大幅改善
+
+**Breaking Changes:**
+- チートシートデータを完全JSON化（`.ts` → `.json`）
+- ファイル構造の再編成
+
+**追加機能:**
+- ✨ 型定義の分離（`src/types/devsheet.ts`）
+- ✨ ユーティリティ関数の集約（`src/utils/devsheet.ts`）
+- ✨ カテゴリページでトピック一覧を直接表示
+- ✨ バージョンページにGitHubスター数を表示（K形式）
+- ✨ JSON駆動のコンテンツ管理システム
+
+**改善:**
+- ⚡ ビルド時間の最適化
+- 📦 モジュラーデータ読み込み
+- 🎨 カテゴリページのUIデザイン改善
+- 🔧 メンテナンス性の向上
+- 📝 ドキュメントの更新
+
+**削除:**
+- 🗑️ リダイレクトロジックの削除
+- 🗑️ 不要なTypeScriptデータファイル
+
+**移行ガイド:**
+```bash
+# 旧構造
+src/data/devsheet/index.ts              # 削除
+src/data/devsheet/categories/html/topics.ts  # 削除
+src/data/devsheet/categories/html/topics/*.ts # 削除
+
+# 新構造
+src/types/devsheet.ts               # 新規
+src/utils/devsheet.ts               # 新規
+src/data/devsheet/categories.json   # 新規
+src/data/devsheet/html/topics.json  # 新規
+src/data/devsheet/html/topics/*.json # 新規
+```
+
+---
+
+### v1.0.0 (2025-10-24)
+
+#### 初回リリース
+
+**機能:**
+- 📰 記事セクション（Qiita, Zenn統合）
+- 🔄 最新バージョン情報
+- 📖 チートシート（HTML, CSS, JavaScript, React, TypeScript）
+- 🌟 開発リソース
+- 💫 人気リポジトリ
+- 🔍 リアルタイム検索
+- 🎨 レスポンシブデザイン
+- ⚡ Shikiシンタックスハイライト
+- 📱 モバイルフレンドリー
+
+---
+
 ## パフォーマンス
 
 ### Lighthouse スコア目標
@@ -362,8 +506,10 @@ npx wrangler pages deploy dist
 - ✅ 静的サイト生成（SSG）
 - ✅ 画像の最適化
 - ✅ コードの分割
-- ✅ モジュラーデータロード（チートシート）
+- ✅ JSON駆動のモジュラーデータロード
 - ✅ Shikiによるビルド時シンタックスハイライト
+- ✅ 最小限のJavaScript
+- ✅ クリティカルCSSのインライン化
 
 ---
 
@@ -382,9 +528,11 @@ npx wrangler pages deploy dist
 ### コーディング規約
 
 - **TypeScript**: 型安全性を保つ
+- **JSON**: すべてのデータはJSON形式で管理
 - **Astro Components**: `.astro`ファイルを使用
 - **スタイリング**: Tailwind CSSユーティリティクラス
 - **日本語**: すべてのコンテンツとUIは日本語
+- **コメント**: 複雑なロジックには説明を追加
 
 ---
 

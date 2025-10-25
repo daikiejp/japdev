@@ -5,6 +5,7 @@
     "date": "2025-10-01",
     "description": "The library for web and native user interfaces.",
     "status": "new",
+    "stars": 240041,
     "repoUrl": "https://github.com/facebook/react",
     "changelogUrl": "https://github.com/facebook/react/releases/tag/v19.2.0"
   },
@@ -14,6 +15,7 @@
     "version": "16.0.0",
     "date": "2025-10-21",
     "status": "new",
+    "stars": 135263,
     "repoUrl": "https://github.com/vercel/next.js",
     "changelogUrl": "https://github.com/vercel/next.js/releases/tag/v16.0.0"
   },
@@ -23,6 +25,7 @@
     "version": "3.5.22",
     "date": "2024-09-25",
     "status": "stable",
+    "stars": 51961,
     "repoUrl": "https://github.com/vuejs/core",
     "changelogUrl": "https://github.com/vuejs/core/blob/main/CHANGELOG.md"
   },
@@ -32,6 +35,7 @@
     "version": "5.15.1",
     "date": "2024-10-23",
     "status": "new",
+    "stars": 54050,
     "repoUrl": "https://github.com/withastro/astro",
     "changelogUrl": "https://github.com/withastro/astro/releases/tag/astro%405.15.1"
   },
@@ -41,6 +45,7 @@
     "version": "5.9.3",
     "date": "2024-10-01",
     "status": "stable",
+    "stars": 106507,
     "repoUrl": "https://github.com/microsoft/TypeScript",
     "changelogUrl": "https://github.com/microsoft/TypeScript/releases/tag/v5.9.3"
   },
@@ -50,6 +55,7 @@
     "version": "25.0.0",
     "date": "2024-10-16",
     "status": "lts",
+    "stars": 113943,
     "repoUrl": "https://github.com/nodejs/node",
     "changelogUrl": "https://github.com/nodejs/node/releases/tag/v25.0.0"
   }

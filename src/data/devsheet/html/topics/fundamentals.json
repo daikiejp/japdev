@@ -1,0 +1,50 @@
+[
+  {
+    "id": "basic-structure",
+    "title": "基本構造",
+    "description": "HTMLドキュメントの基本的な構造を学びましょう",
+    "codeBlocks": [
+      {
+        "title": "基本的なHTMLテンプレート",
+        "language": "html",
+        "filename": "index.html",
+        "code": "<!DOCTYPE html>\n<html lang=\"ja\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>ページタイトル</title>\n    <link rel=\"stylesheet\" href=\"styles.css\">\n</head>\n<body>\n    <h1>こんにちは、世界！</h1>\n    <p>これは基本的なHTMLページです。</p>\n    <script src=\"script.js\"></script>\n</body>\n</html>"
+      }
+    ]
+  },
+  {
+    "id": "common-tags",
+    "title": "よく使うタグ",
+    "description": "頻繁に使用されるHTMLタグの例",
+    "codeBlocks": [
+      {
+        "title": "見出しと段落",
+        "language": "html",
+        "filename": "headings.html",
+        "code": "<!-- 見出しタグ（h1〜h6） -->\n<h1>メインタイトル</h1>\n<h2>セクションタイトル</h2>\n<h3>サブセクション</h3>\n\n<!-- 段落と改行 -->\n<p>これは段落テキストです。</p>\n<p>改行するには<br>brタグを使います。</p>\n\n<!-- 順序なしリスト -->\n<ul>\n    <li>リスト項目 1</li>\n    <li>リスト項目 2</li>\n    <li>リスト項目 3</li>\n</ul>\n\n<!-- 順序付きリスト -->\n<ol>\n    <li>手順 1</li>\n    <li>手順 2</li>\n    <li>手順 3</li>\n</ol>",
+        "highlightLines": [2, 7, 11, 18]
+      },
+      {
+        "title": "リンクと画像",
+        "language": "html",
+        "filename": "links-images.html",
+        "code": "<!-- リンク -->\n<a href=\"https://example.com\">外部リンク</a>\n<a href=\"/about\">内部ページへのリンク</a>\n<a href=\"#section\">同じページ内のセクションへ</a>\n<a href=\"mailto:info@example.com\">メールリンク</a>\n\n<!-- 画像 -->\n<img src=\"image.jpg\" alt=\"画像の説明\">\n<img src=\"logo.png\" alt=\"ロゴ\" width=\"200\" height=\"100\">\n\n<!-- 図表 -->\n<figure>\n    <img src=\"chart.jpg\" alt=\"チャート\">\n    <figcaption>図1: 売上推移グラフ</figcaption>\n</figure>",
+        "highlightLines": [2, 8, 12]
+      }
+    ]
+  },
+  {
+    "id": "forms",
+    "title": "フォーム",
+    "description": "フォーム要素とバリデーション",
+    "codeBlocks": [
+      {
+        "title": "基本的なフォーム",
+        "language": "html",
+        "filename": "form.html",
+        "code": "<form action=\"/submit\" method=\"POST\">\n    <label for=\"name\">名前:</label>\n    <input type=\"text\" id=\"name\" name=\"name\" required>\n    \n    <label for=\"email\">メール:</label>\n    <input type=\"email\" id=\"email\" name=\"email\" required>\n    \n    <label for=\"message\">メッセージ:</label>\n    <textarea id=\"message\" name=\"message\" rows=\"4\"></textarea>\n    \n    <button type=\"submit\">送信</button>\n</form>",
+        "highlightLines": [1, 3, 6, 9, 11]
+      }
+    ]
+  }
+]
