@@ -1,62 +1,72 @@
 [
   {
     "name": "React",
-    "version": "19.2.0",
-    "date": "2025-10-01",
-    "description": "The library for web and native user interfaces.",
+    "version": "19.2.3",
+    "date": "2025-12-11",
+    "description": "19.2.3 (December 11th, 2025)",
     "status": "new",
-    "stars": 240041,
+    "stars": 241915,
     "repoUrl": "https://github.com/facebook/react",
-    "changelogUrl": "https://github.com/facebook/react/releases/tag/v19.2.0"
+    "changelogUrl": "https://github.com/facebook/react/releases/tag/v19.2.3"
   },
   {
     "name": "Next.js",
-    "description": "The React Framework",
-    "version": "16.0.0",
-    "date": "2025-10-21",
+    "version": "16.1.1",
+    "date": "2025-12-22",
+    "description": "v16.1.1",
     "status": "new",
-    "stars": 135263,
+    "stars": 136820,
     "repoUrl": "https://github.com/vercel/next.js",
-    "changelogUrl": "https://github.com/vercel/next.js/releases/tag/v16.0.0"
+    "changelogUrl": "https://github.com/vercel/next.js/releases/tag/v16.1.1"
   },
   {
-    "name": "Vue",
-    "description": "🖖 Vue.js is a progressive, incrementally-adoptable JavaScript framework for building UI on the web.",
-    "version": "3.5.22",
-    "date": "2024-09-25",
-    "status": "stable",
-    "stars": 51961,
-    "repoUrl": "https://github.com/vuejs/core",
-    "changelogUrl": "https://github.com/vuejs/core/blob/main/CHANGELOG.md"
-  },
-  {
-    "name": "Astro",
-    "description": "The web framework for content-driven websites. ⭐️ Star to support our work!",
-    "version": "5.15.1",
-    "date": "2024-10-23",
+    "name": "Node.js",
+    "version": "25.2.1",
+    "date": "2025-11-17",
+    "description": "2025-11-17, Version 25.2.1 (Current), @aduh95",
     "status": "new",
-    "stars": 54050,
-    "repoUrl": "https://github.com/withastro/astro",
-    "changelogUrl": "https://github.com/withastro/astro/releases/tag/astro%405.15.1"
+    "stars": 114952,
+    "repoUrl": "https://github.com/nodejs/node",
+    "changelogUrl": "https://github.com/nodejs/node/releases/tag/v25.2.1"
   },
   {
     "name": "TypeScript",
-    "description": "TypeScript is a superset of JavaScript that compiles to clean JavaScript output.",
     "version": "5.9.3",
-    "date": "2024-10-01",
-    "status": "stable",
-    "stars": 106507,
+    "date": "2025-10-01",
+    "description": "TypeScript 5.9.3",
+    "status": "new",
+    "stars": 107260,
     "repoUrl": "https://github.com/microsoft/TypeScript",
     "changelogUrl": "https://github.com/microsoft/TypeScript/releases/tag/v5.9.3"
   },
   {
-    "name": "Node.js",
-    "description": "Node.js JavaScript runtime ✨🐢🚀✨",
-    "version": "25.0.0",
-    "date": "2024-10-16",
-    "status": "lts",
-    "stars": 113943,
-    "repoUrl": "https://github.com/nodejs/node",
-    "changelogUrl": "https://github.com/nodejs/node/releases/tag/v25.0.0"
+    "name": "Astro",
+    "version": "astro@5.16.6",
+    "date": "2025-12-16",
+    "description": "astro@5.16.6",
+    "status": "new",
+    "stars": 55149,
+    "repoUrl": "https://github.com/withastro/astro",
+    "changelogUrl": "https://github.com/withastro/astro/releases/tag/astro%405.16.6"
+  },
+  {
+    "name": "Vue",
+    "version": "3.5.26",
+    "date": "2025-12-18",
+    "description": "v3.5.26",
+    "status": "new",
+    "stars": 52564,
+    "repoUrl": "https://github.com/vuejs/core",
+    "changelogUrl": "https://github.com/vuejs/core/releases/tag/v3.5.26"
+  },
+  {
+    "name": "SvelteKit",
+    "version": "@sveltejs/kit@2.49.2",
+    "date": "2025-12-08",
+    "description": "@sveltejs/kit@2.49.2",
+    "status": "new",
+    "stars": 20107,
+    "repoUrl": "https://github.com/sveltejs/kit",
+    "changelogUrl": "https://github.com/sveltejs/kit/releases/tag/%40sveltejs/kit%402.49.2"
   }
 ]
