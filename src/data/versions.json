@@ -15,7 +15,7 @@
     "date": "2025-12-22",
     "description": "v16.1.1",
     "status": "new",
-    "stars": 136825,
+    "stars": 136827,
     "repoUrl": "https://github.com/vercel/next.js",
     "changelogUrl": "https://github.com/vercel/next.js/releases/tag/v16.1.1"
   },
@@ -45,7 +45,7 @@
     "date": "2025-12-16",
     "description": "astro@5.16.6",
     "status": "new",
-    "stars": 55162,
+    "stars": 55165,
     "repoUrl": "https://github.com/withastro/astro",
     "changelogUrl": "https://github.com/withastro/astro/releases/tag/astro%405.16.6"
   },
@@ -55,7 +55,7 @@
     "date": "2025-12-18",
     "description": "v3.5.26",
     "status": "new",
-    "stars": 52571,
+    "stars": 52572,
     "repoUrl": "https://github.com/vuejs/core",
     "changelogUrl": "https://github.com/vuejs/core/releases/tag/v3.5.26"
   },
