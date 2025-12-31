@@ -5,7 +5,7 @@
     "date": "2025-12-11",
     "description": "19.2.3 (December 11th, 2025)",
     "status": "new",
-    "stars": 241939,
+    "stars": 241942,
     "repoUrl": "https://github.com/facebook/react",
     "changelogUrl": "https://github.com/facebook/react/releases/tag/v19.2.3"
   },
@@ -25,7 +25,7 @@
     "date": "2025-11-17",
     "description": "2025-11-17, Version 25.2.1 (Current), @aduh95",
     "status": "new",
-    "stars": 114965,
+    "stars": 114967,
     "repoUrl": "https://github.com/nodejs/node",
     "changelogUrl": "https://github.com/nodejs/node/releases/tag/v25.2.1"
   },
@@ -45,7 +45,7 @@
     "date": "2025-12-16",
     "description": "astro@5.16.6",
     "status": "new",
-    "stars": 55196,
+    "stars": 55202,
     "repoUrl": "https://github.com/withastro/astro",
     "changelogUrl": "https://github.com/withastro/astro/releases/tag/astro%405.16.6"
   },
@@ -55,7 +55,7 @@
     "date": "2025-12-18",
     "description": "v3.5.26",
     "status": "new",
-    "stars": 52587,
+    "stars": 52589,
     "repoUrl": "https://github.com/vuejs/core",
     "changelogUrl": "https://github.com/vuejs/core/releases/tag/v3.5.26"
   },
@@ -65,7 +65,7 @@
     "date": "2025-12-08",
     "description": "@sveltejs/kit@2.49.2",
     "status": "new",
-    "stars": 20118,
+    "stars": 20119,
     "repoUrl": "https://github.com/sveltejs/kit",
     "changelogUrl": "https://github.com/sveltejs/kit/releases/tag/%40sveltejs/kit%402.49.2"
   }
