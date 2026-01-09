@@ -25,7 +25,7 @@
     "date": "2025-11-17",
     "description": "2025-11-17, Version 25.2.1 (Current), @aduh95",
     "status": "new",
-    "stars": 115094,
+    "stars": 115093,
     "repoUrl": "https://github.com/nodejs/node",
     "changelogUrl": "https://github.com/nodejs/node/releases/tag/v25.2.1"
   },
@@ -45,7 +45,7 @@
     "date": "2026-01-07",
     "description": "@astrojs/sitemap@3.6.1",
     "status": "new",
-    "stars": 55425,
+    "stars": 55427,
     "repoUrl": "https://github.com/withastro/astro",
     "changelogUrl": "https://github.com/withastro/astro/releases/tag/%40astrojs/sitemap%403.6.1"
   },
@@ -55,7 +55,7 @@
     "date": "2025-12-18",
     "description": "v3.5.26",
     "status": "new",
-    "stars": 52660,
+    "stars": 52662,
     "repoUrl": "https://github.com/vuejs/core",
     "changelogUrl": "https://github.com/vuejs/core/releases/tag/v3.5.26"
   },
