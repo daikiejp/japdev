@@ -5,7 +5,7 @@
     "date": "2025-12-11",
     "description": "19.2.3 (December 11th, 2025)",
     "status": "new",
-    "stars": 242111,
+    "stars": 242114,
     "repoUrl": "https://github.com/facebook/react",
     "changelogUrl": "https://github.com/facebook/react/releases/tag/v19.2.3"
   },
@@ -15,7 +15,7 @@
     "date": "2025-12-22",
     "description": "v16.1.1",
     "status": "new",
-    "stars": 137033,
+    "stars": 137037,
     "repoUrl": "https://github.com/vercel/next.js",
     "changelogUrl": "https://github.com/vercel/next.js/releases/tag/v16.1.1"
   },
@@ -25,7 +25,7 @@
     "date": "2025-11-17",
     "description": "2025-11-17, Version 25.2.1 (Current), @aduh95",
     "status": "new",
-    "stars": 115099,
+    "stars": 115100,
     "repoUrl": "https://github.com/nodejs/node",
     "changelogUrl": "https://github.com/nodejs/node/releases/tag/v25.2.1"
   },
@@ -41,13 +41,13 @@
   },
   {
     "name": "Astro",
-    "version": "@astrojs/sitemap@3.6.1",
-    "date": "2026-01-07",
-    "description": "@astrojs/sitemap@3.6.1",
+    "version": "astro@5.16.8",
+    "date": "2026-01-09",
+    "description": "astro@5.16.8",
     "status": "new",
-    "stars": 55432,
+    "stars": 55434,
     "repoUrl": "https://github.com/withastro/astro",
-    "changelogUrl": "https://github.com/withastro/astro/releases/tag/%40astrojs/sitemap%403.6.1"
+    "changelogUrl": "https://github.com/withastro/astro/releases/tag/astro%405.16.8"
   },
   {
     "name": "Vue",
@@ -65,7 +65,7 @@
     "date": "2026-01-09",
     "description": "@sveltejs/kit@2.49.4",
     "status": "new",
-    "stars": 20149,
+    "stars": 20148,
     "repoUrl": "https://github.com/sveltejs/kit",
     "changelogUrl": "https://github.com/sveltejs/kit/releases/tag/%40sveltejs/kit%402.49.4"
   }
