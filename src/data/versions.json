@@ -5,7 +5,7 @@
     "date": "2025-12-11",
     "description": "19.2.3 (December 11th, 2025)",
     "status": "new",
-    "stars": 242226,
+    "stars": 242234,
     "repoUrl": "https://github.com/facebook/react",
     "changelogUrl": "https://github.com/facebook/react/releases/tag/v19.2.3"
   },
@@ -15,7 +15,7 @@
     "date": "2025-12-22",
     "description": "v16.1.1",
     "status": "new",
-    "stars": 137125,
+    "stars": 137130,
     "repoUrl": "https://github.com/vercel/next.js",
     "changelogUrl": "https://github.com/vercel/next.js/releases/tag/v16.1.1"
   },
@@ -25,7 +25,7 @@
     "date": "2026-01-13",
     "description": "2026-01-13, Version 25.3.0 (Current), @RafaelGSS",
     "status": "new",
-    "stars": 115180,
+    "stars": 115184,
     "repoUrl": "https://github.com/nodejs/node",
     "changelogUrl": "https://github.com/nodejs/node/releases/tag/v25.3.0"
   },
@@ -35,7 +35,7 @@
     "date": "2025-10-01",
     "description": "TypeScript 5.9.3",
     "status": "new",
-    "stars": 107422,
+    "stars": 107426,
     "repoUrl": "https://github.com/microsoft/TypeScript",
     "changelogUrl": "https://github.com/microsoft/TypeScript/releases/tag/v5.9.3"
   },
@@ -45,7 +45,7 @@
     "date": "2026-01-12",
     "description": "astro@5.16.9",
     "status": "new",
-    "stars": 55572,
+    "stars": 55574,
     "repoUrl": "https://github.com/withastro/astro",
     "changelogUrl": "https://github.com/withastro/astro/releases/tag/astro%405.16.9"
   },
@@ -55,7 +55,7 @@
     "date": "2025-12-18",
     "description": "v3.5.26",
     "status": "new",
-    "stars": 52699,
+    "stars": 52701,
     "repoUrl": "https://github.com/vuejs/core",
     "changelogUrl": "https://github.com/vuejs/core/releases/tag/v3.5.26"
   },
@@ -65,7 +65,7 @@
     "date": "2026-01-12",
     "description": "@sveltejs/adapter-node@5.5.0",
     "status": "new",
-    "stars": 20160,
+    "stars": 20161,
     "repoUrl": "https://github.com/sveltejs/kit",
     "changelogUrl": "https://github.com/sveltejs/kit/releases/tag/%40sveltejs/adapter-node%405.5.0"
   }
