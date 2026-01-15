@@ -5,19 +5,19 @@
     "date": "2025-12-11",
     "description": "19.2.3 (December 11th, 2025)",
     "status": "new",
-    "stars": 242251,
+    "stars": 242252,
     "repoUrl": "https://github.com/facebook/react",
     "changelogUrl": "https://github.com/facebook/react/releases/tag/v19.2.3"
   },
   {
     "name": "Next.js",
-    "version": "16.1.1",
-    "date": "2025-12-22",
-    "description": "v16.1.1",
+    "version": "16.1.2",
+    "date": "2026-01-14",
+    "description": "v16.1.2",
     "status": "new",
-    "stars": 137144,
+    "stars": 137146,
     "repoUrl": "https://github.com/vercel/next.js",
-    "changelogUrl": "https://github.com/vercel/next.js/releases/tag/v16.1.1"
+    "changelogUrl": "https://github.com/vercel/next.js/releases/tag/v16.1.2"
   },
   {
     "name": "Node.js",
@@ -25,7 +25,7 @@
     "date": "2026-01-13",
     "description": "2026-01-13, Version 25.3.0 (Current), @RafaelGSS",
     "status": "new",
-    "stars": 115197,
+    "stars": 115200,
     "repoUrl": "https://github.com/nodejs/node",
     "changelogUrl": "https://github.com/nodejs/node/releases/tag/v25.3.0"
   },
@@ -35,7 +35,7 @@
     "date": "2025-10-01",
     "description": "TypeScript 5.9.3",
     "status": "new",
-    "stars": 107435,
+    "stars": 107437,
     "repoUrl": "https://github.com/microsoft/TypeScript",
     "changelogUrl": "https://github.com/microsoft/TypeScript/releases/tag/v5.9.3"
   },
@@ -45,7 +45,7 @@
     "date": "2026-01-12",
     "description": "astro@5.16.9",
     "status": "new",
-    "stars": 55591,
+    "stars": 55592,
     "repoUrl": "https://github.com/withastro/astro",
     "changelogUrl": "https://github.com/withastro/astro/releases/tag/astro%405.16.9"
   },
