@@ -5,7 +5,7 @@
     "date": "2025-12-11",
     "description": "19.2.3 (December 11th, 2025)",
     "status": "new",
-    "stars": 242299,
+    "stars": 242302,
     "repoUrl": "https://github.com/facebook/react",
     "changelogUrl": "https://github.com/facebook/react/releases/tag/v19.2.3"
   },
@@ -15,7 +15,7 @@
     "date": "2026-01-14",
     "description": "v16.1.2",
     "status": "new",
-    "stars": 137162,
+    "stars": 137163,
     "repoUrl": "https://github.com/vercel/next.js",
     "changelogUrl": "https://github.com/vercel/next.js/releases/tag/v16.1.2"
   },
@@ -25,7 +25,7 @@
     "date": "2026-01-13",
     "description": "2026-01-13, Version 25.3.0 (Current), @RafaelGSS",
     "status": "new",
-    "stars": 115227,
+    "stars": 115228,
     "repoUrl": "https://github.com/nodejs/node",
     "changelogUrl": "https://github.com/nodejs/node/releases/tag/v25.3.0"
   },
@@ -35,19 +35,19 @@
     "date": "2025-10-01",
     "description": "TypeScript 5.9.3",
     "status": "new",
-    "stars": 107459,
+    "stars": 107460,
     "repoUrl": "https://github.com/microsoft/TypeScript",
     "changelogUrl": "https://github.com/microsoft/TypeScript/releases/tag/v5.9.3"
   },
   {
     "name": "Astro",
-    "version": "@astrojs/vercel@9.0.4",
+    "version": "astro@5.16.11",
     "date": "2026-01-16",
-    "description": "@astrojs/vercel@9.0.4",
+    "description": "astro@5.16.11",
     "status": "new",
-    "stars": 55637,
+    "stars": 55666,
     "repoUrl": "https://github.com/withastro/astro",
-    "changelogUrl": "https://github.com/withastro/astro/releases/tag/%40astrojs/vercel%409.0.4"
+    "changelogUrl": "https://github.com/withastro/astro/releases/tag/astro%405.16.11"
   },
   {
     "name": "Vue",
@@ -55,7 +55,7 @@
     "date": "2025-12-18",
     "description": "v3.5.26",
     "status": "new",
-    "stars": 52720,
+    "stars": 52723,
     "repoUrl": "https://github.com/vuejs/core",
     "changelogUrl": "https://github.com/vuejs/core/releases/tag/v3.5.26"
   },
@@ -65,7 +65,7 @@
     "date": "2026-01-15",
     "description": "@sveltejs/adapter-node@5.5.1",
     "status": "new",
-    "stars": 20171,
+    "stars": 20172,
     "repoUrl": "https://github.com/sveltejs/kit",
     "changelogUrl": "https://github.com/sveltejs/kit/releases/tag/%40sveltejs/adapter-node%405.5.1"
   }
