@@ -5,7 +5,7 @@
     "date": "2025-12-11",
     "description": "19.2.3 (December 11th, 2025)",
     "status": "new",
-    "stars": 242342,
+    "stars": 242344,
     "repoUrl": "https://github.com/facebook/react",
     "changelogUrl": "https://github.com/facebook/react/releases/tag/v19.2.3"
   },
@@ -25,7 +25,7 @@
     "date": "2026-01-13",
     "description": "2026-01-13, Version 25.3.0 (Current), @RafaelGSS",
     "status": "new",
-    "stars": 115245,
+    "stars": 115247,
     "repoUrl": "https://github.com/nodejs/node",
     "changelogUrl": "https://github.com/nodejs/node/releases/tag/v25.3.0"
   },
@@ -35,7 +35,7 @@
     "date": "2025-10-01",
     "description": "TypeScript 5.9.3",
     "status": "new",
-    "stars": 107474,
+    "stars": 107476,
     "repoUrl": "https://github.com/microsoft/TypeScript",
     "changelogUrl": "https://github.com/microsoft/TypeScript/releases/tag/v5.9.3"
   },
@@ -45,7 +45,7 @@
     "date": "2026-01-16",
     "description": "astro@5.16.11",
     "status": "new",
-    "stars": 55812,
+    "stars": 55821,
     "repoUrl": "https://github.com/withastro/astro",
     "changelogUrl": "https://github.com/withastro/astro/releases/tag/astro%405.16.11"
   },
@@ -65,7 +65,7 @@
     "date": "2026-01-17",
     "description": "@sveltejs/enhanced-img@0.9.3",
     "status": "new",
-    "stars": 20176,
+    "stars": 20177,
     "repoUrl": "https://github.com/sveltejs/kit",
     "changelogUrl": "https://github.com/sveltejs/kit/releases/tag/%40sveltejs/enhanced-img%400.9.3"
   }
