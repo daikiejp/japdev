@@ -5,7 +5,7 @@
     "date": "2025-12-11",
     "description": "19.2.3 (December 11th, 2025)",
     "status": "new",
-    "stars": 242415,
+    "stars": 242420,
     "repoUrl": "https://github.com/facebook/react",
     "changelogUrl": "https://github.com/facebook/react/releases/tag/v19.2.3"
   },
@@ -15,7 +15,7 @@
     "date": "2026-01-19",
     "description": "v16.1.4",
     "status": "new",
-    "stars": 137262,
+    "stars": 137263,
     "repoUrl": "https://github.com/vercel/next.js",
     "changelogUrl": "https://github.com/vercel/next.js/releases/tag/v16.1.4"
   },
@@ -25,7 +25,7 @@
     "date": "2026-01-19",
     "description": "2026-01-19, Version 25.4.0 (Current), @RafaelGSS",
     "status": "new",
-    "stars": 115309,
+    "stars": 115316,
     "repoUrl": "https://github.com/nodejs/node",
     "changelogUrl": "https://github.com/nodejs/node/releases/tag/v25.4.0"
   },
@@ -35,7 +35,7 @@
     "date": "2025-10-01",
     "description": "TypeScript 5.9.3",
     "status": "new",
-    "stars": 107512,
+    "stars": 107514,
     "repoUrl": "https://github.com/microsoft/TypeScript",
     "changelogUrl": "https://github.com/microsoft/TypeScript/releases/tag/v5.9.3"
   },
@@ -45,7 +45,7 @@
     "date": "2026-01-21",
     "description": "astro@5.16.12",
     "status": "new",
-    "stars": 56075,
+    "stars": 56082,
     "repoUrl": "https://github.com/withastro/astro",
     "changelogUrl": "https://github.com/withastro/astro/releases/tag/astro%405.16.12"
   },
@@ -55,7 +55,7 @@
     "date": "2026-01-19",
     "description": "v3.5.27",
     "status": "new",
-    "stars": 52770,
+    "stars": 52772,
     "repoUrl": "https://github.com/vuejs/core",
     "changelogUrl": "https://github.com/vuejs/core/releases/tag/v3.5.27"
   },
@@ -65,7 +65,7 @@
     "date": "2026-01-17",
     "description": "@sveltejs/enhanced-img@0.9.3",
     "status": "new",
-    "stars": 20199,
+    "stars": 20197,
     "repoUrl": "https://github.com/sveltejs/kit",
     "changelogUrl": "https://github.com/sveltejs/kit/releases/tag/%40sveltejs/enhanced-img%400.9.3"
   }
