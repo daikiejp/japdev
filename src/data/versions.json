@@ -5,7 +5,7 @@
     "date": "2025-12-11",
     "description": "19.2.3 (December 11th, 2025)",
     "status": "new",
-    "stars": 242428,
+    "stars": 242431,
     "repoUrl": "https://github.com/facebook/react",
     "changelogUrl": "https://github.com/facebook/react/releases/tag/v19.2.3"
   },
@@ -15,7 +15,7 @@
     "date": "2026-01-19",
     "description": "v16.1.4",
     "status": "new",
-    "stars": 137267,
+    "stars": 137271,
     "repoUrl": "https://github.com/vercel/next.js",
     "changelogUrl": "https://github.com/vercel/next.js/releases/tag/v16.1.4"
   },
@@ -25,7 +25,7 @@
     "date": "2026-01-19",
     "description": "2026-01-19, Version 25.4.0 (Current), @RafaelGSS",
     "status": "new",
-    "stars": 115326,
+    "stars": 115332,
     "repoUrl": "https://github.com/nodejs/node",
     "changelogUrl": "https://github.com/nodejs/node/releases/tag/v25.4.0"
   },
@@ -35,19 +35,19 @@
     "date": "2025-10-01",
     "description": "TypeScript 5.9.3",
     "status": "new",
-    "stars": 107515,
+    "stars": 107518,
     "repoUrl": "https://github.com/microsoft/TypeScript",
     "changelogUrl": "https://github.com/microsoft/TypeScript/releases/tag/v5.9.3"
   },
   {
     "name": "Astro",
-    "version": "astro@5.16.12",
-    "date": "2026-01-21",
-    "description": "astro@5.16.12",
+    "version": "astro@5.16.13",
+    "date": "2026-01-22",
+    "description": "astro@5.16.13",
     "status": "new",
-    "stars": 56121,
+    "stars": 56124,
     "repoUrl": "https://github.com/withastro/astro",
-    "changelogUrl": "https://github.com/withastro/astro/releases/tag/astro%405.16.12"
+    "changelogUrl": "https://github.com/withastro/astro/releases/tag/astro%405.16.13"
   },
   {
     "name": "Vue",
@@ -55,7 +55,7 @@
     "date": "2026-01-19",
     "description": "v3.5.27",
     "status": "new",
-    "stars": 52779,
+    "stars": 52781,
     "repoUrl": "https://github.com/vuejs/core",
     "changelogUrl": "https://github.com/vuejs/core/releases/tag/v3.5.27"
   },
