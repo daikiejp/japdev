@@ -1,33 +1,33 @@
 [
   {
     "name": "React",
-    "version": "19.2.3",
-    "date": "2025-12-11",
-    "description": "19.2.3 (December 11th, 2025)",
+    "version": "19.2.4",
+    "date": "2026-01-26",
+    "description": "19.2.4 (January 26th, 2026)",
     "status": "new",
-    "stars": 242522,
+    "stars": 242524,
     "repoUrl": "https://github.com/facebook/react",
-    "changelogUrl": "https://github.com/facebook/react/releases/tag/v19.2.3"
+    "changelogUrl": "https://github.com/facebook/react/releases/tag/v19.2.4"
   },
   {
     "name": "Next.js",
-    "version": "16.1.4",
-    "date": "2026-01-19",
-    "description": "v16.1.4",
+    "version": "16.1.5",
+    "date": "2026-01-26",
+    "description": "v16.1.5",
     "status": "new",
     "stars": 137347,
     "repoUrl": "https://github.com/vercel/next.js",
-    "changelogUrl": "https://github.com/vercel/next.js/releases/tag/v16.1.4"
+    "changelogUrl": "https://github.com/vercel/next.js/releases/tag/v16.1.5"
   },
   {
     "name": "Node.js",
-    "version": "25.4.0",
-    "date": "2026-01-19",
-    "description": "2026-01-19, Version 25.4.0 (Current), @RafaelGSS",
+    "version": "25.5.0",
+    "date": "2026-01-26",
+    "description": "2026-01-26, Version 25.5.0 (Current), @aduh95",
     "status": "new",
     "stars": 115382,
     "repoUrl": "https://github.com/nodejs/node",
-    "changelogUrl": "https://github.com/nodejs/node/releases/tag/v25.4.0"
+    "changelogUrl": "https://github.com/nodejs/node/releases/tag/v25.5.0"
   },
   {
     "name": "TypeScript",
@@ -45,7 +45,7 @@
     "date": "2026-01-23",
     "description": "astro@5.16.15",
     "status": "new",
-    "stars": 56275,
+    "stars": 56278,
     "repoUrl": "https://github.com/withastro/astro",
     "changelogUrl": "https://github.com/withastro/astro/releases/tag/astro%405.16.15"
   },
