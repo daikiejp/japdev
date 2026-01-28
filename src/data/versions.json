@@ -11,13 +11,13 @@
   },
   {
     "name": "Next.js",
-    "version": "16.1.5",
-    "date": "2026-01-26",
-    "description": "v16.1.5",
+    "version": "16.1.6",
+    "date": "2026-01-27",
+    "description": "v16.1.6",
     "status": "new",
-    "stars": 137361,
+    "stars": 137359,
     "repoUrl": "https://github.com/vercel/next.js",
-    "changelogUrl": "https://github.com/vercel/next.js/releases/tag/v16.1.5"
+    "changelogUrl": "https://github.com/vercel/next.js/releases/tag/v16.1.6"
   },
   {
     "name": "Node.js",
@@ -25,7 +25,7 @@
     "date": "2026-01-26",
     "description": "2026-01-26, Version 25.5.0 (Current), @aduh95",
     "status": "new",
-    "stars": 115406,
+    "stars": 115408,
     "repoUrl": "https://github.com/nodejs/node",
     "changelogUrl": "https://github.com/nodejs/node/releases/tag/v25.5.0"
   },
@@ -45,7 +45,7 @@
     "date": "2026-01-23",
     "description": "astro@5.16.15",
     "status": "new",
-    "stars": 56310,
+    "stars": 56312,
     "repoUrl": "https://github.com/withastro/astro",
     "changelogUrl": "https://github.com/withastro/astro/releases/tag/astro%405.16.15"
   },
@@ -55,7 +55,7 @@
     "date": "2026-01-19",
     "description": "v3.5.27",
     "status": "new",
-    "stars": 52829,
+    "stars": 52831,
     "repoUrl": "https://github.com/vuejs/core",
     "changelogUrl": "https://github.com/vuejs/core/releases/tag/v3.5.27"
   },
@@ -65,7 +65,7 @@
     "date": "2026-01-23",
     "description": "@sveltejs/kit@2.50.1",
     "status": "new",
-    "stars": 20219,
+    "stars": 20220,
     "repoUrl": "https://github.com/sveltejs/kit",
     "changelogUrl": "https://github.com/sveltejs/kit/releases/tag/%40sveltejs/kit%402.50.1"
   }
