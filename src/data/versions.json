@@ -25,7 +25,7 @@
     "date": "2026-01-26",
     "description": "2026-01-26, Version 25.5.0 (Current), @aduh95",
     "status": "new",
-    "stars": 115422,
+    "stars": 115425,
     "repoUrl": "https://github.com/nodejs/node",
     "changelogUrl": "https://github.com/nodejs/node/releases/tag/v25.5.0"
   },
@@ -35,19 +35,19 @@
     "date": "2025-10-01",
     "description": "TypeScript 5.9.3",
     "status": "new",
-    "stars": 107584,
+    "stars": 107588,
     "repoUrl": "https://github.com/microsoft/TypeScript",
     "changelogUrl": "https://github.com/microsoft/TypeScript/releases/tag/v5.9.3"
   },
   {
     "name": "Astro",
-    "version": "astro@5.16.16",
-    "date": "2026-01-28",
-    "description": "astro@5.16.16",
+    "version": "astro@5.17.0",
+    "date": "2026-01-29",
+    "description": "astro@5.17.0",
     "status": "new",
-    "stars": 56351,
+    "stars": 56355,
     "repoUrl": "https://github.com/withastro/astro",
-    "changelogUrl": "https://github.com/withastro/astro/releases/tag/astro%405.16.16"
+    "changelogUrl": "https://github.com/withastro/astro/releases/tag/astro%405.17.0"
   },
   {
     "name": "Vue",
@@ -55,7 +55,7 @@
     "date": "2026-01-19",
     "description": "v3.5.27",
     "status": "new",
-    "stars": 52843,
+    "stars": 52844,
     "repoUrl": "https://github.com/vuejs/core",
     "changelogUrl": "https://github.com/vuejs/core/releases/tag/v3.5.27"
   },
@@ -65,7 +65,7 @@
     "date": "2026-01-23",
     "description": "@sveltejs/kit@2.50.1",
     "status": "new",
-    "stars": 20223,
+    "stars": 20224,
     "repoUrl": "https://github.com/sveltejs/kit",
     "changelogUrl": "https://github.com/sveltejs/kit/releases/tag/%40sveltejs/kit%402.50.1"
   }
