@@ -5,7 +5,7 @@
     "date": "2026-01-26",
     "description": "19.2.4 (January 26th, 2026)",
     "status": "new",
-    "stars": 242654,
+    "stars": 242655,
     "repoUrl": "https://github.com/facebook/react",
     "changelogUrl": "https://github.com/facebook/react/releases/tag/v19.2.4"
   },
@@ -15,7 +15,7 @@
     "date": "2026-01-27",
     "description": "v16.1.6",
     "status": "new",
-    "stars": 137419,
+    "stars": 137421,
     "repoUrl": "https://github.com/vercel/next.js",
     "changelogUrl": "https://github.com/vercel/next.js/releases/tag/v16.1.6"
   },
@@ -35,7 +35,7 @@
     "date": "2025-10-01",
     "description": "TypeScript 5.9.3",
     "status": "new",
-    "stars": 107621,
+    "stars": 107622,
     "repoUrl": "https://github.com/microsoft/TypeScript",
     "changelogUrl": "https://github.com/microsoft/TypeScript/releases/tag/v5.9.3"
   },
