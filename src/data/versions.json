@@ -5,7 +5,7 @@
     "date": "2026-01-26",
     "description": "19.2.4 (January 26th, 2026)",
     "status": "new",
-    "stars": 242877,
+    "stars": 242876,
     "repoUrl": "https://github.com/facebook/react",
     "changelogUrl": "https://github.com/facebook/react/releases/tag/v19.2.4"
   },
@@ -35,7 +35,7 @@
     "date": "2025-10-01",
     "description": "TypeScript 5.9.3",
     "status": "new",
-    "stars": 107740,
+    "stars": 107739,
     "repoUrl": "https://github.com/microsoft/TypeScript",
     "changelogUrl": "https://github.com/microsoft/TypeScript/releases/tag/v5.9.3"
   },
@@ -45,7 +45,7 @@
     "date": "2026-01-29",
     "description": "astro@5.17.1",
     "status": "new",
-    "stars": 56652,
+    "stars": 56661,
     "repoUrl": "https://github.com/withastro/astro",
     "changelogUrl": "https://github.com/withastro/astro/releases/tag/astro%405.17.1"
   },
@@ -55,7 +55,7 @@
     "date": "2026-02-09",
     "description": "v3.5.28",
     "status": "new",
-    "stars": 52943,
+    "stars": 52944,
     "repoUrl": "https://github.com/vuejs/core",
     "changelogUrl": "https://github.com/vuejs/core/releases/tag/v3.5.28"
   },
