@@ -5,7 +5,7 @@
     "date": "2026-01-26",
     "description": "19.2.4 (January 26th, 2026)",
     "status": "new",
-    "stars": 243183,
+    "stars": 243189,
     "repoUrl": "https://github.com/facebook/react",
     "changelogUrl": "https://github.com/facebook/react/releases/tag/v19.2.4"
   },
@@ -15,7 +15,7 @@
     "date": "2026-01-27",
     "description": "v16.1.6",
     "status": "new",
-    "stars": 137849,
+    "stars": 137855,
     "repoUrl": "https://github.com/vercel/next.js",
     "changelogUrl": "https://github.com/vercel/next.js/releases/tag/v16.1.6"
   },
@@ -45,7 +45,7 @@
     "date": "2026-02-18",
     "description": "@astrojs/node@9.5.4",
     "status": "new",
-    "stars": 56961,
+    "stars": 56965,
     "repoUrl": "https://github.com/withastro/astro",
     "changelogUrl": "https://github.com/withastro/astro/releases/tag/%40astrojs/node%409.5.4"
   },
@@ -55,7 +55,7 @@
     "date": "2026-02-09",
     "description": "v3.5.28",
     "status": "new",
-    "stars": 53017,
+    "stars": 53018,
     "repoUrl": "https://github.com/vuejs/core",
     "changelogUrl": "https://github.com/vuejs/core/releases/tag/v3.5.28"
   },
@@ -65,7 +65,7 @@
     "date": "2026-02-18",
     "description": "@sveltejs/adapter-vercel@6.3.2",
     "status": "new",
-    "stars": 20293,
+    "stars": 20295,
     "repoUrl": "https://github.com/sveltejs/kit",
     "changelogUrl": "https://github.com/sveltejs/kit/releases/tag/%40sveltejs/adapter-vercel%406.3.2"
   }
