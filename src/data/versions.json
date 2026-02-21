@@ -5,7 +5,7 @@
     "date": "2026-01-26",
     "description": "19.2.4 (January 26th, 2026)",
     "status": "new",
-    "stars": 243242,
+    "stars": 243246,
     "repoUrl": "https://github.com/facebook/react",
     "changelogUrl": "https://github.com/facebook/react/releases/tag/v19.2.4"
   },
@@ -15,7 +15,7 @@
     "date": "2026-01-27",
     "description": "v16.1.6",
     "status": "new",
-    "stars": 137871,
+    "stars": 137875,
     "repoUrl": "https://github.com/vercel/next.js",
     "changelogUrl": "https://github.com/vercel/next.js/releases/tag/v16.1.6"
   },
@@ -25,7 +25,7 @@
     "date": "2026-02-10",
     "description": "2026-02-10, Version 25.6.1 (Current), @aduh95",
     "status": "new",
-    "stars": 115861,
+    "stars": 115864,
     "repoUrl": "https://github.com/nodejs/node",
     "changelogUrl": "https://github.com/nodejs/node/releases/tag/v25.6.1"
   },
@@ -55,7 +55,7 @@
     "date": "2026-02-09",
     "description": "v3.5.28",
     "status": "new",
-    "stars": 53021,
+    "stars": 53023,
     "repoUrl": "https://github.com/vuejs/core",
     "changelogUrl": "https://github.com/vuejs/core/releases/tag/v3.5.28"
   },
@@ -65,7 +65,7 @@
     "date": "2026-02-20",
     "description": "@sveltejs/adapter-netlify@6.0.3",
     "status": "new",
-    "stars": 20295,
+    "stars": 20297,
     "repoUrl": "https://github.com/sveltejs/kit",
     "changelogUrl": "https://github.com/sveltejs/kit/releases/tag/%40sveltejs/adapter-netlify%406.0.3"
   }
