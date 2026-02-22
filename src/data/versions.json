@@ -5,7 +5,7 @@
     "date": "2026-01-26",
     "description": "19.2.4 (January 26th, 2026)",
     "status": "new",
-    "stars": 243264,
+    "stars": 243262,
     "repoUrl": "https://github.com/facebook/react",
     "changelogUrl": "https://github.com/facebook/react/releases/tag/v19.2.4"
   },
@@ -25,7 +25,7 @@
     "date": "2026-02-10",
     "description": "2026-02-10, Version 25.6.1 (Current), @aduh95",
     "status": "new",
-    "stars": 115883,
+    "stars": 115885,
     "repoUrl": "https://github.com/nodejs/node",
     "changelogUrl": "https://github.com/nodejs/node/releases/tag/v25.6.1"
   },
@@ -45,7 +45,7 @@
     "date": "2026-02-18",
     "description": "@astrojs/node@9.5.4",
     "status": "new",
-    "stars": 57002,
+    "stars": 57003,
     "repoUrl": "https://github.com/withastro/astro",
     "changelogUrl": "https://github.com/withastro/astro/releases/tag/%40astrojs/node%409.5.4"
   },
@@ -65,7 +65,7 @@
     "date": "2026-02-20",
     "description": "@sveltejs/adapter-netlify@6.0.3",
     "status": "new",
-    "stars": 20300,
+    "stars": 20298,
     "repoUrl": "https://github.com/sveltejs/kit",
     "changelogUrl": "https://github.com/sveltejs/kit/releases/tag/%40sveltejs/adapter-netlify%406.0.3"
   }
