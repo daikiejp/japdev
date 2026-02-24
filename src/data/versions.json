@@ -5,7 +5,7 @@
     "date": "2026-01-26",
     "description": "19.2.4 (January 26th, 2026)",
     "status": "new",
-    "stars": 243320,
+    "stars": 243327,
     "repoUrl": "https://github.com/facebook/react",
     "changelogUrl": "https://github.com/facebook/react/releases/tag/v19.2.4"
   },
@@ -15,7 +15,7 @@
     "date": "2026-01-27",
     "description": "v16.1.6",
     "status": "new",
-    "stars": 137933,
+    "stars": 137935,
     "repoUrl": "https://github.com/vercel/next.js",
     "changelogUrl": "https://github.com/vercel/next.js/releases/tag/v16.1.6"
   },
@@ -35,7 +35,7 @@
     "date": "2025-10-01",
     "description": "TypeScript 5.9.3",
     "status": "new",
-    "stars": 107920,
+    "stars": 107922,
     "repoUrl": "https://github.com/microsoft/TypeScript",
     "changelogUrl": "https://github.com/microsoft/TypeScript/releases/tag/v5.9.3"
   },
@@ -45,19 +45,19 @@
     "date": "2026-02-18",
     "description": "@astrojs/node@9.5.4",
     "status": "new",
-    "stars": 57058,
+    "stars": 57061,
     "repoUrl": "https://github.com/withastro/astro",
     "changelogUrl": "https://github.com/withastro/astro/releases/tag/%40astrojs/node%409.5.4"
   },
   {
     "name": "Vue",
-    "version": "3.5.28",
-    "date": "2026-02-09",
-    "description": "v3.5.28",
+    "version": "3.5.29",
+    "date": "2026-02-24",
+    "description": "v3.5.29",
     "status": "new",
-    "stars": 53046,
+    "stars": 53049,
     "repoUrl": "https://github.com/vuejs/core",
-    "changelogUrl": "https://github.com/vuejs/core/releases/tag/v3.5.28"
+    "changelogUrl": "https://github.com/vuejs/core/releases/tag/v3.5.29"
   },
   {
     "name": "SvelteKit",
