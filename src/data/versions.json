@@ -5,7 +5,7 @@
     "date": "2026-01-26",
     "description": "19.2.4 (January 26th, 2026)",
     "status": "new",
-    "stars": 243338,
+    "stars": 243341,
     "repoUrl": "https://github.com/facebook/react",
     "changelogUrl": "https://github.com/facebook/react/releases/tag/v19.2.4"
   },
@@ -15,7 +15,7 @@
     "date": "2026-01-27",
     "description": "v16.1.6",
     "status": "new",
-    "stars": 137950,
+    "stars": 137952,
     "repoUrl": "https://github.com/vercel/next.js",
     "changelogUrl": "https://github.com/vercel/next.js/releases/tag/v16.1.6"
   },
@@ -25,7 +25,7 @@
     "date": "2026-02-24",
     "description": "2026-02-24, Version 25.7.0 (Current), @ruyadorno prepared by @aduh95",
     "status": "new",
-    "stars": 115926,
+    "stars": 115924,
     "repoUrl": "https://github.com/nodejs/node",
     "changelogUrl": "https://github.com/nodejs/node/releases/tag/v25.7.0"
   },
@@ -35,7 +35,7 @@
     "date": "2025-10-01",
     "description": "TypeScript 5.9.3",
     "status": "new",
-    "stars": 107928,
+    "stars": 107929,
     "repoUrl": "https://github.com/microsoft/TypeScript",
     "changelogUrl": "https://github.com/microsoft/TypeScript/releases/tag/v5.9.3"
   },
@@ -55,18 +55,18 @@
     "date": "2026-02-24",
     "description": "v3.5.29",
     "status": "new",
-    "stars": 53053,
+    "stars": 53052,
     "repoUrl": "https://github.com/vuejs/core",
     "changelogUrl": "https://github.com/vuejs/core/releases/tag/v3.5.29"
   },
   {
     "name": "SvelteKit",
-    "version": "@sveltejs/adapter-netlify@6.0.3",
-    "date": "2026-02-20",
-    "description": "@sveltejs/adapter-netlify@6.0.3",
+    "version": "@sveltejs/adapter-netlify@6.0.4",
+    "date": "2026-02-24",
+    "description": "@sveltejs/adapter-netlify@6.0.4",
     "status": "new",
-    "stars": 20306,
+    "stars": 20307,
     "repoUrl": "https://github.com/sveltejs/kit",
-    "changelogUrl": "https://github.com/sveltejs/kit/releases/tag/%40sveltejs/adapter-netlify%406.0.3"
+    "changelogUrl": "https://github.com/sveltejs/kit/releases/tag/%40sveltejs/adapter-netlify%406.0.4"
   }
 ]
