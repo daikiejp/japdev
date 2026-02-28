@@ -5,7 +5,7 @@
     "date": "2026-01-26",
     "description": "19.2.4 (January 26th, 2026)",
     "status": "new",
-    "stars": 243348,
+    "stars": 243351,
     "repoUrl": "https://github.com/facebook/react",
     "changelogUrl": "https://github.com/facebook/react/releases/tag/v19.2.4"
   },
@@ -25,7 +25,7 @@
     "date": "2026-02-24",
     "description": "2026-02-24, Version 25.7.0 (Current), @ruyadorno prepared by @aduh95",
     "status": "new",
-    "stars": 115981,
+    "stars": 115983,
     "repoUrl": "https://github.com/nodejs/node",
     "changelogUrl": "https://github.com/nodejs/node/releases/tag/v25.7.0"
   },
@@ -35,7 +35,7 @@
     "date": "2025-10-01",
     "description": "TypeScript 5.9.3",
     "status": "new",
-    "stars": 107965,
+    "stars": 107966,
     "repoUrl": "https://github.com/microsoft/TypeScript",
     "changelogUrl": "https://github.com/microsoft/TypeScript/releases/tag/v5.9.3"
   },
@@ -45,7 +45,7 @@
     "date": "2026-02-25",
     "description": "astro@5.18.0",
     "status": "new",
-    "stars": 57142,
+    "stars": 57143,
     "repoUrl": "https://github.com/withastro/astro",
     "changelogUrl": "https://github.com/withastro/astro/releases/tag/astro%405.18.0"
   },
@@ -55,18 +55,18 @@
     "date": "2026-02-24",
     "description": "v3.5.29",
     "status": "new",
-    "stars": 53084,
+    "stars": 53086,
     "repoUrl": "https://github.com/vuejs/core",
     "changelogUrl": "https://github.com/vuejs/core/releases/tag/v3.5.29"
   },
   {
     "name": "SvelteKit",
-    "version": "@sveltejs/kit@2.53.3",
-    "date": "2026-02-26",
-    "description": "@sveltejs/kit@2.53.3",
+    "version": "@sveltejs/kit@2.53.4",
+    "date": "2026-02-28",
+    "description": "@sveltejs/kit@2.53.4",
     "status": "new",
     "stars": 20313,
     "repoUrl": "https://github.com/sveltejs/kit",
-    "changelogUrl": "https://github.com/sveltejs/kit/releases/tag/%40sveltejs/kit%402.53.3"
+    "changelogUrl": "https://github.com/sveltejs/kit/releases/tag/%40sveltejs/kit%402.53.4"
   }
 ]
