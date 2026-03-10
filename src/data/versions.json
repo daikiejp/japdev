@@ -5,7 +5,7 @@
     "date": "2026-01-26",
     "description": "19.2.4 (January 26th, 2026)",
     "status": "new",
-    "stars": 243869,
+    "stars": 243872,
     "repoUrl": "https://github.com/facebook/react",
     "changelogUrl": "https://github.com/facebook/react/releases/tag/v19.2.4"
   },
@@ -15,7 +15,7 @@
     "date": "2026-01-27",
     "description": "v16.1.6",
     "status": "new",
-    "stars": 138294,
+    "stars": 138293,
     "repoUrl": "https://github.com/vercel/next.js",
     "changelogUrl": "https://github.com/vercel/next.js/releases/tag/v16.1.6"
   },
@@ -25,7 +25,7 @@
     "date": "2026-03-03",
     "description": "2026-03-03, Version 25.8.0 (Current), @richardlau",
     "status": "new",
-    "stars": 116241,
+    "stars": 116244,
     "repoUrl": "https://github.com/nodejs/node",
     "changelogUrl": "https://github.com/nodejs/node/releases/tag/v25.8.0"
   },
@@ -35,19 +35,19 @@
     "date": "2025-10-01",
     "description": "TypeScript 5.9.3",
     "status": "new",
-    "stars": 108089,
+    "stars": 108091,
     "repoUrl": "https://github.com/microsoft/TypeScript",
     "changelogUrl": "https://github.com/microsoft/TypeScript/releases/tag/v5.9.3"
   },
   {
     "name": "Astro",
-    "version": "@astrojs/svelte@8.0.0",
+    "version": "@astrojs/partytown@2.1.5",
     "date": "2026-03-10",
-    "description": "@astrojs/svelte@8.0.0",
+    "description": "@astrojs/partytown@2.1.5",
     "status": "new",
-    "stars": 57390,
+    "stars": 57395,
     "repoUrl": "https://github.com/withastro/astro",
-    "changelogUrl": "https://github.com/withastro/astro/releases/tag/%40astrojs/svelte%408.0.0"
+    "changelogUrl": "https://github.com/withastro/astro/releases/tag/%40astrojs/partytown%402.1.5"
   },
   {
     "name": "Vue",
@@ -65,7 +65,7 @@
     "date": "2026-02-28",
     "description": "@sveltejs/kit@2.53.4",
     "status": "new",
-    "stars": 20343,
+    "stars": 20344,
     "repoUrl": "https://github.com/sveltejs/kit",
     "changelogUrl": "https://github.com/sveltejs/kit/releases/tag/%40sveltejs/kit%402.53.4"
   }
