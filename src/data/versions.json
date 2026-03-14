@@ -5,7 +5,7 @@
     "date": "2026-01-26",
     "description": "19.2.4 (January 26th, 2026)",
     "status": "new",
-    "stars": 243915,
+    "stars": 243919,
     "repoUrl": "https://github.com/facebook/react",
     "changelogUrl": "https://github.com/facebook/react/releases/tag/v19.2.4"
   },
@@ -15,7 +15,7 @@
     "date": "2026-01-27",
     "description": "v16.1.6",
     "status": "new",
-    "stars": 138290,
+    "stars": 138292,
     "repoUrl": "https://github.com/vercel/next.js",
     "changelogUrl": "https://github.com/vercel/next.js/releases/tag/v16.1.6"
   },
@@ -25,7 +25,7 @@
     "date": "2026-03-11",
     "description": "2026-03-11, Version 25.8.1 (Current), @aduh95",
     "status": "new",
-    "stars": 116241,
+    "stars": 116244,
     "repoUrl": "https://github.com/nodejs/node",
     "changelogUrl": "https://github.com/nodejs/node/releases/tag/v25.8.1"
   },
@@ -45,7 +45,7 @@
     "date": "2026-03-12",
     "description": "astro@6.0.4",
     "status": "new",
-    "stars": 57538,
+    "stars": 57544,
     "repoUrl": "https://github.com/withastro/astro",
     "changelogUrl": "https://github.com/withastro/astro/releases/tag/astro%406.0.4"
   },
@@ -65,7 +65,7 @@
     "date": "2026-03-12",
     "description": "@sveltejs/enhanced-img@0.10.4",
     "status": "new",
-    "stars": 20351,
+    "stars": 20352,
     "repoUrl": "https://github.com/sveltejs/kit",
     "changelogUrl": "https://github.com/sveltejs/kit/releases/tag/%40sveltejs/enhanced-img%400.10.4"
   }
