@@ -5,7 +5,7 @@
     "date": "2026-01-26",
     "description": "19.2.4 (January 26th, 2026)",
     "status": "new",
-    "stars": 244098,
+    "stars": 244103,
     "repoUrl": "https://github.com/facebook/react",
     "changelogUrl": "https://github.com/facebook/react/releases/tag/v19.2.4"
   },
@@ -15,7 +15,7 @@
     "date": "2026-03-18",
     "description": "v16.2.0",
     "status": "new",
-    "stars": 138403,
+    "stars": 138404,
     "repoUrl": "https://github.com/vercel/next.js",
     "changelogUrl": "https://github.com/vercel/next.js/releases/tag/v16.2.0"
   },
@@ -25,7 +25,7 @@
     "date": "2026-03-11",
     "description": "2026-03-11, Version 25.8.1 (Current), @aduh95",
     "status": "new",
-    "stars": 116361,
+    "stars": 116362,
     "repoUrl": "https://github.com/nodejs/node",
     "changelogUrl": "https://github.com/nodejs/node/releases/tag/v25.8.1"
   },
@@ -41,13 +41,13 @@
   },
   {
     "name": "Astro",
-    "version": "astro@6.0.7",
-    "date": "2026-03-19",
-    "description": "astro@6.0.7",
+    "version": "@astrojs/cloudflare@13.1.3",
+    "date": "2026-03-20",
+    "description": "@astrojs/cloudflare@13.1.3",
     "status": "new",
-    "stars": 57710,
+    "stars": 57716,
     "repoUrl": "https://github.com/withastro/astro",
-    "changelogUrl": "https://github.com/withastro/astro/releases/tag/astro%406.0.7"
+    "changelogUrl": "https://github.com/withastro/astro/releases/tag/%40astrojs/cloudflare%4013.1.3"
   },
   {
     "name": "Vue",
