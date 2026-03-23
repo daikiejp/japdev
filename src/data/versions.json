@@ -5,7 +5,7 @@
     "date": "2026-01-26",
     "description": "19.2.4 (January 26th, 2026)",
     "status": "new",
-    "stars": 244147,
+    "stars": 244150,
     "repoUrl": "https://github.com/facebook/react",
     "changelogUrl": "https://github.com/facebook/react/releases/tag/v19.2.4"
   },
@@ -15,7 +15,7 @@
     "date": "2026-03-20",
     "description": "v16.2.1",
     "status": "new",
-    "stars": 138447,
+    "stars": 138451,
     "repoUrl": "https://github.com/vercel/next.js",
     "changelogUrl": "https://github.com/vercel/next.js/releases/tag/v16.2.1"
   },
@@ -25,7 +25,7 @@
     "date": "2026-03-11",
     "description": "2026-03-11, Version 25.8.1 (Current), @aduh95",
     "status": "new",
-    "stars": 116416,
+    "stars": 116419,
     "repoUrl": "https://github.com/nodejs/node",
     "changelogUrl": "https://github.com/nodejs/node/releases/tag/v25.8.1"
   },
@@ -35,7 +35,7 @@
     "date": "2025-10-01",
     "description": "TypeScript 5.9.3",
     "status": "new",
-    "stars": 108244,
+    "stars": 108249,
     "repoUrl": "https://github.com/microsoft/TypeScript",
     "changelogUrl": "https://github.com/microsoft/TypeScript/releases/tag/v5.9.3"
   },
@@ -45,7 +45,7 @@
     "date": "2026-03-20",
     "description": "@astrojs/cloudflare@13.1.3",
     "status": "new",
-    "stars": 57786,
+    "stars": 57793,
     "repoUrl": "https://github.com/withastro/astro",
     "changelogUrl": "https://github.com/withastro/astro/releases/tag/%40astrojs/cloudflare%4013.1.3"
   },
@@ -55,7 +55,7 @@
     "date": "2026-03-09",
     "description": "v3.5.30",
     "status": "new",
-    "stars": 53300,
+    "stars": 53299,
     "repoUrl": "https://github.com/vuejs/core",
     "changelogUrl": "https://github.com/vuejs/core/releases/tag/v3.5.30"
   },
@@ -65,7 +65,7 @@
     "date": "2026-03-12",
     "description": "@sveltejs/enhanced-img@0.10.4",
     "status": "new",
-    "stars": 20370,
+    "stars": 20372,
     "repoUrl": "https://github.com/sveltejs/kit",
     "changelogUrl": "https://github.com/sveltejs/kit/releases/tag/%40sveltejs/enhanced-img%400.10.4"
   }
