@@ -5,7 +5,7 @@
     "date": "2026-01-26",
     "description": "19.2.4 (January 26th, 2026)",
     "status": "new",
-    "stars": 244252,
+    "stars": 244253,
     "repoUrl": "https://github.com/facebook/react",
     "changelogUrl": "https://github.com/facebook/react/releases/tag/v19.2.4"
   },
@@ -15,7 +15,7 @@
     "date": "2026-03-20",
     "description": "v16.2.1",
     "status": "new",
-    "stars": 138519,
+    "stars": 138520,
     "repoUrl": "https://github.com/vercel/next.js",
     "changelogUrl": "https://github.com/vercel/next.js/releases/tag/v16.2.1"
   },
@@ -25,7 +25,7 @@
     "date": "2026-03-24",
     "description": "2026-03-24, Version 25.8.2 (Current), @RafaelGSS",
     "status": "new",
-    "stars": 116448,
+    "stars": 116453,
     "repoUrl": "https://github.com/nodejs/node",
     "changelogUrl": "https://github.com/nodejs/node/releases/tag/v25.8.2"
   },
@@ -45,7 +45,7 @@
     "date": "2026-03-26",
     "description": "create-astro@5.0.4",
     "status": "new",
-    "stars": 57944,
+    "stars": 57953,
     "repoUrl": "https://github.com/withastro/astro",
     "changelogUrl": "https://github.com/withastro/astro/releases/tag/create-astro%405.0.4"
   },
@@ -55,7 +55,7 @@
     "date": "2026-03-25",
     "description": "v3.5.31",
     "status": "new",
-    "stars": 53347,
+    "stars": 53346,
     "repoUrl": "https://github.com/vuejs/core",
     "changelogUrl": "https://github.com/vuejs/core/releases/tag/v3.5.31"
   },
