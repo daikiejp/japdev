@@ -5,7 +5,7 @@
     "date": "2026-01-26",
     "description": "19.2.4 (January 26th, 2026)",
     "status": "new",
-    "stars": 244256,
+    "stars": 244257,
     "repoUrl": "https://github.com/facebook/react",
     "changelogUrl": "https://github.com/facebook/react/releases/tag/v19.2.4"
   },
@@ -15,7 +15,7 @@
     "date": "2026-03-20",
     "description": "v16.2.1",
     "status": "new",
-    "stars": 138548,
+    "stars": 138550,
     "repoUrl": "https://github.com/vercel/next.js",
     "changelogUrl": "https://github.com/vercel/next.js/releases/tag/v16.2.1"
   },
@@ -25,7 +25,7 @@
     "date": "2026-03-24",
     "description": "2026-03-24, Version 25.8.2 (Current), @RafaelGSS",
     "status": "new",
-    "stars": 116467,
+    "stars": 116468,
     "repoUrl": "https://github.com/nodejs/node",
     "changelogUrl": "https://github.com/nodejs/node/releases/tag/v25.8.2"
   },
@@ -35,7 +35,7 @@
     "date": "2026-03-23",
     "description": "TypeScript 6.0",
     "status": "new",
-    "stars": 108355,
+    "stars": 108356,
     "repoUrl": "https://github.com/microsoft/TypeScript",
     "changelogUrl": "https://github.com/microsoft/TypeScript/releases/tag/v6.0.2"
   },
@@ -45,7 +45,7 @@
     "date": "2026-03-30",
     "description": "create-astro@5.0.5",
     "status": "new",
-    "stars": 57972,
+    "stars": 57978,
     "repoUrl": "https://github.com/withastro/astro",
     "changelogUrl": "https://github.com/withastro/astro/releases/tag/create-astro%405.0.5"
   },
