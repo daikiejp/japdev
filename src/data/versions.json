@@ -5,7 +5,7 @@
     "date": "2026-01-26",
     "description": "19.2.4 (January 26th, 2026)",
     "status": "new",
-    "stars": 244270,
+    "stars": 244274,
     "repoUrl": "https://github.com/facebook/react",
     "changelogUrl": "https://github.com/facebook/react/releases/tag/v19.2.4"
   },
@@ -25,7 +25,7 @@
     "date": "2026-03-24",
     "description": "2026-03-24, Version 25.8.2 (Current), @RafaelGSS",
     "status": "new",
-    "stars": 116476,
+    "stars": 116475,
     "repoUrl": "https://github.com/nodejs/node",
     "changelogUrl": "https://github.com/nodejs/node/releases/tag/v25.8.2"
   },
@@ -40,12 +40,22 @@
     "changelogUrl": "https://github.com/microsoft/TypeScript/releases/tag/v6.0.2"
   },
   {
+    "name": "Astro",
+    "version": "@astrojs/cloudflare@13.1.6",
+    "date": "2026-03-30",
+    "description": "@astrojs/cloudflare@13.1.6",
+    "status": "new",
+    "stars": 57983,
+    "repoUrl": "https://github.com/withastro/astro",
+    "changelogUrl": "https://github.com/withastro/astro/releases/tag/%40astrojs/cloudflare%4013.1.6"
+  },
+  {
     "name": "Vue",
     "version": "3.5.31",
     "date": "2026-03-25",
     "description": "v3.5.31",
     "status": "new",
-    "stars": 53351,
+    "stars": 53350,
     "repoUrl": "https://github.com/vuejs/core",
     "changelogUrl": "https://github.com/vuejs/core/releases/tag/v3.5.31"
   },
@@ -55,7 +65,7 @@
     "date": "2026-03-12",
     "description": "@sveltejs/enhanced-img@0.10.4",
     "status": "new",
-    "stars": 20398,
+    "stars": 20399,
     "repoUrl": "https://github.com/sveltejs/kit",
     "changelogUrl": "https://github.com/sveltejs/kit/releases/tag/%40sveltejs/enhanced-img%400.10.4"
   }
