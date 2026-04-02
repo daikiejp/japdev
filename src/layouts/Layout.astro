@@ -17,8 +17,17 @@ const { title, hasSidebar = false } = Astro.props;
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <title>{title}</title>
+    <script is:inline>
+      // ダークモードをflash防止のためにインラインで初期化
+      (function() {
+        const stored = localStorage.getItem('theme');
+        if (stored === 'dark' || (!stored && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+          document.documentElement.classList.add('dark');
+        }
+      })();
+    </script>
   </head>
-  <body class="bg-linear-to-br from-gray-50 via-emerald-50 to-teal-50 min-h-screen">
+  <body style="background-color: var(--bg-page); color: var(--text-primary);">
     <Header />
     <slot />
     <Footer hasSidebar={hasSidebar} />

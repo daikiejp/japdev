@@ -22,28 +22,26 @@ interface Props {
 const { category, currentTopicId, currentSectionId } = Astro.props;
 const currentTopic = category.topics.find(t => t.id === currentTopicId);
 ---
-<!-- サイドバー -->
-<aside class="devsheet-sidebar fixed left-0 top-16 h-[calc(100vh-4rem)] w-64 bg-white border-r border-gray-200 overflow-y-auto z-40 hidden lg:block">
+<!-- デスクトップサイドバー -->
+<aside class="devsheet-sidebar fixed left-0 top-16 h-[calc(100vh-4rem)] w-64 border-r overflow-y-auto z-40 hidden lg:block" style="background-color: var(--bg-sidebar); border-color: var(--border-sidebar);">
   <div class="p-4">
-    <!-- カテゴリーヘッダー -->
-    <a href="/devsheet" class="flex items-center gap-2 text-gray-600 hover:text-emerald-600 mb-4 transition-colors">
+    <a href="/devsheet" class="flex items-center gap-2 hover:text-emerald-600 mb-4 transition-colors" style="color: var(--text-nav);">
       <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
       </svg>
       <span class="text-sm font-medium">チートシート一覧</span>
     </a>
 
-    <div class="flex items-center gap-3 mb-6 pb-4 border-b border-gray-200">
+    <div class="flex items-center gap-3 mb-6 pb-4 border-b" style="border-color: var(--border-sidebar);">
       <div class="w-10 h-10 flex items-center justify-center rounded-lg" style={`background: ${category.color}20;`}>
         <img src={category.logo} alt={category.name} class="w-6 h-6" />
       </div>
       <div>
-        <h2 class="font-bold text-gray-900">{category.name}</h2>
-        <p class="text-xs text-gray-500">{category.topics.length} トピック</p>
+        <h2 class="font-bold" style="color: var(--text-primary);">{category.name}</h2>
+        <p class="text-xs" style="color: var(--text-muted);">{category.topics.length} トピック</p>
       </div>
     </div>
 
-    <!-- トピックナビゲーション -->
     <nav class="space-y-1">
       {category.topics.map((topic) => (
         <div class="topic-group">
@@ -51,8 +49,8 @@ const currentTopic = category.topics.find(t => t.id === currentTopicId);
             href={`/devsheet/${category.id}/${topic.id}`}
             class={`topic-link flex items-center justify-between px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
               currentTopicId === topic.id 
-                ? 'bg-emerald-50 text-emerald-700' 
-                : 'text-gray-700 hover:bg-gray-50'
+                ? 'active-topic' 
+                : 'inactive-topic'
             }`}
           >
             <span>{topic.name}</span>
@@ -67,15 +65,16 @@ const currentTopic = category.topics.find(t => t.id === currentTopicId);
           </a>
           
           {currentTopicId === topic.id && currentTopic && currentTopic.sections && currentTopic.sections.length > 0 && (
-            <div class="ml-4 mt-1 space-y-1 border-l-2 border-gray-200 pl-3">
+            <div class="ml-4 mt-1 space-y-1 border-l-2 pl-3" style="border-color: var(--border-sidebar);">
               {currentTopic.sections.map((section) => (
                 <a 
                   href={`#${section.id}`}
                   class={`section-link block px-3 py-1.5 text-sm rounded transition-colors ${
                     currentSectionId === section.id
                       ? 'text-emerald-600 font-medium'
-                      : 'text-gray-600 hover:text-emerald-600'
+                      : 'hover:text-emerald-600'
                   }`}
+                  style={currentSectionId !== section.id ? 'color: var(--text-secondary);' : ''}
                 >
                   {section.title}
                 </a>
@@ -88,7 +87,7 @@ const currentTopic = category.topics.find(t => t.id === currentTopicId);
   </div>
 </aside>
 
-<!-- モバイルサイドバー切り替え -->
+<!-- モバイル切り替えボタン -->
 <button 
   id="mobile-sidebar-toggle"
   class="lg:hidden fixed bottom-4 right-4 w-12 h-12 bg-emerald-600 text-white rounded-full shadow-lg flex items-center justify-center z-50 hover:bg-emerald-700 transition-colors"
@@ -98,35 +97,35 @@ const currentTopic = category.topics.find(t => t.id === currentTopicId);
   </svg>
 </button>
 
-<!-- モバイルサイドバーオーバーレイ -->
+<!-- モバイルオーバーレイ -->
 <div id="mobile-sidebar-overlay" class="lg:hidden fixed inset-0 bg-black bg-opacity-50 z-40 hidden"></div>
 
 <!-- モバイルサイドバー -->
-<aside id="mobile-sidebar" class="lg:hidden fixed left-0 top-0 h-full w-64 bg-white shadow-xl z-50 transform -translate-x-full transition-transform duration-300 overflow-y-auto">
+<aside id="mobile-sidebar" class="lg:hidden fixed left-0 top-0 h-full w-64 shadow-xl z-50 transform -translate-x-full transition-transform duration-300 overflow-y-auto" style="background-color: var(--bg-sidebar);">
   <div class="p-4">
     <div class="flex items-center justify-between mb-4">
-      <h2 class="font-bold text-gray-900">メニュー</h2>
-      <button id="mobile-sidebar-close" class="text-gray-600 hover:text-gray-900">
+      <h2 class="font-bold" style="color: var(--text-primary);">メニュー</h2>
+      <button id="mobile-sidebar-close" class="hover:text-emerald-600" style="color: var(--text-nav);">
         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
         </svg>
       </button>
     </div>
 
-    <a href="/devsheet" class="flex items-center gap-2 text-gray-600 hover:text-emerald-600 mb-4 transition-colors">
+    <a href="/devsheet" class="flex items-center gap-2 hover:text-emerald-600 mb-4 transition-colors" style="color: var(--text-nav);">
       <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
       </svg>
       <span class="text-sm font-medium">チートシート一覧</span>
     </a>
 
-    <div class="flex items-center gap-3 mb-6 pb-4 border-b border-gray-200">
+    <div class="flex items-center gap-3 mb-6 pb-4 border-b" style="border-color: var(--border-sidebar);">
       <div class="w-10 h-10 flex items-center justify-center rounded-lg" style={`background: ${category.color}20;`}>
         <img src={category.logo} alt={category.name} class="w-6 h-6" />
       </div>
       <div>
-        <h3 class="font-bold text-gray-900">{category.name}</h3>
-        <p class="text-xs text-gray-500">{category.topics.length} トピック</p>
+        <h3 class="font-bold" style="color: var(--text-primary);">{category.name}</h3>
+        <p class="text-xs" style="color: var(--text-muted);">{category.topics.length} トピック</p>
       </div>
     </div>
 
@@ -137,8 +136,8 @@ const currentTopic = category.topics.find(t => t.id === currentTopicId);
             href={`/devsheet/${category.id}/${topic.id}`}
             class={`topic-link flex items-center justify-between px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
               currentTopicId === topic.id 
-                ? 'bg-emerald-50 text-emerald-700' 
-                : 'text-gray-700 hover:bg-gray-50'
+                ? 'active-topic' 
+                : 'inactive-topic'
             }`}
           >
             <span>{topic.name}</span>
@@ -153,15 +152,16 @@ const currentTopic = category.topics.find(t => t.id === currentTopicId);
           </a>
           
           {currentTopicId === topic.id && currentTopic && currentTopic.sections && currentTopic.sections.length > 0 && (
-            <div class="ml-4 mt-1 space-y-1 border-l-2 border-gray-200 pl-3">
+            <div class="ml-4 mt-1 space-y-1 border-l-2 pl-3" style="border-color: var(--border-sidebar);">
               {currentTopic.sections.map((section) => (
                 <a 
                   href={`#${section.id}`}
                   class={`section-link block px-3 py-1.5 text-sm rounded transition-colors ${
                     currentSectionId === section.id
                       ? 'text-emerald-600 font-medium'
-                      : 'text-gray-600 hover:text-emerald-600'
+                      : 'hover:text-emerald-600'
                   }`}
+                  style={currentSectionId !== section.id ? 'color: var(--text-secondary);' : ''}
                   data-mobile-link
                 >
                   {section.title}
@@ -210,11 +210,7 @@ const currentTopic = category.topics.find(t => t.id === currentTopicId);
       if (targetId) {
         const targetElement = document.getElementById(targetId);
         if (targetElement) {
-          const offsetTop = targetElement.offsetTop - 80;
-          window.scrollTo({
-            top: offsetTop,
-            behavior: 'smooth'
-          });
+          window.scrollTo({ top: targetElement.offsetTop - 80, behavior: 'smooth' });
         }
       }
     });
@@ -228,9 +224,8 @@ const currentTopic = category.topics.find(t => t.id === currentTopicId);
     const scrollPosition = window.scrollY + 100;
     
     sections.forEach(section => {
-      const sectionTop = section.offsetTop;
-      const sectionHeight = section.offsetHeight;
-      if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
+      const sectionTop = (section as HTMLElement).offsetTop;
+      if (scrollPosition >= sectionTop && scrollPosition < sectionTop + (section as HTMLElement).offsetHeight) {
         currentSection = section.getAttribute('id') || '';
       }
     });
@@ -239,10 +234,10 @@ const currentTopic = category.topics.find(t => t.id === currentTopicId);
       const href = link.getAttribute('href');
       if (href === `#${currentSection}`) {
         link.classList.add('text-emerald-600', 'font-medium');
-        link.classList.remove('text-gray-600');
+        (link as HTMLElement).style.color = '';
       } else {
         link.classList.remove('text-emerald-600', 'font-medium');
-        link.classList.add('text-gray-600');
+        (link as HTMLElement).style.color = 'var(--text-secondary)';
       }
     });
   }
@@ -250,10 +245,7 @@ const currentTopic = category.topics.find(t => t.id === currentTopicId);
   let ticking = false;
   window.addEventListener('scroll', () => {
     if (!ticking) {
-      window.requestAnimationFrame(() => {
-        highlightActiveSection();
-        ticking = false;
-      });
+      window.requestAnimationFrame(() => { highlightActiveSection(); ticking = false; });
       ticking = true;
     }
   });
@@ -262,47 +254,38 @@ const currentTopic = category.topics.find(t => t.id === currentTopicId);
 </script>
 
 <style>
-  .devsheet-sidebar {
-    scrollbar-width: thin;
-    scrollbar-color: #d1d5db transparent;
+  .active-topic {
+    background-color: rgba(16, 185, 129, 0.1);
+    color: #059669;
   }
 
-  .devsheet-sidebar::-webkit-scrollbar {
-    width: 6px;
+  .inactive-topic {
+    color: var(--text-secondary);
   }
 
-  .devsheet-sidebar::-webkit-scrollbar-track {
-    background: transparent;
+  .inactive-topic:hover {
+    background-color: var(--bg-tab-hover);
   }
 
-  .devsheet-sidebar::-webkit-scrollbar-thumb {
-    background-color: #d1d5db;
-    border-radius: 3px;
-  }
-
-  .devsheet-sidebar::-webkit-scrollbar-thumb:hover {
-    background-color: #9ca3af;
-  }
-
+  .devsheet-sidebar,
   #mobile-sidebar {
     scrollbar-width: thin;
-    scrollbar-color: #d1d5db transparent;
+    scrollbar-color: var(--border-sidebar) transparent;
   }
 
+  .devsheet-sidebar::-webkit-scrollbar,
   #mobile-sidebar::-webkit-scrollbar {
     width: 6px;
   }
 
+  .devsheet-sidebar::-webkit-scrollbar-track,
   #mobile-sidebar::-webkit-scrollbar-track {
     background: transparent;
   }
 
+  .devsheet-sidebar::-webkit-scrollbar-thumb,
   #mobile-sidebar::-webkit-scrollbar-thumb {
-    background-color: #d1d5db;
+    background-color: var(--border-sidebar);
     border-radius: 3px;
-  }
-
-  #mobile-sidebar::-webkit-scrollbar-thumb:hover {
-    background-color: #9ca3af;
   }
 </style>

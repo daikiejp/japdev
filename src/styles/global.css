@@ -1,6 +1,53 @@
 @import url("https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&display=swap");
 @import "tailwindcss";
 
+/* ===== CSS Variables for dark mode ===== */
+:root {
+  --bg-page: #f9fafb;
+  --bg-card: #ffffff;
+  --bg-card-border: #f3f4f6;
+  --bg-header: rgba(255, 255, 255, 0.8);
+  --border-header: #e5e7eb;
+  --bg-sidebar: #ffffff;
+  --border-sidebar: #e5e7eb;
+  --bg-input: #f3f4f6;
+  --bg-footer: #ffffff;
+  --border-footer: #e5e7eb;
+  --text-primary: #111827;
+  --text-secondary: #4b5563;
+  --text-muted: #6b7280;
+  --text-nav: #4b5563;
+  --bg-mobile-menu: #ffffff;
+  --bg-tab: #ffffff;
+  --bg-tab-hover: #f9fafb;
+  --border-tab: #e5e7eb;
+  --text-tab: #4b5563;
+  --highlight-bg: #fef3c7;
+}
+
+html.dark {
+  --bg-page: #0f172a;
+  --bg-card: #1e293b;
+  --bg-card-border: #334155;
+  --bg-header: rgba(15, 23, 42, 0.92);
+  --border-header: #334155;
+  --bg-sidebar: #1e293b;
+  --border-sidebar: #334155;
+  --bg-input: #334155;
+  --bg-footer: #1e293b;
+  --border-footer: #334155;
+  --text-primary: #f1f5f9;
+  --text-secondary: #94a3b8;
+  --text-muted: #64748b;
+  --text-nav: #94a3b8;
+  --bg-mobile-menu: #1e293b;
+  --bg-tab: #1e293b;
+  --bg-tab-hover: #334155;
+  --border-tab: #334155;
+  --text-tab: #94a3b8;
+  --highlight-bg: #78350f;
+}
+
 body {
   font-family:
     "Noto Sans JP",
@@ -11,6 +58,8 @@ body {
     Roboto,
     sans-serif;
   font-size: 18px;
+  background-color: var(--bg-page);
+  color: var(--text-primary);
 }
 
 .container {
@@ -19,9 +68,9 @@ body {
   padding: 0 1rem;
 }
 
-/* 検索機能 */
+/* 検索ハイライト */
 .search-highlight {
-  background-color: #fef3c7;
+  background-color: var(--highlight-bg);
   padding: 2px 4px;
   border-radius: 2px;
 }
@@ -31,7 +80,8 @@ body {
   transition:
     background-color 0.2s ease,
     color 0.2s ease,
-    transform 0.2s ease;
+    transform 0.2s ease,
+    border-color 0.2s ease;
 }
 
 /* カテゴリーアコーディオン */

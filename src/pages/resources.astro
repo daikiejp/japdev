@@ -26,18 +26,18 @@ const groupedResources = resources.reduce((acc, resource) => {
     <!-- リソースセクション -->
     <div class="space-y-6 mb-12">
       {Object.entries(groupedResources).map(([category, items]) => (
-        <div class="category-wrapper bg-white rounded-xl shadow-sm border border-gray-100">
+        <div class="category-wrapper rounded-xl shadow-sm border" style="background-color: var(--bg-card); border-color: var(--bg-card-border);">
           <button 
-            class="category-toggle w-full flex items-center justify-between p-6 text-left hover:bg-gray-50 transition-colors"
+            class="category-toggle w-full flex items-center justify-between p-6 text-left hover:opacity-90 transition-colors"
             data-category={category}
           >
             <div class="flex items-center gap-3">
               <span class="w-10 h-10 bg-linear-to-br from-emerald-500 to-teal-600 rounded-lg flex items-center justify-center text-white font-bold">
                 {items.length}
               </span>
-              <h3 class="text-xl font-bold text-gray-900">{category}</h3>
+              <h3 class="text-xl font-bold" style="color: var(--text-primary);">{category}</h3>
             </div>
-            <svg class="w-6 h-6 text-gray-400 transition-transform category-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg class="w-6 h-6 transition-transform category-arrow" style="color: var(--text-muted);" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
             </svg>
           </button>
@@ -45,14 +45,14 @@ const groupedResources = resources.reduce((acc, resource) => {
             <div class="grid md:grid-cols-2 gap-4 p-6">
               {items.map((r) => (
               <a href={r.url} alt={r.title} target="_blank">
-                <div class="resource-item p-4 border border-gray-200 rounded-lg hover:border-emerald-200 hover:shadow-md transition-all group"
+                <div class="resource-item p-4 border rounded-lg hover:border-emerald-200 hover:shadow-md transition-all group" style="border-color: var(--border-sidebar);"
                      data-search={JSON.stringify({ title: r.title, desc: r.desc, category: r.category })}>
                   <div class="flex items-start justify-between">
                     <div class="flex-1">
-                      <h4 class="font-bold text-gray-900 mb-1 group-hover:text-emerald-600 transition-colors">{r.title}</h4>
-                      <p class="text-sm text-gray-600">{r.desc}</p>
+                      <h4 class="font-bold mb-1 group-hover:text-emerald-600 transition-colors" style="color: var(--text-primary);">{r.title}</h4>
+                      <p class="text-sm" style="color: var(--text-secondary);">{r.desc}</p>
                     </div>
-                    <svg class="w-5 h-5 text-gray-400 group-hover:text-emerald-600 transition-colors shrink-0 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg class="w-5 h-5 group-hover:text-emerald-600 transition-colors shrink-0 ml-2" style="color: var(--text-muted);" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
                     </svg>
                   </div>

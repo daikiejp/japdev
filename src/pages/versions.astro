@@ -25,12 +25,12 @@ function formatStars(stars: number): string {
     <NavTabs />
     <div class="space-y-4 mb-12">
       {versions.map((v) => (
-        <div class="version-item bg-white rounded-xl p-6 shadow-sm border border-gray-100 hover:shadow-md transition-all hover:border-emerald-200"
+        <div class="version-item rounded-xl p-6 shadow-sm border hover:shadow-md transition-all" style="background-color: var(--bg-card); border-color: var(--bg-card-border);"
              data-search={JSON.stringify({ name: v.name, changelog: v.changelog })}>
           <div class="flex items-start justify-between">
             <div class="flex-1">
               <div class="flex items-center gap-3 mb-2">
-                <h3 class="text-xl font-bold text-gray-900">
+                <h3 class="text-xl font-bold" style="color: var(--text-primary);">
                   <a href={v.repoUrl} target="_blank" alt={v.name}>{v.name}</a>
                 </h3>
                 <span class="text-2xl font-mono font-bold bg-linear-to-r from-emerald-600 to-teal-600 bg-clip-text text-transparent">
@@ -47,9 +47,9 @@ function formatStars(stars: number): string {
                   </span>
                 )}
               </div>
-              <p class="text-gray-600 mb-3">{v.description}</p>
+              <p class="mb-3" style="color: var(--text-secondary);">{v.description}</p>
               <div class="flex items-center gap-4 text-sm">
-                <span class="flex items-center gap-1 text-gray-500">
+                <span class="flex items-center gap-1" style="color: var(--text-muted);">
                   <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                   </svg>

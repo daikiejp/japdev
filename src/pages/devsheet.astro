@@ -19,7 +19,7 @@ const searchQuery = Astro.url.searchParams.get('q') || '';
       {categories.map((category) => (
         <a 
           href={`/devsheet/${category.id}`}
-          class="category-card bg-white rounded-xl p-6 shadow-sm border border-gray-100 hover:shadow-lg transition-all hover:border-emerald-200 group"
+          class="category-card rounded-xl p-6 shadow-sm border hover:shadow-lg transition-all hover:border-emerald-200 group" style="background-color: var(--bg-card); border-color: var(--bg-card-border);"
           data-search={JSON.stringify({ name: category.name, description: category.description })}
         >
           <div class="flex items-center gap-4 mb-4">
@@ -27,15 +27,15 @@ const searchQuery = Astro.url.searchParams.get('q') || '';
               <img src={category.logo} alt={category.name} class="w-10 h-10" />
             </div>
             <div class="flex-1">
-              <h3 class="text-xl font-bold text-gray-900 group-hover:text-emerald-600 transition-colors">
+              <h3 class="text-xl font-bold group-hover:text-emerald-600 transition-colors" style="color: var(--text-primary);">
                 {category.name}
               </h3>
-              <p class="text-sm text-gray-500">
+              <p class="text-sm" style="color: var(--text-muted);">
                 {category.topicsCount} トピック
               </p>
             </div>
           </div>
-          <p class="text-gray-600 text-sm mb-4">
+          <p class="text-sm mb-4" style="color: var(--text-secondary);">
             {category.description}
           </p>
           <div class="flex items-center gap-2 text-emerald-600 font-medium text-sm">

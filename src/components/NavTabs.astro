@@ -21,7 +21,7 @@ const tabs = [
 ---
 <!-- ナブタブ -->
 <div class="mb-8 overflow-x-auto">
-  <div class="bg-white rounded-2xl p-2 shadow-sm border border-gray-200 inline-flex gap-2 min-w-max">
+  <div style="background-color: var(--bg-tab); border-color: var(--border-tab);" class="rounded-2xl p-2 shadow-sm border inline-flex gap-2 min-w-max">
     {tabs.map((tab) => (
       <a 
         href={tab.href} 
@@ -39,11 +39,11 @@ const tabs = [
 <style>
   .tab-btn {
     text-decoration: none;
-    color: #4b5563;
+    color: var(--text-tab);
   }
   
   .tab-btn:hover {
-    background-color: #f9fafb;
+    background-color: var(--bg-tab-hover);
   }
   
   .tab-btn.active {

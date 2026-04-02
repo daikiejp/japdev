@@ -18,5 +18,10 @@
     "id": "semantics",
     "name": "セマンティック",
     "description": "意味のあるHTMLタグ"
+  },
+  {
+    "id": "tables",
+    "name": "Tables",
+    "description": "表を作成する"
   }
 ]

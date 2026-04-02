@@ -3,7 +3,7 @@ const currentPath = Astro.url.pathname;
 const searchQuery = Astro.url.searchParams.get('q') || '';
 ---
 <!-- ヘッダー -->
-<header class="bg-white/80 backdrop-blur-lg border-b border-gray-200 sticky top-0 z-50">
+<header style="background-color: var(--bg-header); border-bottom-color: var(--border-header);" class="backdrop-blur-lg border-b sticky top-0 z-50">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="flex items-center justify-between h-16">
       <a href="/" class="flex items-center gap-3">
@@ -14,16 +14,16 @@ const searchQuery = Astro.url.searchParams.get('q') || '';
         </div>
         <div>
           <h1 class="text-xl font-bold text-teal-500">JapDev</h1>
-          <p class="text-xs text-gray-500">開発者向け情報サイト</p>
+          <p style="color: var(--text-muted);" class="text-xs">開発者向け情報サイト</p>
         </div>
       </a>
       
-      <div class="hidden md:flex items-center gap-6">
+      <div class="hidden md:flex items-center gap-4">
         <nav class="flex items-center gap-4">
-          <a href="/" class={`text-md font-medium ${currentPath === '/' ? 'text-emerald-600' : 'text-gray-600 hover:text-emerald-600'}`}>
+          <a href="/" style={`color: ${currentPath === '/' ? '#059669' : 'var(--text-nav)'};`} class="text-md font-medium hover:text-emerald-600 transition-colors">
             ホーム
           </a>
-          <a href="/about" class={`text-md font-medium ${currentPath === '/about' ? 'text-emerald-600' : 'text-gray-600 hover:text-emerald-600'}`}>
+          <a href="/about" style={`color: ${currentPath === '/about' ? '#059669' : 'var(--text-nav)'};`} class="text-md font-medium hover:text-emerald-600 transition-colors">
             私たちについて
           </a>
         </nav>
@@ -37,28 +37,59 @@ const searchQuery = Astro.url.searchParams.get('q') || '';
             name="q"
             value={searchQuery}
             placeholder="検索..."
-            class="pl-10 pr-4 py-2 bg-gray-100 rounded-lg text-md focus:outline-none focus:ring-2 focus:ring-emerald-500 w-64"
+            style="background-color: var(--bg-input); color: var(--text-primary);"
+            class="pl-10 pr-4 py-2 rounded-lg text-md focus:outline-none focus:ring-2 focus:ring-emerald-500 w-64"
           />
         </form>
-        <!--<button class="px-4 py-2 bg-gradient-to-r from-emerald-500 to-teal-600 text-white rounded-lg font-medium hover:shadow-lg transition-all">
-          購読する
-        </button> -->
+
+        <!-- ダークモード切り替え -->
+        <button
+          id="theme-toggle"
+          aria-label="ダークモード切り替え"
+          style="background-color: var(--bg-input); color: var(--text-secondary);"
+          class="w-9 h-9 rounded-lg flex items-center justify-center hover:ring-2 hover:ring-emerald-500 transition-all"
+        >
+          <!-- Sun icon (shown in dark mode) -->
+          <svg id="icon-sun" class="w-5 h-5 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364l-.707.707M6.343 17.657l-.707.707M17.657 17.657l-.707-.707M6.343 6.343l-.707-.707M12 7a5 5 0 100 10A5 5 0 0012 7z" />
+          </svg>
+          <!-- Moon icon (shown in light mode) -->
+          <svg id="icon-moon" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+          </svg>
+        </button>
       </div>
 
-      <button id="mobile-menu-btn" class="md:hidden">
-        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-        </svg>
-      </button>
+      <div class="flex items-center gap-2 md:hidden">
+        <!-- Mobile dark mode toggle -->
+        <button
+          id="theme-toggle-mobile"
+          aria-label="ダークモード切り替え"
+          style="background-color: var(--bg-input); color: var(--text-secondary);"
+          class="w-9 h-9 rounded-lg flex items-center justify-center"
+        >
+          <svg id="icon-sun-mobile" class="w-5 h-5 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364l-.707.707M6.343 17.657l-.707.707M17.657 17.657l-.707-.707M6.343 6.343l-.707-.707M12 7a5 5 0 100 10A5 5 0 0012 7z" />
+          </svg>
+          <svg id="icon-moon-mobile" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+          </svg>
+        </button>
+        <button id="mobile-menu-btn" style="color: var(--text-primary);">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+        </button>
+      </div>
     </div>
   </div>
 
-  <div id="mobile-menu" class="hidden md:hidden bg-white border-b border-gray-200 p-4">
+  <div id="mobile-menu" style="background-color: var(--bg-mobile-menu); border-bottom-color: var(--border-header);" class="hidden md:hidden border-b p-4">
     <nav class="flex flex-col gap-3 mb-3">
-      <a href="/" class={`text-sm font-medium ${currentPath === '/' ? 'text-emerald-600' : 'text-gray-600'}`}>
+      <a href="/" style={`color: ${currentPath === '/' ? '#059669' : 'var(--text-nav)'};`} class="text-sm font-medium">
         ホーム
       </a>
-      <a href="/about" class={`text-sm font-medium ${currentPath === '/about' ? 'text-emerald-600' : 'text-gray-600'}`}>
+      <a href="/about" style={`color: ${currentPath === '/about' ? '#059669' : 'var(--text-nav)'};`} class="text-sm font-medium">
         私たちについて
       </a>
     </nav>
@@ -69,21 +100,21 @@ const searchQuery = Astro.url.searchParams.get('q') || '';
         name="q"
         value={searchQuery}
         placeholder="検索..."
-        class="w-full px-4 py-2 bg-gray-100 rounded-lg text-sm mb-3"
+        style="background-color: var(--bg-input); color: var(--text-primary);"
+        class="w-full px-4 py-2 rounded-lg text-sm mb-3"
       />
     </form>
-    <!-- <button class="w-full px-4 py-2 bg-gradient-to-r from-emerald-500 to-teal-600 text-white rounded-lg font-medium">
-      購読する
-    </button> -->
   </div>
 </header>
 
 <script>
+  // Mobile menu toggle
   document.getElementById('mobile-menu-btn')?.addEventListener('click', () => {
     const menu = document.getElementById('mobile-menu');
     menu?.classList.toggle('hidden');
   });
 
+  // Search sync
   const globalSearch = document.getElementById('global-search') as HTMLInputElement;
   const mobileSearch = document.getElementById('mobile-search') as HTMLInputElement;
 
@@ -98,4 +129,35 @@ const searchQuery = Astro.url.searchParams.get('q') || '';
     if (globalSearch) globalSearch.value = query;
     window.dispatchEvent(new CustomEvent('search-updated', { detail: { query } }));
   });
+
+  // Dark mode toggle logic
+  function updateIcons(isDark: boolean) {
+    const sunDesktop = document.getElementById('icon-sun');
+    const moonDesktop = document.getElementById('icon-moon');
+    const sunMobile = document.getElementById('icon-sun-mobile');
+    const moonMobile = document.getElementById('icon-moon-mobile');
+    if (isDark) {
+      sunDesktop?.classList.remove('hidden');
+      moonDesktop?.classList.add('hidden');
+      sunMobile?.classList.remove('hidden');
+      moonMobile?.classList.add('hidden');
+    } else {
+      sunDesktop?.classList.add('hidden');
+      moonDesktop?.classList.remove('hidden');
+      sunMobile?.classList.add('hidden');
+      moonMobile?.classList.remove('hidden');
+    }
+  }
+
+  function toggleTheme() {
+    const isDark = document.documentElement.classList.toggle('dark');
+    localStorage.setItem('theme', isDark ? 'dark' : 'light');
+    updateIcons(isDark);
+  }
+
+  document.getElementById('theme-toggle')?.addEventListener('click', toggleTheme);
+  document.getElementById('theme-toggle-mobile')?.addEventListener('click', toggleTheme);
+
+  // Sync icons on load
+  updateIcons(document.documentElement.classList.contains('dark'));
 </script>
