@@ -60,7 +60,7 @@ function addLineHighlighting(html: string, lines: number[] | undefined) {
 <!-- コードブロック -->
 <div class="code-block-wrapper mb-6">
   {codeBlock.title && (
-    <div class="code-block-header bg-green-200 p-6 rounded-lg mb-4">
+    <div class="code-block-header p-4 rounded-lg mb-4 border" style="background-color: var(--bg-tab-hover); border-color: var(--border-tab);">
       <h4 class="font-medium text-md" style="color: var(--text-secondary);">{codeBlock.title}</h4>
     </div>
   )}

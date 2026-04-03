@@ -1,6 +1,19 @@
 <!-- 検索結果情報 -->
 <div id="search-results-info" class="hidden mb-6 text-center">
   <p style="color: var(--text-secondary);">
-    「<span id="search-query" class="font-bold text-emerald-600"></span>」の検索結果: <span id="search-count" class="font-bold" style="color: var(--text-primary);">0</span>件
+    「<span id="search-query" class="font-bold text-emerald-600"></span>」の検索結果:
+    <span id="search-count" class="font-bold" style="color: var(--text-primary);">0</span>件
   </p>
+</div>
+<!-- 検索結果なし -->
+<div id="search-no-results" class="hidden mb-8 text-center py-12">
+  <div class="inline-flex flex-col items-center gap-3">
+    <svg class="w-12 h-12" style="color: var(--text-muted);" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+    </svg>
+    <p class="text-lg font-medium" style="color: var(--text-primary);">
+      「<span class="search-no-results-query text-emerald-600"></span>」に一致する結果が見つかりませんでした
+    </p>
+    <p class="text-sm" style="color: var(--text-muted);">別のキーワードで試してみてください</p>
+  </div>
 </div>
