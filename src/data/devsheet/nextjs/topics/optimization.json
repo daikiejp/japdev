@@ -1,0 +1,28 @@
+[
+  {
+    "id": "image-font",
+    "title": "Image と Font の最適化",
+    "description": "next/image・next/font でCore Web Vitalsを改善",
+    "codeBlocks": [
+      {
+        "language": "tsx",
+        "filename": "optimization.tsx",
+        "code": "import Image from 'next/image';\nimport { Inter, Noto_Sans_JP } from 'next/font/google';\nimport localFont from 'next/font/local';\n\n// === next/image ===\n// ✅ 自動的に WebP/AVIF に変換\n// ✅ 遅延読み込み\n// ✅ CLS 防止（サイズ予約）\n// ✅ レスポンシブ対応\n\nfunction Hero() {\n    return (\n        <>\n            {/* 固定サイズ */}\n            <Image src=\"/hero.jpg\" alt=\"Hero\" width={1200} height={630} priority />\n\n            {/* fill（親要素のサイズに合わせる）*/}\n            <div className=\"relative h-64\">\n                <Image src=\"/bg.jpg\" alt=\"Background\" fill className=\"object-cover\" />\n            </div>\n\n            {/* 外部URL（next.config.js で許可が必要）*/}\n            <Image src=\"https://cdn.example.com/img.jpg\" alt=\"\" width={400} height={300} />\n        </>\n    );\n}\n\n// === next/font（レイアウトシフトなし・プライバシー保護）===\nconst inter = Inter({\n    subsets:  ['latin'],\n    variable: '--font-inter',\n    display:  'swap',\n});\n\nconst notoSansJP = Noto_Sans_JP({\n    weight:   ['400', '700'],\n    subsets:  ['latin'],\n    variable: '--font-noto',\n});\n\nconst myFont = localFont({\n    src: './fonts/MyFont.woff2',\n    variable: '--font-my',\n});\n\nexport default function Layout({ children }) {\n    return (\n        <html className={`${inter.variable} ${notoSansJP.variable}`}>\n            <body>{children}</body>\n        </html>\n    );\n}",
+        "highlightLines": [15, 19, 30, 36, 42, 48]
+      }
+    ]
+  },
+  {
+    "id": "metadata-seo",
+    "title": "Metadata と SEO",
+    "description": "静的・動的メタデータ、OGP、sitemap",
+    "codeBlocks": [
+      {
+        "language": "tsx",
+        "filename": "metadata.tsx",
+        "code": "import type { Metadata } from 'next';\n\n// 静的メタデータ\nexport const metadata: Metadata = {\n    title: {\n        default:  'MyApp',\n        template: '%s | MyApp', // 子ページのタイトルに付与\n    },\n    description: 'アプリの説明',\n    keywords:    ['Next.js', 'React'],\n    authors:     [{ name: 'Author' }],\n    openGraph: {\n        type:        'website',\n        url:         'https://myapp.com',\n        title:       'MyApp',\n        description: 'アプリの説明',\n        images:      [{ url: 'https://myapp.com/og.png', width: 1200, height: 630 }],\n    },\n    twitter: {\n        card:    'summary_large_image',\n        creator: '@handle',\n    },\n    robots: {\n        index:  true,\n        follow: true,\n    },\n};\n\n// sitemap.ts\nimport type { MetadataRoute } from 'next';\nexport default async function sitemap(): Promise<MetadataRoute.Sitemap> {\n    const posts = await getAllPosts();\n    return [\n        { url: 'https://myapp.com', lastModified: new Date(), changeFrequency: 'daily', priority: 1 },\n        ...posts.map(p => ({\n            url:             `https://myapp.com/blog/${p.slug}`,\n            lastModified:    p.updatedAt,\n            changeFrequency: 'weekly' as const,\n            priority: 0.8,\n        })),\n    ];\n}",
+        "highlightLines": [4, 12, 23, 31]
+      }
+    ]
+  }
+]

@@ -1,0 +1,47 @@
+[
+  {
+    "id": "file-conventions",
+    "title": "ファイル規約",
+    "description": "app/ ディレクトリのファイル名と役割",
+    "codeBlocks": [
+      {
+        "language": "bash",
+        "filename": "structure.sh",
+        "code": "app/\n├── layout.tsx          # ルートレイアウト（必須）\n├── page.tsx            # / ルート\n├── loading.tsx         # ローディングUI（Suspense自動ラップ）\n├── error.tsx           # エラーUI（Error Boundary自動ラップ）\n├── not-found.tsx       # 404ページ\n├── global-error.tsx    # ルートレイアウトのエラー\n│\n├── (marketing)/        # ルートグループ（URLに影響しない）\n│   ├── layout.tsx      # このグループ専用レイアウト\n│   ├── about/page.tsx  # /about\n│   └── blog/page.tsx   # /blog\n│\n├── dashboard/\n│   ├── layout.tsx      # /dashboard 共通レイアウト\n│   ├── page.tsx        # /dashboard\n│   ├── settings/\n│   │   └── page.tsx    # /dashboard/settings\n│   └── @modal/         # 並列ルート（Parallel Routes）\n│       └── page.tsx\n│\n├── [id]/               # 動的ルート\n│   └── page.tsx        # /123, /abc, ...\n├── [...slug]/          # キャッチオールルート\n├── [[...slug]]/        # オプショナルキャッチオール\n│\n└── api/\n    └── users/\n        └── route.ts    # API Route Handler",
+        "highlightLines": [2, 3, 4, 5, 9, 22, 24, 28]
+      }
+    ]
+  },
+  {
+    "id": "layouts-pages",
+    "title": "Layout と Page",
+    "description": "レイアウトの入れ子とページコンポーネント",
+    "codeBlocks": [
+      {
+        "language": "tsx",
+        "filename": "app/layout.tsx",
+        "code": "import type { Metadata } from 'next';\nimport { Inter } from 'next/font/google';\n\nconst inter = Inter({ subsets: ['latin'] });\n\n// メタデータ（静的）\nexport const metadata: Metadata = {\n    title:       { default: 'MyApp', template: '%s | MyApp' },\n    description: 'My Next.js application',\n    openGraph:   { type: 'website', url: 'https://myapp.com' },\n};\n\n// ルートレイアウト（必須 - html, body タグを含む）\nexport default function RootLayout({\n    children,\n}: {\n    children: React.ReactNode;\n}) {\n    return (\n        <html lang=\"ja\" className={inter.className}>\n            <body>\n                <Header />\n                <main>{children}</main>\n                <Footer />\n            </body>\n        </html>\n    );\n}",
+        "highlightLines": [7, 14, 20]
+      },
+      {
+        "language": "tsx",
+        "filename": "app/blog/[slug]/page.tsx",
+        "code": "import type { Metadata } from 'next';\nimport { notFound } from 'next/navigation';\n\ninterface Props {\n    params:      { slug: string };\n    searchParams: { [key: string]: string | string[] };\n}\n\n// 動的メタデータ\nexport async function generateMetadata({ params }: Props): Promise<Metadata> {\n    const post = await getPost(params.slug);\n    if (!post) return { title: 'Not Found' };\n    return {\n        title:       post.title,\n        description: post.excerpt,\n    };\n}\n\n// 静的パスの事前生成（SSG）\nexport async function generateStaticParams() {\n    const posts = await getAllPosts();\n    return posts.map(p => ({ slug: p.slug }));\n}\n\n// Page コンポーネント（Server Component がデフォルト）\nexport default async function PostPage({ params, searchParams }: Props) {\n    const post = await getPost(params.slug);\n    if (!post) notFound();  // not-found.tsx を表示\n\n    return <article>{post.content}</article>;\n}",
+        "highlightLines": [10, 20, 26, 28]
+      }
+    ]
+  },
+  {
+    "id": "navigation",
+    "title": "ナビゲーション",
+    "description": "Link、useRouter、usePathname、redirect",
+    "codeBlocks": [
+      {
+        "language": "tsx",
+        "filename": "navigation.tsx",
+        "code": "import Link from 'next/link';\nimport { useRouter, usePathname, useSearchParams } from 'next/navigation';\nimport { redirect } from 'next/navigation';\n\n// Link コンポーネント（プリフェッチ自動）\nfunction Nav() {\n    const pathname = usePathname();\n    return (\n        <nav>\n            <Link href=\"/\">ホーム</Link>\n            <Link href=\"/blog\" prefetch={false}>ブログ</Link>\n            <Link href={{ pathname: '/blog', query: { page: 2 } }}>2ページ</Link>\n            {/* アクティブリンク */}\n            <Link href=\"/about\" className={pathname === '/about' ? 'active' : ''}>\n                About\n            </Link>\n        </nav>\n    );\n}\n\n// useRouter（Client Component のみ）\n'use client';\nfunction SearchButton() {\n    const router = useRouter();\n    return (\n        <button onClick={() => {\n            router.push('/search');         // 遷移\n            router.replace('/search');      // 履歴を置き換え\n            router.back();                  // 前のページ\n            router.refresh();              // Server Component を再フェッチ\n        }}>検索</button>\n    );\n}\n\n// redirect（Server Component）\nasync function ProtectedPage() {\n    const session = await getSession();\n    if (!session) redirect('/login');  // ログインページへ\n    return <Dashboard />;\n}",
+        "highlightLines": [10, 24, 27, 36]
+      }
+    ]
+  }
+]

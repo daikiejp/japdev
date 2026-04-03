@@ -1,0 +1,41 @@
+[
+  {
+    "id": "rendering-strategies",
+    "title": "レンダリング戦略",
+    "description": "SSG・SSR・ISR・Streaming の使い分け",
+    "codeBlocks": [
+      {
+        "language": "tsx",
+        "filename": "rendering.tsx",
+        "code": "// === SSG (Static Site Generation) ===\n// fetch に cache: 'force-cache'（デフォルト）→ ビルド時に生成\nexport default async function BlogPage() {\n    const posts = await fetch('/api/posts').then(r => r.json()); // ビルド時のみ実行\n    return <PostList posts={posts} />;\n}\n\n// === SSR (Server-Side Rendering) ===\n// cache: 'no-store' → 毎リクエストごとにサーバーで生成\nexport default async function LivePage() {\n    const data = await fetch('/api/live', { cache: 'no-store' }).then(r => r.json());\n    return <LiveDashboard data={data} />;\n}\n\n// === ISR (Incremental Static Regeneration) ===\n// next: { revalidate: N } → N秒ごとにバックグラウンドで再生成\nexport default async function NewsPage() {\n    const news = await fetch('/api/news', { next: { revalidate: 60 } }).then(r => r.json());\n    return <NewsList news={news} />;\n}\n\n// === Dynamic vs Static の強制 ===\nexport const dynamic = 'force-static';   // 強制的にSSG\nexport const dynamic = 'force-dynamic';  // 強制的にSSR\nexport const revalidate = 3600;          // ページ全体のrevalidate間隔",
+        "highlightLines": [3, 11, 18, 23, 24, 25]
+      }
+    ]
+  },
+  {
+    "id": "streaming",
+    "title": "Streaming と Suspense",
+    "description": "段階的なUIの表示でTTFBを改善",
+    "codeBlocks": [
+      {
+        "language": "tsx",
+        "filename": "app/dashboard/page.tsx",
+        "code": "import { Suspense } from 'react';\n\n// Streaming: 遅いコンポーネントを Suspense でラップ\n// → 速いコンポーネントを先に送信し、遅いものを後から流す\nexport default function Dashboard() {\n    return (\n        <div className=\"grid grid-cols-3 gap-4\">\n            {/* 即座に表示 */}\n            <WelcomeHeader />\n\n            {/* DBクエリが遅いコンポーネント → ローディングUIを先に表示 */}\n            <Suspense fallback={<StatsSkeleton />}>\n                <Stats />        {/* async コンポーネント */}\n            </Suspense>\n\n            <Suspense fallback={<ChartSkeleton />}>\n                <RevenueChart /> {/* 独立して読み込み */}\n            </Suspense>\n\n            <Suspense fallback={<TableSkeleton />}>\n                <LatestOrders /> {/* 他と並列で読み込み */}\n            </Suspense>\n        </div>\n    );\n}\n\n// loading.tsx は Suspense の自動ラッパー\n// app/dashboard/loading.tsx → DashboardPage 全体が Suspense でラップされる",
+        "highlightLines": [12, 16, 20, 27]
+      }
+    ]
+  },
+  {
+    "id": "client-server",
+    "title": "Server / Client Component の使い分け",
+    "description": "'use client' の境界とインタラクティブ性",
+    "codeBlocks": [
+      {
+        "language": "tsx",
+        "filename": "components.tsx",
+        "code": "// === Server Component（デフォルト）===\n// ✅ DB・ファイルシステムに直接アクセス可\n// ✅ API キーなど機密情報を使える\n// ✅ バンドルサイズに影響しない\n// ❌ useState / useEffect / イベントハンドラー不可\n// ❌ ブラウザ API 不可\n\nasync function ServerCard() {\n    const data = await db.query(); // ✅ 直接DBアクセス\n    return <div>{data.title}</div>;\n}\n\n// === Client Component ===\n// 必要な場合のみ 'use client' を追加\n'use client';\n\nimport { useState } from 'react';\n// ✅ インタラクション・useState・useEffect\n// ✅ ブラウザ API（localStorage など）\n// ❌ async/await をトップレベルで使えない\n\nfunction Counter() {\n    const [n, setN] = useState(0);\n    return <button onClick={() => setN(n + 1)}>{n}</button>;\n}\n\n// パターン: Server Component が Client Component を children で渡す\n// → Server Component の利点を保ちながらインタラクションを追加\nfunction Page() { // Server Component\n    return (\n        <ClientShell> {/* 'use client' */}\n            <ServerData /> {/* Server Component を children として渡せる */}\n        </ClientShell>\n    );\n}",
+        "highlightLines": [8, 15, 22, 30, 32]
+      }
+    ]
+  }
+]

@@ -1,0 +1,41 @@
+[
+  {
+    "id": "server-components",
+    "title": "Server Components とデータフェッチ",
+    "description": "非同期 Server Component での fetch",
+    "codeBlocks": [
+      {
+        "language": "tsx",
+        "filename": "app/users/page.tsx",
+        "code": "// Server Component（デフォルト）— async が使える\nexport default async function UsersPage() {\n    // サーバー側で直接 fetch（クライアントに API キーを露出しない）\n    const res = await fetch('https://api.example.com/users', {\n        // キャッシュ制御\n        cache: 'force-cache',           // SSG 相当（デフォルト）\n        // cache: 'no-store',           // SSR 相当（毎リクエスト取得）\n        next: { revalidate: 3600 },     // ISR 相当（1時間ごとに再検証）\n        next: { tags: ['users'] },      // タグによる On-Demand Revalidation\n    });\n\n    if (!res.ok) throw new Error('取得失敗');\n    const users: User[] = await res.json();\n\n    // DB に直接アクセスも可能（クライアントには送られない）\n    // const users = await db.user.findMany();\n\n    return (\n        <ul>\n            {users.map(u => <li key={u.id}>{u.name}</li>)}\n        </ul>\n    );\n}\n\n// 並列フェッチ（Promise.all で高速化）\nexport default async function Dashboard() {\n    const [users, posts, stats] = await Promise.all([\n        fetch('/api/users').then(r => r.json()),\n        fetch('/api/posts').then(r => r.json()),\n        fetch('/api/stats').then(r => r.json()),\n    ]);\n    return <DashboardView users={users} posts={posts} stats={stats} />;\n}",
+        "highlightLines": [2, 4, 6, 8, 27]
+      }
+    ]
+  },
+  {
+    "id": "cache-revalidation",
+    "title": "キャッシュと再検証",
+    "description": "revalidatePath・revalidateTag・unstable_cache",
+    "codeBlocks": [
+      {
+        "language": "tsx",
+        "filename": "actions.ts",
+        "code": "'use server';\nimport { revalidatePath, revalidateTag } from 'next/cache';\n\n// パスの再検証\nasync function createPost(data: FormData) {\n    await db.post.create({ data: { title: data.get('title') as string } });\n    revalidatePath('/blog');        // /blog を再検証\n    revalidatePath('/blog/[slug]', 'page'); // 動的ルート全て\n}\n\n// タグの再検証\nasync function updateUser(id: number, data: Partial<User>) {\n    await db.user.update({ where: { id }, data });\n    revalidateTag('users');         // 'users' タグを持つキャッシュを全て無効化\n}\n\n// unstable_cache: 任意の関数結果をキャッシュ\nimport { unstable_cache } from 'next/cache';\n\nconst getCachedUser = unstable_cache(\n    async (id: number) => db.user.findUnique({ where: { id } }),\n    ['user'],                       // キャッシュキー\n    {\n        revalidate: 3600,           // 1時間\n        tags: ['users'],            // revalidateTag で無効化可能\n    }\n);\n\n// 使用\nconst user = await getCachedUser(1);",
+        "highlightLines": [2, 7, 14, 20, 29]
+      }
+    ]
+  },
+  {
+    "id": "server-actions",
+    "title": "Server Actions",
+    "description": "フォームやミューテーションをサーバーで処理",
+    "codeBlocks": [
+      {
+        "language": "tsx",
+        "filename": "actions-form.tsx",
+        "code": "// app/actions.ts\n'use server';\nimport { revalidatePath } from 'next/cache';\nimport { redirect } from 'next/navigation';\n\nexport async function createPost(formData: FormData) {\n    const title   = formData.get('title')   as string;\n    const content = formData.get('content') as string;\n\n    // バリデーション\n    if (!title) return { error: 'タイトルは必須です' };\n\n    await db.post.create({ data: { title, content } });\n    revalidatePath('/blog');\n    redirect('/blog');\n}\n\n// app/blog/new/page.tsx\nimport { createPost } from '../actions';\n\nexport default function NewPost() {\n    return (\n        // action に Server Action を渡すだけ\n        <form action={createPost}>\n            <input  name=\"title\"   placeholder=\"タイトル\" required />\n            <textarea name=\"content\" />\n            <SubmitButton />\n        </form>\n    );\n}\n\n// useFormStatus でペンディング状態\n'use client';\nimport { useFormStatus } from 'react-dom';\nfunction SubmitButton() {\n    const { pending } = useFormStatus();\n    return <button disabled={pending}>{pending ? '送信中...' : '投稿する'}</button>;\n}",
+        "highlightLines": [2, 6, 24, 34, 36]
+      }
+    ]
+  }
+]

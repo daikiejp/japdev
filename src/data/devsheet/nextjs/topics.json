@@ -1,0 +1,7 @@
+[
+  { "id": "app-router",  "name": "App Router",          "description": "ファイルベースルーティングとレイアウト" },
+  { "id": "data",        "name": "データフェッチング",   "description": "Server Components・fetch・キャッシュ" },
+  { "id": "api",         "name": "Route Handlers",      "description": "API Routes・middleware・認証" },
+  { "id": "rendering",   "name": "レンダリング戦略",     "description": "SSR・SSG・ISR・Streaming" },
+  { "id": "optimization","name": "最適化",               "description": "Image・Font・Metadata・Bundle" }
+]

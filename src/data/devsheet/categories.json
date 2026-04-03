@@ -40,6 +40,14 @@
     "topicsCount": 6
   },
   {
+    "id": "nextjs",
+    "name": "Next.js",
+    "logo": "/logos/nextjs.svg",
+    "description": "Next.jsのApp RouterとAPI",
+    "color": "#000000",
+    "topicsCount": 5
+  },
+  {
     "id": "git",
     "name": "Git",
     "logo": "/logos/git.svg",
