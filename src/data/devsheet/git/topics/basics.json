@@ -1,0 +1,28 @@
+[
+  {
+    "id": "init-config",
+    "title": "初期設定",
+    "description": "リポジトリの作成とグローバル設定",
+    "codeBlocks": [
+      {
+        "language": "bash",
+        "filename": "init.sh",
+        "code": "# グローバル設定\ngit config --global user.name  \"Your Name\"\ngit config --global user.email \"you@example.com\"\ngit config --global core.editor \"code --wait\"   # VSCode\ngit config --global init.defaultBranch main\ngit config --global pull.rebase false            # merge戦略\ngit config --global alias.st status\ngit config --global alias.lg \"log --oneline --graph --decorate\"\n\n# 設定確認\ngit config --list\ngit config user.name\n\n# リポジトリ初期化\ngit init\ngit init my-project  # ディレクトリ作成+初期化\n\n# リモートからクローン\ngit clone https://github.com/user/repo.git\ngit clone https://github.com/user/repo.git my-name  # フォルダ名指定\ngit clone --depth 1 https://github.com/user/repo.git # shallow clone",
+        "highlightLines": [2, 3, 5, 15, 18, 20]
+      }
+    ]
+  },
+  {
+    "id": "staging-committing",
+    "title": "ステージングとコミット",
+    "description": "add、commit、status、diff",
+    "codeBlocks": [
+      {
+        "language": "bash",
+        "filename": "commit.sh",
+        "code": "# 状態確認\ngit status\ngit status -s  # 短縮表示\n\n# ステージング\ngit add file.txt          # 特定ファイル\ngit add src/              # ディレクトリ\ngit add .                 # 全変更ファイル\ngit add -p                # 変更の一部だけ（パッチモード）\ngit add -u                # 追跡済みファイルのみ\n\n# 差分確認\ngit diff                  # ワーキングツリー vs ステージ\ngit diff --staged         # ステージ vs 最新コミット\ngit diff HEAD~1 HEAD      # コミット間の差分\n\n# コミット\ngit commit -m \"feat: ユーザー認証を追加\"\ngit commit -am \"fix: バグ修正\"  # add + commit（追跡済みファイルのみ）\ngit commit --amend            # 直前のコミットを修正（未pushのみ）\ngit commit --amend --no-edit  # メッセージを変えずに修正\n\n# .gitignore\necho \"node_modules/\" >> .gitignore\necho \".env\" >> .gitignore\ngit rm --cached file.txt  # 追跡から除外（ファイルは残す）",
+        "highlightLines": [6, 9, 13, 18, 19, 22]
+      }
+    ]
+  }
+]

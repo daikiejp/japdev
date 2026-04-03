@@ -1,0 +1,41 @@
+[
+  {
+    "id": "branch-basics",
+    "title": "ブランチの基本",
+    "description": "作成、切り替え、削除",
+    "codeBlocks": [
+      {
+        "language": "bash",
+        "filename": "branches.sh",
+        "code": "# ブランチ一覧\ngit branch          # ローカル\ngit branch -r       # リモート\ngit branch -a       # 全て\n\n# 作成と切り替え\ngit branch feature/login       # 作成のみ\ngit checkout feature/login     # 切り替え\ngit checkout -b feature/login  # 作成 + 切り替え（旧来）\ngit switch -c feature/login    # 作成 + 切り替え（推奨）\ngit switch main                # 切り替えのみ\n\n# ブランチ名変更\ngit branch -m old-name new-name\ngit branch -m new-name  # 現在のブランチをリネーム\n\n# 削除\ngit branch -d feature/login    # マージ済みのみ削除\ngit branch -D feature/login    # 強制削除\ngit push origin --delete feature/login  # リモートブランチ削除",
+        "highlightLines": [10, 11, 17, 18]
+      }
+    ]
+  },
+  {
+    "id": "merge",
+    "title": "マージ",
+    "description": "fast-forward、no-ff、squash",
+    "codeBlocks": [
+      {
+        "language": "bash",
+        "filename": "merge.sh",
+        "code": "# ブランチをマージ（mainに取り込む）\ngit switch main\ngit merge feature/login\n\n# --no-ff: マージコミットを必ず作成\ngit merge --no-ff feature/login\n\n# --squash: 全コミットを1つにまとめてステージング\ngit merge --squash feature/login\ngit commit -m \"feat: ログイン機能を追加\"\n\n# コンフリクトの解決\ngit merge feature/login\n# >>> コンフリクト発生 <<<\n# ファイルを編集して解決\ngit add .\ngit merge --continue\n# または中断:\ngit merge --abort\n\n# マージ済みブランチの確認と一括削除\ngit branch --merged main\ngit branch --merged main | grep -v '\\*\\|main\\|develop' | xargs git branch -d",
+        "highlightLines": [3, 6, 9, 15, 16, 22]
+      }
+    ]
+  },
+  {
+    "id": "rebase",
+    "title": "リベース",
+    "description": "rebase、interactive rebase",
+    "codeBlocks": [
+      {
+        "language": "bash",
+        "filename": "rebase.sh",
+        "code": "# feature ブランチを main の最新に追従\ngit switch feature/login\ngit rebase main\n\n# コンフリクト時\ngit rebase main\n# >>> コンフリクト発生 <<<\ngit add .\ngit rebase --continue\n# または中断:\ngit rebase --abort\n\n# インタラクティブリベース（直近3コミットを整理）\ngit rebase -i HEAD~3\n# エディタが開く:\n# pick abc123 feat: ログイン追加\n# squash def456 fix: タイポ修正      ← s に変更してsquash\n# reword ghi789 wip: 作業中          ← r に変更してメッセージ編集\n# drop  jkl012 debug: console.log   ← d に変更して削除\n\n# rebase vs merge\n# rebase: 履歴が線形になる（pushが必要なら --force-with-lease）\n# merge:  分岐の記録が残る（チームでは安全）",
+        "highlightLines": [3, 8, 14, 17, 18, 19, 20]
+      }
+    ]
+  }
+]

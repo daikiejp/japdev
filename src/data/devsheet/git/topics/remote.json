@@ -1,0 +1,28 @@
+[
+  {
+    "id": "remote-basics",
+    "title": "リモート操作",
+    "description": "remote、fetch、pull、push",
+    "codeBlocks": [
+      {
+        "language": "bash",
+        "filename": "remote.sh",
+        "code": "# リモートの確認\ngit remote -v\ngit remote show origin\n\n# リモートの追加・削除・変更\ngit remote add origin https://github.com/user/repo.git\ngit remote remove upstream\ngit remote rename origin upstream\ngit remote set-url origin https://github.com/user/new-repo.git\n\n# fetch: リモートの変更を取得（ローカルには反映しない）\ngit fetch origin\ngit fetch --all       # 全リモート\ngit fetch --prune     # 削除されたリモートブランチを除去\n\n# pull: fetch + merge（または rebase）\ngit pull              # origin/現在のブランチ\ngit pull origin main\ngit pull --rebase     # merge の代わりに rebase\n\n# push\ngit push origin main\ngit push origin feature/login\ngit push -u origin feature/login  # upstream を設定\ngit push --force-with-lease       # 安全な強制push（他人の変更を上書きしない）\ngit push --tags                   # タグをpush\n\n# 追跡ブランチの設定\ngit branch --set-upstream-to=origin/main main",
+        "highlightLines": [6, 12, 16, 21, 24]
+      }
+    ]
+  },
+  {
+    "id": "tags",
+    "title": "タグ",
+    "description": "バージョン管理のためのタグ操作",
+    "codeBlocks": [
+      {
+        "language": "bash",
+        "filename": "tags.sh",
+        "code": "# タグ一覧\ngit tag\ngit tag -l 'v1.*'   # パターン検索\n\n# 軽量タグ（メモ書き用）\ngit tag v1.0.0\ngit tag v1.0.0 abc1234  # 特定コミットにタグ\n\n# 注釈付きタグ（リリース用・推奨）\ngit tag -a v1.0.0 -m \"リリース v1.0.0\"\ngit tag -a v1.0.0 abc1234 -m \"リリース v1.0.0\"\n\n# タグの詳細確認\ngit show v1.0.0\n\n# push\ngit push origin v1.0.0   # 特定タグをpush\ngit push origin --tags   # 全タグをpush\n\n# 削除\ngit tag -d v1.0.0                     # ローカル削除\ngit push origin --delete v1.0.0      # リモート削除\n\n# タグからブランチ作成\ngit checkout -b hotfix/v1.0.1 v1.0.0",
+        "highlightLines": [6, 10, 17, 20, 24]
+      }
+    ]
+  }
+]

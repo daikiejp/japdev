@@ -1,0 +1,28 @@
+[
+  {
+    "id": "log",
+    "title": "履歴の確認",
+    "description": "git log のオプション集",
+    "codeBlocks": [
+      {
+        "language": "bash",
+        "filename": "log.sh",
+        "code": "# 基本\ngit log\ngit log --oneline           # 1行表示\ngit log --oneline --graph   # ブランチのグラフ\ngit log --oneline --graph --decorate --all  # 全ブランチ\n\n# フィルタリング\ngit log --author=\"Alice\"\ngit log --since=\"2025-01-01\" --until=\"2025-12-31\"\ngit log --grep=\"feat:\"      # コミットメッセージで検索\ngit log -S \"functionName\"   # コードの追加・削除で検索\ngit log --follow file.txt   # ファイルの名前変更を追跡\n\n# フォーマット\ngit log --pretty=format:\"%h %s (%an, %ar)\"\n# %h: ハッシュ短縮 %s: 件名 %an: 著者名 %ar: 相対時刻\n\n# ファイルの変更履歴\ngit log -p file.txt          # パッチ形式\ngit log --stat file.txt      # 変更ファイル一覧\ngit blame file.txt           # 誰がいつ変更したか\ngit blame -L 10,20 file.txt  # 行範囲を指定",
+        "highlightLines": [4, 5, 8, 11, 18, 21]
+      }
+    ]
+  },
+  {
+    "id": "undo",
+    "title": "取り消しと修正",
+    "description": "reset、revert、restore、stash",
+    "codeBlocks": [
+      {
+        "language": "bash",
+        "filename": "undo.sh",
+        "code": "# ステージングの取り消し\ngit restore --staged file.txt  # ステージからワーキングツリーに戻す\ngit reset HEAD file.txt        # 旧来の方法\n\n# ワーキングツリーの変更を取り消し\ngit restore file.txt           # 変更を破棄（元に戻す）\ngit checkout -- file.txt       # 旧来の方法\n\n# コミットの取り消し\ngit reset --soft  HEAD~1  # コミットを取り消し、変更はステージに残す\ngit reset --mixed HEAD~1  # コミットを取り消し、変更はワーキングツリーに残す\ngit reset --hard  HEAD~1  # コミットと変更を完全に削除（危険！）\n\n# 安全な取り消し（pushした後はこちら）\ngit revert HEAD      # 直前のコミットを打ち消す新コミットを作成\ngit revert abc1234   # 特定コミットを打ち消す\n\n# stash（作業の一時退避）\ngit stash               # 現在の変更を退避\ngit stash push -m \"WIP: ログイン機能\"\ngit stash list          # 一覧\ngit stash pop           # 最新を取り出して削除\ngit stash apply stash@{1} # 特定を取り出す（削除しない）\ngit stash drop stash@{0}  # 削除\ngit stash clear           # 全削除\n\n# reflog（操作履歴）— 誤ってresetした時の救済\ngit reflog\ngit reset --hard HEAD@{2}  # 2操作前に戻す",
+        "highlightLines": [2, 10, 11, 12, 15, 19, 27]
+      }
+    ]
+  }
+]

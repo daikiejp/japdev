@@ -30,5 +30,13 @@
     "description": "TypeScriptの型システムと機能",
     "color": "#3178C6",
     "topicsCount": 5
+  },
+  {
+    "id": "git",
+    "name": "Git",
+    "logo": "/logos/git.svg",
+    "description": "Gitのワークフローとコマンド集",
+    "color": "#F05032",
+    "topicsCount": 5
   }
 ]

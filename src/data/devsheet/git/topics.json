@@ -1,0 +1,7 @@
+[
+  {"id":"basics","name":"基本操作","description":"init、clone、add、commit、status"},
+  {"id":"branches","name":"ブランチ操作","description":"branch、checkout、merge、rebase"},
+  {"id":"remote","name":"リモート操作","description":"remote、fetch、pull、push"},
+  {"id":"history","name":"履歴と取り消し","description":"log、diff、reset、revert、stash"},
+  {"id":"workflow","name":"ワークフロー","description":"Git Flow、タグ、サブモジュール"}
+]

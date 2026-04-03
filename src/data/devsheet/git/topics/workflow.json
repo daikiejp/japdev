@@ -1,0 +1,35 @@
+[
+  {
+    "id": "git-flow",
+    "title": "Git Flow",
+    "description": "ブランチ戦略とコミットメッセージ規約",
+    "codeBlocks": [
+      {
+        "language": "bash",
+        "filename": "workflow.sh",
+        "code": "# ブランチの役割\n# main    — 本番リリース済みコード\n# develop — 開発の統合ブランチ\n# feature/* — 機能開発\n# release/* — リリース準備\n# hotfix/*  — 本番バグ修正\n\n# 機能開発フロー\ngit switch develop\ngit switch -c feature/user-auth\n# ... 開発 ...\ngit switch develop\ngit merge --no-ff feature/user-auth\ngit branch -d feature/user-auth\n\n# リリースフロー\ngit switch -c release/1.2.0 develop\n# バージョン番号更新、最終テスト\ngit switch main\ngit merge --no-ff release/1.2.0\ngit tag -a v1.2.0 -m \"Release v1.2.0\"\ngit switch develop\ngit merge --no-ff release/1.2.0",
+        "highlightLines": [2, 9, 16, 18, 21]
+      },
+      {
+        "title": "Conventional Commits",
+        "language": "bash",
+        "filename": "commits.sh",
+        "code": "# 形式: <type>(<scope>): <subject>\n# type: feat fix docs style refactor perf test chore\n\ngit commit -m \"feat(auth): Googleログインを追加\"\ngit commit -m \"fix(api): 401エラーのハンドリングを修正\"\ngit commit -m \"docs(readme): インストール手順を更新\"\ngit commit -m \"refactor(db): クエリを最適化\"\ngit commit -m \"chore(deps): パッケージを更新\"\ngit commit -m \"test(auth): ログインテストを追加\"\n\n# Breaking Change\ngit commit -m \"feat!: 認証APIを完全リデザイン\"\n# または本文に:\n# BREAKING CHANGE: 旧APIとの互換性なし\n\n# 複数行コミットメッセージ\ngit commit -m \"feat(user): プロフィール画像のアップロードを追加\n\n- AWS S3への直接アップロードを実装\n- 画像のリサイズ処理を追加（最大2MB）\n- アップロード失敗時のエラー処理を追加\n\nCloses #123\"",
+        "highlightLines": [4, 5, 12, 18]
+      }
+    ]
+  },
+  {
+    "id": "advanced-commands",
+    "title": "上級コマンド",
+    "description": "cherry-pick、bisect、submodule",
+    "codeBlocks": [
+      {
+        "language": "bash",
+        "filename": "advanced.sh",
+        "code": "# cherry-pick: 特定コミットだけ取り込む\ngit cherry-pick abc1234\ngit cherry-pick abc1234..def5678  # 範囲\ngit cherry-pick -n abc1234        # コミットせずにステージング\n\n# bisect: バグが混入したコミットを二分探索\ngit bisect start\ngit bisect bad                    # 現在: バグあり\ngit bisect good v1.0.0            # v1.0.0: バグなし\n# Gitが中間コミットをチェックアウト\ngit bisect good  # または bad を繰り返す\ngit bisect reset # 完了後にHEADを戻す\n\n# worktree: 複数ブランチを同時にチェックアウト\ngit worktree add ../hotfix hotfix/v1.1.1\ngit worktree list\ngit worktree remove ../hotfix\n\n# clean: 追跡されていないファイルを削除\ngit clean -fd    # ファイルとディレクトリを削除\ngit clean -fdn   # ドライラン（実際には削除しない）\ngit clean -fdx   # .gitignoreのファイルも削除\n\n# submodule\ngit submodule add https://github.com/user/lib.git libs/lib\ngit submodule update --init --recursive\ngit submodule foreach git pull origin main",
+        "highlightLines": [2, 7, 15, 21, 25]
+      }
+    ]
+  }
+]
