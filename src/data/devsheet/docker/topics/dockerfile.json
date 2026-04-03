@@ -1,0 +1,49 @@
+[
+  {
+    "id": "instructions",
+    "title": "Dockerfileの命令",
+    "description": "FROM、RUN、COPY、CMD、ENTRYPOINT など",
+    "codeBlocks": [
+      {
+        "language": "dockerfile",
+        "filename": "Dockerfile",
+        "code": "# ベースイメージ\nFROM node:20-alpine\n\n# メタデータ\nLABEL maintainer=\"you@example.com\" version=\"1.0\"\n\n# 環境変数\nENV NODE_ENV=production \\\n    PORT=3000\n\n# 作業ディレクトリ\nWORKDIR /app\n\n# ファイルコピー（.dockerignore が適用される）\nCOPY package*.json ./\n\n# コマンド実行（レイヤーをキャッシュ活用）\nRUN npm ci --only=production\n\n# アプリコードをコピー（依存関係の後）\nCOPY . .\n\n# ポート公開（ドキュメント目的、実際はrunで指定）\nEXPOSE 3000\n\n# ヘルスチェック\nHEALTHCHECK --interval=30s --timeout=3s --retries=3 \\\n    CMD wget -qO- http://localhost:3000/health || exit 1\n\n# 実行ユーザー（rootを避ける）\nUSER node\n\n# コンテナ起動コマンド\nCMD [\"node\", \"server.js\"]\n# ENTRYPOINT と CMD の違い:\n# ENTRYPOINT: 固定コマンド（上書き不可）\n# CMD: デフォルト引数（docker run で上書き可）",
+        "highlightLines": [2, 8, 12, 15, 18, 22, 25, 29, 32]
+      }
+    ]
+  },
+  {
+    "id": "multi-stage",
+    "title": "マルチステージビルド",
+    "description": "ビルドと実行イメージを分離してサイズ削減",
+    "codeBlocks": [
+      {
+        "language": "dockerfile",
+        "filename": "Dockerfile.prod",
+        "code": "# ===== ステージ1: ビルド =====\nFROM node:20-alpine AS builder\n\nWORKDIR /app\nCOPY package*.json ./\nRUN npm ci\nCOPY . .\nRUN npm run build\n\n# ===== ステージ2: 本番 =====\nFROM node:20-alpine AS production\n\n# セキュリティアップデート\nRUN apk update && apk upgrade && apk add --no-cache dumb-init\n\nWORKDIR /app\n\n# ビルド成果物だけをコピー\nCOPY --from=builder /app/dist ./dist\nCOPY --from=builder /app/node_modules ./node_modules\nCOPY --from=builder /app/package.json ./\n\nUSER node\nEXPOSE 3000\n\n# dumb-init: シグナル処理を正しく行う\nENTRYPOINT [\"dumb-init\", \"--\"]\nCMD [\"node\", \"dist/server.js\"]\n\n# ===== ステージ3: テスト（オプション）=====\nFROM builder AS test\nRUN npm test",
+        "highlightLines": [2, 11, 19, 20, 21, 27, 31]
+      }
+    ]
+  },
+  {
+    "id": "best-practices",
+    "title": "ベストプラクティスと .dockerignore",
+    "description": "レイヤーキャッシュの最適化とセキュリティ",
+    "codeBlocks": [
+      {
+        "title": ".dockerignore",
+        "language": "bash",
+        "filename": ".dockerignore",
+        "code": "# バージョン管理\n.git\n.gitignore\n\n# 依存関係（コンテナ内でインストール）\nnode_modules\nnpm-debug.log\nyarn-error.log\n\n# ビルド成果物\ndist\nbuild\n.next\n\n# 環境設定（機密情報を含む）\n.env\n.env.local\n.env.*.local\n\n# ドキュメント\nREADME.md\ndocs\n\n# テスト\ncoverage\n__tests__\n*.test.ts\n\n# IDE\n.vscode\n.idea\n*.swp",
+        "highlightLines": [6, 15, 24]
+      },
+      {
+        "title": "レイヤーキャッシュの最適化",
+        "language": "dockerfile",
+        "filename": "Dockerfile.optimized",
+        "code": "FROM node:20-alpine\nWORKDIR /app\n\n# ✅ 変更頻度の低いものを先に\n# package.json だけコピー → npm install → その後ソースコード\n# → package.json が変わらなければ npm install はキャッシュ利用\nCOPY package*.json ./\nRUN npm ci --only=production\n\n# ✅ ここでソースをコピー（npm install と分離）\nCOPY . .\n\n# ✅ RUN は可能な限り連結してレイヤー数を減らす\nRUN apt-get update && apt-get install -y \\\n    curl \\\n    jq \\\n  && rm -rf /var/lib/apt/lists/*  # キャッシュ削除を同じレイヤーで\n\n# ❌ これは3レイヤー生まれて無駄\n# RUN apt-get update\n# RUN apt-get install -y curl\n# RUN rm -rf /var/lib/apt/lists/*",
+        "highlightLines": [7, 8, 11, 14, 17]
+      }
+    ]
+  }
+]

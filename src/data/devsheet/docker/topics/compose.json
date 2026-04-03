@@ -1,0 +1,48 @@
+[
+  {
+    "id": "compose-basics",
+    "title": "docker-compose.yml の基本",
+    "description": "services、volumes、networks の定義",
+    "codeBlocks": [
+      {
+        "language": "yaml",
+        "filename": "docker-compose.yml",
+        "code": "services:\n  # Webアプリ\n  app:\n    build:\n      context: .\n      dockerfile: Dockerfile\n      target: production          # マルチステージの対象\n    image: myapp:latest\n    container_name: myapp\n    restart: unless-stopped\n    ports:\n      - \"3000:3000\"\n    environment:\n      - NODE_ENV=production\n      - DATABASE_URL=postgresql://user:pass@db:5432/mydb\n      - REDIS_URL=redis://cache:6379\n    env_file:\n      - .env.local                # ファイルから環境変数を読み込む\n    volumes:\n      - uploads:/app/uploads      # named volume\n      - ./logs:/app/logs          # bind mount\n    depends_on:\n      db:\n        condition: service_healthy\n      cache:\n        condition: service_started\n    networks:\n      - backend\n\n  # PostgreSQL\n  db:\n    image: postgres:16-alpine\n    restart: unless-stopped\n    environment:\n      POSTGRES_USER: user\n      POSTGRES_PASSWORD: pass\n      POSTGRES_DB: mydb\n    volumes:\n      - pgdata:/var/lib/postgresql/data\n      - ./init.sql:/docker-entrypoint-initdb.d/init.sql\n    healthcheck:\n      test: [\"CMD-SHELL\", \"pg_isready -U user -d mydb\"]\n      interval: 10s\n      timeout: 5s\n      retries: 5\n    networks:\n      - backend\n\n  # Redis\n  cache:\n    image: redis:7-alpine\n    restart: unless-stopped\n    command: redis-server --maxmemory 256mb --maxmemory-policy allkeys-lru\n    volumes:\n      - redisdata:/data\n    networks:\n      - backend\n\nvolumes:\n  pgdata:\n  redisdata:\n  uploads:\n\nnetworks:\n  backend:\n    driver: bridge",
+        "highlightLines": [3, 22, 30, 40, 48, 58, 63]
+      }
+    ]
+  },
+  {
+    "id": "compose-commands",
+    "title": "Compose コマンド",
+    "description": "up、down、scale、logs、exec",
+    "codeBlocks": [
+      {
+        "language": "bash",
+        "filename": "compose.sh",
+        "code": "# 起動\ndocker compose up           # フォアグラウンド\ndocker compose up -d        # バックグラウンド\ndocker compose up -d --build  # イメージを再ビルドして起動\ndocker compose up app db    # 特定サービスだけ起動\n\n# 停止・削除\ndocker compose stop         # コンテナ停止（削除しない）\ndocker compose down         # 停止+コンテナ削除\ndocker compose down -v      # ボリュームも削除（データ消滅注意！）\ndocker compose down --rmi all # イメージも削除\n\n# ステータス確認\ndocker compose ps\ndocker compose top          # 各コンテナのプロセス\n\n# ログ\ndocker compose logs\ndocker compose logs -f app  # 特定サービスをフォロー\ndocker compose logs --tail=50\n\n# コマンド実行\ndocker compose exec app bash\ndocker compose exec db psql -U user -d mydb\ndocker compose run --rm app npm run migrate  # 一時コンテナで実行\n\n# スケール\ndocker compose up -d --scale app=3  # appを3インスタンス起動\n\n# 設定確認\ndocker compose config       # 最終的な設定を表示\ndocker compose config --services  # サービス一覧\n\n# イメージのプル・ビルド\ndocker compose pull\ndocker compose build --no-cache",
+        "highlightLines": [3, 8, 21, 26, 31]
+      }
+    ]
+  },
+  {
+    "id": "compose-override",
+    "title": "Override と環境別設定",
+    "description": "開発・本番を分けた Compose 構成",
+    "codeBlocks": [
+      {
+        "language": "yaml",
+        "filename": "docker-compose.override.yml",
+        "code": "# docker-compose.override.yml は自動的に merge される\n# 開発環境用の上書き設定\n\nservices:\n  app:\n    build:\n      target: development         # 開発ステージを使用\n    volumes:\n      - .:/app                    # ソースコードをマウント（ホットリロード）\n      - /app/node_modules         # node_modules はコンテナのものを使用\n    environment:\n      - NODE_ENV=development\n      - DEBUG=app:*\n    command: npm run dev\n    ports:\n      - \"9229:9229\"               # Node.js デバッガーポート\n\n  db:\n    ports:\n      - \"5432:5432\"               # 開発時はホストから直接接続可能に",
+        "highlightLines": [5, 8, 11, 19]
+      },
+      {
+        "title": "本番用の明示的な指定",
+        "language": "bash",
+        "filename": "deploy.sh",
+        "code": "# 本番: override を無視して本番設定のみ使用\ndocker compose -f docker-compose.yml -f docker-compose.prod.yml up -d\n\n# 開発: デフォルト（override 自動適用）\ndocker compose up -d\n\n# ステージング\ndocker compose -f docker-compose.yml -f docker-compose.staging.yml up -d",
+        "highlightLines": [2, 5, 8]
+      }
+    ]
+  }
+]

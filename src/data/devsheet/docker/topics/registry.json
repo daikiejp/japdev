@@ -1,0 +1,28 @@
+[
+  {
+    "id": "registry-push",
+    "title": "レジストリへのpush",
+    "description": "Docker Hub・GitHub Container Registry・ECR",
+    "codeBlocks": [
+      {
+        "language": "bash",
+        "filename": "registry.sh",
+        "code": "# === Docker Hub ===\ndocker login\ndocker tag myapp:latest username/myapp:latest\ndocker push username/myapp:latest\n\n# === GitHub Container Registry (ghcr.io) ===\necho $GITHUB_TOKEN | docker login ghcr.io -u USERNAME --password-stdin\ndocker tag myapp:latest ghcr.io/username/myapp:latest\ndocker push ghcr.io/username/myapp:latest\n\n# === AWS ECR ===\naws ecr get-login-password --region ap-northeast-1 \\\n  | docker login --username AWS \\\n    --password-stdin 123456789.dkr.ecr.ap-northeast-1.amazonaws.com\n\ndocker tag myapp:latest 123456789.dkr.ecr.ap-northeast-1.amazonaws.com/myapp:latest\ndocker push 123456789.dkr.ecr.ap-northeast-1.amazonaws.com/myapp:latest\n\n# マルチプラットフォームビルド（arm64 + amd64）\ndocker buildx create --use\ndocker buildx build \\\n  --platform linux/amd64,linux/arm64 \\\n  -t username/myapp:latest \\\n  --push .",
+        "highlightLines": [2, 7, 12, 20]
+      }
+    ]
+  },
+  {
+    "id": "cicd",
+    "title": "CI/CD での自動ビルド",
+    "description": "GitHub Actions でイメージをビルド・プッシュ",
+    "codeBlocks": [
+      {
+        "language": "yaml",
+        "filename": ".github/workflows/docker.yml",
+        "code": "name: Build and Push Docker Image\n\non:\n  push:\n    branches: [main]\n    tags: ['v*']\n\njobs:\n  build:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: actions/checkout@v4\n\n      - name: Set up Docker Buildx\n        uses: docker/setup-buildx-action@v3\n\n      - name: Login to GitHub Container Registry\n        uses: docker/login-action@v3\n        with:\n          registry: ghcr.io\n          username: ${{ github.actor }}\n          password: ${{ secrets.GITHUB_TOKEN }}\n\n      - name: Extract metadata\n        id: meta\n        uses: docker/metadata-action@v5\n        with:\n          images: ghcr.io/${{ github.repository }}\n          tags: |\n            type=semver,pattern={{version}}\n            type=ref,event=branch\n            type=sha\n\n      - name: Build and push\n        uses: docker/build-push-action@v5\n        with:\n          context: .\n          push: true\n          tags: ${{ steps.meta.outputs.tags }}\n          labels: ${{ steps.meta.outputs.labels }}\n          cache-from: type=gha\n          cache-to: type=gha,mode=max",
+        "highlightLines": [17, 23, 33, 40]
+      }
+    ]
+  }
+]

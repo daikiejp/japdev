@@ -40,6 +40,14 @@
     "topicsCount": 5
   },
   {
+    "id": "docker",
+    "name": "Docker",
+    "logo": "/logos/docker.svg",
+    "description": "Dockerコンテナと構成管理",
+    "color": "#2496ED",
+    "topicsCount": 6
+  },
+  {
     "id": "sql",
     "name": "SQL",
     "logo": "/logos/sql.svg",

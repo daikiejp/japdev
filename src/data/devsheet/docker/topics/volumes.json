@@ -1,0 +1,28 @@
+[
+  {
+    "id": "volumes",
+    "title": "ボリューム",
+    "description": "データの永続化とボリューム管理",
+    "codeBlocks": [
+      {
+        "language": "bash",
+        "filename": "volumes.sh",
+        "code": "# ボリューム作成・一覧・削除\ndocker volume create mydata\ndocker volume ls\ndocker volume inspect mydata\ndocker volume rm mydata\ndocker volume prune              # 未使用ボリューム削除\n\n# ボリュームをコンテナにマウント\ndocker run -d \\\n  -v mydata:/var/lib/postgresql/data \\\n  postgres:16\n\n# バインドマウント（ホストのディレクトリを直接マウント）\ndocker run -d \\\n  -v $(pwd)/src:/app/src \\\n  -v $(pwd)/public:/app/public \\\n  myapp:dev\n\n# 読み取り専用マウント\ndocker run -d \\\n  -v $(pwd)/config:/app/config:ro \\\n  myapp\n\n# tmpfs（メモリ上の一時ファイル）\ndocker run -d \\\n  --tmpfs /app/temp \\\n  myapp\n\n# ボリュームの種類:\n# named volume:  docker が管理 → 本番データの永続化\n# bind mount:    ホストパスを直接指定 → 開発時のホットリロード\n# tmpfs:         メモリ上 → 機密データ・一時ファイル",
+        "highlightLines": [2, 9, 14, 20, 25, 30]
+      }
+    ]
+  },
+  {
+    "id": "networks",
+    "title": "ネットワーク",
+    "description": "コンテナ間通信とネットワーク設定",
+    "codeBlocks": [
+      {
+        "language": "bash",
+        "filename": "networks.sh",
+        "code": "# ネットワーク作成・一覧・削除\ndocker network create mynet\ndocker network ls\ndocker network inspect mynet\ndocker network rm mynet\n\n# コンテナをネットワークに接続して起動\ndocker run -d --name db --network mynet postgres:16\ndocker run -d --name app --network mynet \\\n  -e DB_HOST=db \\\n  myapp:latest\n# 同じネットワーク内ではコンテナ名でDNS解決できる\n\n# 既存コンテナをネットワークに接続・切断\ndocker network connect mynet myapp\ndocker network disconnect mynet myapp\n\n# ネットワークの種類:\n# bridge:  デフォルト。同一ホスト内のコンテナ間通信\n# host:    ホストのネットワークを直接使用（Linuxのみ）\n# none:    ネットワーク無効\n# overlay: Docker Swarmでの複数ホスト間通信\n\n# ポートマッピング\ndocker run -p 8080:80 nginx          # localhost:8080 → container:80\ndocker run -p 127.0.0.1:8080:80 nginx # ループバックのみ\ndocker run -p 80 nginx               # ランダムホストポート",
+        "highlightLines": [8, 9, 15, 25, 26]
+      }
+    ]
+  }
+]

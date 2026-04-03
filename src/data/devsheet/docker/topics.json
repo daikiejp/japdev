@@ -1,0 +1,8 @@
+[
+  { "id": "basics",      "name": "基本コマンド",      "description": "images、containers、exec、logs" },
+  { "id": "dockerfile",  "name": "Dockerfile",        "description": "ベストプラクティスとマルチステージビルド" },
+  { "id": "volumes",     "name": "ボリュームとネットワーク", "description": "データ永続化とコンテナ間通信" },
+  { "id": "compose",     "name": "Docker Compose",    "description": "複数コンテナのオーケストレーション" },
+  { "id": "registry",    "name": "レジストリとCI/CD", "description": "イメージのビルド・プッシュ・デプロイ" },
+  { "id": "production",  "name": "本番運用",           "description": "セキュリティ・ヘルスチェック・リソース管理" }
+]

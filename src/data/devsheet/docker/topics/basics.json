@@ -1,0 +1,41 @@
+[
+  {
+    "id": "images",
+    "title": "イメージ操作",
+    "description": "pull、build、list、remove",
+    "codeBlocks": [
+      {
+        "language": "bash",
+        "filename": "images.sh",
+        "code": "# イメージの取得\ndocker pull nginx\ndocker pull node:20-alpine\ndocker pull postgres:16\n\n# イメージ一覧\ndocker images\ndocker images --filter \"dangling=true\"  # タグなし（未使用）\n\n# イメージのビルド\ndocker build -t myapp:1.0 .\ndocker build -t myapp:1.0 -f Dockerfile.prod .\ndocker build --no-cache -t myapp:latest .  # キャッシュなし\n\n# イメージの詳細確認\ndocker inspect myapp:1.0\ndocker history myapp:1.0    # レイヤー履歴\n\n# タグ付け\ndocker tag myapp:1.0 myregistry.io/myapp:1.0\n\n# イメージ削除\ndocker rmi myapp:1.0\ndocker image prune           # 未使用イメージを一括削除\ndocker image prune -a        # タグ付きも含めて全削除\n\n# エクスポート・インポート\ndocker save myapp:1.0 | gzip > myapp.tar.gz\ndocker load < myapp.tar.gz",
+        "highlightLines": [2, 10, 17, 21, 25]
+      }
+    ]
+  },
+  {
+    "id": "containers",
+    "title": "コンテナ操作",
+    "description": "run、start、stop、exec、logs",
+    "codeBlocks": [
+      {
+        "language": "bash",
+        "filename": "containers.sh",
+        "code": "# コンテナの起動\ndocker run nginx\ndocker run -d nginx                          # バックグラウンド\ndocker run -d -p 8080:80 nginx               # ポートマッピング\ndocker run -d --name web -p 8080:80 nginx    # 名前付き\ndocker run -it ubuntu bash                   # インタラクティブ\ndocker run --rm alpine echo \"hello\"          # 実行後に自動削除\n\n# よく使うオプション\ndocker run -d \\\n  --name myapp \\\n  -p 3000:3000 \\\n  -e NODE_ENV=production \\\n  -e DATABASE_URL=postgres://... \\\n  -v $(pwd)/data:/app/data \\\n  --restart unless-stopped \\\n  myapp:latest\n\n# コンテナ一覧\ndocker ps           # 起動中\ndocker ps -a        # 全コンテナ\n\n# 起動・停止・削除\ndocker start myapp\ndocker stop myapp\ndocker restart myapp\ndocker rm myapp\ndocker rm -f myapp  # 強制停止+削除\n\n# コンテナ内でコマンド実行\ndocker exec -it myapp bash\ndocker exec myapp cat /etc/hosts\n\n# ログ確認\ndocker logs myapp\ndocker logs -f myapp         # フォロー\ndocker logs --tail 100 myapp # 最後100行\n\n# 不要コンテナ一括削除\ndocker container prune",
+        "highlightLines": [4, 9, 20, 29, 33]
+      }
+    ]
+  },
+  {
+    "id": "system",
+    "title": "システム管理",
+    "description": "stats、inspect、prune、system",
+    "codeBlocks": [
+      {
+        "language": "bash",
+        "filename": "system.sh",
+        "code": "# リソース使用状況\ndocker stats                  # リアルタイム監視\ndocker stats --no-stream      # 1回だけ表示\ndocker stats myapp db         # 特定コンテナのみ\n\n# コンテナ詳細\ndocker inspect myapp\ndocker inspect --format '{{.NetworkSettings.IPAddress}}' myapp\ndocker inspect --format '{{.State.Status}}' myapp\n\n# ファイルのコピー\ndocker cp myapp:/app/logs ./logs    # コンテナ→ホスト\ndocker cp ./config.json myapp:/app/ # ホスト→コンテナ\n\n# システム情報\ndocker info\ndocker version\n\n# 一括クリーンアップ\ndocker system df              # ディスク使用量確認\ndocker system prune           # 停止コンテナ・未使用イメージ・ネットワーク削除\ndocker system prune -a        # 全未使用リソース削除\ndocker system prune -a --volumes # ボリュームも含めて削除（注意！）",
+        "highlightLines": [2, 7, 11, 19, 21]
+      }
+    ]
+  }
+]

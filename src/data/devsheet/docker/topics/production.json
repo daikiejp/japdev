@@ -1,0 +1,35 @@
+[
+  {
+    "id": "security",
+    "title": "セキュリティ",
+    "description": "非rootユーザー・読み取り専用・Secrets",
+    "codeBlocks": [
+      {
+        "language": "dockerfile",
+        "filename": "Dockerfile.secure",
+        "code": "FROM node:20-alpine\n\n# セキュリティアップデートを適用\nRUN apk update && apk upgrade && rm -rf /var/cache/apk/*\n\nWORKDIR /app\n\n# アプリ専用ユーザーを作成（rootを避ける）\nRUN addgroup -S appgroup && adduser -S appuser -G appgroup\n\nCOPY --chown=appuser:appgroup package*.json ./\nRUN npm ci --only=production\nCOPY --chown=appuser:appgroup . .\n\n# 非rootユーザーに切り替え\nUSER appuser\n\n# 読み取り専用ファイルシステム（runで --read-only オプションと組み合わせ）\n# docker run --read-only --tmpfs /tmp myapp\n\nEXPOSE 3000\nCMD [\"node\", \"server.js\"]",
+        "highlightLines": [4, 9, 11, 13, 16]
+      },
+      {
+        "title": "Docker Secrets (Compose)",
+        "language": "yaml",
+        "filename": "docker-compose.secrets.yml",
+        "code": "services:\n  app:\n    image: myapp:latest\n    secrets:\n      - db_password\n      - api_key\n    environment:\n      # ファイルパスで参照（環境変数に直接入れない）\n      - DB_PASSWORD_FILE=/run/secrets/db_password\n\nsecrets:\n  db_password:\n    file: ./secrets/db_password.txt  # ローカル開発用\n  api_key:\n    external: true                   # Docker Swarm で管理",
+        "highlightLines": [4, 9, 12]
+      }
+    ]
+  },
+  {
+    "id": "healthcheck-resources",
+    "title": "ヘルスチェックとリソース制限",
+    "description": "健全性監視とCPU・メモリ制限",
+    "codeBlocks": [
+      {
+        "language": "yaml",
+        "filename": "docker-compose.limits.yml",
+        "code": "services:\n  app:\n    image: myapp:latest\n\n    # ヘルスチェック\n    healthcheck:\n      test: [\"CMD\", \"wget\", \"-qO-\", \"http://localhost:3000/health\"]\n      interval: 30s    # チェック間隔\n      timeout: 10s     # タイムアウト\n      retries: 3       # 失敗許容回数\n      start_period: 40s # 起動待機時間\n\n    # リソース制限\n    deploy:\n      resources:\n        limits:\n          cpus: '0.5'     # 最大 0.5 コア\n          memory: 512M    # 最大 512MB\n        reservations:\n          cpus: '0.25'    # 予約: 0.25 コア\n          memory: 256M    # 予約: 256MB\n\n    # 再起動ポリシー\n    restart: unless-stopped\n    # on-failure:3  → 失敗時のみ最大3回\n    # always        → 常に再起動\n    # no            → 再起動しない",
+        "highlightLines": [6, 14, 17, 24]
+      }
+    ]
+  }
+]
