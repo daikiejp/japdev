@@ -1,47 +1,57 @@
 [
   {
-    "id": "flex-basics",
-    "title": "Flexboxの基本",
-    "description": "Flexboxレイアウトの基本的な使い方",
+    "id": "flex-container",
+    "title": "Flexコンテナのプロパティ",
+    "description": "display: flex で有効になるコンテナ側プロパティ",
     "codeBlocks": [
       {
-        "title": "基本的なFlexコンテナ",
-        "language": "html",
-        "filename": "flexbox-basic.html",
-        "code": "",
-        "tabs": [
-          {
-            "label": "HTML",
-            "code": "<div class=\"flex-container\">\n    <div class=\"flex-item\">アイテム 1</div>\n    <div class=\"flex-item\">アイテム 2</div>\n    <div class=\"flex-item\">アイテム 3</div>\n</div>",
-            "language": "html"
-          },
-          {
-            "label": "CSS",
-            "code": ".flex-container {\n    display: flex;\n    justify-content: space-between;\n    align-items: center;\n    gap: 1rem;\n    padding: 1rem;\n    background: #f0f0f0;\n}\n\n.flex-item {\n    flex: 1;\n    padding: 1rem;\n    background: white;\n    border-radius: 8px;\n    box-shadow: 0 2px 4px rgba(0,0,0,0.1);\n}",
-            "language": "css"
-          }
-        ]
+        "title": "flex-direction / flex-wrap",
+        "language": "css",
+        "filename": "flex-container.css",
+        "code": ".container {\n    display: flex; /* または inline-flex */\n\n    /* 主軸の方向 */\n    flex-direction: row;            /* → デフォルト */\n    flex-direction: row-reverse;    /* ← */\n    flex-direction: column;         /* ↓ */\n    flex-direction: column-reverse; /* ↑ */\n\n    /* 折り返し */\n    flex-wrap: nowrap;              /* 折り返しなし（デフォルト） */\n    flex-wrap: wrap;                /* 折り返しあり */\n    flex-wrap: wrap-reverse;        /* 逆順で折り返し */\n\n    /* 短縮形 */\n    flex-flow: row wrap;\n}",
+        "highlightLines": [2, 5, 7, 12, 16]
       },
       {
-        "title": "Flex方向とラッピング",
+        "title": "justify-content / align-items",
         "language": "css",
-        "filename": "flex-direction.css",
-        "code": "/* 横並び（デフォルト） */\n.flex-row {\n    display: flex;\n    flex-direction: row;\n}\n\n/* 縦並び */\n.flex-column {\n    display: flex;\n    flex-direction: column;\n}\n\n/* 折り返しあり */\n.flex-wrap {\n    display: flex;\n    flex-wrap: wrap;\n    gap: 1rem;\n}\n\n/* 折り返しなし（デフォルト） */\n.flex-nowrap {\n    display: flex;\n    flex-wrap: nowrap;\n}",
-        "highlightLines": [2, 8, 14, 21]
+        "filename": "align.css",
+        "code": ".container {\n    /* 主軸方向の揃え（水平 ← row の場合） */\n    justify-content: flex-start;    /* 左揃え（デフォルト） */\n    justify-content: flex-end;      /* 右揃え */\n    justify-content: center;        /* 中央揃え */\n    justify-content: space-between; /* 両端揃え */\n    justify-content: space-around;  /* 均等配置（端に余白半分） */\n    justify-content: space-evenly;  /* 均等配置（端も同じ余白） */\n\n    /* 交差軸方向の揃え（垂直 ← row の場合） */\n    align-items: stretch;           /* 伸縮（デフォルト） */\n    align-items: flex-start;        /* 上揃え */\n    align-items: flex-end;          /* 下揃え */\n    align-items: center;            /* 中央揃え */\n    align-items: baseline;          /* ベースライン揃え */\n\n    /* 複数行の揃え */\n    align-content: flex-start | flex-end | center | space-between | stretch;\n}",
+        "highlightLines": [6, 8, 14]
       }
     ]
   },
   {
-    "id": "flex-alignment",
-    "title": "配置とスペース",
-    "description": "要素の配置とスペース調整の方法",
+    "id": "flex-items",
+    "title": "Flexアイテムのプロパティ",
+    "description": "個別のアイテムを制御するプロパティ",
     "codeBlocks": [
       {
-        "title": "主軸と交差軸の配置",
+        "title": "flex-grow / flex-shrink / flex-basis",
         "language": "css",
-        "filename": "flex-alignment.css",
-        "code": "/* 主軸方向の配置 */\n.justify-start {\n    display: flex;\n    justify-content: flex-start; /* 左揃え */\n}\n\n.justify-center {\n    display: flex;\n    justify-content: center; /* 中央揃え */\n}\n\n.justify-end {\n    display: flex;\n    justify-content: flex-end; /* 右揃え */\n}\n\n.justify-between {\n    display: flex;\n    justify-content: space-between; /* 両端揃え */\n}\n\n.justify-around {\n    display: flex;\n    justify-content: space-around; /* 均等配置 */\n}\n\n/* 交差軸方向の配置 */\n.align-start {\n    display: flex;\n    align-items: flex-start; /* 上揃え */\n}\n\n.align-center {\n    display: flex;\n    align-items: center; /* 中央揃え */\n}\n\n.align-end {\n    display: flex;\n    align-items: flex-end; /* 下揃え */\n}",
-        "highlightLines": [4, 9, 14, 19, 24, 30, 35, 40]
+        "filename": "flex-items.css",
+        "code": ".item {\n    /* 空きスペースへの伸長比率（デフォルト 0） */\n    flex-grow: 1;\n\n    /* スペース不足時の縮小比率（デフォルト 1） */\n    flex-shrink: 0; /* 縮まない */\n\n    /* アイテムの基本サイズ */\n    flex-basis: auto;   /* コンテンツサイズ（デフォルト） */\n    flex-basis: 200px;  /* 固定値 */\n    flex-basis: 50%;    /* パーセント */\n    flex-basis: 0;      /* flex-growのみで計算 */\n\n    /* 短縮形: flex: grow shrink basis */\n    flex: 1;       /* 1 1 0% — 均等分割 */\n    flex: 1 1 auto; /* 余白を均等分割しつつ縮小可 */\n    flex: none;    /* 0 0 auto — 固定サイズ */\n    flex: auto;    /* 1 1 auto */\n}",
+        "highlightLines": [3, 6, 15, 16]
+      },
+      {
+        "title": "order / align-self",
+        "language": "css",
+        "filename": "order.css",
+        "code": ".item {\n    /* 表示順序（デフォルト 0、小さいほど前） */\n    order: -1; /* 先頭に移動 */\n    order: 0;  /* デフォルト */\n    order: 1;  /* 後ろに移動 */\n\n    /* 個別の交差軸揃え（align-itemsを上書き） */\n    align-self: auto;       /* 親の align-items を継承 */\n    align-self: flex-start;\n    align-self: flex-end;\n    align-self: center;\n    align-self: stretch;\n    align-self: baseline;\n}",
+        "highlightLines": [3, 8]
+      }
+    ]
+  },
+  {
+    "id": "flex-patterns",
+    "title": "よく使うFlexパターン",
+    "description": "実務でよく使うレイアウトパターン集",
+    "codeBlocks": [
+      {
+        "title": "中央配置 / ナビゲーション / カード",
+        "language": "css",
+        "filename": "patterns.css",
+        "code": "/* 完全中央配置 */\n.center {\n    display: flex;\n    justify-content: center;\n    align-items: center;\n}\n\n/* ヘッダーナビゲーション */\n.header {\n    display: flex;\n    justify-content: space-between;\n    align-items: center;\n}\n\n/* 均等カードグリッド（折り返しあり） */\n.card-grid {\n    display: flex;\n    flex-wrap: wrap;\n    gap: 1rem;\n}\n.card-grid > * {\n    flex: 1 1 300px; /* 最小300px、均等分割 */\n    max-width: calc(33.333% - 1rem);\n}\n\n/* スティッキーフッター */\n.page {\n    display: flex;\n    flex-direction: column;\n    min-height: 100vh;\n}\n.page main { flex: 1; } /* mainが残り全部を占有 */",
+        "highlightLines": [3, 11, 21, 30]
       }
     ]
   }

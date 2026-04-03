@@ -1,14 +1,92 @@
 [
   {
     "id": "semantic-tags",
-    "title": "セマンティックタグ",
+    "title": "セマンティックタグ一覧",
     "description": "意味のあるHTMLタグを使用する",
     "codeBlocks": [
       {
+        "title": "ページ構造のセマンティクス",
         "language": "html",
         "filename": "semantic.html",
-        "code": "<header>\n    <nav>\n        <ul>\n            <li><a href=\"/\">ホーム</a></li>\n            <li><a href=\"/about\">私たちについて</a></li>\n            <li><a href=\"/contact\">お問い合わせ</a></li>\n        </ul>\n    </nav>\n</header>\n\n<main>\n    <article>\n        <h1>記事タイトル</h1>\n        <p class=\"meta\">\n            <time datetime=\"2025-10-24\">2025年10月24日</time>\n            著者: 太郎\n        </p>\n        <p>記事の内容がここに入ります...</p>\n    </article>\n    \n    <aside>\n        <h2>関連情報</h2>\n        <ul>\n            <li><a href=\"#\">関連記事1</a></li>\n            <li><a href=\"#\">関連記事2</a></li>\n        </ul>\n    </aside>\n</main>\n\n<footer>\n    <p>&copy; 2025 会社名. All rights reserved.</p>\n</footer>",
-        "highlightLines": [1, 2, 8, 9, 11, 12, 19, 21, 27, 28, 30, 32]
+        "code": "<header>\n    <nav>\n        <ul>\n            <li><a href=\"/\">ホーム</a></li>\n            <li><a href=\"/about\">私たちについて</a></li>\n        </ul>\n    </nav>\n</header>\n\n<main>\n    <article>\n        <h1>記事タイトル</h1>\n        <time datetime=\"2025-10-24\">2025年10月24日</time>\n        <p>記事の内容がここに入ります...</p>\n    </article>\n\n    <aside>\n        <h2>関連情報</h2>\n        <ul>\n            <li><a href=\"#\">関連記事1</a></li>\n        </ul>\n    </aside>\n</main>\n\n<footer>\n    <p>&copy; 2025 会社名</p>\n</footer>",
+        "highlightLines": [1, 2, 9, 10, 11, 16, 17, 23, 24]
+      }
+    ]
+  },
+  {
+    "id": "text-semantics",
+    "title": "テキストのセマンティクス",
+    "description": "テキストレベルのセマンティックタグ",
+    "codeBlocks": [
+      {
+        "title": "強調・引用・コード",
+        "language": "html",
+        "filename": "text.html",
+        "code": "<!-- 強調 -->\n<strong>重要なテキスト</strong>   <!-- 意味的な強調 -->\n<em>強調されたテキスト</em>       <!-- アクセントの強調 -->\n<mark>ハイライト</mark>           <!-- 参照・強調表示 -->\n<small>補足情報</small>           <!-- 免責・著作権など -->\n\n<!-- 引用 -->\n<blockquote cite=\"https://example.com\">\n    <p>長い引用文はblockquoteを使います。</p>\n</blockquote>\n<q>短いインライン引用</q>\n\n<!-- コード -->\n<code>console.log('hello')</code>    <!-- インラインコード -->\n<pre><code>function greet() {\n    return 'hello';\n}</code></pre>                       <!-- コードブロック -->\n<kbd>Ctrl + C</kbd>                 <!-- キーボード入力 -->\n<var>x</var> = <var>y</var> + 1    <!-- 変数 -->\n<samp>Output: Hello World</samp>    <!-- サンプル出力 -->",
+        "highlightLines": [2, 3, 4, 8, 13, 14]
+      },
+      {
+        "title": "その他のテキストタグ",
+        "language": "html",
+        "filename": "misc-text.html",
+        "code": "<!-- 日付・時刻 -->\n<time datetime=\"2025-10-24T14:00\">2025年10月24日 14:00</time>\n\n<!-- 略語 -->\n<abbr title=\"HyperText Markup Language\">HTML</abbr>\n\n<!-- 上付き・下付き文字 -->\n<p>H<sub>2</sub>O  E = mc<sup>2</sup></p>\n\n<!-- 削除・挿入 -->\n<del>削除されたテキスト</del>\n<ins>追加されたテキスト</ins>\n\n<!-- ルビ（ふりがな） -->\n<ruby>漢字<rt>かんじ</rt></ruby>\n\n<!-- 双方向テキスト -->\n<bdi>unknown_user_name</bdi>   <!-- 方向が不明なテキストを分離 -->\n<bdo dir=\"rtl\">Right to left</bdo>",
+        "highlightLines": [2, 5, 8, 14]
+      }
+    ]
+  },
+  {
+    "id": "media-elements",
+    "title": "メディア要素",
+    "description": "audio、video、picture タグ",
+    "codeBlocks": [
+      {
+        "title": "video / audio",
+        "language": "html",
+        "filename": "media.html",
+        "code": "<!-- 動画 -->\n<video controls width=\"640\" height=\"360\" poster=\"thumbnail.jpg\">\n    <source src=\"video.webm\" type=\"video/webm\">\n    <source src=\"video.mp4\"  type=\"video/mp4\">\n    <p>お使いのブラウザは動画をサポートしていません。</p>\n</video>\n\n<!-- 音声 -->\n<audio controls>\n    <source src=\"audio.ogg\" type=\"audio/ogg\">\n    <source src=\"audio.mp3\" type=\"audio/mpeg\">\n    お使いのブラウザは音声をサポートしていません。\n</audio>",
+        "highlightLines": [2, 3, 4, 9, 10, 11]
+      },
+      {
+        "title": "picture（レスポンシブ画像）",
+        "language": "html",
+        "filename": "picture.html",
+        "code": "<!-- 解像度・フォーマット切り替え -->\n<picture>\n    <source media=\"(min-width: 1024px)\" srcset=\"hero-lg.webp\" type=\"image/webp\">\n    <source media=\"(min-width: 1024px)\" srcset=\"hero-lg.jpg\">\n    <source media=\"(min-width: 768px)\"  srcset=\"hero-md.webp\" type=\"image/webp\">\n    <source media=\"(min-width: 768px)\"  srcset=\"hero-md.jpg\">\n    <img src=\"hero-sm.jpg\" alt=\"ヒーロー画像\" loading=\"lazy\" decoding=\"async\">\n</picture>\n\n<!-- srcset と sizes -->\n<img\n    src=\"image-800.jpg\"\n    srcset=\"image-400.jpg 400w, image-800.jpg 800w, image-1200.jpg 1200w\"\n    sizes=\"(max-width: 600px) 100vw, (max-width: 900px) 50vw, 33vw\"\n    alt=\"レスポンシブ画像\"\n    loading=\"lazy\">",
+        "highlightLines": [2, 7, 13, 14]
+      }
+    ]
+  },
+  {
+    "id": "interactive-elements",
+    "title": "インタラクティブ要素",
+    "description": "details、dialog、datalist など",
+    "codeBlocks": [
+      {
+        "title": "details / summary / dialog",
+        "language": "html",
+        "filename": "interactive.html",
+        "code": "<!-- アコーディオン -->\n<details>\n    <summary>クリックして詳細を表示</summary>\n    <p>詳細な内容がここに入ります。JavaScriptなしで動作します。</p>\n</details>\n\n<!-- ダイアログ（モーダル） -->\n<dialog id=\"myDialog\">\n    <h2>ダイアログタイトル</h2>\n    <p>内容</p>\n    <button onclick=\"this.closest('dialog').close()\">閉じる</button>\n</dialog>\n<button onclick=\"document.getElementById('myDialog').showModal()\">開く</button>\n\n<!-- データリスト（オートコンプリート） -->\n<input list=\"fruits\" placeholder=\"フルーツを選択...\">\n<datalist id=\"fruits\">\n    <option value=\"りんご\">\n    <option value=\"バナナ\">\n    <option value=\"さくらんぼ\">\n</datalist>",
+        "highlightLines": [2, 8, 16, 17]
+      }
+    ]
+  },
+  {
+    "id": "accessibility",
+    "title": "アクセシビリティ",
+    "description": "WAI-ARIA とアクセシブルなHTML",
+    "codeBlocks": [
+      {
+        "title": "ARIA属性",
+        "language": "html",
+        "filename": "aria.html",
+        "code": "<!-- ランドマーク -->\n<nav aria-label=\"メインナビゲーション\">...</nav>\n<nav aria-label=\"パンくずリスト\">...</nav>\n\n<!-- ボタンとコントロール -->\n<button aria-expanded=\"false\" aria-controls=\"menu\">メニュー</button>\n<ul id=\"menu\" aria-hidden=\"true\">...</ul>\n\n<!-- フォームのアクセシビリティ -->\n<label for=\"email\">メールアドレス</label>\n<input\n    type=\"email\"\n    id=\"email\"\n    aria-required=\"true\"\n    aria-describedby=\"email-hint\"\n    aria-invalid=\"false\">\n<p id=\"email-hint\" class=\"hint\">例: user@example.com</p>\n\n<!-- ライブリージョン -->\n<div role=\"status\" aria-live=\"polite\" aria-atomic=\"true\">\n    <!-- 動的に更新される通知 -->\n</div>",
+        "highlightLines": [2, 6, 14, 15, 19]
+      },
+      {
+        "title": "スキップリンクとフォーカス管理",
+        "language": "html",
+        "filename": "focus.html",
+        "code": "<!-- スキップリンク（キーボードユーザー向け） -->\n<a href=\"#main-content\" class=\"skip-link\">メインコンテンツへスキップ</a>\n\n<!-- tabindex -->\n<div tabindex=\"0\" role=\"button\" onkeydown=\"handleKey(event)\">\n    カスタムボタン\n</div>\n\n<!-- フォーカスを受け取らない要素 -->\n<div tabindex=\"-1\" id=\"programmatic-focus-target\">\n    プログラムでフォーカスを当てる要素\n</div>\n\n<style>\n.skip-link {\n    position: absolute;\n    top: -100%;\n    left: 0;\n}\n.skip-link:focus {\n    top: 0; /* フォーカス時に表示 */\n}\n</style>",
+        "highlightLines": [2, 5, 10]
       }
     ]
   }

@@ -13,8 +13,7 @@
           {
             "label": "grid.html",
             "code": "<div class=\"grid-container\">\n    <div class=\"grid-item\">1</div>\n    <div class=\"grid-item\">2</div>\n    <div class=\"grid-item\">3</div>\n    <div class=\"grid-item\">4</div>\n    <div class=\"grid-item\">5</div>\n    <div class=\"grid-item\">6</div>\n</div>",
-            "language": "html",
-                        "title": "grid.html"
+            "language": "html"
           },
           {
             "label": "style.css",
@@ -22,6 +21,61 @@
             "language": "css"
           }
         ]
+      }
+    ]
+  },
+  {
+    "id": "grid-template",
+    "title": "grid-template",
+    "description": "行・列・エリアの定義",
+    "codeBlocks": [
+      {
+        "title": "grid-template-columns / rows",
+        "language": "css",
+        "filename": "grid-template.css",
+        "code": "/* 固定幅の列 */\n.grid { grid-template-columns: 200px 1fr 200px; }\n\n/* repeat()関数 */\n.grid { grid-template-columns: repeat(4, 1fr); }\n.grid { grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); }\n\n/* 行の高さ */\n.grid { grid-template-rows: 80px 1fr auto; }\n\n/* fr単位（fraction） */\n.grid { grid-template-columns: 1fr 2fr 1fr; } /* 25% 50% 25% */\n\n/* minmax() */\n.grid { grid-template-columns: minmax(100px, 300px) 1fr; }",
+        "highlightLines": [6, 14]
+      },
+      {
+        "title": "grid-template-areas",
+        "language": "css",
+        "filename": "areas.css",
+        "code": ".layout {\n    display: grid;\n    grid-template-areas:\n        \"header header header\"\n        \"sidebar main   main\"\n        \"footer footer footer\";\n    grid-template-columns: 250px 1fr;\n    grid-template-rows: 60px 1fr 60px;\n    min-height: 100vh;\n}\n\nheader  { grid-area: header; }\n.sidebar { grid-area: sidebar; }\nmain    { grid-area: main; }\nfooter  { grid-area: footer; }",
+        "highlightLines": [3, 4, 5, 6, 12, 13, 14, 15]
+      }
+    ]
+  },
+  {
+    "id": "grid-placement",
+    "title": "アイテムの配置",
+    "description": "グリッドアイテムを自在に配置する",
+    "codeBlocks": [
+      {
+        "title": "grid-column / grid-row",
+        "language": "css",
+        "filename": "placement.css",
+        "code": "/* 列スパン */\n.item { grid-column: 1 / 3; }     /* 列1〜2を占有 */\n.item { grid-column: 1 / -1; }    /* 全列にまたがる */\n.item { grid-column: span 2; }    /* 現在位置から2列分 */\n\n/* 行スパン */\n.item { grid-row: 1 / 4; }        /* 行1〜3を占有 */\n.item { grid-row: span 2; }       /* 現在位置から2行分 */\n\n/* 短縮形 grid-area: row-start / col-start / row-end / col-end */\n.item { grid-area: 1 / 2 / 3 / 4; }"
+      },
+      {
+        "title": "align / justify",
+        "language": "css",
+        "filename": "align.css",
+        "code": "/* コンテナ全体の整列 */\n.grid {\n    justify-items: start | center | end | stretch; /* 水平 */\n    align-items:   start | center | end | stretch; /* 垂直 */\n    place-items: center;                           /* 両方 */\n\n    justify-content: start | center | space-between | space-around;\n    align-content:   start | center | space-between | space-around;\n}\n\n/* 個別アイテムの整列 */\n.item {\n    justify-self: start | center | end | stretch;\n    align-self:   start | center | end | stretch;\n    place-self: center end;\n}",
+        "highlightLines": [5, 15]
+      }
+    ]
+  },
+  {
+    "id": "grid-auto",
+    "title": "暗黙のグリッドと自動配置",
+    "description": "グリッドの自動生成と配置アルゴリズム",
+    "codeBlocks": [
+      {
+        "title": "grid-auto-flow / grid-auto-rows",
+        "language": "css",
+        "filename": "auto.css",
+        "code": ".grid {\n    display: grid;\n    grid-template-columns: repeat(3, 1fr);\n\n    /* 自動生成行の高さ */\n    grid-auto-rows: minmax(100px, auto);\n\n    /* 配置方向: row（デフォルト）| column | dense */\n    grid-auto-flow: row dense; /* 隙間を自動埋め */\n}\n\n/* レスポンシブグリッド（メディアクエリ不要） */\n.responsive-grid {\n    display: grid;\n    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));\n    gap: 1.5rem;\n}",
+        "highlightLines": [9, 15]
       }
     ]
   }
