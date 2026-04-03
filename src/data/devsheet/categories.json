@@ -5,6 +5,14 @@
     "logo": "/logos/html5.svg",
     "description": "HTMLの基礎から応用まで",
     "color": "#E34F26",
-    "topicsCount": 4
+    "topicsCount": 5
+  },
+  {
+    "id": "css",
+    "name": "CSS",
+    "logo": "/logos/css3.svg",
+    "description": "CSSスタイリングの完全ガイド",
+    "color": "#1572B6",
+    "topicsCount": 6
   }
 ]

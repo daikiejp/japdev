@@ -1,0 +1,8 @@
+[
+  {"id":"selectors","name":"セレクター","description":"CSSセレクターの種類と優先度"},
+  {"id":"box-model","name":"ボックスモデル","description":"margin、padding、border、box-sizing"},
+  {"id":"typography","name":"タイポグラフィ","description":"フォント、テキスト、行間の設定"},
+  {"id":"colors-backgrounds","name":"色と背景","description":"color、background、グラデーション"},
+  {"id":"transitions-animations","name":"トランジション・アニメーション","description":"CSS transitions と @keyframes"},
+  {"id":"responsive","name":"レスポンシブデザイン","description":"media queries、viewport、モバイルファースト"}
+]

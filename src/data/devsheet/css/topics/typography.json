@@ -1,0 +1,41 @@
+[
+  {
+    "id": "font-properties",
+    "title": "フォントプロパティ",
+    "description": "font-family、font-size、font-weight など",
+    "codeBlocks": [
+      {
+        "language": "css",
+        "filename": "fonts.css",
+        "code": "body {\n    /* フォントファミリー（フォールバックリスト） */\n    font-family: 'Noto Sans JP', system-ui, -apple-system, sans-serif;\n\n    /* サイズ */\n    font-size: 16px;    /* 絶対値 */\n    font-size: 1rem;    /* ルートのfont-sizeの倍数（推奨） */\n    font-size: 1.125em; /* 親の倍数 */\n    font-size: clamp(1rem, 2.5vw, 1.5rem); /* 最小・推奨・最大 */\n\n    /* 太さ */\n    font-weight: normal; /* = 400 */\n    font-weight: bold;   /* = 700 */\n    font-weight: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900;\n\n    /* スタイル */\n    font-style: normal | italic | oblique;\n\n    /* 短縮形 */\n    font: italic bold 1rem/1.6 'Noto Sans JP', sans-serif;\n    /*       style weight size/line-height  family */\n}",
+        "highlightLines": [9, 14, 20]
+      }
+    ]
+  },
+  {
+    "id": "text-properties",
+    "title": "テキストプロパティ",
+    "description": "line-height、letter-spacing、text-align など",
+    "codeBlocks": [
+      {
+        "language": "css",
+        "filename": "text.css",
+        "code": "p {\n    /* 行間 */\n    line-height: 1.6;     /* 単位なし推奨（font-sizeの1.6倍） */\n    line-height: 1.8;     /* 日本語は1.7〜1.9が読みやすい */\n\n    /* 文字間隔 */\n    letter-spacing: 0.05em;\n    word-spacing: 0.1em;\n\n    /* 揃え */\n    text-align: left | center | right | justify;\n\n    /* インデント */\n    text-indent: 1em;\n\n    /* 装飾 */\n    text-decoration: none;\n    text-decoration: underline dotted red;\n    text-decoration-thickness: 2px;\n    text-underline-offset: 4px; /* 下線の位置調整 */\n\n    /* 変換 */\n    text-transform: uppercase | lowercase | capitalize;\n\n    /* 折り返し */\n    word-break: break-word;\n    overflow-wrap: anywhere;\n    hyphens: auto;\n\n    /* 縦書き（日本語） */\n    writing-mode: vertical-rl;\n}",
+        "highlightLines": [3, 11, 18, 25, 30]
+      }
+    ]
+  },
+  {
+    "id": "web-fonts",
+    "title": "Webフォント",
+    "description": "@font-face と Google Fonts の使い方",
+    "codeBlocks": [
+      {
+        "language": "css",
+        "filename": "webfonts.css",
+        "code": "/* Google Fonts（@import） */\n@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap');\n\n/* @font-face（自前ホスティング）*/\n@font-face {\n    font-family: 'MyFont';\n    src: url('/fonts/myfont.woff2') format('woff2'),\n         url('/fonts/myfont.woff')  format('woff');\n    font-weight: 400;\n    font-style: normal;\n    font-display: swap; /* テキストを即時表示 */\n}\n\n/* 可変フォント */\n@font-face {\n    font-family: 'MyVariable';\n    src: url('/fonts/variable.woff2') format('woff2-variations');\n    font-weight: 100 900; /* 範囲指定 */\n}\n\n.variable-heading {\n    font-family: 'MyVariable', sans-serif;\n    font-variation-settings: 'wght' 650, 'wdth' 90;\n}",
+        "highlightLines": [2, 5, 11, 17, 23]
+      }
+    ]
+  }
+]

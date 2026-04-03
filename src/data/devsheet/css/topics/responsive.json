@@ -1,0 +1,54 @@
+[
+  {
+    "id": "media-queries",
+    "title": "メディアクエリ",
+    "description": "@media で画面サイズに応じたスタイルを適用",
+    "codeBlocks": [
+      {
+        "language": "css",
+        "filename": "media-queries.css",
+        "code": "/* モバイルファースト（min-width 推奨）*/\n/* ベース: スマホ */\n.container { padding: 1rem; }\n\n/* タブレット以上 */\n@media (min-width: 768px) {\n    .container { padding: 2rem; }\n    .grid { grid-template-columns: repeat(2, 1fr); }\n}\n\n/* デスクトップ以上 */\n@media (min-width: 1024px) {\n    .grid { grid-template-columns: repeat(3, 1fr); }\n}\n\n/* ワイドスクリーン */\n@media (min-width: 1280px) {\n    .container { max-width: 1280px; margin: 0 auto; }\n}\n\n/* Tailwindの標準ブレークポイント */\n/* sm: 640px  md: 768px  lg: 1024px  xl: 1280px  2xl: 1536px */\n\n/* デスクトップファースト（max-width）*/\n@media (max-width: 767px) {\n    .sidebar { display: none; }\n}\n\n/* 範囲指定 */\n@media (768px <= width <= 1023px) { /* 新構文 */\n    .nav { flex-direction: column; }\n}",
+        "highlightLines": [6, 12, 17, 29]
+      }
+    ]
+  },
+  {
+    "id": "media-features",
+    "title": "メディア特性",
+    "description": "orientation、hover、color-scheme など",
+    "codeBlocks": [
+      {
+        "language": "css",
+        "filename": "media-features.css",
+        "code": "/* 向き */\n@media (orientation: portrait)  { /* 縦向き */ }\n@media (orientation: landscape) { /* 横向き */ }\n\n/* ポインターデバイス */\n@media (hover: hover) {\n    /* マウスあり（hover可能なデバイス）*/\n    .card:hover { transform: translateY(-4px); }\n}\n@media (pointer: coarse) {\n    /* タッチスクリーン → タップターゲットを大きく */\n    button { min-height: 44px; min-width: 44px; }\n}\n\n/* ダークモード */\n@media (prefers-color-scheme: dark) {\n    :root {\n        --bg: #0f172a;\n        --text: #f1f5f9;\n    }\n}\n\n/* 高コントラスト */\n@media (prefers-contrast: high) {\n    .card { border: 2px solid currentColor; }\n}\n\n/* 印刷 */\n@media print {\n    .no-print { display: none; }\n    a::after { content: \" (\" attr(href) \")\"; }\n}",
+        "highlightLines": [6, 10, 16, 23, 28]
+      }
+    ]
+  },
+  {
+    "id": "fluid-typography",
+    "title": "流体タイポグラフィ",
+    "description": "clamp() で画面サイズに応じて自動調整",
+    "codeBlocks": [
+      {
+        "language": "css",
+        "filename": "fluid.css",
+        "code": "/* clamp(最小値, 推奨値, 最大値) */\n:root {\n    /* font-size: 画面幅768pxで1rem、1440pxで1.25rem の間で補間 */\n    font-size: clamp(1rem, 0.75rem + 0.5vw, 1.25rem);\n}\n\nh1 { font-size: clamp(2rem, 5vw, 4rem); }\nh2 { font-size: clamp(1.5rem, 3vw, 2.5rem); }\n\n/* 流体スペーシング */\n.section {\n    padding: clamp(2rem, 8vw, 8rem);\n    margin-bottom: clamp(3rem, 10vw, 12rem);\n}\n\n/* 流体グリッド */\n.grid {\n    display: grid;\n    grid-template-columns: repeat(auto-fit, minmax(clamp(200px, 30%, 300px), 1fr));\n    gap: clamp(1rem, 3vw, 2rem);\n}\n\n/* コンテナクエリ（親要素のサイズに応じて）*/\n.card-container {\n    container-type: inline-size;\n    container-name: card;\n}\n\n@container card (min-width: 400px) {\n    .card { flex-direction: row; }\n}",
+        "highlightLines": [4, 7, 12, 20, 27]
+      }
+    ]
+  },
+  {
+    "id": "viewport-units",
+    "title": "ビューポート単位",
+    "description": "vw、vh、dvh、svh、cqw など",
+    "codeBlocks": [
+      {
+        "language": "css",
+        "filename": "viewport-units.css",
+        "code": "/* 従来のビューポート単位 */\n.hero   { height: 100vh; }  /* ビューポートの高さ100% */\n.banner { width: 50vw; }    /* ビューポートの幅50% */\n.text   { font-size: 4vmin; } /* vw と vh の小さい方 */\n\n/* 問題: モバイルではアドレスバーで 100vh がずれる */\n\n/* 新しいビューポート単位（モバイル対応）*/\n.hero {\n    /* svh: スモール（アドレスバー表示時） */\n    height: 100svh;\n\n    /* lvh: ラージ（アドレスバー非表示時） */\n    height: 100lvh;\n\n    /* dvh: ダイナミック（現在の状態）← 推奨 */\n    height: 100dvh;\n}\n\n/* コンテナクエリ単位 */\n.child {\n    width: 50cqw;   /* コンテナ幅の50% */\n    height: 50cqh;  /* コンテナ高さの50% */\n    font-size: 4cqi; /* インラインサイズ基準 */\n}",
+        "highlightLines": [11, 14, 17, 21]
+      }
+    ]
+  }
+]

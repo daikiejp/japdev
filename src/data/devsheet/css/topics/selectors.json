@@ -1,0 +1,75 @@
+[
+  {
+    "id": "basic-selectors",
+    "title": "基本セレクター",
+    "description": "要素、クラス、ID、属性セレクター",
+    "codeBlocks": [
+      {
+        "language": "css",
+        "filename": "selectors.css",
+        "code": "/* 要素セレクター */\np { color: gray; }\n\n/* クラスセレクター */\n.card { padding: 1rem; }\n\n/* IDセレクター */\n#header { height: 60px; }\n\n/* 複数セレクター */\nh1, h2, h3 { font-weight: bold; }\n\n/* 子孫セレクター */\n.nav a { text-decoration: none; }\n\n/* 直接の子セレクター */\n.list > li { list-style: none; }\n\n/* 隣接兄弟セレクター */\nh2 + p { margin-top: 0; }\n\n/* 一般兄弟セレクター */\nh2 ~ p { color: var(--text-secondary); }",
+        "highlightLines": [2, 5, 8, 14, 17, 20, 23]
+      }
+    ]
+  },
+  {
+    "id": "attribute-selectors",
+    "title": "属性セレクター",
+    "description": "HTML属性を条件にセレクトする",
+    "codeBlocks": [
+      {
+        "language": "css",
+        "filename": "attributes.css",
+        "code": "/* 属性の存在 */\n[disabled] { opacity: 0.5; }\n\n/* 完全一致 */\n[type=\"text\"] { border: 1px solid #ccc; }\n\n/* 部分一致（語を含む） */\n[class~=\"active\"] { color: green; }\n\n/* 前方一致 */\n[href^=\"https\"] { color: green; }\n\n/* 後方一致 */\n[href$=\".pdf\"]::after { content: \" (PDF)\"; }\n\n/* 部分文字列を含む */\n[href*=\"github\"] { font-weight: bold; }\n\n/* 大文字小文字を無視 */\n[type=\"email\" i] { text-transform: lowercase; }",
+        "highlightLines": [11, 14, 17]
+      }
+    ]
+  },
+  {
+    "id": "pseudo-classes",
+    "title": "擬似クラス",
+    "description": ":hover、:focus、:nth-child など",
+    "codeBlocks": [
+      {
+        "title": "状態系",
+        "language": "css",
+        "filename": "pseudo-state.css",
+        "code": "/* ユーザーアクション */\na:hover   { color: blue; }\na:focus   { outline: 2px solid blue; }\na:active  { opacity: 0.8; }\na:visited { color: purple; }\n\n/* フォーム状態 */\ninput:focus-visible { outline: 2px solid #4f46e5; outline-offset: 2px; }\ninput:invalid       { border-color: red; }\ninput:valid         { border-color: green; }\ninput:disabled      { background: #f3f4f6; cursor: not-allowed; }\ninput:checked + label { font-weight: bold; }\ninput:placeholder-shown { background: lightyellow; }\n\n/* リンク状態の推奨順序（LoVe HAte）*/\na:link, a:visited, a:hover, a:active { }",
+        "highlightLines": [8, 9, 10, 14]
+      },
+      {
+        "title": "構造系",
+        "language": "css",
+        "filename": "pseudo-structural.css",
+        "code": "/* 子要素の位置 */\nli:first-child  { margin-top: 0; }\nli:last-child   { margin-bottom: 0; }\nli:nth-child(2) { color: red; }      /* 2番目 */\nli:nth-child(odd)  { background: #f9f9f9; } /* 奇数 */\nli:nth-child(even) { background: white; }   /* 偶数 */\nli:nth-child(3n+1) { font-weight: bold; }   /* 1,4,7... */\n\n/* 型ベース */\np:first-of-type { font-size: 1.1em; }\np:last-of-type  { margin-bottom: 0; }\np:only-of-type  { text-align: center; }\n\n/* その他 */\n:not(.disabled)   { cursor: pointer; }\n:is(h1, h2, h3)   { line-height: 1.2; } /* 複数セレクター短縮 */\n:where(h1, h2, h3){ margin-top: 2rem; } /* 詳細度0 */\n:has(img)         { padding: 0; }       /* 親セレクター */",
+        "highlightLines": [6, 7, 14, 15, 16, 17]
+      }
+    ]
+  },
+  {
+    "id": "pseudo-elements",
+    "title": "擬似要素",
+    "description": "::before、::after、::placeholder など",
+    "codeBlocks": [
+      {
+        "language": "css",
+        "filename": "pseudo-elements.css",
+        "code": "/* コンテンツの前後に挿入 */\n.card::before {\n    content: \"\";\n    display: block;\n    width: 100%;\n    height: 4px;\n    background: linear-gradient(to right, #10b981, #14b8a6);\n}\n\n.required::after {\n    content: \" *\";\n    color: red;\n}\n\n/* テキスト装飾 */\np::first-line   { font-weight: bold; }\np::first-letter { font-size: 2em; float: left; margin-right: .1em; }\n\n/* 選択時のスタイル */\n::selection {\n    background: #10b981;\n    color: white;\n}\n\n/* プレースホルダー */\ninput::placeholder { color: #9ca3af; font-style: italic; }\n\n/* スクロールバー */\n::-webkit-scrollbar       { width: 8px; }\n::-webkit-scrollbar-track { background: #f1f1f1; }\n::-webkit-scrollbar-thumb { background: #10b981; border-radius: 4px; }",
+        "highlightLines": [2, 10, 19, 25, 28]
+      }
+    ]
+  },
+  {
+    "id": "specificity",
+    "title": "詳細度（Specificity）",
+    "description": "セレクターの優先度計算",
+    "codeBlocks": [
+      {
+        "language": "css",
+        "filename": "specificity.css",
+        "code": "/*\n詳細度の計算（高い順）:\n  !important              → 最優先（使用は最小限に）\n  style=\"...\"            → インラインスタイル (1,0,0,0)\n  #id                    → (0,1,0,0)\n  .class :pseudo-class   → (0,0,1,0)\n  [attr] ::pseudo-element→ (0,0,1,0)\n  element                → (0,0,0,1)\n  *                      → (0,0,0,0)\n*/\n\n/* 例 */\n#nav .item a:hover { }  /* 0,1,1,1 */\n.container > p     { }  /* 0,0,1,1 */\nh1                 { }  /* 0,0,0,1 */\n\n/* :is() と :not() は内部の最高詳細度を継承 */\n:is(#id, .class) p { }  /* 0,1,0,1 — #id の詳細度 */\n\n/* :where() は詳細度 0 */\n:where(#id, .class) p { } /* 0,0,0,1 */",
+        "highlightLines": [13, 18, 20]
+      }
+    ]
+  }
+]

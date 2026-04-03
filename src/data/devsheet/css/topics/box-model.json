@@ -1,0 +1,54 @@
+[
+  {
+    "id": "box-model-basics",
+    "title": "ボックスモデルの基本",
+    "description": "content、padding、border、margin",
+    "codeBlocks": [
+      {
+        "language": "css",
+        "filename": "box-model.css",
+        "code": "/* ボックスモデルの構成 */\n/* [margin][border][padding][content][padding][border][margin] */\n\n.box {\n    /* コンテンツ */\n    width: 300px;\n    height: 200px;\n\n    /* パディング: 内側の余白 */\n    padding: 1rem;              /* 全方向 */\n    padding: 1rem 2rem;         /* 上下 左右 */\n    padding: 1rem 2rem 1rem 2rem; /* 上 右 下 左 */\n    padding-top: 0;\n\n    /* ボーダー */\n    border: 1px solid #e5e7eb;\n    border-top: 2px solid #10b981;\n    border-radius: 8px;         /* 角丸 */\n    border-radius: 50%;         /* 円形 */\n\n    /* マージン: 外側の余白 */\n    margin: 1rem auto;          /* 水平中央揃え */\n    margin-bottom: 2rem;\n}\n\n/* box-sizing の違い */\n.default { box-sizing: content-box; } /* width = コンテンツのみ */\n.border  { box-sizing: border-box; }  /* width = コンテンツ+padding+border */\n\n/* グローバルにborder-boxを設定（推奨） */\n*, *::before, *::after { box-sizing: border-box; }",
+        "highlightLines": [28, 31]
+      }
+    ]
+  },
+  {
+    "id": "display",
+    "title": "displayプロパティ",
+    "description": "block、inline、inline-block、none など",
+    "codeBlocks": [
+      {
+        "language": "css",
+        "filename": "display.css",
+        "code": "/* block: 幅いっぱいに広がる、前後に改行 */\n.block { display: block; }\n/* 例: div, p, h1-h6, section, article, ul, li */\n\n/* inline: コンテンツの幅のみ、改行なし */\n.inline { display: inline; }\n/* 例: span, a, strong, em — width/height は無効 */\n\n/* inline-block: inline のように並ぶが width/height が有効 */\n.inline-block { display: inline-block; }\n\n/* none: 表示しない（スペースも消える） */\n.hidden { display: none; }\n\n/* visibility: hidden と違い スペースが残る */\n.invisible { visibility: hidden; }\n\n/* contents: 自身のボックスを消し子要素を直接表示 */\n.wrapper { display: contents; }\n\n/* table系 */\n.table     { display: table; }\n.table-row { display: table-row; }\n.table-cell{ display: table-cell; vertical-align: middle; }",
+        "highlightLines": [2, 6, 10, 14, 17]
+      }
+    ]
+  },
+  {
+    "id": "positioning",
+    "title": "positionプロパティ",
+    "description": "static、relative、absolute、fixed、sticky",
+    "codeBlocks": [
+      {
+        "language": "css",
+        "filename": "position.css",
+        "code": "/* static: デフォルト。通常のフロー */\n.static { position: static; }\n\n/* relative: 通常位置から相対移動（スペースは保持） */\n.relative {\n    position: relative;\n    top: 10px;\n    left: 10px;\n    z-index: 1;\n}\n\n/* absolute: 最近の位置付け祖先を基準に配置 */\n.parent { position: relative; }\n.absolute {\n    position: absolute;\n    top: 0;\n    right: 0;\n    /* 親の右上に配置 */\n}\n\n/* fixed: viewportを基準に配置（スクロールしても固定） */\n.fixed {\n    position: fixed;\n    bottom: 1rem;\n    right: 1rem;\n    z-index: 1000;\n}\n\n/* sticky: スクロール位置に応じてrelative↔fixed切り替え */\n.sticky {\n    position: sticky;\n    top: 0;          /* スクロール時にここで固定 */\n    z-index: 50;\n}",
+        "highlightLines": [5, 13, 14, 21, 29, 30]
+      }
+    ]
+  },
+  {
+    "id": "overflow-visibility",
+    "title": "overflow と visibility",
+    "description": "コンテンツのはみ出しと表示制御",
+    "codeBlocks": [
+      {
+        "language": "css",
+        "filename": "overflow.css",
+        "code": "/* overflow */\n.box {\n    overflow: visible; /* はみ出して表示（デフォルト） */\n    overflow: hidden;  /* はみ出しを切り取る */\n    overflow: scroll;  /* 常にスクロールバー表示 */\n    overflow: auto;    /* 必要な時のみスクロールバー */\n\n    overflow-x: hidden;\n    overflow-y: auto;\n\n    /* テキストの省略表示 */\n    white-space: nowrap;\n    overflow: hidden;\n    text-overflow: ellipsis; /* 末尾に「...」 */\n}\n\n/* 複数行の省略（WebKit系） */\n.clamp {\n    display: -webkit-box;\n    -webkit-line-clamp: 3;\n    -webkit-box-orient: vertical;\n    overflow: hidden;\n}\n\n/* aspect-ratio */\n.video-wrapper {\n    aspect-ratio: 16 / 9;\n    width: 100%;\n}",
+        "highlightLines": [6, 14, 18, 19, 26]
+      }
+    ]
+  }
+]

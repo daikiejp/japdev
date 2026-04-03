@@ -1,0 +1,54 @@
+[
+  {
+    "id": "color-values",
+    "title": "色の指定方法",
+    "description": "hex、rgb、hsl、oklch など",
+    "codeBlocks": [
+      {
+        "language": "css",
+        "filename": "colors.css",
+        "code": "/* キーワード */\ncolor: red;\ncolor: transparent;\ncolor: currentColor; /* 親のcolorを継承 */\n\n/* HEX */\ncolor: #ff0000;    /* RGB */\ncolor: #ff000080;  /* RGBA（最後2桁が透明度） */\ncolor: #f00;       /* 短縮形 */\n\n/* RGB / RGBA */\ncolor: rgb(255, 0, 0);\ncolor: rgba(255, 0, 0, 0.5);\ncolor: rgb(255 0 0 / 50%);  /* モダン構文 */\n\n/* HSL（Hue Saturation Lightness）*/\ncolor: hsl(0, 100%, 50%);       /* 赤 */\ncolor: hsl(120, 100%, 50%);     /* 緑 */\ncolor: hsl(240, 100%, 50%);     /* 青 */\ncolor: hsl(0 100% 50% / 70%);  /* モダン構文 */\n\n/* OKLCH（知覚均等、推奨）*/\ncolor: oklch(0.7 0.15 30);   /* lightness chroma hue */\n\n/* カラーミックス */\ncolor: color-mix(in srgb, blue 30%, white);",
+        "highlightLines": [16, 17, 18, 21, 24]
+      }
+    ]
+  },
+  {
+    "id": "css-variables",
+    "title": "CSS カスタムプロパティ（変数）",
+    "description": "var()、カスタムプロパティの定義と使用",
+    "codeBlocks": [
+      {
+        "language": "css",
+        "filename": "variables.css",
+        "code": "/* 定義（:root でグローバル） */\n:root {\n    --color-primary:   #10b981;\n    --color-secondary: #14b8a6;\n    --color-text:      #111827;\n    --color-bg:        #f9fafb;\n    --spacing-base:    1rem;\n    --radius:          8px;\n    --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);\n}\n\n/* ダークモードで上書き */\n.dark {\n    --color-text: #f1f5f9;\n    --color-bg:   #0f172a;\n}\n\n/* 使用 */\n.card {\n    color:            var(--color-text);\n    background-color: var(--color-bg);\n    border-radius:    var(--radius);\n    padding:          var(--spacing-base);\n    box-shadow:       var(--shadow-sm);\n\n    /* フォールバック値 */\n    color: var(--color-accent, #6366f1);\n}\n\n/* JavaScriptから操作 */\n/* el.style.setProperty('--color-primary', '#ff0000'); */",
+        "highlightLines": [2, 13, 19, 27]
+      }
+    ]
+  },
+  {
+    "id": "backgrounds",
+    "title": "背景プロパティ",
+    "description": "background-color、background-image、background-size",
+    "codeBlocks": [
+      {
+        "language": "css",
+        "filename": "backgrounds.css",
+        "code": ".box {\n    /* 背景色 */\n    background-color: #f0fdf4;\n\n    /* 背景画像 */\n    background-image: url('/images/bg.jpg');\n    background-repeat: no-repeat;    /* repeat | repeat-x | repeat-y */\n    background-position: center top; /* または: 50% 0% */\n    background-size: cover;          /* cover | contain | 100% auto */\n    background-attachment: fixed;    /* スクロール時に固定 */\n    background-origin: border-box;   /* padding-box | content-box */\n    background-clip: text;           /* テキスト形状でクリップ */\n\n    /* 短縮形 */\n    background: url('/bg.jpg') center/cover no-repeat #f0fdf4;\n\n    /* 複数背景 */\n    background:\n        url('overlay.png') top left no-repeat,\n        url('texture.jpg') center/cover;\n}",
+        "highlightLines": [9, 12, 15, 18]
+      }
+    ]
+  },
+  {
+    "id": "gradients",
+    "title": "グラデーション",
+    "description": "linear-gradient、radial-gradient、conic-gradient",
+    "codeBlocks": [
+      {
+        "language": "css",
+        "filename": "gradients.css",
+        "code": "/* 線形グラデーション */\n.linear {\n    background: linear-gradient(to right, #10b981, #3b82f6);\n    background: linear-gradient(135deg, #10b981 0%, #3b82f6 100%);\n    /* 複数カラーストップ */\n    background: linear-gradient(to right, red 0%, yellow 50%, green 100%);\n}\n\n/* 放射状グラデーション */\n.radial {\n    background: radial-gradient(circle, #10b981, #0f172a);\n    background: radial-gradient(ellipse at top, #e0f2fe, #0f172a);\n}\n\n/* 扇形グラデーション（円グラフなどに）*/\n.conic {\n    background: conic-gradient(#10b981 0% 25%, #3b82f6 25% 50%, #f59e0b 50% 75%, #ef4444 75%);\n    border-radius: 50%;\n    width: 200px;\n    height: 200px;\n}\n\n/* テキストグラデーション */\n.gradient-text {\n    background: linear-gradient(to right, #10b981, #3b82f6);\n    -webkit-background-clip: text;\n    -webkit-text-fill-color: transparent;\n    background-clip: text;\n}",
+        "highlightLines": [3, 11, 17, 25]
+      }
+    ]
+  }
+]

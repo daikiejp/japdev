@@ -1,0 +1,68 @@
+[
+  {
+    "id": "transitions",
+    "title": "トランジション",
+    "description": "transition プロパティで状態変化をアニメーション",
+    "codeBlocks": [
+      {
+        "language": "css",
+        "filename": "transitions.css",
+        "code": ".button {\n    background: #10b981;\n    transform: translateY(0);\n    box-shadow: 0 2px 4px rgba(0,0,0,0.1);\n\n    /* transition: プロパティ 時間 イージング 遅延 */\n    transition: background 0.2s ease,\n                transform  0.2s ease,\n                box-shadow 0.2s ease;\n\n    /* 全プロパティ（パフォーマンスに注意）*/\n    transition: all 0.3s ease;\n\n    /* 特定プロパティのみ（推奨）*/\n    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);\n}\n\n.button:hover {\n    background: #059669;\n    transform: translateY(-2px);\n    box-shadow: 0 8px 16px rgba(0,0,0,0.15);\n}",
+        "highlightLines": [7, 8, 9, 15]
+      },
+      {
+        "title": "イージング関数",
+        "language": "css",
+        "filename": "easing.css",
+        "code": "/* キーワード */\ntransition-timing-function: ease;         /* slow-fast-slow（デフォルト） */\ntransition-timing-function: ease-in;      /* slow → fast */\ntransition-timing-function: ease-out;     /* fast → slow */\ntransition-timing-function: ease-in-out;  /* slow-fast-slow（対称） */\ntransition-timing-function: linear;       /* 一定速度 */\ntransition-timing-function: step-start;   /* ステップ（始点） */\ntransition-timing-function: steps(4);     /* 4ステップ */\n\n/* cubic-bezier カスタム曲線 */\ntransition-timing-function: cubic-bezier(0.25, 0.1, 0.25, 1.0);\n\n/* 参考サイト: easings.net / cubic-bezier.com */\n/* バウンス風 */\ntransition-timing-function: cubic-bezier(0.34, 1.56, 0.64, 1);\n\n/* CSS @property でカスタム */",
+        "highlightLines": [2, 6, 11, 15]
+      }
+    ]
+  },
+  {
+    "id": "keyframe-animations",
+    "title": "@keyframes アニメーション",
+    "description": "キーフレームで複雑なアニメーションを定義",
+    "codeBlocks": [
+      {
+        "language": "css",
+        "filename": "keyframes.css",
+        "code": "/* キーフレームの定義 */\n@keyframes slideIn {\n    from {\n        opacity: 0;\n        transform: translateY(-20px);\n    }\n    to {\n        opacity: 1;\n        transform: translateY(0);\n    }\n}\n\n@keyframes bounce {\n    0%, 100% { transform: translateY(0); }\n    50%       { transform: translateY(-20px); }\n}\n\n@keyframes spinner {\n    to { transform: rotate(360deg); }\n}\n\n/* 適用 */\n.modal {\n    /* animation: 名前 時間 イージング 遅延 回数 方向 fill-mode play-state */\n    animation: slideIn 0.3s ease-out;\n}\n\n.loader {\n    animation: spinner 0.8s linear infinite;\n}\n\n.card:hover .icon {\n    animation: bounce 0.6s ease-in-out 2; /* 2回 */\n}",
+        "highlightLines": [2, 13, 18, 25, 29]
+      },
+      {
+        "title": "animation プロパティ詳細",
+        "language": "css",
+        "filename": "animation-props.css",
+        "code": ".element {\n    animation-name:            slideIn;\n    animation-duration:        0.4s;\n    animation-timing-function: ease-out;\n    animation-delay:           0.1s;  /* 負の値で途中から開始 */\n    animation-iteration-count: infinite; /* または 数値 */\n    animation-direction:       normal; /* reverse | alternate | alternate-reverse */\n    animation-fill-mode:       forwards; /* none | backwards | both */\n    animation-play-state:      running;  /* paused で停止 */\n\n    /* 短縮形（複数アニメーション） */\n    animation:\n        slideIn  0.4s ease-out    forwards,\n        fadeIn   0.6s ease-in-out forwards;\n}\n\n/* アニメーション制御（JavaScript） */\n/* el.style.animationPlayState = 'paused'; */\n/* el.addEventListener('animationend', handler); */",
+        "highlightLines": [8, 12]
+      }
+    ]
+  },
+  {
+    "id": "transforms",
+    "title": "transform",
+    "description": "translate、rotate、scale、skew、perspective",
+    "codeBlocks": [
+      {
+        "language": "css",
+        "filename": "transforms.css",
+        "code": ".element {\n    /* 2D変換 */\n    transform: translateX(50px);\n    transform: translateY(-20%);\n    transform: translate(50px, -20px);  /* X Y */\n\n    transform: rotate(45deg);\n    transform: rotate(-0.25turn);\n\n    transform: scale(1.2);       /* 均等 */\n    transform: scale(2, 0.5);   /* X Y */\n    transform: scaleX(1.5);\n\n    transform: skew(15deg, 5deg); /* X Y */\n\n    /* 複数変換（右から左の順で適用）*/\n    transform: translateY(-4px) scale(1.05) rotate(2deg);\n\n    /* 3D変換 */\n    transform: rotateY(180deg);\n    transform: perspective(500px) rotateY(30deg);\n\n    /* 変換の基点（デフォルト: center） */\n    transform-origin: top left;\n    transform-origin: 0% 100%;\n\n    /* GPU加速ヒント */\n    will-change: transform;\n}",
+        "highlightLines": [17, 20, 24, 28]
+      }
+    ]
+  },
+  {
+    "id": "motion-preferences",
+    "title": "アクセシビリティとモーション",
+    "description": "prefers-reduced-motion でアニメーションを制御",
+    "codeBlocks": [
+      {
+        "language": "css",
+        "filename": "reduced-motion.css",
+        "code": "/* モーション低減設定のユーザーに配慮 */\n@media (prefers-reduced-motion: reduce) {\n    *,\n    *::before,\n    *::after {\n        animation-duration:        0.01ms !important;\n        animation-iteration-count: 1      !important;\n        transition-duration:       0.01ms !important;\n        scroll-behavior:           auto   !important;\n    }\n}\n\n/* または: モーションOKの時だけアニメーション定義 */\n@media (prefers-reduced-motion: no-preference) {\n    .hero {\n        animation: fadeIn 0.6s ease-out;\n    }\n    .card {\n        transition: transform 0.3s ease;\n    }\n    .card:hover {\n        transform: translateY(-4px);\n    }\n}",
+        "highlightLines": [2, 14]
+      }
+    ]
+  }
+]
