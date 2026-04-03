@@ -1,0 +1,9 @@
+[
+  {"id":"variables-types","name":"変数と型","description":"var、let、const とデータ型"},
+  {"id":"functions","name":"関数","description":"関数宣言、アロー関数、クロージャ"},
+  {"id":"arrays","name":"配列メソッド","description":"map、filter、reduce、find など"},
+  {"id":"objects","name":"オブジェクトと分割代入","description":"オブジェクト操作、スプレッド、分割代入"},
+  {"id":"async","name":"非同期処理","description":"Promise、async/await、fetch"},
+  {"id":"dom","name":"DOM操作","description":"要素の取得、イベント、操作"},
+  {"id":"modules","name":"モジュール","description":"import/export、ES Modules"}
+]

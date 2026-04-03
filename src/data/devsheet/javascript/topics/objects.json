@@ -1,0 +1,54 @@
+[
+  {
+    "id": "object-basics",
+    "title": "オブジェクトの基本",
+    "description": "作成、アクセス、プロパティ操作",
+    "codeBlocks": [
+      {
+        "language": "javascript",
+        "filename": "objects.js",
+        "code": "// オブジェクトリテラル\nconst user = {\n    name: 'Alice',\n    age: 30,\n    'job title': 'Engineer', // スペースを含むキー\n\n    // メソッド短縮記法\n    greet() { return `Hi, I'm ${this.name}`; },\n\n    // 計算プロパティ\n    ['key_' + 1]: 'value1',\n};\n\n// アクセス\nuser.name;           // 'Alice'\nuser['job title'];   // 'Engineer'\nuser?.address?.city; // Optional chaining — undefined（例外なし）\n\n// プロパティの追加・削除\nuser.email = 'alice@example.com';\ndelete user.age;\n\n// プロパティの確認\n'name' in user;             // true\nuser.hasOwnProperty('name'); // true（継承を除外）\nObject.hasOwn(user, 'name'); // true（ES2022 推奨）\n\n// プロパティの列挙\nObject.keys(user);    // キーの配列\nObject.values(user);  // 値の配列\nObject.entries(user); // [key, value] の配列",
+        "highlightLines": [2, 11, 17, 24, 27]
+      }
+    ]
+  },
+  {
+    "id": "destructuring",
+    "title": "分割代入",
+    "description": "オブジェクト・配列の分割代入",
+    "codeBlocks": [
+      {
+        "language": "javascript",
+        "filename": "destructuring.js",
+        "code": "// オブジェクト分割代入\nconst { name, age } = user;\n\n// リネーム\nconst { name: userName, age: userAge } = user;\n\n// デフォルト値\nconst { name = 'Guest', role = 'user' } = user;\n\n// ネスト\nconst { address: { city, zip } } = user;\n\n// 残余プロパティ\nconst { name, ...rest } = user; // rest にname以外が入る\n\n// 配列分割代入\nconst [a, b, c] = [1, 2, 3];\nconst [first, , third] = [1, 2, 3]; // 要素をスキップ\nconst [head, ...tail] = [1, 2, 3, 4]; // head=1, tail=[2,3,4]\n\n// 関数引数での分割代入\nfunction display({ name, age = 0, role = 'user' } = {}) {\n    console.log(`${name}, ${age}, ${role}`);\n}\n\n// スワップ\nlet x = 1, y = 2;\n[x, y] = [y, x]; // x=2, y=1",
+        "highlightLines": [2, 5, 8, 14, 16, 21, 26]
+      }
+    ]
+  },
+  {
+    "id": "spread-rest",
+    "title": "スプレッド演算子と残余引数",
+    "description": "...演算子のパターン集",
+    "codeBlocks": [
+      {
+        "language": "javascript",
+        "filename": "spread.js",
+        "code": "// オブジェクトのコピーとマージ\nconst copy = { ...original };\nconst merged = { ...defaults, ...override }; // 後勝ち\nconst updated = { ...user, age: 31 };        // プロパティ更新\n\n// 配列のコピーとマージ\nconst arrCopy = [...arr];\nconst combined = [...arr1, ...arr2];\nconst withItem = [...arr, newItem];  // 末尾追加（非破壊）\nconst prepended = [newItem, ...arr]; // 先頭追加（非破壊）\n\n// 関数呼び出しへの展開\nMath.max(...[1, 5, 3]); // 5\nconsole.log(...messages);\n\n// 注意: スプレッドはシャローコピー\nconst shallow = { ...obj };\n// obj.nested と shallow.nested は同じ参照\n\n// ディープコピー\nconst deep = structuredClone(obj);  // ES2022 推奨\nconst deep = JSON.parse(JSON.stringify(obj)); // 関数・Date・正規表現は非対応",
+        "highlightLines": [2, 3, 4, 8, 13, 20, 21]
+      }
+    ]
+  },
+  {
+    "id": "object-methods",
+    "title": "Object の静的メソッド",
+    "description": "Object.assign、freeze、fromEntries など",
+    "codeBlocks": [
+      {
+        "language": "javascript",
+        "filename": "object-methods.js",
+        "code": "// Object.assign: ターゲットにプロパティをコピー\nconst target = Object.assign({}, source1, source2);\n\n// Object.freeze: 変更不可（シャロー）\nconst config = Object.freeze({ host: 'localhost', port: 3000 });\n// config.port = 8080; // silently fails（strict modeではエラー）\n\n// Object.fromEntries: entries配列からオブジェクト生成\nconst entries = [['a', 1], ['b', 2]];\nconst obj = Object.fromEntries(entries); // { a: 1, b: 2 }\n\n// Map を Object に変換\nconst fromMap = Object.fromEntries(myMap);\n\n// クエリ文字列をオブジェクトに\nconst params = Object.fromEntries(new URLSearchParams('a=1&b=2'));\n// { a: '1', b: '2' }\n\n// Object.create: プロトタイプを指定してオブジェクト生成\nconst proto = { greet() { return `Hi, ${this.name}`; } };\nconst alice = Object.create(proto);\nalice.name = 'Alice';\nalice.greet(); // 'Hi, Alice'\n\n// Object.defineProperty: 詳細なプロパティ定義\nObject.defineProperty(obj, 'readOnly', {\n    value: 42,\n    writable: false,\n    enumerable: true,\n    configurable: false,\n});",
+        "highlightLines": [2, 5, 9, 15, 19, 24]
+      }
+    ]
+  }
+]

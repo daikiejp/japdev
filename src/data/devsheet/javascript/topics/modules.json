@@ -1,0 +1,28 @@
+[
+  {
+    "id": "es-modules",
+    "title": "ES Modules",
+    "description": "import / export の構文",
+    "codeBlocks": [
+      {
+        "language": "javascript",
+        "filename": "modules.js",
+        "code": "// === math.js（エクスポート側）===\n\n// 名前付きエクスポート\nexport const PI = 3.14159;\nexport function add(a, b) { return a + b; }\nexport class Calculator { /* ... */ }\n\n// デフォルトエクスポート（1ファイルに1つ）\nexport default class App { /* ... */ }\n\n// まとめてエクスポート\nconst multiply = (a, b) => a * b;\nconst divide   = (a, b) => a / b;\nexport { multiply, divide };\nexport { multiply as mul, divide as div }; // リネーム\n\n// === main.js（インポート側）===\n\n// 名前付きインポート\nimport { PI, add } from './math.js';\nimport { multiply as mul } from './math.js';\n\n// デフォルトインポート\nimport App from './app.js';\n\n// デフォルト + 名前付き\nimport App, { PI, add } from './math.js';\n\n// 全て\nimport * as Math from './math.js';\nMath.PI; Math.add(1, 2);\n\n// 動的インポート（コード分割）\nconst { add } = await import('./math.js');",
+        "highlightLines": [4, 8, 14, 20, 27, 33]
+      }
+    ]
+  },
+  {
+    "id": "module-patterns",
+    "title": "モジュールパターン",
+    "description": "再エクスポート、バレルファイル、循環参照",
+    "codeBlocks": [
+      {
+        "language": "javascript",
+        "filename": "index.js",
+        "code": "// バレルファイル（index.js）— 複数モジュールをまとめて公開\nexport { Button }   from './Button.js';\nexport { Input }    from './Input.js';\nexport { Modal }    from './Modal.js';\nexport { default as Card } from './Card.js';\n\n// 使用側\nimport { Button, Input, Modal } from './components'; // index.js省略可\n\n// 再エクスポート（全て）\nexport * from './utils.js';\nexport * as utils from './utils.js'; // 名前空間付き\n\n// 条件付きインポート（動的）\nasync function loadFeature(name) {\n    const module = await import(`./features/${name}.js`);\n    return module.default;\n}\n\n// import.meta\nconsole.log(import.meta.url);  // 現在のファイルのURL\nconsole.log(import.meta.env);  // 環境変数（Vite等）",
+        "highlightLines": [2, 8, 11, 15, 21]
+      }
+    ]
+  }
+]

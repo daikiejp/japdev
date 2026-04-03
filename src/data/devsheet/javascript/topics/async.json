@@ -1,0 +1,54 @@
+[
+  {
+    "id": "promises",
+    "title": "Promise",
+    "description": "Promise の作成・連鎖・エラー処理",
+    "codeBlocks": [
+      {
+        "language": "javascript",
+        "filename": "promises.js",
+        "code": "// Promise の作成\nconst p = new Promise((resolve, reject) => {\n    setTimeout(() => resolve('成功！'), 1000);\n    // または: reject(new Error('失敗'));\n});\n\n// 消費\np.then(value => console.log(value))   // 成功時\n .catch(err   => console.error(err))  // 失敗時\n .finally(()  => console.log('完了')); // 常に実行\n\n// チェーン（各 then は新しい Promise を返す）\nfetch('/api/user')\n    .then(res  => res.json())\n    .then(user => fetch(`/api/posts/${user.id}`))\n    .then(res  => res.json())\n    .then(posts => console.log(posts))\n    .catch(err  => console.error(err));\n\n// 複数の並列実行\nPromise.all([p1, p2, p3])         // 全て成功 or 1つでも失敗\nPromise.allSettled([p1, p2, p3])  // 全て完了（成否問わず）\nPromise.race([p1, p2, p3])        // 最初に完了したもの\nPromise.any([p1, p2, p3])         // 最初に成功したもの\n\n// 即時解決・拒否\nPromise.resolve(value);\nPromise.reject(new Error('失敗'));",
+        "highlightLines": [2, 8, 13, 21, 22]
+      }
+    ]
+  },
+  {
+    "id": "async-await",
+    "title": "async / await",
+    "description": "非同期処理を同期的に書く",
+    "codeBlocks": [
+      {
+        "language": "javascript",
+        "filename": "async-await.js",
+        "code": "// async 関数は常に Promise を返す\nasync function fetchUser(id) {\n    // await: Promise の解決を待つ\n    const res  = await fetch(`/api/users/${id}`);\n    const user = await res.json();\n    return user;\n}\n\n// エラーハンドリング\nasync function safeLoad(id) {\n    try {\n        const user = await fetchUser(id);\n        return user;\n    } catch (err) {\n        console.error('取得失敗:', err.message);\n        return null;\n    }\n}\n\n// 並列実行（await を並べると直列になる！）\nasync function loadAll() {\n    // ❌ 直列（遅い）\n    const a = await fetchA();\n    const b = await fetchB();\n\n    // ✅ 並列（速い）\n    const [a, b] = await Promise.all([fetchA(), fetchB()]);\n\n    // ✅ 並列（エラーを個別に処理）\n    const results = await Promise.allSettled([fetchA(), fetchB()]);\n    results.forEach(r => {\n        if (r.status === 'fulfilled') console.log(r.value);\n        else console.error(r.reason);\n    });\n}",
+        "highlightLines": [2, 4, 11, 27, 30]
+      }
+    ]
+  },
+  {
+    "id": "fetch-api",
+    "title": "Fetch API",
+    "description": "HTTP リクエストの送受信",
+    "codeBlocks": [
+      {
+        "language": "javascript",
+        "filename": "fetch.js",
+        "code": "// GET\nconst res  = await fetch('/api/users');\nconst data = await res.json();\n\n// ステータスチェック\nif (!res.ok) {\n    throw new Error(`HTTP error: ${res.status}`);\n}\n\n// POST\nconst res = await fetch('/api/users', {\n    method: 'POST',\n    headers: { 'Content-Type': 'application/json' },\n    body: JSON.stringify({ name: 'Alice', age: 30 }),\n});\n\n// PUT / PATCH / DELETE\nawait fetch(`/api/users/${id}`, { method: 'PUT',    body: JSON.stringify(data), headers });\nawait fetch(`/api/users/${id}`, { method: 'PATCH',  body: JSON.stringify(patch), headers });\nawait fetch(`/api/users/${id}`, { method: 'DELETE' });\n\n// URLSearchParams\nconst params = new URLSearchParams({ page: 1, limit: 10 });\nconst res = await fetch(`/api/users?${params}`);\n\n// AbortController（タイムアウト）\nconst controller = new AbortController();\nconst timeout = setTimeout(() => controller.abort(), 5000);\nconst res = await fetch('/api/data', { signal: controller.signal });\nclearTimeout(timeout);",
+        "highlightLines": [2, 6, 11, 13, 18, 26]
+      }
+    ]
+  },
+  {
+    "id": "event-loop",
+    "title": "イベントループ",
+    "description": "マイクロタスク・マクロタスクの実行順序",
+    "codeBlocks": [
+      {
+        "language": "javascript",
+        "filename": "event-loop.js",
+        "code": "// 実行順序\nconsole.log('1: 同期');                          // 1番目\n\nsetTimeout(() => console.log('2: setTimeout'), 0); // マクロタスク\n\nPromise.resolve().then(() => console.log('3: Promise')); // マイクロタスク\n\nqueueMicrotask(() => console.log('4: queueMicrotask')); // マイクロタスク\n\nconsole.log('5: 同期');\n\n// 出力順序:\n// 1: 同期\n// 5: 同期\n// 3: Promise\n// 4: queueMicrotask\n// 2: setTimeout\n\n// ポイント:\n// コールスタック → マイクロタスクキュー → マクロタスクキュー\n// Promise.then / async/await / queueMicrotask → マイクロタスク\n// setTimeout / setInterval / DOM events     → マクロタスク",
+        "highlightLines": [4, 6, 8, 13, 14, 15, 16]
+      }
+    ]
+  }
+]

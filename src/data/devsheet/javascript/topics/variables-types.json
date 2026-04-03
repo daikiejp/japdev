@@ -1,0 +1,54 @@
+[
+  {
+    "id": "var-let-const",
+    "title": "var / let / const",
+    "description": "変数宣言の違いとスコープ",
+    "codeBlocks": [
+      {
+        "language": "javascript",
+        "filename": "declarations.js",
+        "code": "// const: 再代入不可（推奨デフォルト）\nconst PI = 3.14159;\nconst user = { name: 'Alice' };\nuser.name = 'Bob'; // ✅ プロパティは変更可\n// user = {};      // ❌ 再代入は不可\n\n// let: 再代入可能\nlet count = 0;\ncount = count + 1; // ✅\n\n// var: 関数スコープ、巻き上げあり（非推奨）\nvar old = 'avoid';\n\n// スコープの違い\nfunction scopeDemo() {\n    var x = 'function scope';\n    let y = 'block scope';\n    if (true) {\n        var x = 'same variable!'; // 上書きされる\n        let y = 'new variable';   // 別の変数\n        const z = 'block only';\n    }\n    console.log(x); // 'same variable!'\n    console.log(y); // 'block scope'\n    // console.log(z); // ❌ ReferenceError\n}",
+        "highlightLines": [2, 8, 12, 18, 19]
+      }
+    ]
+  },
+  {
+    "id": "data-types",
+    "title": "データ型",
+    "description": "プリミティブ型と参照型",
+    "codeBlocks": [
+      {
+        "language": "javascript",
+        "filename": "types.js",
+        "code": "// プリミティブ型（値渡し）\nconst num    = 42;\nconst float  = 3.14;\nconst str    = 'hello';\nconst bool   = true;\nconst nothing = null;\nconst undef  = undefined;\nconst big    = 9007199254740991n; // BigInt\nconst sym    = Symbol('unique');   // Symbol\n\n// 参照型（参照渡し）\nconst arr = [1, 2, 3];\nconst obj = { key: 'value' };\nconst fn  = () => {};\n\n// 型の確認\ntypeof 42         // 'number'\ntypeof 'hello'    // 'string'\ntypeof true       // 'boolean'\ntypeof undefined  // 'undefined'\ntypeof null       // 'object' ← 歴史的バグ\ntypeof []         // 'object'\ntypeof {}         // 'object'\ntypeof function(){} // 'function'\n\n// 正確な型チェック\nArray.isArray([1,2,3])    // true\nObject.prototype.toString.call(null) // '[object Null]'\nvalue instanceof Date     // Date インスタンス判定",
+        "highlightLines": [2, 12, 17, 26]
+      }
+    ]
+  },
+  {
+    "id": "type-coercion",
+    "title": "型変換",
+    "description": "明示的・暗黙的な型変換",
+    "codeBlocks": [
+      {
+        "language": "javascript",
+        "filename": "coercion.js",
+        "code": "// 明示的な変換\nNumber('42')    // 42\nNumber('')      // 0\nNumber('abc')   // NaN\nNumber(true)    // 1\nNumber(false)   // 0\nNumber(null)    // 0\nNumber(undefined) // NaN\n\nString(42)      // '42'\nString(null)    // 'null'\nString(true)    // 'true'\n\nBoolean(0)      // false\nBoolean('')     // false\nBoolean(null)   // false\nBoolean(undefined) // false\nBoolean(NaN)    // false\nBoolean(0n)     // false\n// 上記以外はすべて true（Truthy）\n\n// 整数・浮動小数点変換\nparseInt('42px')    // 42\nparseInt('0xff', 16) // 255\nparseFloat('3.14m') // 3.14\n(3.14159).toFixed(2) // '3.14'\n\n// NaN のチェック\nisNaN('hello')     // true（型変換あり）\nNumber.isNaN('hello') // false（型変換なし・推奨）\nNumber.isNaN(NaN)     // true",
+        "highlightLines": [2, 10, 14, 22, 28]
+      }
+    ]
+  },
+  {
+    "id": "template-literals",
+    "title": "テンプレートリテラル",
+    "description": "バッククォートで文字列の補間と複数行",
+    "codeBlocks": [
+      {
+        "language": "javascript",
+        "filename": "template-literals.js",
+        "code": "const name = 'Alice';\nconst age  = 30;\n\n// 文字列補間\nconst msg = `こんにちは、${name}さん！ ${age}歳ですね。`;\n\n// 複数行\nconst html = `\n  <div class=\"card\">\n    <h2>${name}</h2>\n    <p>年齢: ${age}</p>\n  </div>\n`;\n\n// 式の評価\nconst result = `合計: ${10 * 5 + 3}`; // '合計: 53'\nconst status = `状態: ${age >= 18 ? '成人' : '未成年'}`;\n\n// タグ付きテンプレート\nfunction highlight(strings, ...values) {\n    return strings.reduce((result, str, i) =>\n        result + str + (values[i] ? `<mark>${values[i]}</mark>` : ''),\n    '');\n}\nconst output = highlight`${name}は${age}歳です。`;",
+        "highlightLines": [5, 8, 16, 20]
+      }
+    ]
+  }
+]

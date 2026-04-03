@@ -1,0 +1,54 @@
+[
+  {
+    "id": "function-types",
+    "title": "関数の定義方法",
+    "description": "宣言、式、アロー関数",
+    "codeBlocks": [
+      {
+        "language": "javascript",
+        "filename": "function-types.js",
+        "code": "// 関数宣言（巻き上げあり）\nfunction greet(name) {\n    return `こんにちは、${name}！`;\n}\n\n// 関数式（巻き上げなし）\nconst greet = function(name) {\n    return `こんにちは、${name}！`;\n};\n\n// アロー関数\nconst greet = (name) => `こんにちは、${name}！`;\n\n// アロー関数 — オブジェクト返却\nconst makeUser = (name, age) => ({ name, age });\n\n// アロー関数 — 複数行\nconst add = (a, b) => {\n    const result = a + b;\n    return result;\n};\n\n// デフォルト引数\nfunction connect(host = 'localhost', port = 3000) {\n    return `${host}:${port}`;\n}\n\n// 残余引数（rest parameters）\nfunction sum(...nums) {\n    return nums.reduce((a, b) => a + b, 0);\n}\nsum(1, 2, 3, 4); // 10",
+        "highlightLines": [2, 7, 12, 15, 24, 29]
+      }
+    ]
+  },
+  {
+    "id": "closures",
+    "title": "クロージャ",
+    "description": "外部スコープの変数を参照し続ける関数",
+    "codeBlocks": [
+      {
+        "language": "javascript",
+        "filename": "closures.js",
+        "code": "// カウンター\nfunction makeCounter(start = 0) {\n    let count = start;\n    return {\n        increment() { return ++count; },\n        decrement() { return --count; },\n        value()     { return count; },\n    };\n}\nconst counter = makeCounter(10);\ncounter.increment(); // 11\ncounter.increment(); // 12\ncounter.value();     // 12\n\n// プライベート変数のエミュレーション\nfunction createUser(name) {\n    let _password = null;    // 外からアクセス不可\n    return {\n        getName: () => name,\n        setPassword: (pw) => { _password = pw; },\n        verify: (pw) => pw === _password,\n    };\n}\n\n// メモ化\nfunction memoize(fn) {\n    const cache = new Map();\n    return (...args) => {\n        const key = JSON.stringify(args);\n        if (cache.has(key)) return cache.get(key);\n        const result = fn(...args);\n        cache.set(key, result);\n        return result;\n    };\n}",
+        "highlightLines": [2, 16, 26]
+      }
+    ]
+  },
+  {
+    "id": "higher-order",
+    "title": "高階関数",
+    "description": "関数を引数・戻り値として扱う",
+    "codeBlocks": [
+      {
+        "language": "javascript",
+        "filename": "higher-order.js",
+        "code": "// 関数を引数に取る\nfunction applyTwice(fn, value) {\n    return fn(fn(value));\n}\napplyTwice(x => x * 2, 3); // 12\n\n// 関数を返す\nfunction multiply(factor) {\n    return (n) => n * factor;\n}\nconst double = multiply(2);\nconst triple = multiply(3);\ndouble(5); // 10\ntriple(5); // 15\n\n// カリー化\nconst add = (a) => (b) => a + b;\nconst add5 = add(5);\nadd5(3); // 8\nadd5(7); // 12\n\n// 関数合成\nconst compose = (...fns) => (x) => fns.reduceRight((v, f) => f(v), x);\nconst pipe    = (...fns) => (x) => fns.reduce((v, f) => f(v), x);\n\nconst process = pipe(\n    x => x.trim(),\n    x => x.toLowerCase(),\n    x => x.replace(/\\s+/g, '-'),\n);\nprocess('  Hello World  '); // 'hello-world'",
+        "highlightLines": [2, 8, 17, 23, 26]
+      }
+    ]
+  },
+  {
+    "id": "this-binding",
+    "title": "this の束縛",
+    "description": "call、apply、bind、アロー関数での this",
+    "codeBlocks": [
+      {
+        "language": "javascript",
+        "filename": "this.js",
+        "code": "const obj = {\n    name: 'Alice',\n    // 通常の関数: this は呼び出し元に依存\n    greet() {\n        return `こんにちは、${this.name}！`;\n    },\n    // アロー関数: this を外側のスコープから継承\n    greetArrow: () => {\n        return `こんにちは、${this?.name}！`; // this は obj ではない\n    },\n};\nobj.greet(); // 'こんにちは、Alice！'\n\n// call: 即時実行、引数をカンマ区切り\nobj.greet.call({ name: 'Bob' }); // 'こんにちは、Bob！'\n\n// apply: 即時実行、引数を配列で渡す\nMath.max.apply(null, [1, 5, 3]); // 5\n\n// bind: 新しい関数を返す（this を固定）\nconst greetAlice = obj.greet.bind({ name: 'Charlie' });\ngreetAlice(); // 'こんにちは、Charlie！'\n\n// イベントリスナーでの注意\nbutton.addEventListener('click', obj.greet.bind(obj));",
+        "highlightLines": [4, 8, 15, 18, 21]
+      }
+    ]
+  }
+]

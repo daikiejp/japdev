@@ -14,5 +14,13 @@
     "description": "CSSスタイリングの完全ガイド",
     "color": "#1572B6",
     "topicsCount": 6
+  },
+  {
+    "id": "javascript",
+    "name": "JavaScript",
+    "logo": "/logos/javascript.svg",
+    "description": "JavaScriptのコア概念と実践",
+    "color": "#F7DF1E",
+    "topicsCount": 7
   }
 ]

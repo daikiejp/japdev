@@ -1,0 +1,54 @@
+[
+  {
+    "id": "querying",
+    "title": "DOM要素の取得",
+    "description": "querySelector、getElementById など",
+    "codeBlocks": [
+      {
+        "language": "javascript",
+        "filename": "query.js",
+        "code": "// 1要素取得\ndocument.getElementById('header');\ndocument.querySelector('.card');           // CSSセレクター（最初の1つ）\ndocument.querySelector('#nav > a.active');\n\n// 複数要素取得（NodeList）\ndocument.querySelectorAll('.item');\ndocument.querySelectorAll('ul > li:not(.hidden)');\n\n// 関係ナビゲーション\nconst el = document.querySelector('.container');\nel.parentElement;\nel.children;\nel.firstElementChild;\nel.lastElementChild;\nel.nextElementSibling;\nel.previousElementSibling;\n\n// 祖先を遡る\nel.closest('.section');   // 条件に合う最近の祖先\nel.matches('.active');    // 要素が条件に合うか\n\n// NodeList を配列に変換\nconst items = [...document.querySelectorAll('.item')];\nconst items = Array.from(document.querySelectorAll('.item'));",
+        "highlightLines": [2, 7, 11, 20, 24]
+      }
+    ]
+  },
+  {
+    "id": "manipulation",
+    "title": "DOM操作",
+    "description": "要素の作成・追加・削除・変更",
+    "codeBlocks": [
+      {
+        "language": "javascript",
+        "filename": "manipulation.js",
+        "code": "// 要素の作成\nconst card = document.createElement('div');\ncard.className = 'card';\ncard.textContent = 'Hello';              // テキストのみ（XSS安全）\ncard.innerHTML = '<strong>Hi</strong>';  // HTML（XSS注意）\n\n// 要素の追加\nparent.appendChild(card);               // 末尾に追加\nparent.prepend(card);                   // 先頭に追加\nel.insertAdjacentHTML('beforeend', '<li>item</li>');\n// 'beforebegin' | 'afterbegin' | 'beforeend' | 'afterend'\n\n// クローン\nconst clone = el.cloneNode(true); // true = 子孫ごとコピー\n\n// 要素の削除\nel.remove();\n\n// 属性操作\nel.setAttribute('data-id', '42');\nel.getAttribute('data-id');     // '42'\nel.removeAttribute('disabled');\nel.toggleAttribute('hidden');\nel.dataset.id;                  // data-id 属性",
+        "highlightLines": [2, 8, 10, 16, 19]
+      }
+    ]
+  },
+  {
+    "id": "events",
+    "title": "イベント処理",
+    "description": "addEventListener、委譲、カスタムイベント",
+    "codeBlocks": [
+      {
+        "language": "javascript",
+        "filename": "events.js",
+        "code": "// 追加と削除\nconst handler = (e) => console.log(e.target);\nel.addEventListener('click', handler);\nel.removeEventListener('click', handler);\n\n// オプション\nel.addEventListener('click', handler, {\n    once:    true,  // 1回だけ\n    passive: true,  // スクロール最適化\n    capture: true,  // キャプチャフェーズ\n});\n\n// イベントオブジェクト\nel.addEventListener('click', (e) => {\n    e.target;            // 発生元要素\n    e.currentTarget;     // リスナー設置要素\n    e.preventDefault();  // デフォルト動作キャンセル\n    e.stopPropagation(); // バブリング停止\n});\n\n// イベント委譲（動的要素に有効）\ndocument.querySelector('#list').addEventListener('click', (e) => {\n    if (e.target.matches('.item')) {\n        console.log('クリック:', e.target.dataset.id);\n    }\n});\n\n// カスタムイベント\nconst event = new CustomEvent('user:login', {\n    detail: { userId: 42 },\n    bubbles: true,\n});\nel.dispatchEvent(event);\nwindow.addEventListener('user:login', e => console.log(e.detail));",
+        "highlightLines": [3, 7, 14, 22, 28]
+      }
+    ]
+  },
+  {
+    "id": "styles-classes",
+    "title": "スタイルとクラス操作",
+    "description": "classList、style、サイズ取得",
+    "codeBlocks": [
+      {
+        "language": "javascript",
+        "filename": "styles.js",
+        "code": "// classList\nel.classList.add('active', 'visible');\nel.classList.remove('hidden');\nel.classList.toggle('expanded');\nel.classList.toggle('dark', isDark);  // 条件付き\nel.classList.contains('active');      // true/false\nel.classList.replace('old', 'new');\n\n// インラインスタイル\nel.style.color = 'red';\nel.style.backgroundColor = '#f0fdf4'; // キャメルケース\nel.style.setProperty('--my-var', '#10b981'); // CSS変数\n\n// 計算済みスタイルの取得\nconst styles = getComputedStyle(el);\nstyles.getPropertyValue('color');\nstyles.getPropertyValue('--my-var');\n\n// 要素のサイズと位置\nel.getBoundingClientRect(); // { top, left, width, height }\nel.offsetWidth;             // マージン除く幅\nel.clientWidth;             // パディング含む幅\n\n// Intersection Observer\nconst observer = new IntersectionObserver(entries => {\n    entries.forEach(e => {\n        if (e.isIntersecting) e.target.classList.add('visible');\n    });\n}, { threshold: 0.1 });\nobserver.observe(el);",
+        "highlightLines": [2, 10, 12, 15, 20, 24]
+      }
+    ]
+  }
+]

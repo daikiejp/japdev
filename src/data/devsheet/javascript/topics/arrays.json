@@ -1,0 +1,54 @@
+[
+  {
+    "id": "array-basics",
+    "title": "配列の基本操作",
+    "description": "作成、アクセス、追加・削除",
+    "codeBlocks": [
+      {
+        "language": "javascript",
+        "filename": "arrays.js",
+        "code": "// 作成\nconst arr = [1, 2, 3];\nconst from = Array.from('hello');     // ['h','e','l','l','o']\nconst fill = Array.from({ length: 5 }, (_, i) => i * 2); // [0,2,4,6,8]\nconst of   = Array.of(1, 2, 3);       // [1,2,3]\n\n// アクセス\narr[0];         // 1\narr.at(-1);     // 最後の要素（ES2022）\narr.at(-2);     // 最後から2番目\n\n// 末尾の追加・削除\narr.push(4);    // [1,2,3,4] — 末尾追加\narr.pop();      // [1,2,3]   — 末尾削除・返却\n\n// 先頭の追加・削除\narr.unshift(0); // [0,1,2,3] — 先頭追加\narr.shift();    // [1,2,3]   — 先頭削除・返却\n\n// 任意位置の操作\narr.splice(1, 1);          // [1,3] — index1から1個削除\narr.splice(1, 0, 'a','b'); // [1,'a','b',3] — 挿入\n\n// 検索\narr.indexOf(2);        // 1（見つからない場合-1）\narr.includes(2);       // true\narr.findIndex(x => x > 2); // 2",
+        "highlightLines": [3, 4, 9, 13, 17, 21, 24]
+      }
+    ]
+  },
+  {
+    "id": "iteration-methods",
+    "title": "イテレーション系メソッド",
+    "description": "forEach、map、filter、reduce",
+    "codeBlocks": [
+      {
+        "language": "javascript",
+        "filename": "iteration.js",
+        "code": "const nums = [1, 2, 3, 4, 5];\n\n// forEach: 副作用のみ（返り値なし）\nnums.forEach((n, i) => console.log(i, n));\n\n// map: 各要素を変換した新配列\nconst doubled = nums.map(n => n * 2);     // [2,4,6,8,10]\nconst users = ids.map(id => fetchUser(id));\n\n// filter: 条件を満たす要素の新配列\nconst evens = nums.filter(n => n % 2 === 0); // [2,4]\nconst active = users.filter(u => u.isActive);\n\n// find: 最初に条件を満たす要素（または undefined）\nconst first = nums.find(n => n > 3);     // 4\n\n// findIndex: 最初に条件を満たすインデックス\nconst idx = nums.findIndex(n => n > 3);  // 3\n\n// some: 1つでも条件を満たすか\nconst hasEven = nums.some(n => n % 2 === 0); // true\n\n// every: 全て条件を満たすか\nconst allPositive = nums.every(n => n > 0);  // true\n\n// reduce: 累積処理\nconst sum  = nums.reduce((acc, n) => acc + n, 0); // 15\nconst max  = nums.reduce((a, b) => a > b ? a : b);\nconst flat = [[1,2],[3,4]].reduce((a, b) => a.concat(b), []); // [1,2,3,4]",
+        "highlightLines": [7, 11, 15, 21, 24, 26]
+      }
+    ]
+  },
+  {
+    "id": "transform-methods",
+    "title": "変換・整形メソッド",
+    "description": "flat、flatMap、sort、slice、concat",
+    "codeBlocks": [
+      {
+        "language": "javascript",
+        "filename": "transform.js",
+        "code": "// sort（デフォルトは文字列順！）\n[10, 1, 5].sort();                // [1, 10, 5] ← バグ注意\n[10, 1, 5].sort((a, b) => a - b); // [1, 5, 10] ← 正しい数値ソート\n[10, 1, 5].sort((a, b) => b - a); // [10, 5, 1] ← 降順\nusers.sort((a, b) => a.name.localeCompare(b.name)); // 文字列比較\n\n// flat / flatMap\n[1, [2, [3, [4]]]].flat();    // [1, 2, [3, [4]]] — 1層\n[1, [2, [3, [4]]]].flat(Infinity); // [1, 2, 3, 4]\n[[1,2],[3,4]].flatMap(x => x); // [1,2,3,4]\n[1, 2, 3].flatMap(n => [n, n * 2]); // [1,2, 2,4, 3,6]\n\n// slice（元配列変更なし）\n[1,2,3,4,5].slice(1, 3); // [2,3]\n[1,2,3,4,5].slice(-2);   // [4,5]\n\n// concat\n[1,2].concat([3,4], [5,6]); // [1,2,3,4,5,6]\n[...a, ...b, ...c];          // スプレッド推奨\n\n// join / split\n['a','b','c'].join('-');    // 'a-b-c'\n'a-b-c'.split('-');         // ['a','b','c']\n\n// reverse（元配列を変更！）\n[1,2,3].toReversed();       // ES2023: 非破壊版\n[1,2,3].toSorted((a,b) => b-a); // ES2023: 非破壊sort",
+        "highlightLines": [3, 8, 11, 14, 24, 25]
+      }
+    ]
+  },
+  {
+    "id": "array-patterns",
+    "title": "よく使うパターン",
+    "description": "重複削除、グループ化、zip など",
+    "codeBlocks": [
+      {
+        "language": "javascript",
+        "filename": "patterns.js",
+        "code": "// 重複削除\nconst unique = [...new Set([1, 2, 2, 3, 3])]; // [1,2,3]\n\n// オブジェクト配列の重複削除\nconst uniqueById = [...new Map(users.map(u => [u.id, u])).values()];\n\n// グループ化（Object.groupBy — ES2024）\nconst grouped = Object.groupBy(users, u => u.role);\n// { admin: [...], user: [...] }\n\n// グループ化（reduceで）\nconst grouped = users.reduce((acc, u) => {\n    (acc[u.role] ??= []).push(u);\n    return acc;\n}, {});\n\n// 配列の分割\nconst [first, second, ...rest] = [1,2,3,4,5];\n// first=1, second=2, rest=[3,4,5]\n\n// zip（2配列を組み合わせ）\nconst zip = (a, b) => a.map((v, i) => [v, b[i]]);\nzip([1,2,3], ['a','b','c']); // [[1,'a'],[2,'b'],[3,'c']]\n\n// チャンク分割\nconst chunk = (arr, size) =>\n    Array.from({ length: Math.ceil(arr.length / size) },\n        (_, i) => arr.slice(i * size, i * size + size));\nchunk([1,2,3,4,5], 2); // [[1,2],[3,4],[5]]",
+        "highlightLines": [2, 5, 8, 17, 21, 24]
+      }
+    ]
+  }
+]
