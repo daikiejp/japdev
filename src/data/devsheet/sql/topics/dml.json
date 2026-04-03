@@ -1,0 +1,28 @@
+[
+  {
+    "id": "insert",
+    "title": "INSERT",
+    "description": "データの挿入",
+    "codeBlocks": [
+      {
+        "language": "sql",
+        "filename": "insert.sql",
+        "code": "-- 1行挿入\nINSERT INTO users (name, email, age)\nVALUES ('Alice', 'alice@example.com', 30);\n\n-- 複数行一括挿入\nINSERT INTO users (name, email, age)\nVALUES\n    ('Bob',   'bob@example.com',   25),\n    ('Carol', 'carol@example.com', 35),\n    ('Dave',  'dave@example.com',  28);\n\n-- SELECTの結果を挿入\nINSERT INTO archived_users (id, name, email)\nSELECT id, name, email\nFROM users\nWHERE deleted_at IS NOT NULL;\n\n-- UPSERT: 存在すれば更新、なければ挿入\nINSERT INTO users (email, name, updated_at)\nVALUES ('alice@example.com', 'Alice', NOW())\nON CONFLICT (email) DO UPDATE\n    SET name       = EXCLUDED.name,\n        updated_at = EXCLUDED.updated_at;\n-- MySQL: ON DUPLICATE KEY UPDATE name = VALUES(name);",
+        "highlightLines": [2, 6, 13, 19, 22]
+      }
+    ]
+  },
+  {
+    "id": "update-delete",
+    "title": "UPDATE / DELETE",
+    "description": "データの更新と削除",
+    "codeBlocks": [
+      {
+        "language": "sql",
+        "filename": "update-delete.sql",
+        "code": "-- UPDATE\nUPDATE users\nSET name = 'Alice Smith',\n    updated_at = NOW()\nWHERE id = 1;\n\n-- 複数行を条件で一括更新\nUPDATE users\nSET role = 'premium'\nWHERE id IN (\n    SELECT user_id FROM orders\n    GROUP BY user_id HAVING SUM(total) > 100000\n);\n\n-- 別テーブルの値で更新（PostgreSQL）\nUPDATE users u\nSET score = s.total_score\nFROM scores s\nWHERE u.id = s.user_id;\n\n-- DELETE\nDELETE FROM users WHERE id = 1;\n\n-- 条件付き削除\nDELETE FROM sessions WHERE expires_at < NOW();\n\n-- 全行削除（トランザクション可能）\nDELETE FROM logs;\n\n-- TRUNCATE: 高速全行削除（ロールバック不可な場合あり）\nTRUNCATE TABLE logs;\nTRUNCATE TABLE orders CASCADE; -- 外部キー参照先も削除\n\n-- Soft delete パターン（推奨）\nUPDATE users SET deleted_at = NOW() WHERE id = 1;\nSELECT * FROM users WHERE deleted_at IS NULL; -- 有効なユーザーのみ",
+        "highlightLines": [2, 8, 16, 22, 29, 33]
+      }
+    ]
+  }
+]

@@ -1,0 +1,62 @@
+[
+  {
+    "id": "subqueries",
+    "title": "サブクエリ",
+    "description": "スカラー・インライン・相関サブクエリ",
+    "codeBlocks": [
+      {
+        "language": "sql",
+        "filename": "subqueries.sql",
+        "code": "-- スカラーサブクエリ（1値を返す）\nSELECT name, salary,\n    (SELECT AVG(salary) FROM employees) AS avg_salary,\n    salary - (SELECT AVG(salary) FROM employees) AS diff\nFROM employees;\n\n-- インラインビュー（FROM句のサブクエリ）\nSELECT dept, avg_sal\nFROM (\n    SELECT department AS dept, AVG(salary) AS avg_sal\n    FROM employees\n    GROUP BY department\n) AS dept_avg\nWHERE avg_sal > 50000;\n\n-- 相関サブクエリ（外側のクエリを参照）\n-- 各部門で最高給与の社員を取得\nSELECT e1.name, e1.department, e1.salary\nFROM employees e1\nWHERE e1.salary = (\n    SELECT MAX(e2.salary)\n    FROM employees e2\n    WHERE e2.department = e1.department\n);\n\n-- EXISTS（相関サブクエリ、存在確認）\nSELECT * FROM users u\nWHERE EXISTS (\n    SELECT 1 FROM orders o\n    WHERE o.user_id = u.id AND o.total > 10000\n);\n\n-- NOT EXISTS（存在しない行）\nSELECT * FROM users u\nWHERE NOT EXISTS (\n    SELECT 1 FROM orders o WHERE o.user_id = u.id\n);",
+        "highlightLines": [3, 9, 20, 27, 34]
+      }
+    ]
+  },
+  {
+    "id": "cte",
+    "title": "CTE（共通テーブル式）",
+    "description": "WITH句、再帰CTE",
+    "codeBlocks": [
+      {
+        "language": "sql",
+        "filename": "cte.sql",
+        "code": "-- 基本的なCTE（サブクエリより読みやすい）\nWITH high_value_users AS (\n    SELECT user_id, SUM(total) AS lifetime_value\n    FROM orders\n    GROUP BY user_id\n    HAVING SUM(total) > 100000\n)\nSELECT u.name, u.email, h.lifetime_value\nFROM users u\nJOIN high_value_users h ON u.id = h.user_id\nORDER BY h.lifetime_value DESC;\n\n-- 複数のCTEを連鎖\nWITH\nmonthly_sales AS (\n    SELECT DATE_TRUNC('month', created_at) AS month,\n           SUM(total) AS revenue\n    FROM orders\n    GROUP BY 1\n),\ngrowth AS (\n    SELECT month, revenue,\n           LAG(revenue) OVER (ORDER BY month) AS prev_month,\n           ROUND((revenue - LAG(revenue) OVER (ORDER BY month))\n                 / LAG(revenue) OVER (ORDER BY month) * 100, 2) AS growth_pct\n    FROM monthly_sales\n)\nSELECT * FROM growth WHERE growth_pct IS NOT NULL;\n\n-- 再帰CTE（階層データ・ツリー構造）\nWITH RECURSIVE org_tree AS (\n    -- ベースケース: ルート（上司なし）\n    SELECT id, name, manager_id, 0 AS level\n    FROM employees\n    WHERE manager_id IS NULL\n\n    UNION ALL\n\n    -- 再帰ケース: 部下を追加\n    SELECT e.id, e.name, e.manager_id, t.level + 1\n    FROM employees e\n    JOIN org_tree t ON e.manager_id = t.id\n)\nSELECT REPEAT('  ', level) || name AS hierarchy, level\nFROM org_tree\nORDER BY level, name;",
+        "highlightLines": [2, 15, 21, 31, 38, 43]
+      }
+    ]
+  },
+  {
+    "id": "transactions",
+    "title": "トランザクション",
+    "description": "BEGIN、COMMIT、ROLLBACK、SAVEPOINT",
+    "codeBlocks": [
+      {
+        "language": "sql",
+        "filename": "transactions.sql",
+        "code": "-- 基本的なトランザクション\nBEGIN;\n\n    UPDATE accounts SET balance = balance - 5000 WHERE id = 1; -- 送金元\n    UPDATE accounts SET balance = balance + 5000 WHERE id = 2; -- 送金先\n\n    -- 残高チェック\n    -- （アプリ側でチェックして ROLLBACK を判断）\n\nCOMMIT;  -- 全て成功した場合\n-- ROLLBACK; -- 問題があれば取り消し\n\n-- SAVEPOINT（部分ロールバック）\nBEGIN;\n    INSERT INTO orders (user_id, total) VALUES (1, 5000);\n\n    SAVEPOINT after_order;\n\n    INSERT INTO payments (order_id, amount) VALUES (LASTVAL(), 5000);\n    -- もし支払い処理に失敗したら\n    ROLLBACK TO SAVEPOINT after_order; -- 注文は残して支払いだけ取り消し\n    -- または\n    RELEASE SAVEPOINT after_order;    -- SAVEPOINTを解放\n\nCOMMIT;\n\n-- 分離レベル\nSET TRANSACTION ISOLATION LEVEL READ COMMITTED;  -- デフォルト\nSET TRANSACTION ISOLATION LEVEL REPEATABLE READ;  -- ファジーリードなし\nSET TRANSACTION ISOLATION LEVEL SERIALIZABLE;     -- 最強（デッドロックに注意）\n\n-- ロック\nSELECT * FROM accounts WHERE id = 1 FOR UPDATE;   -- 行ロック\nSELECT * FROM accounts WHERE id = 1 FOR SHARE;    -- 共有ロック",
+        "highlightLines": [2, 10, 14, 17, 21, 27, 32]
+      }
+    ]
+  },
+  {
+    "id": "views-procedures",
+    "title": "ビュー・関数・ストアドプロシージャ",
+    "description": "CREATE VIEW、関数、インデックス戦略",
+    "codeBlocks": [
+      {
+        "title": "ビューと関数",
+        "language": "sql",
+        "filename": "views.sql",
+        "code": "-- ビュー（仮想テーブル）\nCREATE VIEW active_users AS\nSELECT id, name, email\nFROM users\nWHERE deleted_at IS NULL AND is_active = true;\n\n-- マテリアライズドビュー（結果をキャッシュ）\nCREATE MATERIALIZED VIEW monthly_revenue AS\nSELECT DATE_TRUNC('month', created_at) AS month,\n       SUM(total) AS revenue\nFROM orders GROUP BY 1;\n\nREFRESH MATERIALIZED VIEW monthly_revenue; -- データを再計算\n\n-- ビュー削除\nDROP VIEW IF EXISTS active_users;\n\n-- 関数（PostgreSQL）\nCREATE OR REPLACE FUNCTION get_user_total(p_user_id INT)\nRETURNS DECIMAL AS $$\nDECLARE\n    v_total DECIMAL;\nBEGIN\n    SELECT COALESCE(SUM(total), 0)\n    INTO v_total\n    FROM orders WHERE user_id = p_user_id;\n    RETURN v_total;\nEND;\n$$ LANGUAGE plpgsql;\n\n-- 使用\nSELECT name, get_user_total(id) AS total_spent FROM users;",
+        "highlightLines": [2, 8, 13, 19, 31]
+      },
+      {
+        "title": "EXPLAINとクエリ最適化",
+        "language": "sql",
+        "filename": "explain.sql",
+        "code": "-- 実行計画の確認\nEXPLAIN SELECT * FROM users WHERE email = 'alice@example.com';\n\n-- 実際の実行時間も計測\nEXPLAIN ANALYZE SELECT * FROM orders WHERE user_id = 1;\n\n-- よくある最適化ポイント\n-- ✅ Seq Scan → Index Scan になるようインデックスを追加\nCREATE INDEX idx_orders_user_id ON orders(user_id);\n\n-- ✅ SELECT * を避け必要な列のみ取得\n-- ✅ LIMIT を早めに適用\n-- ✅ サブクエリより JOIN を優先\n-- ✅ OR より IN / UNION を使う\n-- ✅ 関数をWHEREの左辺に使わない（インデックスが効かない）\n\n-- ❌ インデックスが効かない例\nWHERE LOWER(email) = 'alice@example.com'\n-- ✅ 代わりに関数インデックスを作成\nCREATE INDEX idx_users_email_lower ON users(LOWER(email));\n-- またはGenerated Column（MySQL 8+）\n\n-- ページネーション最適化\n-- ❌ OFFSETは遅い（大量ページで全行スキャン）\nSELECT * FROM posts ORDER BY id LIMIT 10 OFFSET 10000;\n-- ✅ カーソルベース（Keyset Pagination）\nSELECT * FROM posts WHERE id > 10000 ORDER BY id LIMIT 10;",
+        "highlightLines": [2, 5, 9, 17, 20, 25, 27]
+      }
+    ]
+  }
+]

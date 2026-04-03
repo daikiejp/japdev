@@ -1,0 +1,28 @@
+[
+  {
+    "id": "create-table",
+    "title": "CREATE TABLE",
+    "description": "テーブル作成とデータ型",
+    "codeBlocks": [
+      {
+        "language": "sql",
+        "filename": "ddl.sql",
+        "code": "CREATE TABLE users (\n    id          SERIAL       PRIMARY KEY,         -- 自動採番（PostgreSQL）\n    -- または: id INT AUTO_INCREMENT PRIMARY KEY  -- MySQL\n    uuid        UUID         DEFAULT gen_random_uuid(),\n    name        VARCHAR(100) NOT NULL,\n    email       VARCHAR(255) NOT NULL UNIQUE,\n    age         INT          CHECK (age >= 0 AND age <= 150),\n    role        VARCHAR(20)  NOT NULL DEFAULT 'user',\n    bio         TEXT,                              -- NULL許容\n    score       DECIMAL(5,2),                      -- 合計5桁、小数2桁\n    is_active   BOOLEAN      NOT NULL DEFAULT true,\n    metadata    JSONB,                             -- JSON型（PostgreSQL）\n    created_at  TIMESTAMP    NOT NULL DEFAULT NOW(),\n    updated_at  TIMESTAMP    NOT NULL DEFAULT NOW(),\n    deleted_at  TIMESTAMP,                        -- Soft delete用\n\n    -- 複合ユニーク制約\n    CONSTRAINT uq_name_email UNIQUE (name, email)\n);\n\n-- 外部キー\nCREATE TABLE orders (\n    id      SERIAL  PRIMARY KEY,\n    user_id INT     NOT NULL,\n    total   DECIMAL(10,2) NOT NULL,\n    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE\n);",
+        "highlightLines": [2, 5, 7, 12, 18, 26]
+      }
+    ]
+  },
+  {
+    "id": "alter-index",
+    "title": "ALTER TABLE とインデックス",
+    "description": "テーブル変更とパフォーマンスチューニング",
+    "codeBlocks": [
+      {
+        "language": "sql",
+        "filename": "alter-index.sql",
+        "code": "-- テーブルの変更\nALTER TABLE users ADD COLUMN phone VARCHAR(20);\nALTER TABLE users DROP COLUMN phone;\nALTER TABLE users RENAME COLUMN bio TO biography;\nALTER TABLE users ALTER COLUMN age TYPE BIGINT;\nALTER TABLE users ALTER COLUMN role SET NOT NULL;\nALTER TABLE users ALTER COLUMN role DROP NOT NULL;\nALTER TABLE users ALTER COLUMN role SET DEFAULT 'user';\n\n-- テーブル名変更\nALTER TABLE users RENAME TO accounts;\n\n-- インデックス\nCREATE INDEX idx_users_email   ON users(email);\nCREATE INDEX idx_users_country ON users(country);\nCREATE UNIQUE INDEX idx_users_email_unique ON users(email);\n\n-- 複合インデックス（順序が重要）\nCREATE INDEX idx_orders_user_date ON orders(user_id, created_at DESC);\n\n-- 部分インデックス（条件付き）\nCREATE INDEX idx_active_users ON users(email) WHERE is_active = true;\n\n-- インデックス削除\nDROP INDEX idx_users_email;\nALTER TABLE users DROP CONSTRAINT uq_name_email;\n\n-- テーブル削除\nDROP TABLE IF EXISTS temp_users;\nDROP TABLE orders CASCADE; -- 依存する外部キーも削除",
+        "highlightLines": [2, 14, 19, 22, 29]
+      }
+    ]
+  }
+]

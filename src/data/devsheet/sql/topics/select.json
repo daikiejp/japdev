@@ -1,0 +1,28 @@
+[
+  {
+    "id": "basic-select",
+    "title": "基本的な SELECT",
+    "description": "SELECT、WHERE、ORDER BY、LIMIT",
+    "codeBlocks": [
+      {
+        "language": "sql",
+        "filename": "select.sql",
+        "code": "-- 全列取得\nSELECT * FROM users;\n\n-- 特定列\nSELECT id, name, email FROM users;\n\n-- エイリアス\nSELECT id, name AS user_name, email AS mail FROM users;\n\n-- 条件絞り込み\nSELECT * FROM users\nWHERE age >= 18\n  AND active = true\n  AND role IN ('admin', 'user')\n  AND name LIKE 'Alice%'   -- 前方一致\n  AND name LIKE '%alice%'  -- 部分一致\n  AND email IS NOT NULL;\n\n-- 並べ替え\nSELECT * FROM users\nORDER BY age DESC, name ASC;\n\n-- 取得件数の制限\nSELECT * FROM users LIMIT 10;\nSELECT * FROM users LIMIT 10 OFFSET 20; -- ページ2（21〜30件目）\n\n-- 重複除外\nSELECT DISTINCT country FROM users;",
+        "highlightLines": [11, 14, 21, 24, 27]
+      }
+    ]
+  },
+  {
+    "id": "where-operators",
+    "title": "WHERE 条件の演算子",
+    "description": "比較、論理、LIKE、BETWEEN、IN",
+    "codeBlocks": [
+      {
+        "language": "sql",
+        "filename": "where.sql",
+        "code": "-- 比較演算子\nWHERE price = 100\nWHERE price != 100  -- または <>\nWHERE price > 100\nWHERE price <= 100\n\n-- 論理演算子\nWHERE age >= 18 AND age <= 65\nWHERE role = 'admin' OR role = 'superadmin'\nWHERE NOT active\n\n-- BETWEEN（両端含む）\nWHERE price BETWEEN 100 AND 500\nWHERE created_at BETWEEN '2025-01-01' AND '2025-12-31'\n\n-- IN\nWHERE country IN ('JP', 'US', 'GB')\nWHERE id NOT IN (1, 2, 3)\nWHERE id IN (SELECT user_id FROM orders WHERE total > 1000)\n\n-- LIKE\nWHERE name LIKE 'A%'       -- A で始まる\nWHERE name LIKE '%son'     -- son で終わる\nWHERE name LIKE '%li%'     -- li を含む\nWHERE code LIKE '_BC_'     -- 任意の1文字\n\n-- NULL チェック\nWHERE deleted_at IS NULL\nWHERE deleted_at IS NOT NULL\nWHERE COALESCE(nickname, name) = 'Alice' -- NULLならnameを使用",
+        "highlightLines": [12, 16, 21, 26, 28]
+      }
+    ]
+  }
+]

@@ -1,0 +1,28 @@
+[
+  {
+    "id": "aggregate-functions",
+    "title": "集計関数",
+    "description": "COUNT、SUM、AVG、MAX、MIN",
+    "codeBlocks": [
+      {
+        "language": "sql",
+        "filename": "aggregate.sql",
+        "code": "-- 基本集計\nSELECT\n    COUNT(*)           AS total_users,    -- NULL含む全行数\n    COUNT(email)       AS users_with_email,-- NULLを除いた行数\n    COUNT(DISTINCT country) AS countries, -- ユニーク数\n    SUM(total)         AS revenue,\n    AVG(age)           AS avg_age,\n    MAX(created_at)    AS latest,\n    MIN(created_at)    AS earliest\nFROM users;\n\n-- GROUP BY: グループ別集計\nSELECT\n    country,\n    COUNT(*)   AS user_count,\n    AVG(age)   AS avg_age,\n    SUM(total) AS total_revenue\nFROM users\nJOIN orders ON users.id = orders.user_id\nGROUP BY country;\n\n-- HAVING: グループに対する条件（WHERE は使えない）\nSELECT country, COUNT(*) AS cnt\nFROM users\nGROUP BY country\nHAVING COUNT(*) >= 100  -- 100人以上の国だけ\nORDER BY cnt DESC;",
+        "highlightLines": [3, 5, 13, 22, 25]
+      }
+    ]
+  },
+  {
+    "id": "window-functions",
+    "title": "ウィンドウ関数",
+    "description": "OVER、PARTITION BY、ROW_NUMBER、RANK",
+    "codeBlocks": [
+      {
+        "language": "sql",
+        "filename": "window.sql",
+        "code": "-- ROW_NUMBER: 連番\nSELECT\n    name,\n    salary,\n    ROW_NUMBER() OVER (ORDER BY salary DESC) AS rank_num\nFROM employees;\n\n-- PARTITION BY: グループ内でのランキング\nSELECT\n    department,\n    name,\n    salary,\n    RANK()       OVER (PARTITION BY department ORDER BY salary DESC) AS dept_rank,\n    DENSE_RANK() OVER (PARTITION BY department ORDER BY salary DESC) AS dense_rank\n    -- RANK: 同順位の次は飛ぶ (1,2,2,4)\n    -- DENSE_RANK: 同順位の次は飛ばない (1,2,2,3)\nFROM employees;\n\n-- 集計ウィンドウ関数\nSELECT\n    order_date,\n    total,\n    SUM(total)  OVER (ORDER BY order_date) AS running_total,\n    AVG(total)  OVER (ORDER BY order_date ROWS BETWEEN 6 PRECEDING AND CURRENT ROW) AS moving_avg_7d,\n    LAG(total,  1, 0) OVER (ORDER BY order_date) AS prev_day,\n    LEAD(total, 1, 0) OVER (ORDER BY order_date) AS next_day\nFROM daily_sales;",
+        "highlightLines": [5, 13, 14, 22, 23, 24, 25]
+      }
+    ]
+  }
+]

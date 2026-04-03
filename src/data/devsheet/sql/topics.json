@@ -1,0 +1,8 @@
+[
+  {"id":"select","name":"SELECT クエリ","description":"基本的なデータ取得"},
+  {"id":"joins","name":"JOIN","description":"テーブルの結合"},
+  {"id":"aggregate","name":"集計関数","description":"GROUP BY、COUNT、SUM、AVG"},
+  {"id":"ddl","name":"DDL","description":"CREATE、ALTER、DROP"},
+  {"id":"dml","name":"DML","description":"INSERT、UPDATE、DELETE"},
+  {"id":"advanced","name":"高度なSQL","description":"サブクエリ、CTE、ウィンドウ関数"}
+]

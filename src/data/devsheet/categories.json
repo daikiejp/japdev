@@ -38,5 +38,13 @@
     "description": "Gitのワークフローとコマンド集",
     "color": "#F05032",
     "topicsCount": 5
+  },
+  {
+    "id": "sql",
+    "name": "SQL",
+    "logo": "/logos/sql.svg",
+    "description": "SQLクエリとデータベース操作",
+    "color": "#4479A1",
+    "topicsCount": 6
   }
 ]

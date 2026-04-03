@@ -1,0 +1,28 @@
+[
+  {
+    "id": "join-types",
+    "title": "JOIN の種類",
+    "description": "INNER、LEFT、RIGHT、FULL OUTER JOIN",
+    "codeBlocks": [
+      {
+        "language": "sql",
+        "filename": "joins.sql",
+        "code": "-- サンプルテーブル\n-- users:  id, name\n-- orders: id, user_id, total\n\n-- INNER JOIN: 両方に存在する行のみ\nSELECT u.name, o.total\nFROM users u\nINNER JOIN orders o ON u.id = o.user_id;\n\n-- LEFT JOIN: usersの全行 + マッチするordersがなければNULL\nSELECT u.name, o.total\nFROM users u\nLEFT JOIN orders o ON u.id = o.user_id;\n-- 注文のないユーザーも含まれる（o.total は NULL）\n\n-- RIGHT JOIN: ordersの全行 + マッチするusersがなければNULL\nSELECT u.name, o.total\nFROM users u\nRIGHT JOIN orders o ON u.id = o.user_id;\n\n-- FULL OUTER JOIN: 両方の全行\nSELECT u.name, o.total\nFROM users u\nFULL OUTER JOIN orders o ON u.id = o.user_id;\n\n-- CROSS JOIN: 全組み合わせ（直積）\nSELECT * FROM colors CROSS JOIN sizes;",
+        "highlightLines": [6, 11, 16, 21, 26]
+      }
+    ]
+  },
+  {
+    "id": "join-patterns",
+    "title": "JOIN パターン",
+    "description": "複数テーブル結合、自己結合、サブクエリ",
+    "codeBlocks": [
+      {
+        "language": "sql",
+        "filename": "join-patterns.sql",
+        "code": "-- 3テーブルの結合\nSELECT\n    u.name,\n    o.order_date,\n    p.name  AS product_name,\n    oi.qty  AS quantity\nFROM users u\nJOIN orders o      ON u.id       = o.user_id\nJOIN order_items oi ON o.id      = oi.order_id\nJOIN products p    ON oi.product_id = p.id;\n\n-- 自己結合（従業員とその上司）\nSELECT\n    e.name  AS employee,\n    m.name  AS manager\nFROM employees e\nLEFT JOIN employees m ON e.manager_id = m.id;\n\n-- 注文のないユーザーのみ取得（アンチジョイン）\nSELECT u.*\nFROM users u\nLEFT JOIN orders o ON u.id = o.user_id\nWHERE o.id IS NULL;\n\n-- EXISTS を使う方法（大量データで高速）\nSELECT * FROM users u\nWHERE EXISTS (\n    SELECT 1 FROM orders WHERE user_id = u.id\n);",
+        "highlightLines": [8, 9, 10, 17, 22, 26]
+      }
+    ]
+  }
+]
