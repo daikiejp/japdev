@@ -1,0 +1,41 @@
+[
+  {
+    "id": "usecontext",
+    "title": "useContext",
+    "description": "Context API でグローバル状態を共有",
+    "codeBlocks": [
+      {
+        "language": "tsx",
+        "filename": "ThemeContext.tsx",
+        "code": "import { createContext, useContext, useState, type ReactNode } from 'react';\n\n// 1. Context の型定義と作成\ninterface ThemeContextType {\n    theme:       'light' | 'dark';\n    toggleTheme: () => void;\n}\nconst ThemeContext = createContext<ThemeContextType | null>(null);\n\n// 2. Provider コンポーネント\nexport function ThemeProvider({ children }: { children: ReactNode }) {\n    const [theme, setTheme] = useState<'light' | 'dark'>('light');\n    const toggleTheme = () => setTheme(t => t === 'light' ? 'dark' : 'light');\n\n    return (\n        <ThemeContext.Provider value={{ theme, toggleTheme }}>\n            {children}\n        </ThemeContext.Provider>\n    );\n}\n\n// 3. カスタムフックでラップ（推奨）\nexport function useTheme() {\n    const ctx = useContext(ThemeContext);\n    if (!ctx) throw new Error('useTheme must be used within ThemeProvider');\n    return ctx;\n}\n\n// 4. 使用\nfunction App() {\n    return (\n        <ThemeProvider>\n            <Header />\n        </ThemeProvider>\n    );\n}\n\nfunction Header() {\n    const { theme, toggleTheme } = useTheme();\n    return <button onClick={toggleTheme}>現在: {theme}</button>;\n}",
+        "highlightLines": [8, 11, 16, 23, 31, 39]
+      }
+    ]
+  },
+  {
+    "id": "usereducer",
+    "title": "useReducer",
+    "description": "複雑な状態管理にはreducerパターン",
+    "codeBlocks": [
+      {
+        "language": "tsx",
+        "filename": "useReducer.tsx",
+        "code": "import { useReducer } from 'react';\n\n// Action の型\ntype Action =\n    | { type: 'increment' }\n    | { type: 'decrement' }\n    | { type: 'reset';     payload: number }\n    | { type: 'set';       payload: number };\n\n// Reducer 関数（純粋関数）\nfunction counterReducer(state: number, action: Action): number {\n    switch (action.type) {\n        case 'increment': return state + 1;\n        case 'decrement': return state - 1;\n        case 'reset':     return action.payload;\n        case 'set':       return action.payload;\n        default:          return state;\n    }\n}\n\nfunction Counter({ initial = 0 }) {\n    const [count, dispatch] = useReducer(counterReducer, initial);\n\n    return (\n        <div>\n            <p>{count}</p>\n            <button onClick={() => dispatch({ type: 'increment' })}>+</button>\n            <button onClick={() => dispatch({ type: 'decrement' })}>-</button>\n            <button onClick={() => dispatch({ type: 'reset', payload: initial })}>Reset</button>\n        </div>\n    );\n}\n\n// useReducer + useContext = 簡易 Redux\nexport const StateContext  = createContext<State>(initialState);\nexport const DispatchContext = createContext<Dispatch<Action>>(() => {});",
+        "highlightLines": [4, 11, 22, 27, 35]
+      }
+    ]
+  },
+  {
+    "id": "usememo-usecallback",
+    "title": "useMemo / useCallback",
+    "description": "メモ化で不要な再計算・再生成を防ぐ",
+    "codeBlocks": [
+      {
+        "language": "tsx",
+        "filename": "memoization.tsx",
+        "code": "import { useMemo, useCallback, memo } from 'react';\n\n// useMemo: 重い計算結果をキャッシュ\nfunction ProductList({ products, filter }) {\n    // filter が変わった時だけ再計算\n    const filtered = useMemo(\n        () => products.filter(p => p.category === filter && p.inStock),\n        [products, filter]\n    );\n\n    // ソートも依存配列で制御\n    const sorted = useMemo(\n        () => [...filtered].sort((a, b) => a.price - b.price),\n        [filtered]\n    );\n\n    return <ul>{sorted.map(p => <ProductItem key={p.id} product={p} />)}</ul>;\n}\n\n// useCallback: 関数の参照を安定させる\nfunction Parent() {\n    const [count, setCount] = useState(0);\n\n    // count が変わっても handleClick の参照が変わらない\n    const handleClick = useCallback((id: number) => {\n        console.log('clicked:', id, count);\n    }, [count]); // count に依存するので含める\n\n    return <Child onClick={handleClick} />;\n}\n\n// memo: props が変わらなければ再レンダリングしない\nconst Child = memo(function Child({ onClick }) {\n    console.log('Child rendered');  // useCallback なしだと毎回実行\n    return <button onClick={() => onClick(1)}>Click</button>;\n});\n\n// ⚠️ 乱用注意: 単純な値・コンポーネントには不要。\n// パフォーマンス問題が実際にある時だけ使う。",
+        "highlightLines": [6, 12, 24, 33, 38]
+      }
+    ]
+  }
+]

@@ -1,0 +1,41 @@
+[
+  {
+    "id": "function-components",
+    "title": "関数コンポーネント",
+    "description": "props・デフォルト値・children・型定義",
+    "codeBlocks": [
+      {
+        "language": "tsx",
+        "filename": "Button.tsx",
+        "code": "import type { ReactNode, MouseEvent } from 'react';\n\n// Props の型定義\ninterface ButtonProps {\n  children:  ReactNode;\n  onClick?:  (e: MouseEvent<HTMLButtonElement>) => void;\n  variant?:  'primary' | 'secondary' | 'danger';\n  size?:     'sm' | 'md' | 'lg';\n  disabled?: boolean;\n  className?: string;\n}\n\n// 関数コンポーネント\nexport function Button({\n  children,\n  onClick,\n  variant = 'primary',   // デフォルト値\n  size    = 'md',\n  disabled = false,\n  className = '',\n}: ButtonProps) {\n  const base = 'rounded font-medium transition-colors';\n  const variants = {\n    primary:   'bg-emerald-600 text-white hover:bg-emerald-700',\n    secondary: 'bg-gray-100 text-gray-900 hover:bg-gray-200',\n    danger:    'bg-red-600 text-white hover:bg-red-700',\n  };\n  const sizes = { sm: 'px-3 py-1 text-sm', md: 'px-4 py-2', lg: 'px-6 py-3 text-lg' };\n\n  return (\n    <button\n      onClick={onClick}\n      disabled={disabled}\n      className={`${base} ${variants[variant]} ${sizes[size]} ${className}`}\n    >\n      {children}\n    </button>\n  );\n}",
+        "highlightLines": [4, 14, 17, 23, 31]
+      }
+    ]
+  },
+  {
+    "id": "conditional-rendering",
+    "title": "条件レンダリングとリスト",
+    "description": "&&、三項演算子、map、key",
+    "codeBlocks": [
+      {
+        "language": "tsx",
+        "filename": "rendering.tsx",
+        "code": "// 条件レンダリング\nfunction UserPanel({ user, isLoading, error }) {\n  // アーリーリターン（推奨）\n  if (isLoading) return <Spinner />;\n  if (error)     return <ErrorMessage message={error.message} />;\n  if (!user)     return null;\n\n  return (\n    <div>\n      {/* && 演算子: 左辺が truthy の時だけ右辺を表示 */}\n      {user.isAdmin && <AdminBadge />}\n\n      {/* 三項演算子 */}\n      <span>{user.isActive ? '有効' : '無効'}</span>\n\n      {/* 複数条件は変数に切り出す */}\n      {user.role === 'admin' ? <AdminView /> : <UserView />}\n    </div>\n  );\n}\n\n// リストレンダリング\nfunction UserList({ users }: { users: User[] }) {\n  return (\n    <ul>\n      {users.map(user => (\n        // key は一意で安定した値を使う（インデックスは最後の手段）\n        <li key={user.id}>\n          <UserCard user={user} />\n        </li>\n      ))}\n      {users.length === 0 && <li>ユーザーが見つかりません</li>}\n    </ul>\n  );\n}",
+        "highlightLines": [4, 11, 14, 26, 28, 32]
+      }
+    ]
+  },
+  {
+    "id": "composition",
+    "title": "コンポジション",
+    "description": "children・slots・as prop パターン",
+    "codeBlocks": [
+      {
+        "language": "tsx",
+        "filename": "composition.tsx",
+        "code": "// children による合成\nfunction Card({ children, className = '' }) {\n  return <div className={`rounded-xl border p-6 ${className}`}>{children}</div>;\n}\nfunction Card.Header({ children }) { return <div className=\"mb-4 font-bold\">{children}</div>; }\nfunction Card.Body({ children })   { return <div>{children}</div>; }\n\n// 使用\n<Card>\n  <Card.Header>タイトル</Card.Header>\n  <Card.Body>コンテンツ</Card.Body>\n</Card>\n\n// 複数スロット（named slots）\nfunction Layout({ header, sidebar, children }) {\n  return (\n    <div className=\"grid grid-cols-[250px_1fr]\">\n      <aside>{sidebar}</aside>\n      <div>\n        <header>{header}</header>\n        <main>{children}</main>\n      </div>\n    </div>\n  );\n}\n\n// as prop（ポリモーフィックコンポーネント）\nfunction Text({ as: Component = 'p', children, ...props }) {\n  return <Component {...props}>{children}</Component>;\n}\n// <Text as=\"h1\">見出し</Text>\n// <Text as=\"span\">インライン</Text>",
+        "highlightLines": [2, 9, 15, 28]
+      }
+    ]
+  }
+]

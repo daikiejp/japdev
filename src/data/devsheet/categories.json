@@ -32,6 +32,14 @@
     "topicsCount": 5
   },
   {
+    "id": "react",
+    "name": "React",
+    "logo": "/logos/react.svg",
+    "description": "Reactのコンポーネントとフック",
+    "color": "#61DAFB",
+    "topicsCount": 6
+  },
+  {
     "id": "git",
     "name": "Git",
     "logo": "/logos/git.svg",

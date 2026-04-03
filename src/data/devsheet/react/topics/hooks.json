@@ -1,0 +1,41 @@
+[
+  {
+    "id": "usestate",
+    "title": "useState",
+    "description": "状態管理の基本",
+    "codeBlocks": [
+      {
+        "language": "tsx",
+        "filename": "useState.tsx",
+        "code": "import { useState } from 'react';\n\n// 基本\nconst [count, setCount] = useState(0);\nconst [name,  setName]  = useState('');\nconst [user,  setUser]  = useState<User | null>(null);\n\n// 更新\nsetCount(5);                     // 直接指定\nsetCount(prev => prev + 1);      // 関数型更新（前の値を使うとき）\n\n// オブジェクト状態（イミュータブルに更新）\nconst [form, setForm] = useState({ name: '', email: '' });\nsetForm(prev => ({ ...prev, name: 'Alice' }));   // 一部だけ更新\n\n// 配列状態\nconst [items, setItems] = useState<string[]>([]);\nsetItems(prev => [...prev, 'new item']);          // 追加\nsetItems(prev => prev.filter(i => i !== 'old')); // 削除\nsetItems(prev => prev.map(i => i === 'x' ? 'y' : i)); // 更新\n\n// 遅延初期化（重い初期値の計算）\nconst [data, setData] = useState(() => {\n    const saved = localStorage.getItem('data');\n    return saved ? JSON.parse(saved) : [];\n});",
+        "highlightLines": [4, 10, 13, 17, 22]
+      }
+    ]
+  },
+  {
+    "id": "useeffect",
+    "title": "useEffect",
+    "description": "副作用・データフェッチ・クリーンアップ",
+    "codeBlocks": [
+      {
+        "language": "tsx",
+        "filename": "useEffect.tsx",
+        "code": "import { useEffect, useState } from 'react';\n\n// 基本パターン\nuseEffect(() => {\n    // 副作用処理\n    document.title = `Count: ${count}`;\n}, [count]);  // count が変わるたびに実行\n\nuseEffect(() => { /* マウント時のみ実行 */ }, []);\nuseEffect(() => { /* 毎レンダリング後に実行 */ });\n\n// クリーンアップ\nuseEffect(() => {\n    const handler = () => console.log('resize');\n    window.addEventListener('resize', handler);\n    return () => window.removeEventListener('resize', handler); // クリーンアップ\n}, []);\n\n// データフェッチ（abort 対応）\nfunction UserProfile({ userId }: { userId: number }) {\n    const [user, setUser] = useState<User | null>(null);\n\n    useEffect(() => {\n        const controller = new AbortController();\n\n        fetch(`/api/users/${userId}`, { signal: controller.signal })\n            .then(r => r.json())\n            .then(setUser)\n            .catch(err => {\n                if (err.name !== 'AbortError') console.error(err);\n            });\n\n        return () => controller.abort(); // アンマウント時にキャンセル\n    }, [userId]);\n\n    return user ? <div>{user.name}</div> : <Spinner />;\n}",
+        "highlightLines": [4, 9, 13, 22, 33]
+      }
+    ]
+  },
+  {
+    "id": "useref",
+    "title": "useRef",
+    "description": "DOM参照・ミュータブルな値の保持",
+    "codeBlocks": [
+      {
+        "language": "tsx",
+        "filename": "useRef.tsx",
+        "code": "import { useRef, useEffect } from 'react';\n\n// DOM参照\nfunction AutoFocusInput() {\n    const inputRef = useRef<HTMLInputElement>(null);\n\n    useEffect(() => {\n        inputRef.current?.focus();\n    }, []);\n\n    return <input ref={inputRef} />;\n}\n\n// ミュータブルな値（変更してもレンダリングしない）\nfunction Timer() {\n    const [time, setTime]   = useState(0);\n    const intervalRef       = useRef<ReturnType<typeof setInterval>>();\n    const isRunningRef      = useRef(false);\n\n    const start = () => {\n        if (isRunningRef.current) return;\n        isRunningRef.current = true;\n        intervalRef.current = setInterval(() => setTime(t => t + 1), 1000);\n    };\n\n    const stop = () => {\n        clearInterval(intervalRef.current);\n        isRunningRef.current = false;\n    };\n\n    useEffect(() => () => clearInterval(intervalRef.current), []);\n\n    return <div>{time}s <button onClick={start}>▶</button> <button onClick={stop}>⏹</button></div>;\n}\n\n// 前の値を保持\nfunction usePrevious<T>(value: T) {\n    const ref = useRef<T>();\n    useEffect(() => { ref.current = value; });\n    return ref.current;\n}",
+        "highlightLines": [5, 8, 17, 22, 37]
+      }
+    ]
+  }
+]

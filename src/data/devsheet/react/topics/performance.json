@@ -1,0 +1,28 @@
+[
+  {
+    "id": "memo-lazy",
+    "title": "React.memo / lazy / Suspense",
+    "description": "コンポーネントの遅延読み込みとメモ化",
+    "codeBlocks": [
+      {
+        "language": "tsx",
+        "filename": "performance.tsx",
+        "code": "import { memo, lazy, Suspense } from 'react';\n\n// React.memo: props が変わらなければ再レンダリングをスキップ\nconst HeavyChart = memo(function HeavyChart({ data, config }) {\n    return <canvas>{/* 重い描画処理 */}</canvas>;\n});\n\n// カスタム比較関数\nconst Chart = memo(HeavyChart, (prev, next) => {\n    // true を返すと再レンダリングをスキップ\n    return prev.data === next.data && prev.config.color === next.config.color;\n});\n\n// lazy: コンポーネントを動的インポート（コード分割）\nconst Dashboard = lazy(() => import('./Dashboard'));\nconst Settings  = lazy(() => import('./Settings'));\n\n// Suspense: ローディング状態の表示\nfunction App() {\n    return (\n        <Suspense fallback={<PageSkeleton />}>\n            <Dashboard />\n        </Suspense>\n    );\n}\n\n// ルートごとに分割\nfunction Router() {\n    return (\n        <Suspense fallback={<Spinner />}>\n            {route === '/dashboard' && <Dashboard />}\n            {route === '/settings'  && <Settings />}\n        </Suspense>\n    );\n}",
+        "highlightLines": [4, 9, 15, 21, 30]
+      }
+    ]
+  },
+  {
+    "id": "transitions",
+    "title": "useTransition / useDeferredValue",
+    "description": "UIのブロッキングを防ぐ優先度制御",
+    "codeBlocks": [
+      {
+        "language": "tsx",
+        "filename": "transitions.tsx",
+        "code": "import { useState, useTransition, useDeferredValue } from 'react';\n\n// useTransition: 重い更新を低優先度にする\nfunction SearchPage() {\n    const [query,   setQuery]   = useState('');\n    const [results, setResults] = useState([]);\n    const [isPending, startTransition] = useTransition();\n\n    const handleChange = (e) => {\n        setQuery(e.target.value);  // 高優先度（入力は即座に反映）\n\n        startTransition(() => {\n            // 低優先度（検索結果の更新は遅延可）\n            setResults(heavySearch(e.target.value));\n        });\n    };\n\n    return (\n        <>\n            <input value={query} onChange={handleChange} />\n            {isPending && <Spinner />}\n            <ResultList results={results} />\n        </>\n    );\n}\n\n// useDeferredValue: 値の更新を遅延\nfunction FilteredList({ query }) {\n    // query の更新を遅延させて UI をブロックしない\n    const deferredQuery = useDeferredValue(query);\n    const isStale = query !== deferredQuery;\n\n    return (\n        <div style={{ opacity: isStale ? 0.7 : 1 }}>\n            <HeavyFilteredList query={deferredQuery} />\n        </div>\n    );\n}",
+        "highlightLines": [7, 12, 21, 29, 33]
+      }
+    ]
+  }
+]

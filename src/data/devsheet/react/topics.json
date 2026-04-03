@@ -1,0 +1,8 @@
+[
+  { "id": "components",  "name": "コンポーネント",     "description": "関数コンポーネント・props・条件レンダリング" },
+  { "id": "hooks",       "name": "基本フック",          "description": "useState・useEffect・useRef" },
+  { "id": "hooks-adv",   "name": "高度なフック",        "description": "useContext・useReducer・useMemo・useCallback" },
+  { "id": "patterns",    "name": "パターン",            "description": "カスタムフック・コンポジション・Render Props" },
+  { "id": "performance", "name": "パフォーマンス",      "description": "memo・lazy・Suspense・Profiler" },
+  { "id": "forms",       "name": "フォーム管理",        "description": "制御・非制御コンポーネント・バリデーション" }
+]

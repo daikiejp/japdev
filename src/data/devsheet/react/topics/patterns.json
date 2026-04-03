@@ -1,0 +1,35 @@
+[
+  {
+    "id": "custom-hooks",
+    "title": "カスタムフック",
+    "description": "ロジックを再利用可能なフックに抽出",
+    "codeBlocks": [
+      {
+        "language": "tsx",
+        "filename": "useFetch.ts",
+        "code": "import { useState, useEffect, useCallback } from 'react';\n\n// データフェッチ汎用フック\nfunction useFetch<T>(url: string) {\n    const [data,    setData]    = useState<T | null>(null);\n    const [loading, setLoading] = useState(true);\n    const [error,   setError]   = useState<Error | null>(null);\n\n    const refetch = useCallback(async () => {\n        setLoading(true);\n        setError(null);\n        try {\n            const res = await fetch(url);\n            if (!res.ok) throw new Error(`HTTP ${res.status}`);\n            setData(await res.json());\n        } catch (e) {\n            setError(e as Error);\n        } finally {\n            setLoading(false);\n        }\n    }, [url]);\n\n    useEffect(() => { refetch(); }, [refetch]);\n\n    return { data, loading, error, refetch };\n}\n\n// 使用\nfunction UserPage({ id }) {\n    const { data: user, loading, error } = useFetch<User>(`/api/users/${id}`);\n    if (loading) return <Spinner />;\n    if (error)   return <Error message={error.message} />;\n    return <UserCard user={user!} />;\n}",
+        "highlightLines": [4, 9, 23, 29]
+      },
+      {
+        "title": "useLocalStorage / useDebounce",
+        "language": "ts",
+        "filename": "hooks.ts",
+        "code": "// useLocalStorage: 状態を localStorage に永続化\nfunction useLocalStorage<T>(key: string, initial: T) {\n    const [value, setValue] = useState<T>(() => {\n        try {\n            const item = localStorage.getItem(key);\n            return item ? JSON.parse(item) : initial;\n        } catch { return initial; }\n    });\n\n    const set = useCallback((v: T | ((prev: T) => T)) => {\n        setValue(prev => {\n            const next = typeof v === 'function' ? (v as Function)(prev) : v;\n            localStorage.setItem(key, JSON.stringify(next));\n            return next;\n        });\n    }, [key]);\n\n    return [value, set] as const;\n}\n\n// useDebounce: 値の更新を遅延\nfunction useDebounce<T>(value: T, delay = 300): T {\n    const [debounced, setDebounced] = useState(value);\n    useEffect(() => {\n        const id = setTimeout(() => setDebounced(value), delay);\n        return () => clearTimeout(id);\n    }, [value, delay]);\n    return debounced;\n}\n\n// 使用: 検索入力のデバウンス\nconst [query, setQuery] = useState('');\nconst debouncedQuery = useDebounce(query, 400);\nuseEffect(() => { search(debouncedQuery); }, [debouncedQuery]);",
+        "highlightLines": [2, 22, 33]
+      }
+    ]
+  },
+  {
+    "id": "error-boundary",
+    "title": "Error Boundary",
+    "description": "子コンポーネントのエラーをキャッチ",
+    "codeBlocks": [
+      {
+        "language": "tsx",
+        "filename": "ErrorBoundary.tsx",
+        "code": "import { Component, type ReactNode, type ErrorInfo } from 'react';\n\ninterface Props {\n    fallback: ReactNode | ((error: Error) => ReactNode);\n    children:  ReactNode;\n    onError?:  (error: Error, info: ErrorInfo) => void;\n}\ninterface State { error: Error | null; }\n\n// Error Boundary はクラスコンポーネントが必要\nexport class ErrorBoundary extends Component<Props, State> {\n    state: State = { error: null };\n\n    static getDerivedStateFromError(error: Error): State {\n        return { error };\n    }\n\n    componentDidCatch(error: Error, info: ErrorInfo) {\n        this.props.onError?.(error, info);\n        // Sentry.captureException(error); など\n    }\n\n    render() {\n        if (this.state.error) {\n            const { fallback } = this.props;\n            return typeof fallback === 'function'\n                ? fallback(this.state.error)\n                : fallback;\n        }\n        return this.props.children;\n    }\n}\n\n// 使用\n<ErrorBoundary fallback={<p>エラーが発生しました</p>}>\n    <UserDashboard />\n</ErrorBoundary>",
+        "highlightLines": [11, 14, 18, 24, 35]
+      }
+    ]
+  }
+]
