@@ -1,0 +1,41 @@
+[
+  {
+    "id": "partial-required",
+    "title": "Partial / Required / Readonly",
+    "description": "プロパティの省略可能・必須・読み取り専用変換",
+    "codeBlocks": [
+      {
+        "language": "typescript",
+        "filename": "utility1.ts",
+        "code": "interface User {\n    id:    number;\n    name:  string;\n    email: string;\n    age:   number;\n}\n\n// Partial<T> — 全プロパティをオプショナルに\ntype UserPatch = Partial<User>;\n// { id?: number; name?: string; email?: string; age?: number; }\n\n// 使用例: 更新用の引数\nfunction updateUser(id: number, patch: Partial<User>): User {\n    return { ...currentUser, ...patch };\n}\n\n// Required<T> — 全プロパティを必須に\ntype RequiredUser = Required<User>;\n\n// Readonly<T> — 全プロパティを読み取り専用に\ntype FrozenUser = Readonly<User>;\nconst u: FrozenUser = { id: 1, name: 'Alice', email: '', age: 30 };\n// u.name = 'Bob'; // ❌ エラー\n\n// ReadonlyArray との組み合わせ\nconst users: Readonly<User[]> = [];\n// users.push(newUser); // ❌ エラー",
+        "highlightLines": [9, 13, 18, 21, 25]
+      }
+    ]
+  },
+  {
+    "id": "pick-omit",
+    "title": "Pick / Omit / Record",
+    "description": "プロパティの選択・除外・辞書型",
+    "codeBlocks": [
+      {
+        "language": "typescript",
+        "filename": "utility2.ts",
+        "code": "interface User {\n    id: number; name: string; email: string; password: string; age: number;\n}\n\n// Pick<T, Keys> — 特定プロパティだけ取り出す\ntype UserPreview = Pick<User, 'id' | 'name'>;\n// { id: number; name: string; }\n\n// Omit<T, Keys> — 特定プロパティを除外\ntype PublicUser = Omit<User, 'password'>;\n// { id: number; name: string; email: string; age: number; }\n\n// Record<Keys, Type> — 辞書型（マップ）\ntype RoleMap = Record<string, User[]>;\nconst roles: RoleMap = { admin: [], user: [], guest: [] };\n\n// ユニオン型をキーに\ntype Status = 'active' | 'inactive' | 'pending';\ntype StatusLabel = Record<Status, string>;\nconst labels: StatusLabel = {\n    active:   '有効',\n    inactive: '無効',\n    pending:  '保留中',\n};\n\n// Extract<T, U> / Exclude<T, U>\ntype OnlyStrings = Extract<string | number | boolean, string>; // string\ntype NoStrings   = Exclude<string | number | boolean, string>; // number | boolean",
+        "highlightLines": [6, 10, 14, 19, 26]
+      }
+    ]
+  },
+  {
+    "id": "parameters-return",
+    "title": "Parameters / ReturnType / Awaited",
+    "description": "関数型から引数・戻り値型を取り出す",
+    "codeBlocks": [
+      {
+        "language": "typescript",
+        "filename": "utility3.ts",
+        "code": "function fetchUser(id: number, options?: RequestInit): Promise<User> {\n    return fetch(`/api/users/${id}`, options).then(r => r.json());\n}\n\n// Parameters<T> — 引数の型をタプルとして取得\ntype FetchArgs = Parameters<typeof fetchUser>;\n// [id: number, options?: RequestInit]\n\n// ReturnType<T> — 戻り値の型を取得\ntype FetchReturn = ReturnType<typeof fetchUser>;\n// Promise<User>\n\n// Awaited<T> — Promiseの解決型を取得\ntype ResolvedUser = Awaited<ReturnType<typeof fetchUser>>;\n// User\n\n// ConstructorParameters<T> — コンストラクタの引数型\nclass Timer { constructor(delay: number, label: string) {} }\ntype TimerArgs = ConstructorParameters<typeof Timer>; // [number, string]\n\n// InstanceType<T> — クラスのインスタンス型\ntype TimerInstance = InstanceType<typeof Timer>; // Timer\n\n// NonNullable<T> — null / undefined を除外\ntype SafeUser = NonNullable<User | null | undefined>; // User",
+        "highlightLines": [6, 10, 14, 19, 23]
+      }
+    ]
+  }
+]

@@ -1,0 +1,7 @@
+[
+  {"id":"basic-types","name":"基本型","description":"number、string、boolean、tuple、enum"},
+  {"id":"interfaces-types","name":"インターフェースと型エイリアス","description":"interface、type、extends"},
+  {"id":"generics","name":"ジェネリクス","description":"型パラメーターと制約"},
+  {"id":"utility-types","name":"ユーティリティ型","description":"Partial、Required、Pick、Omit など"},
+  {"id":"advanced","name":"高度な型","description":"Union、Intersection、Conditional Types"}
+]

@@ -1,0 +1,41 @@
+[
+  {
+    "id": "interface",
+    "title": "interface",
+    "description": "オブジェクト型の定義と拡張",
+    "codeBlocks": [
+      {
+        "language": "typescript",
+        "filename": "interface.ts",
+        "code": "// 基本的な interface\ninterface User {\n    id:       number;\n    name:     string;\n    email?:   string;    // オプショナル\n    readonly createdAt: Date; // 読み取り専用\n}\n\n// 関数型\ninterface Formatter {\n    (value: string, locale: string): string;\n}\n\n// インデックスシグネチャ\ninterface StringMap {\n    [key: string]: string;\n}\n\n// 拡張（extends）\ninterface Admin extends User {\n    role:        'admin' | 'superadmin';\n    permissions: string[];\n}\n\n// 複数インターフェースの拡張\ninterface SuperAdmin extends Admin, Auditable {\n    auditLog: string[];\n}\n\n// 宣言のマージ（同名interface は自動マージ）\ninterface Window { myPlugin: MyPlugin; }\ninterface Window { analytics: Analytics; }\n// 両方の定義が有効",
+        "highlightLines": [2, 10, 15, 20, 26, 30]
+      }
+    ]
+  },
+  {
+    "id": "type-alias",
+    "title": "type エイリアス",
+    "description": "型の別名定義と interface との違い",
+    "codeBlocks": [
+      {
+        "language": "typescript",
+        "filename": "types.ts",
+        "code": "// type エイリアス\ntype UserId = number;\ntype UserName = string;\n\n// オブジェクト型\ntype Point = { x: number; y: number; };\n\n// Union型\ntype StringOrNumber = string | number;\ntype Status = 'active' | 'inactive' | 'pending';\n\n// Intersection型（&）— 型の結合\ntype AdminUser = User & { role: 'admin' };\ntype WithTimestamp = { createdAt: Date; updatedAt: Date };\ntype UserRecord = User & WithTimestamp;\n\n// type vs interface の主な違い\n// interface: 宣言マージ可、クラスでimplements可\n// type:      Union/Intersection型を直接表現可\n\n// オブジェクト型には interface を使う（推奨）\ninterface UserDTO { id: number; name: string; }\n\n// Union / Intersection / リテラル型には type を使う（推奨）\ntype ID = string | number;\ntype Theme = 'light' | 'dark';",
+        "highlightLines": [6, 9, 12, 14, 22, 25]
+      }
+    ]
+  },
+  {
+    "id": "class-types",
+    "title": "クラスと型",
+    "description": "implements、アクセス修飾子、抽象クラス",
+    "codeBlocks": [
+      {
+        "language": "typescript",
+        "filename": "classes.ts",
+        "code": "interface Printable {\n    print(): void;\n}\n\nclass Document implements Printable {\n    // アクセス修飾子\n    public    title:   string;    // どこからでもアクセス可（デフォルト）\n    private   content: string;    // クラス内のみ\n    protected author:  string;    // クラスとサブクラス\n    readonly  id:      number;    // 変更不可\n\n    // コンストラクタ短縮記法\n    constructor(\n        public name: string,\n        private secret: string,\n    ) {}\n\n    print(): void {\n        console.log(this.title);\n    }\n}\n\n// 抽象クラス\nabstract class Shape {\n    abstract area(): number; // サブクラスで実装必須\n\n    describe(): string {\n        return `面積: ${this.area()}`; // 共通実装\n    }\n}\n\nclass Circle extends Shape {\n    constructor(private radius: number) { super(); }\n    area(): number { return Math.PI * this.radius ** 2; }\n}",
+        "highlightLines": [5, 7, 8, 9, 13, 23, 25]
+      }
+    ]
+  }
+]

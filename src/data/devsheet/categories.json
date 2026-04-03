@@ -22,5 +22,13 @@
     "description": "JavaScriptのコア概念と実践",
     "color": "#F7DF1E",
     "topicsCount": 7
+  },
+  {
+    "id": "typescript",
+    "name": "TypeScript",
+    "logo": "/logos/typescript.svg",
+    "description": "TypeScriptの型システムと機能",
+    "color": "#3178C6",
+    "topicsCount": 5
   }
 ]

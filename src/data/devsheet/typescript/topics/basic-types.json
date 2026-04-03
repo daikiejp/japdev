@@ -1,0 +1,41 @@
+[
+  {
+    "id": "primitives",
+    "title": "基本型",
+    "description": "number、string、boolean、null、undefined",
+    "codeBlocks": [
+      {
+        "language": "typescript",
+        "filename": "basic-types.ts",
+        "code": "// プリミティブ型\nconst age:    number  = 30;\nconst name:   string  = 'Alice';\nconst active: boolean = true;\nconst nothing: null      = null;\nconst undef:   undefined = undefined;\n\n// 型推論（型注釈を省略できる）\nconst age = 30;      // number と推論\nconst name = 'Alice'; // string と推論\n\n// 特殊型\nconst anything: any    = 'anything'; // 型チェック無効化（避けるべき）\nconst unknown:  unknown = getData();  // 型確認してから使う（any より安全）\nconst nothing:  never   = (() => { throw new Error(); })(); // 到達不可能\nconst voidFn:   void    = undefined;  // 戻り値なしの関数\n\n// リテラル型\nconst dir: 'left' | 'right' = 'left';\nconst code: 200 | 400 | 404 | 500 = 200;\n\n// BigInt / Symbol\nconst big: bigint = 9007199254740991n;\nconst sym: symbol = Symbol('unique');",
+        "highlightLines": [2, 9, 14, 19, 22]
+      }
+    ]
+  },
+  {
+    "id": "arrays-tuples",
+    "title": "配列とタプル",
+    "description": "Array、ReadonlyArray、タプル型",
+    "codeBlocks": [
+      {
+        "language": "typescript",
+        "filename": "arrays.ts",
+        "code": "// 配列\nconst nums:  number[]      = [1, 2, 3];\nconst strs:  Array<string> = ['a', 'b'];\nconst mixed: (string | number)[] = [1, 'two', 3];\n\n// 読み取り専用配列\nconst frozen: ReadonlyArray<number> = [1, 2, 3];\nconst frozen: readonly number[] = [1, 2, 3];\n// frozen.push(4); // ❌ エラー\n\n// タプル型（固定長・順序固定）\nconst point: [number, number] = [10, 20];\nconst entry: [string, number] = ['Alice', 30];\n\n// オプショナルタプル要素\nconst opt: [string, number?] = ['Alice'];\n\n// ラベル付きタプル\nconst rgb: [red: number, green: number, blue: number] = [255, 128, 0];\n\n// Rest要素\nconst rest: [string, ...number[]] = ['sum', 1, 2, 3, 4];\n\n// 分割代入\nconst [x, y] = point;\nconst [name, age] = entry;",
+        "highlightLines": [2, 7, 11, 18, 21]
+      }
+    ]
+  },
+  {
+    "id": "enums",
+    "title": "Enum（列挙型）",
+    "description": "数値・文字列・const enum",
+    "codeBlocks": [
+      {
+        "language": "typescript",
+        "filename": "enums.ts",
+        "code": "// 数値 enum（デフォルト）\nenum Direction {\n    Up,    // 0\n    Down,  // 1\n    Left,  // 2\n    Right, // 3\n}\nconst dir: Direction = Direction.Up; // 0\n\n// 文字列 enum（推奨 — デバッグしやすい）\nenum Status {\n    Active   = 'ACTIVE',\n    Inactive = 'INACTIVE',\n    Pending  = 'PENDING',\n}\nconst s: Status = Status.Active; // 'ACTIVE'\n\n// const enum（コンパイル時にインライン展開）\nconst enum Color {\n    Red   = 0xff0000,\n    Green = 0x00ff00,\n    Blue  = 0x0000ff,\n}\n// Color.Red はコンパイル後 0xff0000 に置換\n\n// Union型での代替（const enumより軽量）\ntype Direction = 'Up' | 'Down' | 'Left' | 'Right';\nconst dirs = ['Up', 'Down', 'Left', 'Right'] as const;\ntype Direction = typeof dirs[number];",
+        "highlightLines": [2, 11, 19, 26]
+      }
+    ]
+  }
+]

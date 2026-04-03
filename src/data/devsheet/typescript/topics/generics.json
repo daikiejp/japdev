@@ -1,0 +1,41 @@
+[
+  {
+    "id": "generic-basics",
+    "title": "ジェネリクスの基本",
+    "description": "型パラメーターで再利用可能な型を定義",
+    "codeBlocks": [
+      {
+        "language": "typescript",
+        "filename": "generics.ts",
+        "code": "// ジェネリック関数\nfunction identity<T>(value: T): T {\n    return value;\n}\nidentity<string>('hello'); // 'hello'\nidentity(42);              // 型推論: number\n\n// 配列の最初の要素\nfunction first<T>(arr: T[]): T | undefined {\n    return arr[0];\n}\nfirst([1, 2, 3]);     // number | undefined\nfirst(['a', 'b']);    // string | undefined\n\n// ジェネリックインターフェース\ninterface Repository<T> {\n    findById(id: number): Promise<T>;\n    findAll(): Promise<T[]>;\n    save(entity: T): Promise<T>;\n    delete(id: number): Promise<void>;\n}\n\n// ジェネリッククラス\nclass Stack<T> {\n    private items: T[] = [];\n    push(item: T):  void    { this.items.push(item); }\n    pop():          T | undefined { return this.items.pop(); }\n    peek():         T | undefined { return this.items.at(-1); }\n    isEmpty():      boolean  { return this.items.length === 0; }\n}",
+        "highlightLines": [2, 9, 16, 23]
+      }
+    ]
+  },
+  {
+    "id": "constraints",
+    "title": "型制約",
+    "description": "extends で型パラメーターを制限する",
+    "codeBlocks": [
+      {
+        "language": "typescript",
+        "filename": "constraints.ts",
+        "code": "// extends による制約\nfunction getLength<T extends { length: number }>(val: T): number {\n    return val.length;\n}\ngetLength('hello');   // 5\ngetLength([1, 2, 3]); // 3\n// getLength(42);     // ❌ エラー: numberはlengthを持たない\n\n// keyof 制約\nfunction getProperty<T, K extends keyof T>(obj: T, key: K): T[K] {\n    return obj[key];\n}\nconst user = { name: 'Alice', age: 30 };\ngetProperty(user, 'name'); // string\ngetProperty(user, 'age');  // number\n// getProperty(user, 'email'); // ❌ エラー\n\n// 複数の制約\nfunction merge<T extends object, U extends object>(a: T, b: U): T & U {\n    return { ...a, ...b };\n}\n\n// デフォルト型パラメーター\ninterface ApiResponse<T = unknown> {\n    data:    T;\n    status:  number;\n    message: string;\n}\ntype UserResponse = ApiResponse<User>; // data は User 型\ntype RawResponse  = ApiResponse;       // data は unknown 型",
+        "highlightLines": [2, 10, 19, 24]
+      }
+    ]
+  },
+  {
+    "id": "generic-patterns",
+    "title": "実用ジェネリックパターン",
+    "description": "ReturnType、Parameters、infer など",
+    "codeBlocks": [
+      {
+        "language": "typescript",
+        "filename": "patterns.ts",
+        "code": "// infer — 型の推論\ntype ReturnType<T extends (...args: any) => any> =\n    T extends (...args: any) => infer R ? R : never;\n\ntype Unpacked<T> =\n    T extends Array<infer Item>        ? Item :\n    T extends Promise<infer Resolved>  ? Resolved :\n    T;\n\ntype A = Unpacked<string[]>;          // string\ntype B = Unpacked<Promise<number>>;   // number\n\n// 非同期関数の戻り値型\nasync function fetchUser(): Promise<User> { /* ... */ return user; }\ntype FetchResult = Awaited<ReturnType<typeof fetchUser>>; // User\n\n// 条件型 + ジェネリクス\ntype NonNullable<T> = T extends null | undefined ? never : T;\ntype Flatten<T> = T extends Array<infer Item> ? Item : T;\n\n// Mapped Type + ジェネリクス\ntype Nullable<T>  = { [K in keyof T]: T[K] | null };\ntype Optional<T>  = { [K in keyof T]?: T[K] };\ntype Stringify<T> = { [K in keyof T]: string };",
+        "highlightLines": [2, 5, 15, 17, 22]
+      }
+    ]
+  }
+]

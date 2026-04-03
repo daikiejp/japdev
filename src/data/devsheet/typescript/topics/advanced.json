@@ -1,0 +1,41 @@
+[
+  {
+    "id": "union-intersection",
+    "title": "Union / Intersection 型",
+    "description": "| と & を使った型の合成",
+    "codeBlocks": [
+      {
+        "language": "typescript",
+        "filename": "union-intersection.ts",
+        "code": "// Union型（どちらかの型）\ntype ID = string | number;\ntype Result<T> = T | Error;\ntype Theme = 'light' | 'dark' | 'system';\n\n// 型ガードで絞り込み\nfunction processId(id: ID) {\n    if (typeof id === 'string') {\n        id.toUpperCase(); // string 確定\n    } else {\n        id.toFixed(0);    // number 確定\n    }\n}\n\n// Discriminated Union（タグ付きUnion）\ntype Shape =\n    | { kind: 'circle';    radius: number }\n    | { kind: 'rectangle'; width: number; height: number }\n    | { kind: 'triangle';  base: number;  height: number };\n\nfunction area(shape: Shape): number {\n    switch (shape.kind) {\n        case 'circle':    return Math.PI * shape.radius ** 2;\n        case 'rectangle': return shape.width * shape.height;\n        case 'triangle':  return (shape.base * shape.height) / 2;\n    }\n}\n\n// Intersection型（両方の型を持つ）\ntype WithId        = { id: number };\ntype WithTimestamp = { createdAt: Date; updatedAt: Date };\ntype Entity = WithId & WithTimestamp;\n// Entity = { id: number; createdAt: Date; updatedAt: Date }",
+        "highlightLines": [2, 7, 16, 21, 30, 33]
+      }
+    ]
+  },
+  {
+    "id": "conditional-types",
+    "title": "条件型",
+    "description": "T extends U ? X : Y パターン",
+    "codeBlocks": [
+      {
+        "language": "typescript",
+        "filename": "conditional.ts",
+        "code": "// 基本構文: T extends U ? TrueType : FalseType\ntype IsString<T> = T extends string ? true : false;\ntype A = IsString<string>;  // true\ntype B = IsString<number>;  // false\n\n// Distribution（Unionに対して分配）\ntype ToArray<T> = T extends unknown ? T[] : never;\ntype C = ToArray<string | number>; // string[] | number[]\n\n// NonNullable の実装\ntype NonNullable<T> = T extends null | undefined ? never : T;\n\n// infer — 型の推論\ntype ElementType<T> = T extends (infer E)[] ? E : never;\ntype D = ElementType<string[]>; // string\n\ntype UnpackPromise<T> = T extends Promise<infer R> ? R : T;\ntype E = UnpackPromise<Promise<User>>; // User\ntype F = UnpackPromise<string>;        // string\n\n// 深いオプショナル（再帰的条件型）\ntype DeepPartial<T> = T extends object\n    ? { [K in keyof T]?: DeepPartial<T[K]> }\n    : T;",
+        "highlightLines": [2, 7, 11, 14, 16, 21]
+      }
+    ]
+  },
+  {
+    "id": "mapped-types",
+    "title": "Mapped Types",
+    "description": "既存の型のプロパティをマッピング",
+    "codeBlocks": [
+      {
+        "language": "typescript",
+        "filename": "mapped.ts",
+        "code": "// 基本構文: { [K in keyof T]: ... }\ntype Stringify<T> = { [K in keyof T]: string };\ntype Nullable<T>  = { [K in keyof T]: T[K] | null };\n\n// +? / -? で省略可能を追加・削除\ntype AllOptional<T> = { [K in keyof T]+?: T[K] };\ntype AllRequired<T> = { [K in keyof T]-?: T[K] };\n\n// readonly の追加・削除\ntype Freeze<T>  = { +readonly [K in keyof T]: T[K] };\ntype Mutable<T> = { -readonly [K in keyof T]: T[K] };\n\n// キーの再マッピング（as）\ntype Getters<T> = {\n    [K in keyof T as `get${Capitalize<string & K>}`]: () => T[K];\n};\n// { getName: () => string; getAge: () => number; ... }\n\n// フィルタリング\ntype PickByValue<T, V> = {\n    [K in keyof T as T[K] extends V ? K : never]: T[K];\n};\ntype StringProps = PickByValue<User, string>; // name: string; email: string;",
+        "highlightLines": [2, 6, 10, 14, 20]
+      }
+    ]
+  }
+]
