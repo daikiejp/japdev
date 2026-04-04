@@ -1,0 +1,48 @@
+[
+  {
+    "id": "erb-templates",
+    "title": "ERB テンプレート",
+    "description": "タグの種類・パーシャル・レイアウト",
+    "codeBlocks": [
+      {
+        "language": "erb",
+        "filename": "app/views/posts/show.html.erb",
+        "code": "<%# ERB タグの種類 %>\n<% code %>         <%# 実行（出力なし）%>\n<%= expression %>  <%# 実行して出力（エスケープあり）%>\n<%== raw_html %>   <%# 実行して出力（エスケープなし）%>\n<%- trimmed -%>    <%# 前後の空白・改行を削除 %>\n\n<%# ループ %>\n<% @posts.each do |post| %>\n  <article>\n    <h2><%= post.title %></h2>\n    <p><%= post.body.truncate(200) %></p>\n    <time><%= post.created_at.strftime('%Y年%m月%d日') %></time>\n\n    <%# リンクヘルパー %>\n    <%= link_to '詳細', post_path(post), class: 'btn' %>\n    <%= link_to '削除', post_path(post),\n                method: :delete,\n                data: { turbo_confirm: '削除しますか？' },\n                class: 'btn btn-danger' %>\n  </article>\n<% end %>\n\n<%# 条件分岐 %>\n<% if @post.published? %>\n  <span class=\"badge\">公開済み</span>\n<% elsif @post.draft? %>\n  <span class=\"badge\">下書き</span>\n<% end %>\n\n<%# パーシャルの呼び出し %>\n<%= render 'shared/header' %>\n<%= render partial: 'post', locals: { post: @post } %>\n<%= render @posts %>  <%# コレクションの自動レンダリング %>\n<%= render @posts, cached: true %>  <%# キャッシュ付き %>\n\n<%# コンテンツのキャプチャ %>\n<% content_for :title do %>\n  <%= @post.title %> | MyBlog\n<% end %>\n\n<%# ヘルパーメソッド %>\n<%= number_with_delimiter(1000000) %>  <%# 1,000,000 %>\n<%= time_ago_in_words(@post.created_at) %> <%# 3分前 %>\n<%= truncate(@post.body, length: 100) %>\n<%= pluralize(@post.comments.count, 'comment') %>",
+        "highlightLines": [2, 3, 8, 15, 24, 31, 37, 43]
+      }
+    ]
+  },
+  {
+    "id": "layouts-partials",
+    "title": "レイアウトとパーシャル",
+    "description": "yield・content_for・パーシャルのパターン",
+    "codeBlocks": [
+      {
+        "language": "erb",
+        "filename": "app/views/layouts/application.html.erb",
+        "code": "<!DOCTYPE html>\n<html lang=\"ja\">\n  <head>\n    <title><%= content_for?(:title) ? yield(:title) : 'MyApp' %></title>\n    <%= csrf_meta_tags %>\n    <%= csp_meta_tag %>\n    <%= stylesheet_link_tag 'application', media: 'all' %>\n    <%= javascript_importmap_tags %>\n  </head>\n  <body class=\"<%= body_class %>\">\n    <header>\n      <%= render 'shared/navbar' %>\n      <%= render 'shared/flash_messages' %>\n    </header>\n\n    <main>\n      <%= yield %>  <%# 各ページのコンテンツ %>\n    </main>\n\n    <%# 複数の yield ゾーン %>\n    <%= yield :sidebar if content_for?(:sidebar) %>\n    <%= yield :modal %>\n\n    <%= render 'shared/footer' %>\n  </body>\n</html>",
+        "highlightLines": [4, 17, 21]
+      },
+      {
+        "title": "パーシャルのパターン",
+        "language": "erb",
+        "filename": "_post.html.erb",
+        "code": "<%# app/views/posts/_post.html.erb %>\n<%# render @posts → 各 post に対してこのパーシャルを自動呼び出し %>\n\n<article id=\"<%= dom_id(post) %>\" class=\"post\">\n  <h3><%= link_to post.title, post %></h3>\n  <p><%= post.excerpt %></p>\n\n  <%# ネストしたパーシャル %>\n  <%= render 'tags/tag', collection: post.tags, as: :tag %>\n</article>\n\n<%# フォームパーシャル（new と edit で共有）%>\n<%# app/views/posts/_form.html.erb %>\n<%= form_with model: post do |f| %>\n  <div class=\"field\">\n    <%= f.label :title %>\n    <%= f.text_field :title, class: 'form-control' %>\n    <% if post.errors[:title].any? %>\n      <span class=\"error\"><%= post.errors[:title].first %></span>\n    <% end %>\n  </div>\n\n  <div class=\"field\">\n    <%= f.label :body %>\n    <%= f.text_area :body, rows: 10 %>\n  </div>\n\n  <div class=\"field\">\n    <%= f.select :status, Post.statuses.keys, include_blank: '選択してください' %>\n  </div>\n\n  <div class=\"field\">\n    <%= f.collection_check_boxes :tag_ids, Tag.all, :id, :name %>\n  </div>\n\n  <%= f.submit '保存', class: 'btn btn-primary' %>\n<% end %>",
+        "highlightLines": [4, 14, 18, 29, 33]
+      }
+    ]
+  },
+  {
+    "id": "helpers",
+    "title": "ヘルパーメソッド",
+    "description": "form_with・link_to・image_tag・カスタムヘルパー",
+    "codeBlocks": [
+      {
+        "language": "erb",
+        "filename": "helpers.html.erb",
+        "code": "<%# === フォームヘルパー === %>\n<%= form_with model: @user, url: users_path do |f| %>\n  <%= f.text_field  :name,     placeholder: '名前', autofocus: true %>\n  <%= f.email_field :email %>\n  <%= f.password_field :password %>\n  <%= f.number_field   :age,  min: 0, max: 150 %>\n  <%= f.check_box      :active %>\n  <%= f.radio_button   :role, 'admin' %> 管理者\n  <%= f.radio_button   :role, 'user' %> 一般ユーザー\n  <%= f.select :role, [['管理者', 'admin'], ['一般', 'user']] %>\n  <%= f.file_field  :avatar, accept: 'image/*' %>\n  <%= f.hidden_field :token, value: form_token %>\n  <%= f.submit '登録' %>\n<% end %>\n\n<%# 検索フォーム（モデルに対応しない）%>\n<%= form_with url: search_path, method: :get do |f| %>\n  <%= f.search_field :q, placeholder: '検索...' %>\n  <%= f.submit '検索' %>\n<% end %>\n\n<%# === リンクとURL === %>\n<%= link_to '詳細', @post %>\n<%= link_to '編集', edit_post_path(@post) %>\n<%= link_to '↗外部', 'https://example.com', target: '_blank', rel: 'noopener' %>\n<%= button_to '削除', @post, method: :delete, data: { confirm: '本当に？' } %>\n\n<%# === 画像・アセット === %>\n<%= image_tag 'logo.png', alt: 'ロゴ', width: 100 %>\n<%= image_tag @user.avatar, class: 'avatar' if @user.avatar.attached? %>\n<%= stylesheet_link_tag 'print', media: 'print' %>\n\n<%# === 数値・日時 === %>\n<%= number_to_currency(1234.5, unit: '¥', precision: 0) %>  <%# ¥1,235 %>\n<%= number_to_percentage(75.4, precision: 1) %>              <%# 75.4% %>\n<%= number_with_delimiter(1000000) %>                        <%# 1,000,000 %>\n<%= distance_of_time_in_words(from, to) %>\n<%= @post.created_at.strftime('%Y年%m月%d日 %H:%M') %>",
+        "highlightLines": [2, 17, 23, 29, 34]
+      }
+    ]
+  }
+]

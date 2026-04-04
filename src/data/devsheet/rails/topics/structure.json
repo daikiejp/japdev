@@ -1,0 +1,35 @@
+[
+  {
+    "id": "directory-structure",
+    "title": "ディレクトリ構成",
+    "description": "Rails アプリの主要ファイルと役割",
+    "codeBlocks": [
+      {
+        "language": "bash",
+        "filename": "structure.sh",
+        "code": "rails new myapp --database=postgresql\nrails new myapp --api            # APIモード\nrails new myapp -T               # テストなし\nrails new myapp --javascript=importmap  # デフォルト\n\n# ディレクトリ構成\napp/\n├── controllers/         # リクエスト処理\n│   └── application_controller.rb\n├── models/              # ビジネスロジック・DB操作\n├── views/               # HTML テンプレート\n├── helpers/             # ビューヘルパー\n├── jobs/                # バックグラウンドジョブ\n├── mailers/             # メール送信\n├── channels/            # ActionCable (WebSocket)\n└── assets/              # CSS・JS・画像\nconfig/\n├── routes.rb            # URLルーティング\n├── database.yml         # DB接続設定\n├── application.rb       # アプリ設定\n└── environments/        # 環境別設定\ndb/\n├── migrate/             # マイグレーションファイル\n└── schema.rb            # 現在のスキーマ\nspec/ (or test/)         # テストコード\nGemfile                  # 依存関係\n\n# よく使う rails コマンド\nrails server             # サーバー起動（rails s）\nrails console            # IRBコンソール（rails c）\nrails generate model User name:string age:integer\nrails generate controller Users index show\nrails generate scaffold Post title:string body:text\nrails db:migrate\nrails db:rollback\nrails routes             # ルート一覧\nrails routes | grep user # 絞り込み",
+        "highlightLines": [1, 6, 17, 24, 30]
+      }
+    ]
+  },
+  {
+    "id": "routing",
+    "title": "ルーティング",
+    "description": "RESTful routes・名前付きルート・ネスト・制約",
+    "codeBlocks": [
+      {
+        "language": "ruby",
+        "filename": "config/routes.rb",
+        "code": "Rails.application.routes.draw do\n  # RESTful リソース（7アクションを自動定義）\n  # index, show, new, create, edit, update, destroy\n  resources :posts\n\n  # 一部のアクションのみ\n  resources :users, only: [:index, :show, :create]\n  resources :sessions, except: [:edit, :update]\n\n  # シングルリソース（IDなし）\n  resource :profile  # show, new, create, edit, update, destroy\n\n  # ネストしたリソース\n  resources :posts do\n    resources :comments, only: [:index, :create, :destroy]\n    member do\n      post :publish     # /posts/:id/publish\n      post :unpublish\n    end\n    collection do\n      get :drafts       # /posts/drafts\n      get :featured\n    end\n  end\n\n  # 名前空間\n  namespace :admin do\n    resources :users\n    resources :posts\n  end\n  # => /admin/users, Admin::UsersController\n\n  scope '/api/v1', module: 'api/v1', as: 'api_v1' do\n    resources :users\n  end\n\n  # カスタムルート\n  get  '/about',        to: 'pages#about',   as: :about\n  post '/login',        to: 'sessions#create'\n  delete '/logout',     to: 'sessions#destroy'\n  get  '/search',       to: 'search#index'\n\n  # ルートへのリダイレクト\n  get '/old-path', to: redirect('/new-path')\n  get '/blog/:id', to: redirect('/posts/%{id}')\n\n  # デフォルトルート\n  root 'home#index'\n\n  # 制約\n  constraints(id: /\\d+/) do\n    resources :products\n  end\nend",
+        "highlightLines": [4, 7, 11, 14, 27, 33, 38, 47]
+      },
+      {
+        "title": "名前付きルートヘルパー",
+        "language": "ruby",
+        "filename": "url_helpers.rb",
+        "code": "# resources :posts が生成するヘルパー\nposts_path          # /posts          (GET index)\npost_path(@post)    # /posts/1        (GET show)\nnew_post_path       # /posts/new      (GET new)\nedit_post_path(@post) # /posts/1/edit (GET edit)\n\n# _url vs _path\nposts_path          # '/posts'        （相対パス）\nposts_url           # 'http://example.com/posts' （絶対URL）\n\n# パラメーター付き\nposts_path(page: 2, per: 10)\n# => '/posts?page=2&per=10'\n\npost_path(@post, format: :json)\n# => '/posts/1.json'\n\n# ネストしたルート\npost_comments_path(@post)\n# => '/posts/1/comments'\n\n# namespace\nadmin_users_path\n# => '/admin/users'",
+        "highlightLines": [2, 8, 12, 17, 22]
+      }
+    ]
+  }
+]

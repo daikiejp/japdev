@@ -1,0 +1,9 @@
+[
+  { "id": "structure",    "name": "MVC構造とルーティング",    "description": "ディレクトリ構成・routes・RESTful" },
+  { "id": "models",       "name": "ActiveRecord モデル",     "description": "マイグレーション・バリデーション・コールバック" },
+  { "id": "queries",      "name": "ActiveRecord クエリ",     "description": "where・join・scope・N+1対策" },
+  { "id": "controllers",  "name": "コントローラー",           "description": "アクション・params・before_action・レスポンス" },
+  { "id": "views",        "name": "ビューとヘルパー",         "description": "ERB・パーシャル・レイアウト・form_with" },
+  { "id": "associations", "name": "アソシエーション",         "description": "belongs_to・has_many・through・polymorphic" },
+  { "id": "advanced",     "name": "認証・API・テスト",        "description": "Devise・JWT・RSpec・FactoryBot" }
+]

@@ -1,0 +1,41 @@
+[
+  {
+    "id": "controller-basics",
+    "title": "コントローラーの基本",
+    "description": "アクション・params・strong parameters・レスポンス",
+    "codeBlocks": [
+      {
+        "language": "ruby",
+        "filename": "app/controllers/posts_controller.rb",
+        "code": "class PostsController < ApplicationController\n  before_action :authenticate_user!\n  before_action :set_post, only: [:show, :edit, :update, :destroy]\n  before_action :authorize_post!, only: [:edit, :update, :destroy]\n\n  def index\n    @posts = Post.published.recent\n                 .includes(:user, :tags)\n                 .page(params[:page]).per(params[:per] || 20)\n    respond_to do |format|\n      format.html\n      format.json { render json: @posts }\n    end\n  end\n\n  def show\n    @comment = @post.comments.build  # フォーム用\n  end\n\n  def new\n    @post = current_user.posts.build\n  end\n\n  def create\n    @post = current_user.posts.build(post_params)\n    if @post.save\n      redirect_to @post, notice: '投稿しました'\n    else\n      render :new, status: :unprocessable_entity\n    end\n  end\n\n  def update\n    if @post.update(post_params)\n      redirect_to @post, notice: '更新しました'\n    else\n      render :edit, status: :unprocessable_entity\n    end\n  end\n\n  def destroy\n    @post.destroy!\n    redirect_to posts_path, notice: '削除しました', status: :see_other\n  end\n\n  private\n\n  def set_post\n    @post = Post.find(params[:id])\n  end\n\n  # Strong Parameters\n  def post_params\n    params.require(:post).permit(:title, :body, :status, tag_ids: [])\n  end\n\n  def authorize_post!\n    redirect_to root_path, alert: '権限がありません' unless @post.user == current_user\n  end\nend",
+        "highlightLines": [2, 3, 6, 10, 24, 26, 52, 57]
+      }
+    ]
+  },
+  {
+    "id": "filters-concerns",
+    "title": "フィルターとコンサーン",
+    "description": "before_action・ApplicationController・Concern",
+    "codeBlocks": [
+      {
+        "language": "ruby",
+        "filename": "app/controllers/application_controller.rb",
+        "code": "class ApplicationController < ActionController::Base\n  include Authenticatable\n  include Paginatable\n\n  # 例外ハンドリング\n  rescue_from ActiveRecord::RecordNotFound do |e|\n    respond_to do |format|\n      format.html { render 'errors/not_found', status: :not_found }\n      format.json { render json: { error: e.message }, status: :not_found }\n    end\n  end\n\n  rescue_from ActionPolicy::Unauthorized do\n    render json: { error: '権限がありません' }, status: :forbidden\n  end\n\n  private\n\n  def current_user\n    @current_user ||= User.find_by(id: session[:user_id])\n  end\n\n  def authenticate_user!\n    redirect_to login_path unless current_user\n  end\nend\n\n# Concern（共通処理の分離）\nmodule Authenticatable\n  extend ActiveSupport::Concern\n\n  included do\n    helper_method :current_user, :logged_in?\n  end\n\n  def logged_in?\n    current_user.present?\n  end\n\n  def require_admin!\n    render json: { error: 'forbidden' }, status: :forbidden unless current_user&.admin?\n  end\nend",
+        "highlightLines": [6, 13, 20, 30, 33, 41]
+      }
+    ]
+  },
+  {
+    "id": "params-responses",
+    "title": "パラメーターとレスポンス",
+    "description": "params・flash・redirect・render・ステータスコード",
+    "codeBlocks": [
+      {
+        "language": "ruby",
+        "filename": "params_responses.rb",
+        "code": "# params の操作\nparams[:id]                          # URL パラメーター\nparams[:user][:name]                 # ネストしたパラメーター\nparams.require(:user).permit(:name, :email)  # Strong Parameters\nparams.permit!                       # 全許可（非推奨）\n\n# Strong Parameters の詳細\ndef user_params\n  params.require(:user).permit(\n    :name, :email, :password,\n    :avatar,                          # ファイルアップロード\n    preferences: [:theme, :lang],     # ネストしたハッシュ\n    role_ids: [],                     # 配列\n    address_attributes: [:street, :city, :_destroy]  # nested attributes\n  )\nend\n\n# レスポンス\nrender :show                          # ビューを描画\nrender 'posts/show'\nrender template: 'posts/show'\nrender partial: 'form', locals: { post: @post }\nrender json: @post\nrender json: @post, status: :created\nrender json: { error: 'Not found' }, status: :not_found\nrender nothing: true, status: :no_content\nhead :ok                              # ボディなし\nhead :not_found\n\n# redirect\nredirect_to @post\nredirect_to posts_path\nredirect_to posts_path, notice: '作成しました'\nredirect_to posts_path, alert: 'エラーが発生しました'\nredirect_back fallback_location: root_path\nredirect_to @post, status: :see_other  # POST→GETのリダイレクト（303）\n\n# flash\nflash[:notice] = '作成しました'\nflash[:alert]  = 'エラーが発生しました'\nflash.now[:notice] = '現在のリクエストのみ'  # redirect しない場合\n\n# HTTPステータスコード（シンボルで指定可）\n# :ok(200) :created(201) :no_content(204)\n# :not_modified(304) :see_other(303)\n# :bad_request(400) :unauthorized(401) :forbidden(403) :not_found(404)\n# :unprocessable_entity(422) :too_many_requests(429)\n# :internal_server_error(500)",
+        "highlightLines": [4, 8, 18, 29, 37, 43]
+      }
+    ]
+  }
+]

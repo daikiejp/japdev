@@ -1,0 +1,54 @@
+[
+  {
+    "id": "basic-queries",
+    "title": "基本クエリ",
+    "description": "where・order・limit・find・pluck",
+    "codeBlocks": [
+      {
+        "language": "ruby",
+        "filename": "queries.rb",
+        "code": "# 検索\nUser.all                         # 全レコード（遅延評価）\nUser.find(1)                     # 主キーで検索（なければ例外）\nUser.find_by(email: 'a@b.com')  # 最初の1件（なければ nil）\nUser.find_by!(email: 'a@b.com') # なければ例外\nUser.first; User.last\nUser.first(3)                    # 最初の3件\n\n# where\nUser.where(active: true)\nUser.where(role: ['admin', 'moderator'])  # IN\nUser.where(age: 18..65)                   # BETWEEN\nUser.where('age >= ?', 18)               # プレースホルダー（推奨）\nUser.where('created_at > ?', 1.week.ago)\nUser.where('name LIKE ?', \"%#{query}%\")\nUser.where.not(role: 'guest')\nUser.where(active: true).or(User.where(role: 'admin'))\n\n# 並べ替え・制限\nUser.order(:name)                # 昇順\nUser.order(name: :desc)          # 降順\nUser.order(role: :asc, name: :desc)  # 複数\nUser.limit(10)\nUser.limit(10).offset(20)        # ページネーション\nUser.limit(10).offset(page * 10)\n\n# 集計\nUser.count\nUser.count(:email)               # NULLを除いたカウント\nUser.where(active: true).count\nUser.average(:age)\nUser.sum(:balance)\nUser.minimum(:age); User.maximum(:age)\n\n# select・pluck\nUser.select(:id, :name, :email)  # 指定カラムのみ取得\nUser.pluck(:email)               # 値の配列 ['a@b.com', ...]\nUser.pluck(:id, :name)           # [[1,'Alice'],[2,'Bob'],...]\nUser.ids                         # [1, 2, 3, ...]\n\n# 存在確認\nUser.exists?(1)\nUser.exists?(email: 'a@b.com')\nUser.where(active: true).exists?",
+        "highlightLines": [2, 9, 18, 26, 33, 38]
+      }
+    ]
+  },
+  {
+    "id": "joins-includes",
+    "title": "JOIN・includes・N+1対策",
+    "description": "eager loading・joins・left_joins",
+    "codeBlocks": [
+      {
+        "language": "ruby",
+        "filename": "joins.rb",
+        "code": "# N+1 問題\n# ❌ N+1: posts を取得後、各 post で user を個別にクエリ\nposts = Post.all\nposts.each { |p| puts p.user.name }  # N+1!\n\n# ✅ includes: 関連を事前ロード\nposts = Post.includes(:user)\nposts.each { |p| puts p.user.name }  # クエリ2回で済む\n\n# 複数の関連を同時にロード\nPosts.includes(:user, :tags, comments: :user)\n\n# joins: INNER JOIN（関連レコードが存在するもののみ）\nPost.joins(:user).where(users: { active: true })\nPost.joins(:comments).distinct  # コメントがある投稿\nPost.joins(comments: :likes)    # ネストした joins\n\n# left_joins: LEFT OUTER JOIN（関連がなくても取得）\nPost.left_joins(:comments)\n    .select('posts.*, COUNT(comments.id) AS comment_count')\n    .group('posts.id')\n\n# eager_load: includes + LEFT OUTER JOIN（WHERE に関連を使う場合）\nPost.eager_load(:user).where(users: { role: 'admin' })\n\n# preload: includes の内部実装（常に別クエリ）\nPost.preload(:user)\n\n# ベンチマーク用クエリ確認\nPost.includes(:user).to_sql  # 発行されるSQLを確認\n\n# Bullet gem: N+1 を自動検出（開発環境）\n# gem 'bullet', group: :development",
+        "highlightLines": [3, 6, 11, 13, 18, 22, 29]
+      }
+    ]
+  },
+  {
+    "id": "scopes",
+    "title": "スコープ",
+    "description": "scope・default_scope・クエリオブジェクト",
+    "codeBlocks": [
+      {
+        "language": "ruby",
+        "filename": "app/models/post.rb",
+        "code": "class Post < ApplicationRecord\n  # スコープ（再利用可能なクエリ）\n  scope :published,  -> { where(status: 'published') }\n  scope :draft,      -> { where(status: 'draft') }\n  scope :recent,     -> { order(created_at: :desc) }\n  scope :popular,    -> { order(views_count: :desc) }\n  scope :featured,   -> { where(featured: true) }\n\n  # 引数付きスコープ\n  scope :by_author,  ->(user) { where(user: user) }\n  scope :since,      ->(date) { where('created_at >= ?', date) }\n  scope :limit_to,   ->(n)    { limit(n) }\n\n  # スコープのチェーン\n  # Post.published.recent.limit(10)\n  # Post.by_author(user).since(1.month.ago).popular\n\n  # default_scope（注意して使う）\n  default_scope { where(deleted_at: nil) }  # ソフトデリート\n  # default_scope は unscoped で解除できる\n  # Post.unscoped.where(...)\n\n  # クラスメソッドはスコープと同様にチェーン可能\n  def self.top(n = 10)\n    popular.limit(n)\n  end\nend\n\n# クエリオブジェクト（複雑なクエリを分離）\nclass PostSearchQuery\n  attr_reader :relation\n\n  def initialize(relation = Post.all)\n    @relation = relation\n  end\n\n  def call(params)\n    result = relation\n    result = result.where('title ILIKE ?', \"%#{params[:q]}%\") if params[:q].present?\n    result = result.where(status: params[:status]) if params[:status].present?\n    result = result.by_author(params[:author]) if params[:author].present?\n    result = result.since(params[:from].to_date) if params[:from].present?\n    result.recent\n  end\nend\n\n# 使用\nposts = PostSearchQuery.new.call(q: 'Rails', status: 'published')",
+        "highlightLines": [3, 10, 19, 24, 30, 37, 46]
+      }
+    ]
+  },
+  {
+    "id": "transactions",
+    "title": "トランザクションと高度なクエリ",
+    "description": "transaction・upsert・bulk insert・生SQL",
+    "codeBlocks": [
+      {
+        "language": "ruby",
+        "filename": "transactions.rb",
+        "code": "# トランザクション\nActiveRecord::Base.transaction do\n  from_account.update!(balance: from_account.balance - amount)\n  to_account.update!(balance: to_account.balance + amount)\nend\n# いずれかで例外が発生するとロールバック\n\n# ネストしたトランザクション（savepoint）\nUser.transaction do\n  user.save!\n  User.transaction(requires_new: true) do\n    profile.save!\n  rescue ActiveRecord::RecordInvalid\n    # 内側のみロールバック\n  end\nend\n\n# bulk insert（Rails 6+）\nPosts.insert_all([\n  { title: 'Post 1', user_id: 1, created_at: Time.current, updated_at: Time.current },\n  { title: 'Post 2', user_id: 2, created_at: Time.current, updated_at: Time.current },\n])\n\n# upsert（Rails 6+）\nUser.upsert_all(\n  [{ email: 'a@b.com', name: 'Alice' }],\n  unique_by: :email\n)\n\n# update_all / delete_all（コールバックを呼ばない）\nPost.where(status: 'draft').update_all(status: 'archived')\nPost.where('created_at < ?', 1.year.ago).delete_all\nUser.where(active: false).destroy_all  # コールバックあり（遅い）\n\n# 生SQL\nActiveRecord::Base.connection.execute('SELECT 1')\nUser.find_by_sql('SELECT * FROM users WHERE age > 18')\nUser.where('age > ?', 18).to_sql  # SQLを確認\n\n# explain\nUser.where(active: true).explain  # クエリ実行計画",
+        "highlightLines": [2, 10, 19, 24, 30, 35]
+      }
+    ]
+  }
+]

@@ -1,0 +1,47 @@
+[
+  {
+    "id": "migrations",
+    "title": "マイグレーション",
+    "description": "テーブル作成・変更・カラム型",
+    "codeBlocks": [
+      {
+        "language": "bash",
+        "filename": "generate.sh",
+        "code": "# マイグレーション生成\nrails generate model User name:string email:string:uniq age:integer\nrails generate migration AddPhoneToUsers phone:string\nrails generate migration CreateJoinTableUsersRoles users roles\n\n# カラム型\n# string       短い文字列（255文字）\n# text         長い文字列\n# integer      整数\n# bigint       大きな整数（ID に使用）\n# float        浮動小数点\n# decimal      精度指定の小数（金額など）\n# boolean      true/false\n# date         日付\n# datetime     日時\n# timestamp    タイムスタンプ\n# json / jsonb JSON（PostgreSQL）\n# references   外部キー（belongs_to と対応）",
+        "highlightLines": [2, 3, 7]
+      },
+      {
+        "language": "ruby",
+        "filename": "db/migrate/20251024_create_users.rb",
+        "code": "class CreateUsers < ActiveRecord::Migration[8.0]\n  def change\n    create_table :users do |t|\n      t.string   :name,  null: false\n      t.string   :email, null: false\n      t.string   :password_digest\n      t.integer  :age\n      t.decimal  :balance, precision: 10, scale: 2, default: 0\n      t.boolean  :active, default: true, null: false\n      t.text     :bio\n      t.jsonb    :preferences, default: {}\n      t.references :role, null: false, foreign_key: true\n      t.timestamps  # created_at, updated_at を自動追加\n    end\n\n    add_index :users, :email, unique: true\n    add_index :users, [:name, :active]  # 複合インデックス\n  end\nend\n\n# テーブルの変更\nclass AddPhoneToUsers < ActiveRecord::Migration[8.0]\n  def change\n    add_column    :users, :phone,      :string\n    add_column    :users, :deleted_at, :datetime\n    remove_column :users, :bio,        :text\n    rename_column :users, :active,     :is_active\n    change_column :users, :age,        :bigint\n    add_index     :users, :phone\n    remove_index  :users, :phone\n  end\nend",
+        "highlightLines": [3, 12, 13, 17, 22]
+      }
+    ]
+  },
+  {
+    "id": "validations",
+    "title": "バリデーション",
+    "description": "validates・カスタムバリデーター・エラーメッセージ",
+    "codeBlocks": [
+      {
+        "language": "ruby",
+        "filename": "app/models/user.rb",
+        "code": "class User < ApplicationRecord\n  # 存在チェック\n  validates :name,  presence: true\n  validates :email, presence: true\n\n  # 長さ\n  validates :name,     length: { minimum: 2, maximum: 50 }\n  validates :password, length: { in: 8..128 }\n  validates :bio,      length: { maximum: 500 }, allow_blank: true\n\n  # 一意性\n  validates :email, uniqueness: { case_sensitive: false }\n  validates :username, uniqueness: { scope: :organization_id,\n                                     message: 'はこの組織内で重複しています' }\n\n  # フォーマット\n  VALID_EMAIL = /\\A[\\w+\\-.]+@[a-z\\d\\-.]+\\.[a-z]+\\z/i\n  validates :email, format: { with: VALID_EMAIL }\n\n  # 数値\n  validates :age, numericality: { greater_than_or_equal_to: 0,\n                                   less_than: 150,\n                                   only_integer: true },\n                  allow_nil: true\n\n  # 包含\n  validates :role, inclusion: { in: %w[user admin moderator] }\n\n  # 確認\n  validates :password, confirmation: true  # password_confirmationフィールドを使用\n\n  # 条件付きバリデーション\n  validates :company, presence: true, if: :corporate_account?\n  validates :phone,   presence: true, unless: -> { email.present? }\n\n  # カスタムバリデーター（メソッド）\n  validate :email_not_banned\n\n  private\n\n  def email_not_banned\n    if BannedEmail.exists?(domain: email.split('@').last)\n      errors.add(:email, 'のドメインは使用できません')\n    end\n  end\nend\n\n# バリデーションの確認\nuser = User.new(name: '', email: 'invalid')\nuser.valid?          # false\nuser.invalid?        # true\nuser.errors.full_messages  # ['Name can't be blank', 'Email is invalid']\nuser.errors[:email]        # ['is invalid']\nuser.save            # false（バリデーション失敗）\nuser.save!           # ActiveRecord::RecordInvalid を raise",
+        "highlightLines": [3, 7, 11, 17, 20, 26, 31, 35, 47]
+      }
+    ]
+  },
+  {
+    "id": "callbacks",
+    "title": "コールバック",
+    "description": "before_save・after_create・around_・条件付き",
+    "codeBlocks": [
+      {
+        "language": "ruby",
+        "filename": "app/models/post.rb",
+        "code": "class Post < ApplicationRecord\n  belongs_to :user\n\n  # コールバックの種類\n  before_validation :normalize_title\n  after_validation  :log_errors, if: :invalid?\n\n  before_save  :set_slug\n  after_save   :update_search_index\n\n  before_create  :set_published_at\n  after_create   :send_notification\n  after_create_commit :broadcast_post  # トランザクションコミット後\n\n  before_update  :track_changes\n  after_update   :invalidate_cache\n\n  before_destroy :check_destroyable\n  after_destroy  :cleanup_attachments\n\n  # around_コールバック\n  around_save :measure_save_time\n\n  private\n\n  def normalize_title\n    self.title = title.to_s.strip.capitalize\n  end\n\n  def set_slug\n    self.slug = title.parameterize if title_changed?\n  end\n\n  def set_published_at\n    self.published_at ||= Time.current if status == 'published'\n  end\n\n  def check_destroyable\n    if comments.exists?\n      errors.add(:base, 'コメントがあるため削除できません')\n      throw(:abort)  # コールバックチェーンを中断・ロールバック\n    end\n  end\n\n  def measure_save_time\n    start = Time.current\n    yield  # 保存処理を実行\n    Rails.logger.info \"Save took #{Time.current - start}s\"\n  end\nend\n\n# コールバックの実行順序（作成時）\n# before_validation → after_validation\n# → before_save → before_create\n# → INSERT INTO ...\n# → after_create → after_save\n# → after_commit / after_create_commit",
+        "highlightLines": [5, 8, 11, 21, 37, 44, 52]
+      }
+    ]
+  }
+]

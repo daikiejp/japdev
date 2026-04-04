@@ -86,5 +86,13 @@
     "description": "Rubyの基礎からメタプログラミングまで",
     "color": "#CC342D",
     "topicsCount": 7
+  },
+  {
+    "id": "rails",
+    "name": "Ruby on Rails",
+    "logo": "/logos/rails.svg",
+    "description": "Rails のMVC・ActiveRecord・API開発",
+    "color": "#CC0000",
+    "topicsCount": 7
   }
 ]

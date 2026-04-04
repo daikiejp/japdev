@@ -1,0 +1,53 @@
+[
+  {
+    "id": "api-mode",
+    "title": "API モード",
+    "description": "APIコントローラー・シリアライザー・JWT認証",
+    "codeBlocks": [
+      {
+        "language": "ruby",
+        "filename": "app/controllers/api/v1/posts_controller.rb",
+        "code": "# API モード（ActionController::API を継承）\nmodule Api\n  module V1\n    class PostsController < ApplicationController\n      before_action :authenticate_jwt!\n      before_action :set_post, only: [:show, :update, :destroy]\n\n      def index\n        posts = Post.published.recent.page(params[:page])\n        render json: {\n          data:  ActiveModelSerializers::SerializableResource.new(posts),\n          meta:  pagination_meta(posts)\n        }\n      end\n\n      def show\n        render json: PostSerializer.new(@post).as_json\n      end\n\n      def create\n        post = current_user.posts.build(post_params)\n        if post.save\n          render json: PostSerializer.new(post), status: :created\n        else\n          render json: { errors: post.errors.full_messages }, status: :unprocessable_entity\n        end\n      end\n\n      private\n\n      def set_post = @post = Post.find(params[:id])\n      def post_params = params.require(:post).permit(:title, :body, :status)\n    end\n  end\nend\n\n# JWT 認証\nclass AuthController < ApplicationController\n  skip_before_action :authenticate_jwt!, only: [:create]\n\n  def create\n    user = User.find_by(email: params[:email])\n    if user&.authenticate(params[:password])  # has_secure_password\n      token = JWT.encode(\n        { user_id: user.id, exp: 24.hours.from_now.to_i },\n        Rails.application.credentials.jwt_secret\n      )\n      render json: { token: token, user: UserSerializer.new(user) }\n    else\n      render json: { error: '認証失敗' }, status: :unauthorized\n    end\n  end\nend\n\n# application_controller.rb\ndef authenticate_jwt!\n  header = request.headers['Authorization']\n  token  = header&.split(' ')&.last\n  payload = JWT.decode(token, Rails.application.credentials.jwt_secret).first\n  @current_user = User.find(payload['user_id'])\nrescue JWT::DecodeError, ActiveRecord::RecordNotFound\n  render json: { error: '認証が必要です' }, status: :unauthorized\nend",
+        "highlightLines": [2, 10, 21, 38, 55]
+      }
+    ]
+  },
+  {
+    "id": "devise-auth",
+    "title": "Devise 認証",
+    "description": "インストール・カスタマイズ・ヘルパー",
+    "codeBlocks": [
+      {
+        "language": "bash",
+        "filename": "devise_setup.sh",
+        "code": "# Gemfile\n# gem 'devise'\n\nbundle install\nrails generate devise:install\nrails generate devise User\nrails generate devise:views  # ビューをカスタマイズする場合\nrails db:migrate\n\n# 生成されるルート\n# GET  /users/sign_up   → registrations#new\n# POST /users/sign_up   → registrations#create\n# GET  /users/sign_in   → sessions#new\n# POST /users/sign_in   → sessions#create\n# DELETE /users/sign_out → sessions#destroy",
+        "highlightLines": [4, 5, 6, 7]
+      },
+      {
+        "language": "ruby",
+        "filename": "devise_usage.rb",
+        "code": "# モデル設定\nclass User < ApplicationRecord\n  devise :database_authenticatable, :registerable,\n         :recoverable, :rememberable, :validatable,\n         :confirmable, :lockable, :trackable,\n         :omniauthable, omniauth_providers: [:google_oauth2]\nend\n\n# コントローラーで使用できるヘルパー\nauthenticate_user!          # 未ログインをリダイレクト\ncurrent_user                # 現在のユーザー\nuser_signed_in?             # ログイン状態の確認\n\n# ビューでのリンク\n# link_to 'ログイン', new_user_session_path\n# link_to 'ログアウト', destroy_user_session_path, method: :delete\n# link_to '登録', new_user_registration_path\n\n# ApplicationController でのカスタマイズ\nclass ApplicationController < ActionController::Base\n  before_action :authenticate_user!\n\n  def after_sign_in_path_for(resource)\n    stored_location_for(resource) || dashboard_path\n  end\n\n  def after_sign_out_path_for(resource_or_scope)\n    root_path\n  end\nend\n\n# カスタムフィールドの追加\nclass Users::RegistrationsController < Devise::RegistrationsController\n  private\n\n  def sign_up_params\n    params.require(:user).permit(:name, :email, :password, :password_confirmation)\n  end\n\n  def account_update_params\n    params.require(:user).permit(:name, :email, :password, :password_confirmation, :current_password)\n  end\nend",
+        "highlightLines": [3, 10, 21, 23, 33]
+      }
+    ]
+  },
+  {
+    "id": "rspec-factorybot",
+    "title": "RSpec と FactoryBot",
+    "description": "モデル・リクエストスペック・FactoryBot",
+    "codeBlocks": [
+      {
+        "language": "ruby",
+        "filename": "spec/factories/users.rb",
+        "code": "# FactoryBot の定義\nFactoryBot.define do\n  factory :user do\n    name     { Faker::Name.name }\n    email    { Faker::Internet.unique.email }\n    password { 'password123' }\n    role     { 'user' }\n    active   { true }\n\n    # トレイト（バリエーション）\n    trait :admin do\n      role { 'admin' }\n    end\n\n    trait :inactive do\n      active { false }\n    end\n\n    # 関連\n    trait :with_posts do\n      after(:create) do |user|\n        create_list(:post, 3, user: user)\n      end\n    end\n  end\n\n  factory :post do\n    title  { Faker::Lorem.sentence }\n    body   { Faker::Lorem.paragraphs(number: 3).join('\\n') }\n    status { 'published' }\n    association :user\n\n    trait :draft do\n      status { 'draft' }\n    end\n  end\nend",
+        "highlightLines": [2, 11, 20, 27, 33]
+      },
+      {
+        "language": "ruby",
+        "filename": "spec/requests/posts_spec.rb",
+        "code": "require 'rails_helper'\n\nRSpec.describe 'Posts API', type: :request do\n  let(:user) { create(:user) }\n  let(:post) { create(:post, user: user) }\n  let(:headers) { { 'Authorization' => \"Bearer #{jwt_token(user)}\" } }\n\n  describe 'GET /api/v1/posts' do\n    before { create_list(:post, 3, :published) }\n\n    it 'returns published posts' do\n      get '/api/v1/posts', headers: headers\n\n      expect(response).to have_http_status(:ok)\n      json = JSON.parse(response.body)\n      expect(json['data'].length).to eq(3)\n    end\n  end\n\n  describe 'POST /api/v1/posts' do\n    let(:params) { { post: { title: 'New Post', body: 'Content', status: 'published' } } }\n\n    context 'with valid params' do\n      it 'creates a post' do\n        expect {\n          post '/api/v1/posts', params: params, headers: headers\n        }.to change(Post, :count).by(1)\n\n        expect(response).to have_http_status(:created)\n      end\n    end\n\n    context 'with invalid params' do\n      it 'returns errors' do\n        post '/api/v1/posts',\n             params: { post: { title: '' } },\n             headers: headers\n\n        expect(response).to have_http_status(:unprocessable_entity)\n        expect(JSON.parse(response.body)['errors']).to be_present\n      end\n    end\n  end\nend",
+        "highlightLines": [4, 9, 13, 22, 34]
+      }
+    ]
+  }
+]

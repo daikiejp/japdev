@@ -1,0 +1,41 @@
+[
+  {
+    "id": "basic-associations",
+    "title": "基本アソシエーション",
+    "description": "belongs_to・has_many・has_one・オプション",
+    "codeBlocks": [
+      {
+        "language": "ruby",
+        "filename": "app/models/associations.rb",
+        "code": "# === belongs_to ===\nclass Comment < ApplicationRecord\n  belongs_to :post               # post_id カラムが必要\n  belongs_to :user, optional: true  # null 許可\n  belongs_to :author, class_name: 'User', foreign_key: :user_id\n\n  # カウンターキャッシュ\n  belongs_to :post, counter_cache: true  # posts.comments_count を自動更新\nend\n\n# === has_many / has_one ===\nclass User < ApplicationRecord\n  has_one  :profile, dependent: :destroy  # 1対1\n  has_many :posts,   dependent: :destroy  # 1対多\n  has_many :comments\n\n  # ソート・条件付き\n  has_many :published_posts, -> { published.order(:title) },\n           class_name: 'Post'\n  has_many :recent_comments, -> { order(created_at: :desc).limit(5) },\n           class_name: 'Comment'\n\n  # 外部キーのカスタム\n  has_many :authored_posts, class_name: 'Post', foreign_key: :author_id\nend\n\n# === has_many :through ===\nclass Post < ApplicationRecord\n  has_many :taggings\n  has_many :tags, through: :taggings\n  has_many :comments, dependent: :destroy\n  has_many :commenters, through: :comments, source: :user\nend\n\nclass Tag < ApplicationRecord\n  has_many :taggings\n  has_many :posts, through: :taggings\nend\n\nclass Tagging < ApplicationRecord\n  belongs_to :post\n  belongs_to :tag\nend\n\n# has_one :through\nclass User < ApplicationRecord\n  has_one :account\n  has_one :account_history, through: :account\nend",
+        "highlightLines": [2, 12, 18, 27, 35, 45]
+      }
+    ]
+  },
+  {
+    "id": "polymorphic",
+    "title": "ポリモーフィックとSTI",
+    "description": "polymorphic・Single Table Inheritance",
+    "codeBlocks": [
+      {
+        "language": "ruby",
+        "filename": "polymorphic.rb",
+        "code": "# === ポリモーフィック ===\n# 複数のモデルに対して同一の関連を持つ\n\nclass Comment < ApplicationRecord\n  belongs_to :commentable, polymorphic: true\n  # commentable_type: 'Post' / 'Video' / 'Photo'\n  # commentable_id:   対応するIDを格納\nend\n\nclass Post < ApplicationRecord\n  has_many :comments, as: :commentable, dependent: :destroy\nend\n\nclass Video < ApplicationRecord\n  has_many :comments, as: :commentable, dependent: :destroy\nend\n\n# マイグレーション\n# add_reference :comments, :commentable, polymorphic: true, null: false\n\n# 使用\npost = Post.find(1)\npost.comments.create!(body: '素晴らしい！', user: current_user)\n\nComment.where(commentable: post)  # ポリモーフィックで検索\n\n# === STI (Single Table Inheritance) ===\n# 1つのテーブルで複数のクラスを管理\n\nclass Vehicle < ApplicationRecord\n  # type カラムが必要（'Car', 'Truck', 'Motorcycle'）\nend\n\nclass Car < Vehicle\n  def fuel_type = '電気・ガソリン'\nend\n\nclass Truck < Vehicle\n  def fuel_type = 'ディーゼル'\n  def max_load  = '10t'\nend\n\n# 使用\nCar.all       # WHERE type = 'Car'\nVehicle.all   # 全てのサブクラスを含む\ncar = Car.create!(name: 'Prius')\ncar.type      # 'Car'\n\n# === Delegated Types（Rails 6.1+、STIの代替）===\nclass Entry < ApplicationRecord\n  delegated_type :entryable, types: %w[Post Comment]\nend\n\nclass Post < ApplicationRecord\n  include Entry::Entryable\nend",
+        "highlightLines": [4, 11, 30, 34, 43, 49]
+      }
+    ]
+  },
+  {
+    "id": "association-methods",
+    "title": "アソシエーションメソッド",
+    "description": "build・create・コレクション操作・dependent",
+    "codeBlocks": [
+      {
+        "language": "ruby",
+        "filename": "association_methods.rb",
+        "code": "user = User.find(1)\n\n# コレクションのビルド・作成\npost  = user.posts.build(title: '新記事')   # 未保存\npost  = user.posts.create!(title: '新記事')  # 保存（失敗で例外）\npost  = user.posts.create(title: '新記事')   # 保存（失敗で false）\n\n# コレクションの操作\nuser.posts << post            # 追加\nuser.posts.delete(post)       # 関連を削除（レコードは残る）\nuser.posts.destroy(post)      # レコードごと削除\nuser.posts.clear              # 全ての関連を解除\n\n# 関連のクエリ\nuser.posts.where(status: 'published')\nuser.posts.order(created_at: :desc).limit(5)\nuser.posts.count\nuser.posts.exists?(id: 1)\nuser.posts.ids                # 関連IDの配列\n\n# 関連オブジェクトのリロード\nuser.posts.reload\n\n# nested attributes\nclass User < ApplicationRecord\n  has_many :addresses\n  accepts_nested_attributes_for :addresses,\n    allow_destroy: true,\n    reject_if: :all_blank\nend\n\n# Strong Parameters で\ndef user_params\n  params.require(:user).permit(\n    :name,\n    addresses_attributes: [:id, :street, :city, :_destroy]\n  )\nend\n\n# dependent オプション\n# :destroy    → 各レコードの destroy を呼ぶ（コールバックあり）\n# :delete_all → SQL DELETE（コールバックなし、高速）\n# :nullify    → 外部キーを NULL に\n# :restrict_with_error   → 関連があればエラー\n# :restrict_with_exception → 関連があれば例外",
+        "highlightLines": [4, 9, 14, 24, 32, 40]
+      }
+    ]
+  }
+]
