@@ -1,0 +1,41 @@
+[
+  {
+    "id": "pathlib",
+    "title": "pathlib / os",
+    "description": "ファイルシステム操作",
+    "codeBlocks": [
+      {
+        "language": "python",
+        "filename": "pathlib_examples.py",
+        "code": "from pathlib import Path\n\n# パスの構築\np = Path('/home/user/docs/report.txt')\np = Path.home() / 'docs' / 'report.txt'  # /演算子で結合\np = Path('.')   # カレントディレクトリ\n\n# パス情報\np.name          # 'report.txt'\np.stem          # 'report'\np.suffix        # '.txt'\np.suffixes      # ['.txt']\np.parent        # Path('/home/user/docs')\np.parts         # ('/', 'home', 'user', 'docs', 'report.txt')\np.is_absolute() # True\np.exists()      # ファイル存在確認\np.is_file()     # ファイルかどうか\np.is_dir()      # ディレクトリかどうか\n\n# ファイルの読み書き\ntext = p.read_text(encoding='utf-8')\np.write_text('hello', encoding='utf-8')\nbytes_data = p.read_bytes()\np.write_bytes(b'\\x00\\x01')\n\n# ディレクトリ操作\np.mkdir(parents=True, exist_ok=True)   # 作成\np.unlink()                             # ファイル削除\np.rmdir()                              # 空ディレクトリ削除\np.rename(p.parent / 'new_name.txt')   # リネーム\np.replace(dest)                        # 移動・上書き\n\n# ファイル一覧\nfor f in Path('.').iterdir(): print(f)\nfor f in Path('.').glob('*.py'): print(f)     # パターン\nfor f in Path('.').rglob('*.py'): print(f)    # 再帰\n\n# ファイル情報\nstat = p.stat()\nstat.st_size    # バイトサイズ\nstat.st_mtime   # 更新時刻（Unix時間）",
+        "highlightLines": [3, 8, 17, 24, 31, 37]
+      }
+    ]
+  },
+  {
+    "id": "datetime-json",
+    "title": "datetime / json",
+    "description": "日時処理とJSONシリアライズ",
+    "codeBlocks": [
+      {
+        "language": "python",
+        "filename": "datetime_json.py",
+        "code": "from datetime import datetime, date, timedelta, timezone\n\n# 現在時刻\nnow_local = datetime.now()                   # ローカル時刻（非推奨）\nnow_utc   = datetime.now(timezone.utc)       # UTC（推奨）\nnow_jst   = datetime.now(timezone(timedelta(hours=9)))  # JST\n\n# 作成\ndt = datetime(2025, 10, 24, 14, 30, 0, tzinfo=timezone.utc)\nd  = date(2025, 10, 24)\n\n# フォーマット・パース\nformatted = dt.strftime('%Y-%m-%d %H:%M:%S')\nparsed    = datetime.strptime('2025-10-24', '%Y-%m-%d')\niso_str   = dt.isoformat()                   # '2025-10-24T14:30:00+00:00'\nparsed2   = datetime.fromisoformat(iso_str)\n\n# 演算\ntomorrow  = dt + timedelta(days=1)\nlast_week = dt - timedelta(weeks=1)\ndiff      = dt - datetime(2025, 1, 1, tzinfo=timezone.utc)\ndiff.days, diff.seconds  # 日数と秒数\n\n# JSON\nimport json\n\ndata = {'name': 'Alice', 'scores': [95, 87, 92], 'active': True}\njson_str = json.dumps(data, ensure_ascii=False, indent=2)\nparsed   = json.loads(json_str)\n\n# ファイルへの読み書き\nwith open('data.json', 'w', encoding='utf-8') as f:\n    json.dump(data, f, ensure_ascii=False, indent=2)\nwith open('data.json', encoding='utf-8') as f:\n    data = json.load(f)\n\n# カスタムシリアライザー\nclass DateEncoder(json.JSONEncoder):\n    def default(self, obj):\n        if isinstance(obj, datetime): return obj.isoformat()\n        return super().default(obj)\n\njson.dumps({'dt': datetime.now(timezone.utc)}, cls=DateEncoder)",
+        "highlightLines": [4, 5, 12, 18, 25, 30, 36]
+      }
+    ]
+  },
+  {
+    "id": "typing-re",
+    "title": "typing / re",
+    "description": "型ヒントと正規表現",
+    "codeBlocks": [
+      {
+        "language": "python",
+        "filename": "typing_re.py",
+        "code": "# === typing ===\nfrom typing import (\n    Any, Union, Optional, Literal, Final,\n    TypeVar, Generic, Protocol,\n    Callable, Iterator, Generator,\n    TypedDict, overload,\n)\n\n# TypedDict\nclass UserDict(TypedDict):\n    id:   int\n    name: str\n    email: str\n\n# Protocol（構造的サブタイプ）\nclass Drawable(Protocol):\n    def draw(self) -> None: ...\n\ndef render(shape: Drawable) -> None:  # Duck typing を型安全に\n    shape.draw()\n\n# TypeVar（ジェネリクス）\nT = TypeVar('T')\ndef first(lst: list[T]) -> T | None:\n    return lst[0] if lst else None\n\n# Literal型\nMode = Literal['r', 'w', 'a', 'rb', 'wb']\ndef open_file(path: str, mode: Mode) -> ...: ...\n\n# === re（正規表現）===\nimport re\n\ntext = 'Alice: alice@example.com, Bob: bob@test.org'\n\n# 基本操作\nre.match(r'^\\d+', text)           # 先頭マッチのみ\nre.search(r'\\w+@\\w+\\.\\w+', text)  # 最初の1つ\nre.findall(r'[\\w.]+@[\\w.]+', text) # 全てリスト\nre.sub(r'\\d+', 'N', 'a1b2c3')     # 'aNbNcN'\n\n# グループ\nm = re.search(r'(\\w+)@(\\w+)\\.(\\w+)', text)\nm.group(0)   # 'alice@example.com'（全体）\nm.group(1)   # 'alice'（1番目のグループ）\nm.groups()   # ('alice', 'example', 'com')\n\n# 名前付きグループ\nm = re.search(r'(?P<user>\\w+)@(?P<domain>[\\w.]+)', text)\nm.group('user')    # 'alice'\nm.groupdict()      # {'user': 'alice', 'domain': 'example.com'}\n\n# コンパイル（繰り返し使う場合）\nEMAIL_RE = re.compile(r'[\\w.+-]+@[\\w-]+\\.[\\w.]+')\nEMAIL_RE.findall(text)",
+        "highlightLines": [10, 16, 22, 27, 36, 40, 45, 51]
+      }
+    ]
+  }
+]

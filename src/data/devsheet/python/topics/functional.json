@@ -1,0 +1,54 @@
+[
+  {
+    "id": "lambda-hof",
+    "title": "lambda と高階関数",
+    "description": "map・filter・reduce・sorted",
+    "codeBlocks": [
+      {
+        "language": "python",
+        "filename": "functional.py",
+        "code": "from functools import reduce\n\n# lambda（無名関数、シンプルな処理のみに）\ndouble = lambda x: x * 2\nadd    = lambda x, y: x + y\n\n# map: 各要素に関数を適用\nnums = [1, 2, 3, 4, 5]\ndoubled = list(map(lambda x: x * 2, nums))  # [2,4,6,8,10]\n# 内包表記が読みやすい場合が多い:\ndoubled = [x * 2 for x in nums]\n\n# filter: 条件を満たす要素を残す\nevens = list(filter(lambda x: x % 2 == 0, nums))  # [2,4]\nevens = [x for x in nums if x % 2 == 0]           # 内包表記版\n\n# reduce: 累積処理\ntotal   = reduce(lambda acc, x: acc + x, nums, 0)  # 15\nproduct = reduce(lambda acc, x: acc * x, nums, 1)  # 120\n\n# sorted のキー関数\nusers = [{'name': 'Charlie', 'age': 30}, {'name': 'Alice', 'age': 25}]\nsorted_by_age  = sorted(users, key=lambda u: u['age'])\nsorted_by_name = sorted(users, key=lambda u: u['name'])\n\n# operator モジュール（lambda の代わり）\nfrom operator import attrgetter, itemgetter\nsorted(users, key=itemgetter('age'))         # dictのキー\nsorted(objects, key=attrgetter('name'))      # 属性\nsorted(objects, key=attrgetter('x', 'y'))    # 複数属性",
+        "highlightLines": [4, 9, 13, 17, 21, 25]
+      }
+    ]
+  },
+  {
+    "id": "generators",
+    "title": "ジェネレーター",
+    "description": "yield・yield from・ジェネレーター式",
+    "codeBlocks": [
+      {
+        "language": "python",
+        "filename": "generators.py",
+        "code": "# ジェネレーター関数（yield で値を返しつつ状態を保持）\ndef count_up(start: int = 0):\n    while True:\n        yield start\n        start += 1\n\ncounter = count_up()\nnext(counter)  # 0\nnext(counter)  # 1\nnext(counter)  # 2\n\n# 有限ジェネレーター\ndef fibonacci(n: int):\n    a, b = 0, 1\n    for _ in range(n):\n        yield a\n        a, b = b, a + b\n\nlist(fibonacci(8))  # [0,1,1,2,3,5,8,13]\n\n# yield from（サブジェネレーターに委譲）\ndef chain(*iterables):\n    for it in iterables:\n        yield from it\n\nlist(chain([1,2], [3,4], [5,6]))  # [1,2,3,4,5,6]\n\n# ジェネレーター式（メモリ効率）\nsum_sq = sum(x**2 for x in range(1_000_000))  # リストを生成しない\n\n# 実用パターン：大きなファイルを行ごとに処理\ndef read_large_file(path: str):\n    with open(path) as f:\n        yield from f  # 1行ずつ yield\n\n# パイプライン\ndef grep(pattern, lines):\n    import re\n    return (line for line in lines if re.search(pattern, line))\n\ndef head(lines, n=10):\n    return (line for _, line in zip(range(n), lines))\n\nlines = read_large_file('app.log')\nerrors = grep(r'ERROR', lines)\nfirst_10 = head(errors, 10)\nfor line in first_10:\n    print(line, end='')",
+        "highlightLines": [2, 13, 21, 29, 33, 37]
+      }
+    ]
+  },
+  {
+    "id": "itertools",
+    "title": "itertools",
+    "description": "chain・product・groupby・islice・accumulate",
+    "codeBlocks": [
+      {
+        "language": "python",
+        "filename": "itertools_examples.py",
+        "code": "import itertools\n\n# 結合・繰り返し\nlist(itertools.chain([1,2], [3,4], [5]))     # [1,2,3,4,5]\nlist(itertools.chain.from_iterable([[1,2],[3,4]]))  # [1,2,3,4]\nlist(itertools.repeat('x', 3))              # ['x','x','x']\nlist(itertools.cycle('AB'))                 # A,B,A,B,...（無限）\n\n# スライス\nlist(itertools.islice(range(100), 5, 15, 2))  # [5,7,9,11,13]\n\n# 組み合わせ\nlist(itertools.product('AB', repeat=2))     # AA,AB,BA,BB\nlist(itertools.combinations('ABCD', 2))     # AB,AC,AD,BC,BD,CD\nlist(itertools.permutations('ABC', 2))      # AB,AC,BA,BC,CA,CB\n\n# 累積\nlist(itertools.accumulate([1,2,3,4,5]))     # [1,3,6,10,15]\nlist(itertools.accumulate([1,2,3,4,5], max)) # [1,2,3,4,5]\n\n# グループ化（事前ソートが必要）\ndata = [('A',1),('A',2),('B',3),('B',4),('C',5)]\nfor key, group in itertools.groupby(data, key=lambda x: x[0]):\n    print(key, list(group))\n# A [('A',1),('A',2)]\n# B [('B',3),('B',4)]\n\n# フィルタリング\nlist(itertools.takewhile(lambda x: x < 5, [1,2,3,4,5,6]))  # [1,2,3,4]\nlist(itertools.dropwhile(lambda x: x < 5, [1,2,3,4,5,6]))  # [5,6]\nlist(itertools.compress('ABCDE', [1,0,1,0,1]))  # ['A','C','E']\n\n# ペアリング\nlist(itertools.pairwise([1,2,3,4,5]))  # [(1,2),(2,3),(3,4),(4,5)]",
+        "highlightLines": [4, 11, 16, 21, 27, 31]
+      }
+    ]
+  },
+  {
+    "id": "functools",
+    "title": "functools",
+    "description": "lru_cache・partial・wraps・reduce",
+    "codeBlocks": [
+      {
+        "language": "python",
+        "filename": "functools_examples.py",
+        "code": "import functools\n\n# lru_cache: メモ化（結果をキャッシュ）\n@functools.lru_cache(maxsize=128)\ndef fibonacci(n: int) -> int:\n    if n < 2: return n\n    return fibonacci(n-1) + fibonacci(n-2)\n\nfibonacci(50)          # 高速（再帰でも O(n)）\nfibonacci.cache_info() # CacheInfo(hits=48, misses=51, ...)\nfibonacci.cache_clear()\n\n# cache（Python 3.9+）: maxsize=None の lru_cache\n@functools.cache\ndef expensive(n: int) -> int: ...\n\n# partial: 引数を一部固定した新しい関数を作る\nfrom functools import partial\n\ndef power(base: float, exp: float) -> float:\n    return base ** exp\n\nsquare = partial(power, exp=2)\ncube   = partial(power, exp=3)\nsquare(5)  # 25\ncube(3)    # 27\n\n# よく使われる例\nfrom functools import partial\nint_from_hex = partial(int, base=16)\nint_from_hex('ff')   # 255\nint_from_hex('1a')   # 26\n\n# total_ordering: __eq__ と1つの比較メソッドから全て生成\n@functools.total_ordering\nclass Card:\n    def __eq__(self, other): ...\n    def __lt__(self, other): ...\n    # __le__, __gt__, __ge__ は自動生成",
+        "highlightLines": [4, 14, 22, 29, 35]
+      }
+    ]
+  }
+]

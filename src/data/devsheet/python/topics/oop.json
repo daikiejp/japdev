@@ -1,0 +1,54 @@
+[
+  {
+    "id": "classes",
+    "title": "クラスの定義",
+    "description": "__init__・インスタンス・クラス変数・プロパティ",
+    "codeBlocks": [
+      {
+        "language": "python",
+        "filename": "classes.py",
+        "code": "class BankAccount:\n    # クラス変数（全インスタンスで共有）\n    interest_rate: float = 0.02\n    _count: int = 0\n\n    def __init__(self, owner: str, balance: float = 0.0) -> None:\n        # インスタンス変数\n        self.owner   = owner\n        self._balance = balance   # _: 慣例的に非公開\n        BankAccount._count += 1\n\n    # プロパティ（getterとsetter）\n    @property\n    def balance(self) -> float:\n        return self._balance\n\n    @balance.setter\n    def balance(self, value: float) -> None:\n        if value < 0:\n            raise ValueError('残高は0以上')\n        self._balance = value\n\n    # インスタンスメソッド\n    def deposit(self, amount: float) -> None:\n        self.balance += amount\n\n    # クラスメソッド（cls を第一引数）\n    @classmethod\n    def get_count(cls) -> int:\n        return cls._count\n\n    # 静的メソッド（self も cls も不要）\n    @staticmethod\n    def validate_amount(amount: float) -> bool:\n        return amount > 0\n\n    # 文字列表現\n    def __repr__(self) -> str:\n        return f'BankAccount({self.owner!r}, {self._balance})'\n\n    def __str__(self) -> str:\n        return f'{self.owner}の口座: {self._balance}円'\n\nacc = BankAccount('Alice', 1000)\nacc.deposit(500)\nprint(acc.balance)  # 1500\nprint(BankAccount.get_count())  # 1",
+        "highlightLines": [3, 6, 13, 17, 24, 28, 33, 38]
+      }
+    ]
+  },
+  {
+    "id": "inheritance",
+    "title": "継承と多態性",
+    "description": "super()・多重継承・抽象クラス・MRO",
+    "codeBlocks": [
+      {
+        "language": "python",
+        "filename": "inheritance.py",
+        "code": "from abc import ABC, abstractmethod\n\n# 抽象基底クラス\nclass Animal(ABC):\n    def __init__(self, name: str) -> None:\n        self.name = name\n\n    @abstractmethod\n    def speak(self) -> str: ...  # サブクラスで実装必須\n\n    def describe(self) -> str:\n        return f'{self.name}は{self.speak()}と言う'\n\nclass Dog(Animal):\n    def speak(self) -> str: return 'ワン'\n\nclass Cat(Animal):\n    def speak(self) -> str: return 'ニャン'\n\n# 多重継承\nclass Flyable:\n    def fly(self) -> str: return '飛んでいます'\n\nclass FlyingDog(Dog, Flyable):\n    def speak(self) -> str:\n        return super().speak() + '（飛びながら）'\n\n# MRO（メソッド解決順序）\nprint(FlyingDog.__mro__)\n# (<class 'FlyingDog'>, <class 'Dog'>, <class 'Animal'>, <class 'Flyable'>, ...)\n\n# super() の正しい使い方\nclass SavingsAccount(BankAccount):\n    def __init__(self, owner: str, balance: float, rate: float) -> None:\n        super().__init__(owner, balance)  # 親の __init__ を呼ぶ\n        self.rate = rate\n\n    def apply_interest(self) -> None:\n        self.deposit(self._balance * self.rate)\n\n# isinstance と issubclass\ndog = Dog('ポチ')\nisinstance(dog, Dog)    # True\nisinstance(dog, Animal) # True（継承関係も検査）\nissubclass(Dog, Animal) # True",
+        "highlightLines": [4, 8, 14, 21, 24, 27, 32, 41]
+      }
+    ]
+  },
+  {
+    "id": "dunder",
+    "title": "dunder メソッド",
+    "description": "__repr__・__eq__・__len__・__iter__・__enter__",
+    "codeBlocks": [
+      {
+        "language": "python",
+        "filename": "dunder.py",
+        "code": "class Vector:\n    def __init__(self, x: float, y: float):\n        self.x, self.y = x, y\n\n    # 文字列表現\n    def __repr__(self) -> str: return f'Vector({self.x}, {self.y})'\n    def __str__(self)  -> str: return f'({self.x}, {self.y})'\n\n    # 演算子オーバーロード\n    def __add__(self, other: 'Vector') -> 'Vector':\n        return Vector(self.x + other.x, self.y + other.y)\n    def __mul__(self, scalar: float) -> 'Vector':\n        return Vector(self.x * scalar, self.y * scalar)\n    def __abs__(self) -> float:\n        return (self.x**2 + self.y**2) ** 0.5\n\n    # 比較\n    def __eq__(self, other: object) -> bool:\n        if not isinstance(other, Vector): return NotImplemented\n        return self.x == other.x and self.y == other.y\n    def __lt__(self, other: 'Vector') -> bool:\n        return abs(self) < abs(other)\n\n    # コンテナ風\n    def __len__(self)  -> int:   return 2\n    def __iter__(self):          yield self.x; yield self.y\n    def __getitem__(self, i):    return (self.x, self.y)[i]\n    def __contains__(self, v):   return v in (self.x, self.y)\n\n# コンテキストマネージャー\nclass DBConnection:\n    def __enter__(self):\n        self.conn = connect_db()\n        return self.conn\n    def __exit__(self, exc_type, exc_val, exc_tb):\n        self.conn.close()\n        return False  # 例外を再送出\n\nwith DBConnection() as conn:\n    conn.execute('SELECT 1')",
+        "highlightLines": [6, 10, 18, 25, 31, 35]
+      }
+    ]
+  },
+  {
+    "id": "dataclass",
+    "title": "dataclass",
+    "description": "ボイラープレートを省略したクラス定義",
+    "codeBlocks": [
+      {
+        "language": "python",
+        "filename": "dataclass.py",
+        "code": "from dataclasses import dataclass, field\nfrom typing import ClassVar\n\n@dataclass\nclass User:\n    # フィールド定義（型ヒント必須）\n    id:    int\n    name:  str\n    email: str\n    tags:  list[str]  = field(default_factory=list)  # ミュータブルなデフォルト値\n    role:  str        = 'user'  # イミュータブルなデフォルト値\n\n    # クラス変数（dataclass のフィールドから除外）\n    count: ClassVar[int] = 0\n\n# 自動生成される:\n# __init__、__repr__、__eq__\n\n# frozen=True: イミュータブル（__hash__ も生成される）\n@dataclass(frozen=True)\nclass Point:\n    x: float\n    y: float\n\n    def distance(self) -> float:\n        return (self.x**2 + self.y**2) ** 0.5\n\n# order=True: 比較演算子を生成\n@dataclass(order=True)\nclass Priority:\n    sort_index: int = field(init=False, repr=False)\n    level: int\n    name: str\n\n    def __post_init__(self):\n        # __init__ 後に実行\n        self.sort_index = self.level\n\n# 使用\nu = User(id=1, name='Alice', email='a@b.com', tags=['admin'])\np = Point(3.0, 4.0)\nprint(p.distance())  # 5.0",
+        "highlightLines": [4, 10, 20, 28, 34, 40]
+      }
+    ]
+  }
+]

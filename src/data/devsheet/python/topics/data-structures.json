@@ -1,0 +1,54 @@
+[
+  {
+    "id": "list",
+    "title": "リスト（list）",
+    "description": "可変シーケンス・スライス・メソッド",
+    "codeBlocks": [
+      {
+        "language": "python",
+        "filename": "lists.py",
+        "code": "# 作成\nnums = [1, 2, 3, 4, 5]\nmixed = [1, 'two', 3.0, True]\nempty = []\nfrom_range = list(range(1, 6))  # [1,2,3,4,5]\n\n# 追加・削除\nnums.append(6)          # 末尾追加\nnums.extend([7, 8])     # 複数追加\nnums.insert(0, 0)       # 先頭に挿入\nnums.pop()              # 末尾削除・返却\nnums.pop(0)             # 先頭削除・返却\nnums.remove(3)          # 値で削除（最初の1つ）\ndel nums[0]             # インデックスで削除\ndel nums[1:3]           # スライスで削除\n\n# 検索・確認\n3 in nums               # True\nnums.index(3)           # 最初のインデックス\nnums.count(3)           # 出現回数\n\n# ソート\nnums.sort()             # in-place 昇順\nnums.sort(reverse=True) # in-place 降順\nnums.sort(key=abs)      # キー関数\nsorted(nums)            # 新しいリストを返す（非破壊）\nnums.reverse()          # in-place 逆順\nlist(reversed(nums))    # 非破壊版\n\n# コピー\ncopy1 = nums[:]         # シャローコピー\ncopy2 = nums.copy()     # シャローコピー\nimport copy\ndeep = copy.deepcopy(nums)  # ディープコピー",
+        "highlightLines": [8, 12, 18, 23, 30]
+      }
+    ]
+  },
+  {
+    "id": "dict",
+    "title": "辞書（dict）",
+    "description": "キーと値のマッピング・操作パターン",
+    "codeBlocks": [
+      {
+        "language": "python",
+        "filename": "dicts.py",
+        "code": "# 作成\nuser = {'name': 'Alice', 'age': 30, 'active': True}\nfrom_keys = dict.fromkeys(['a', 'b', 'c'], 0)  # {'a':0,'b':0,'c':0}\n\n# アクセス\nuser['name']                  # 'Alice'（KeyError の可能性）\nuser.get('email')             # None（キーがなければデフォルト）\nuser.get('email', 'N/A')      # 'N/A'\n\n# 更新\nuser['email'] = 'alice@example.com'  # 追加・更新\nuser.update({'age': 31, 'city': 'Tokyo'})  # 複数更新\nuser |= {'role': 'admin'}     # |= 演算子（Python 3.9+）\n\n# 削除\ndel user['city']\nvalue = user.pop('role')      # 削除して返却\nuser.pop('missing', None)     # キーがなくても安全\n\n# イテレーション\nfor key in user:              # キーのみ\n    ...\nfor val in user.values():     # 値のみ\n    ...\nfor key, val in user.items(): # キーと値のペア\n    print(f'{key}: {val}')\n\n# マージ（非破壊）\nmerged = {**defaults, **overrides}  # 後が優先\nmerged = defaults | overrides       # Python 3.9+\n\n# defaultdict・Counter\nfrom collections import defaultdict, Counter\n\ndd = defaultdict(list)\ndd['key'].append(1)           # KeyError なし\n\ncounts = Counter('aabbccca')  # Counter({'a':4,'c':3,'b':2})\ncounts.most_common(2)         # [('a',4),('c',3)]",
+        "highlightLines": [7, 11, 17, 22, 27, 31]
+      }
+    ]
+  },
+  {
+    "id": "set-tuple",
+    "title": "セット・タプル",
+    "description": "集合演算とイミュータブルシーケンス",
+    "codeBlocks": [
+      {
+        "language": "python",
+        "filename": "set-tuple.py",
+        "code": "# セット（重複なし・順序なし）\ns1 = {1, 2, 3, 4}\ns2 = {3, 4, 5, 6}\n\n# 集合演算\ns1 | s2    # 和集合: {1,2,3,4,5,6}\ns1 & s2    # 積集合: {3,4}\ns1 - s2    # 差集合: {1,2}\ns1 ^ s2    # 対称差: {1,2,5,6}\n\n# メソッド\ns1.add(5)\ns1.discard(10)    # 存在しなくてもエラーなし\ns1.remove(10)     # なければ KeyError\n3 in s1           # True（O(1) の高速検索）\n\n# 重複削除のイディオム\nunique = list(set([1,2,2,3,3,3]))  # [1,2,3]（順序は非保証）\n\n# frozenset（イミュータブルなセット）\nfs = frozenset([1, 2, 3])  # 辞書のキーに使える\n\n# タプル（イミュータブルリスト）\nt = (1, 2, 3)\none = (1,)         # 要素1つのタプル（カンマ必須）\n\n# アンパック\na, b, c = t\nfirst, *rest = t   # first=1, rest=[2,3]\n*init, last = t    # init=[1,2], last=3\n\n# 名前付きタプル\nfrom collections import namedtuple\nPoint = namedtuple('Point', ['x', 'y'])\np = Point(3, 4)\np.x, p.y      # 3, 4\nprint(p)      # Point(x=3, y=4)\n\n# typing.NamedTuple（型ヒント付き）\nfrom typing import NamedTuple\nclass Point(NamedTuple):\n    x: float\n    y: float\n    label: str = ''  # デフォルト値",
+        "highlightLines": [5, 8, 16, 23, 28, 31, 37]
+      }
+    ]
+  },
+  {
+    "id": "comprehensions",
+    "title": "内包表記",
+    "description": "list・dict・set・generator comprehension",
+    "codeBlocks": [
+      {
+        "language": "python",
+        "filename": "comprehensions.py",
+        "code": "nums = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]\n\n# リスト内包表記\nsquares = [x**2 for x in nums]              # [1,4,9,...,100]\nevens   = [x for x in nums if x % 2 == 0]   # [2,4,6,8,10]\nlabeled = [f'item_{x}' for x in nums]\n\n# 条件分岐（三項演算子）\ntagged = ['偶数' if x % 2 == 0 else '奇数' for x in nums]\n\n# ネスト\nmatrix = [[i * j for j in range(1, 4)] for i in range(1, 4)]\nflat   = [x for row in matrix for x in row]  # フラット化\n\n# 辞書内包表記\nsquare_map = {x: x**2 for x in range(5)}    # {0:0, 1:1, 2:4, ...}\ninverted   = {v: k for k, v in {'a':1,'b':2}.items()}\nfiltered   = {k: v for k, v in d.items() if v > 0}\n\n# セット内包表記\nunique_mods = {x % 3 for x in nums}         # {0, 1, 2}\n\n# ジェネレーター式（メモリ効率が良い）\ngen = (x**2 for x in range(1_000_000))      # 遅延評価\ntotal = sum(x**2 for x in nums)             # 括弧不要\nany(x > 5 for x in nums)                   # True\nall(x > 0 for x in nums)                   # True\n\n# walrus 演算子（:=）で内包表記内に代入\nresults = [y for x in nums if (y := x**2) > 25]  # [36,49,64,81,100]",
+        "highlightLines": [4, 5, 9, 13, 21, 26]
+      }
+    ]
+  }
+]

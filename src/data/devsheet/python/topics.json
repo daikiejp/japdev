@@ -1,0 +1,9 @@
+[
+  { "id": "basics",        "name": "基本構文",          "description": "変数・型・制御フロー・関数" },
+  { "id": "data-structures","name": "データ構造",        "description": "list・dict・set・tuple・comprehension" },
+  { "id": "oop",           "name": "オブジェクト指向",   "description": "クラス・継承・dunder・dataclass" },
+  { "id": "functional",    "name": "関数型プログラミング","description": "lambda・map・filter・itertools・generator" },
+  { "id": "modules",       "name": "標準ライブラリ",     "description": "pathlib・datetime・json・os・re・typing" },
+  { "id": "async",         "name": "非同期・並列処理",   "description": "asyncio・threading・multiprocessing" },
+  { "id": "testing",       "name": "テストとデバッグ",   "description": "pytest・unittest・logging・pdb" }
+]

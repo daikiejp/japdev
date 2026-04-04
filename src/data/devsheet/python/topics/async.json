@@ -1,0 +1,41 @@
+[
+  {
+    "id": "asyncio-basics",
+    "title": "asyncio の基本",
+    "description": "async/await・coroutine・イベントループ",
+    "codeBlocks": [
+      {
+        "language": "python",
+        "filename": "asyncio_basics.py",
+        "code": "import asyncio\n\n# coroutine 関数（async def で定義）\nasync def fetch_data(url: str) -> dict:\n    await asyncio.sleep(1)  # ノンブロッキング待機\n    return {'url': url, 'data': '...'}\n\n# 単一実行\nasync def main():\n    result = await fetch_data('https://api.example.com')\n    print(result)\n\nasyncio.run(main())  # イベントループを作成して実行\n\n# 並列実行（gather）\nasync def main():\n    # 複数のコルーチンを並列実行\n    results = await asyncio.gather(\n        fetch_data('https://api.example.com/users'),\n        fetch_data('https://api.example.com/posts'),\n        fetch_data('https://api.example.com/comments'),\n    )\n    return results  # [result1, result2, result3]\n\n# エラーハンドリング\nasync def safe_gather():\n    results = await asyncio.gather(\n        fetch_data('url1'),\n        fetch_data('url2'),\n        return_exceptions=True,  # 例外をリストの要素として返す\n    )\n    for r in results:\n        if isinstance(r, Exception):\n            print(f'エラー: {r}')\n        else:\n            print(r)\n\n# タイムアウト\nasync def with_timeout():\n    try:\n        result = await asyncio.wait_for(fetch_data('url'), timeout=5.0)\n    except asyncio.TimeoutError:\n        print('タイムアウト')",
+        "highlightLines": [4, 13, 17, 26, 40]
+      }
+    ]
+  },
+  {
+    "id": "asyncio-advanced",
+    "title": "asyncio 応用",
+    "description": "Task・Queue・セマフォ・aiohttp",
+    "codeBlocks": [
+      {
+        "language": "python",
+        "filename": "asyncio_advanced.py",
+        "code": "import asyncio\n\n# Task: バックグラウンドで実行\nasync def main():\n    # create_task でバックグラウンド実行\n    task = asyncio.create_task(fetch_data('url'))\n\n    # 他の処理をしている間にバックグラウンドで実行される\n    await do_other_things()\n\n    # 結果を待つ\n    result = await task\n\n# 並列タスク管理\nasync def fetch_all(urls: list[str]):\n    tasks = [asyncio.create_task(fetch_data(url)) for url in urls]\n    results = await asyncio.gather(*tasks)\n    return results\n\n# セマフォ（同時実行数を制限）\nasync def limited_fetch(urls: list[str], concurrency: int = 10):\n    sem = asyncio.Semaphore(concurrency)\n\n    async def fetch_one(url: str):\n        async with sem:  # 最大 concurrency 個まで同時実行\n            return await fetch_data(url)\n\n    return await asyncio.gather(*[fetch_one(url) for url in urls])\n\n# asyncio.Queue（プロデューサー・コンシューマー）\nasync def producer_consumer():\n    queue = asyncio.Queue(maxsize=10)\n\n    async def producer():\n        for i in range(20):\n            await queue.put(i)  # キューが満杯なら待機\n        await queue.put(None)   # 終了シグナル\n\n    async def consumer():\n        while True:\n            item = await queue.get()\n            if item is None: break\n            print(f'処理: {item}')\n            queue.task_done()\n\n    await asyncio.gather(producer(), consumer())\n\n# aiohttp（非同期HTTP）\nimport aiohttp\n\nasync def async_fetch(session: aiohttp.ClientSession, url: str):\n    async with session.get(url) as response:\n        return await response.json()\n\nasync def main():\n    async with aiohttp.ClientSession() as session:\n        tasks = [async_fetch(session, url) for url in urls]\n        results = await asyncio.gather(*tasks)",
+        "highlightLines": [6, 22, 31, 49, 55]
+      }
+    ]
+  },
+  {
+    "id": "threading-multiprocessing",
+    "title": "threading / multiprocessing",
+    "description": "I/O並列・CPU並列・concurrent.futures",
+    "codeBlocks": [
+      {
+        "language": "python",
+        "filename": "parallel.py",
+        "code": "from concurrent.futures import ThreadPoolExecutor, ProcessPoolExecutor\nimport threading\n\n# ThreadPoolExecutor（I/Oバウンドタスク向け）\n# → DBクエリ・HTTP通信・ファイルI/Oなど\ndef fetch_url(url: str) -> str:\n    import urllib.request\n    with urllib.request.urlopen(url) as r:\n        return r.read().decode()\n\nwith ThreadPoolExecutor(max_workers=10) as executor:\n    # map: 順序を保って結果を取得\n    results = list(executor.map(fetch_url, urls))\n\n    # submit: 個別に Future を取得\n    futures = [executor.submit(fetch_url, url) for url in urls]\n    results = [f.result() for f in futures]\n\n# ProcessPoolExecutor（CPUバウンドタスク向け）\n# → 計算処理・画像処理・データ変換など\ndef cpu_heavy(n: int) -> int:\n    return sum(i**2 for i in range(n))\n\nwith ProcessPoolExecutor() as executor:\n    results = list(executor.map(cpu_heavy, [10**6, 10**6, 10**6]))\n\n# GIL について\n# Python の GIL（Global Interpreter Lock）により\n# threading はCPUバウンドでは並列にならない\n# → CPUバウンドには multiprocessing を使う\n# → I/Oバウンドには threading か asyncio を使う\n\n# threading.Lock でスレッドセーフな操作\nlock = threading.Lock()\ncounter = 0\n\ndef increment():\n    global counter\n    with lock:  # クリティカルセクション\n        counter += 1\n\n# threading.Event でスレッド間の同期\nevent = threading.Event()\n\ndef worker():\n    event.wait()  # イベントが set されるまで待機\n    print('開始！')\n\nt = threading.Thread(target=worker)\nt.start()\nevent.set()  # ワーカーを開始させる\nt.join()     # ワーカーの終了を待つ",
+        "highlightLines": [11, 23, 28, 35, 43]
+      }
+    ]
+  }
+]

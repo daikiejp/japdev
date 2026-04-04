@@ -70,5 +70,13 @@
     "description": "SQLクエリとデータベース操作",
     "color": "#4479A1",
     "topicsCount": 6
+  },
+  {
+    "id": "python",
+    "name": "Python",
+    "logo": "/logos/python.svg",
+    "description": "Pythonの基礎から実践まで",
+    "color": "#3776AB",
+    "topicsCount": 7
   }
 ]

@@ -1,0 +1,54 @@
+[
+  {
+    "id": "variables-types",
+    "title": "変数と型",
+    "description": "動的型付けと型ヒント",
+    "codeBlocks": [
+      {
+        "language": "python",
+        "filename": "types.py",
+        "code": "# 型推論（型注釈不要）\nname    = 'Alice'\nage     = 30\nprice   = 3.14\nactive  = True\nnothing = None\n\n# 型ヒント（Python 3.9+）\nfrom typing import Optional\n\ndef greet(name: str, age: int = 0) -> str:\n    return f'こんにちは、{name}！{age}歳ですね。'\n\n# 複合型ヒント\ndef process(\n    items:  list[str],\n    config: dict[str, int],\n    callback: Optional[callable] = None,\n) -> tuple[bool, str]:\n    return True, 'ok'\n\n# 型の確認\ntype(42)          # <class 'int'>\nisinstance(42, int)  # True\nisinstance(42, (int, float))  # True\n\n# 型変換\nint('42')      # 42\nfloat('3.14')  # 3.14\nstr(42)        # '42'\nbool(0)        # False\nlist('abc')    # ['a', 'b', 'c']\ntuple([1,2,3]) # (1, 2, 3)\nset([1,1,2])   # {1, 2}",
+        "highlightLines": [10, 12, 25, 28]
+      }
+    ]
+  },
+  {
+    "id": "strings",
+    "title": "文字列操作",
+    "description": "f-string・メソッド・スライス",
+    "codeBlocks": [
+      {
+        "language": "python",
+        "filename": "strings.py",
+        "code": "# f-string（推奨）\nname, price = 'Alice', 3.14159\nf'こんにちは、{name}！'\nf'価格: {price:.2f}円'      # 書式指定\nf'値: {1 + 2}'             # 式の評価\nf'{name!r}'                # repr()\nf'{name:>10}'              # 右寄せ10文字\nf'{1000000:,}'             # 1,000,000\n\n# 主なメソッド\ns = '  Hello, World!  '\ns.strip()            # 'Hello, World!'\ns.lower()            # '  hello, world!  '\ns.upper()            # '  HELLO, WORLD!  '\ns.replace('World', 'Python')  # '  Hello, Python!  '\ns.split(', ')        # ['  Hello', 'World!  ']\n', '.join(['a','b','c'])     # 'a, b, c'\ns.startswith('  H')  # True\ns.endswith('  ')     # True\n'abc'.center(7, '-') # '--abc--'\n\n# スライス\ns = 'Hello, World!'\ns[0]      # 'H'\ns[-1]     # '!'\ns[7:12]   # 'World'\ns[:5]     # 'Hello'\ns[::2]    # 'Hlo ol!'\ns[::-1]   # '!dlroW ,olleH'  ← 逆順\n\n# 文字列チェック\n'abc'.isalpha()   # True\n'123'.isdigit()   # True\n'abc123'.isalnum()# True\n'  '.isspace()    # True",
+        "highlightLines": [3, 4, 12, 16, 23, 28]
+      }
+    ]
+  },
+  {
+    "id": "control-flow",
+    "title": "制御フロー",
+    "description": "if・for・while・match・例外処理",
+    "codeBlocks": [
+      {
+        "language": "python",
+        "filename": "control.py",
+        "code": "# if / elif / else\nx = 10\nif x > 0:\n    print('正')\nelif x == 0:\n    print('ゼロ')\nelse:\n    print('負')\n\n# 三項演算子\nresult = '偶数' if x % 2 == 0 else '奇数'\n\n# for ループ\nfor i in range(5):          # 0,1,2,3,4\n    print(i)\n\nfor i in range(2, 10, 2):   # 2,4,6,8\n    print(i)\n\nfor i, val in enumerate(['a','b','c'], start=1):\n    print(i, val)            # 1 a, 2 b, 3 c\n\nfor a, b in zip([1,2,3], ['x','y','z']):\n    print(a, b)              # 1 x, 2 y, 3 z\n\n# match / case（Python 3.10+）\nstatus = 200\nmatch status:\n    case 200: print('OK')\n    case 404: print('Not Found')\n    case 400 | 422: print('Bad Request')\n    case _:   print('その他')\n\n# 例外処理\ntry:\n    result = 10 / 0\nexcept ZeroDivisionError as e:\n    print(f'エラー: {e}')\nexcept (TypeError, ValueError) as e:\n    print(f'型エラー: {e}')\nelse:\n    print('成功')    # 例外がなかった場合\nfinally:\n    print('常に実行') # 常に実行\n\n# 例外の再送出\ntry:\n    risky()\nexcept Exception as e:\n    log(e)\n    raise  # 同じ例外を再送出",
+        "highlightLines": [11, 19, 22, 27, 33, 40, 46]
+      }
+    ]
+  },
+  {
+    "id": "functions",
+    "title": "関数",
+    "description": "引数・デコレーター・型ヒント",
+    "codeBlocks": [
+      {
+        "language": "python",
+        "filename": "functions.py",
+        "code": "# 基本\ndef add(a: int, b: int = 0) -> int:\n    return a + b\n\n# *args（可変長位置引数）\ndef sum_all(*nums: int) -> int:\n    return sum(nums)\nsum_all(1, 2, 3, 4)  # 10\n\n# **kwargs（可変長キーワード引数）\ndef create_user(**kwargs: str) -> dict:\n    return kwargs\ncreate_user(name='Alice', role='admin')\n\n# キーワード専用引数（* の後）\ndef connect(host: str, *, port: int = 3000, timeout: int = 30):\n    pass\nconnect('localhost', port=8080)  # port はキーワード必須\n\n# デコレーター\nimport functools, time\n\ndef timer(func):\n    @functools.wraps(func)  # func のメタデータを保持\n    def wrapper(*args, **kwargs):\n        start = time.perf_counter()\n        result = func(*args, **kwargs)\n        print(f'{func.__name__}: {time.perf_counter() - start:.3f}s')\n        return result\n    return wrapper\n\n@timer\ndef slow_function():\n    time.sleep(0.1)\n\n# デコレーターに引数を渡す\ndef retry(times: int = 3):\n    def decorator(func):\n        @functools.wraps(func)\n        def wrapper(*args, **kwargs):\n            for i in range(times):\n                try:\n                    return func(*args, **kwargs)\n                except Exception:\n                    if i == times - 1: raise\n        return wrapper\n    return decorator\n\n@retry(times=5)\ndef flaky_api(): ...",
+        "highlightLines": [2, 6, 11, 15, 23, 33, 36]
+      }
+    ]
+  }
+]
