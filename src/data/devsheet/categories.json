@@ -78,5 +78,13 @@
     "description": "Pythonの基礎から実践まで",
     "color": "#3776AB",
     "topicsCount": 7
+  },
+  {
+    "id": "ruby",
+    "name": "Ruby",
+    "logo": "/logos/ruby.svg",
+    "description": "Rubyの基礎からメタプログラミングまで",
+    "color": "#CC342D",
+    "topicsCount": 7
   }
 ]

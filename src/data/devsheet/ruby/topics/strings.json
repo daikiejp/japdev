@@ -1,0 +1,42 @@
+[
+  {
+    "id": "string-basics",
+    "title": "文字列の基本",
+    "description": "作成・補間・メソッド・ミュータビリティ",
+    "codeBlocks": [
+      {
+        "language": "ruby",
+        "filename": "strings.rb",
+        "code": "# 文字列リテラル\nsingle = 'シングルクォート（補間なし）\\n は文字通り'\ndouble = \"ダブルクォート（補間あり）\\n は改行\"\n\n# 文字列補間\nname = 'Alice'\nage  = 30\n\"こんにちは、#{name}！#{age}歳ですね。\"\n\"計算: #{1 + 2 * 3}\"  # 式も使える\n\n# ヒアドキュメント\ntext = <<~HEREDOC\n  インデントを除去する\n  複数行テキスト\n  #{name} さんへ\nHEREDOC\n\n# 主なメソッド\ns = '  Hello, World!  '\ns.strip          # 'Hello, World!'\ns.chomp          # 末尾の改行のみ削除\ns.upcase         # '  HELLO, WORLD!  '\ns.downcase       # '  hello, world!  '\ns.capitalize     # '  hello, world!  ' → 'Hello, world!'\ns.reverse        # '  !dlroW ,olleH  '\ns.length         # 18\ns.size           # 18（length の別名）\n\ns.include?('World')    # true\ns.start_with?('  H')   # true\ns.end_with?('  ')      # true\n\ns.gsub('o', '0')       # 全置換\ns.sub('o', '0')        # 最初の1つのみ置換\ns.gsub(/\\s+/, '_')     # 正規表現で置換\n\ns.split(', ')          # ['  Hello', 'World!  ']\ns.split                # 空白で分割\n\n'ab' * 3               # 'ababab'\n'a' + 'b'              # 'ab'\n\n# フォーマット\n'%s は %d 歳' % [name, age]   # 'Alice は 30 歳'\nformat('%.2f', 3.14159)       # '3.14'\nsprinf('%05d', 42)            # '00042'",
+        "highlightLines": [8, 12, 20, 27, 32, 38, 42]
+      }
+    ]
+  },
+  {
+    "id": "symbols",
+    "title": "シンボル",
+    "description": "Symbol vs String・用途・変換",
+    "codeBlobs": [],
+    "codeBlocks": [
+      {
+        "language": "ruby",
+        "filename": "symbols.rb",
+        "code": "# シンボル: イミュータブルな名前付き識別子\nsym = :hello\n:hello.class  # Symbol\n\n# Stringとの違い\n:hello.object_id == :hello.object_id  # true（同じオブジェクト）\n'hello'.object_id == 'hello'.object_id # false（毎回新しいオブジェクト）\n\n# よく使われる場面\nhash = { name: 'Alice', age: 30 }  # キーとしてのシンボル\nhash[:name]  # 'Alice'\n\nattr_accessor :name, :email  # メソッド名のシンボル\n:upcase.to_proc              # Proc に変換\n['a','b','c'].map(&:upcase)  # ['A','B','C']\n\n# 変換\n:hello.to_s    # 'hello'\n'hello'.to_sym # :hello\n\n# respond_to? / send\n'hello'.respond_to?(:upcase)  # true\n'hello'.send(:upcase)         # 'HELLO'（メソッドを動的呼び出し）\n\n# Symbol.all_symbols で全シンボルを確認（開発時のみ）",
+        "highlightLines": [2, 6, 10, 14, 17, 21]
+      }
+    ]
+  },
+  {
+    "id": "encoding-regex",
+    "title": "エンコーディングと正規表現",
+    "description": "Regexp・match・scan・gsub",
+    "codeBlocks": [
+      {
+        "language": "ruby",
+        "filename": "regex.rb",
+        "code": "# 正規表現リテラル\npattern = /\\w+@[\\w.]+/\n\ntext = 'Alice: alice@example.com, Bob: bob@test.org'\n\n# マッチ確認\ntext =~ /\\w+@\\w+/     # マッチ位置（整数）または nil\n/\\w+@\\w+/ === text    # true（case/when でも使える）\ntext.match?(/\\w+@\\w+/) # true（MatchData不要）\n\n# MatchData\nm = text.match(/(\\w+)@([\\w.]+)/)\nm[0]        # 'alice@example.com'（全体）\nm[1]        # 'alice'（グループ1）\nm[2]        # 'example.com'（グループ2）\n\n# 名前付きグループ\nm = text.match(/(?<user>\\w+)@(?<domain>[\\w.]+)/)\nm[:user]    # 'alice'\nm[:domain]  # 'example.com'\n\n# 全マッチ取得\ntext.scan(/(\\w+)@([\\w.]+)/)  # [['alice','example.com'],['bob','test.org']]\n\n# 置換\ntext.gsub(/\\w+@[\\w.]+/, '[REDACTED]')  # 全置換\ntext.sub(/\\w+/, 'Charlie')             # 最初の1つ\ntext.gsub(/(?<u>\\w+)@([\\w.]+)/) { \"#{$~[:u]}@hidden.com\" }  # ブロックで\n\n# よく使うパターン\n/^\\d+$/           # 数字のみ\n/\\A[a-zA-Z0-9_]+\\z/ # \\A,\\z: 文字列全体の先頭・末尾（^,$はマルチライン）\n/\\p{Hiragana}/    # Unicodeプロパティ（ひらがな）\n/\\p{Han}/         # 漢字\n\n# フラグ\n/hello/i          # 大文字小文字無視\n/first.*second/m  # .が改行にもマッチ\n/hello # 注釈/x   # 空白・コメント許可（拡張モード）",
+        "highlightLines": [7, 11, 17, 22, 27, 33]
+      }
+    ]
+  }
+]

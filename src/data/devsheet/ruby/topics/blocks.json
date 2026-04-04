@@ -1,0 +1,41 @@
+[
+  {
+    "id": "blocks-yield",
+    "title": "ブロックと yield",
+    "description": "ブロックの渡し方・yield・block_given?",
+    "codeBlocks": [
+      {
+        "language": "ruby",
+        "filename": "blocks.rb",
+        "code": "# ブロックを受け取るメソッド\ndef greet(name)\n  result = yield(name) if block_given?\n  puts result || \"こんにちは、#{name}！\"\nend\n\ngreet('Alice')                          # 'こんにちは、Alice！'\ngreet('Alice') { |n| \"Hello, #{n}!\" }   # 'Hello, Alice!'\n\n# yield の値\ndef transform(value)\n  block_given? ? yield(value) : value\nend\n\ntransform(5)              # 5\ntransform(5) { |x| x * 2 }  # 10\n\n# 明示的なブロック引数（&block）\ndef run_twice(&block)\n  block.call(1)\n  block.call(2)\nend\n\nrun_twice { |n| puts n }  # 1, 2\n\n# ブロックの受け渡し\ndef apply(arr, &block)\n  arr.map(&block)\nend\n\napply([1,2,3]) { |x| x ** 2 }  # [1,4,9]\n\n# Proc に変換して渡す\ndoubler = proc { |x| x * 2 }\n[1,2,3].map(&doubler)   # [2,4,6]\n\n# シンボルの to_proc\n['a','b','c'].map(&:upcase)  # ['A','B','C']\n# & は to_proc を呼ぶ → :upcase.to_proc → { |x| x.upcase }\n\n[1,-2,3,-4].select(&:positive?)  # [1,3]",
+        "highlightLines": [3, 18, 26, 33, 37, 40]
+      }
+    ]
+  },
+  {
+    "id": "proc-lambda",
+    "title": "Proc と Lambda",
+    "description": "作成方法・引数チェック・return の違い",
+    "codeBlocks": [
+      {
+        "language": "ruby",
+        "filename": "proc_lambda.rb",
+        "code": "# Proc の作成\np1 = Proc.new { |x| x * 2 }\np2 = proc { |x| x * 2 }  # 短縮形\np1.call(5)  # 10\np1.(5)      # 10（短縮記法）\np1[5]       # 10（[]でも呼べる）\n\n# Lambda の作成\nl1 = lambda { |x| x * 2 }\nl2 = ->(x) { x * 2 }   # stabby lambda（Ruby 1.9+）\nl3 = ->(x, y = 0) { x + y }  # デフォルト引数\nl1.call(5)  # 10\nl1.lambda?  # true\n\n# Proc vs Lambda の主な違い\n\n# 1. 引数チェック\np = proc  { |a, b| [a, b] }\nl = lambda{ |a, b| [a, b] }\np.call(1)        # [1, nil]（余分・不足を無視）\nl.call(1)        # ArgumentError（引数数が厳格）\n\n# 2. return の挙動\ndef test_proc\n  p = proc { return 'procのreturn' }  # メソッドから抜ける\n  p.call\n  'ここには到達しない'\nend\n\ndef test_lambda\n  l = lambda { return 'lambdaのreturn' }  # lambdaからだけ抜ける\n  l.call\n  'ここに到達する'  # これが返る\nend\n\ntest_proc    # 'procのreturn'\ntest_lambda  # 'ここに到達する'\n\n# カリー化\nadd    = ->(a, b) { a + b }\nadd5   = add.curry.(5)\nadd5.(3)   # 8\nadd5.(10)  # 15\n\nmultiply = ->(a, b, c) { a * b * c }\ndouble   = multiply.curry.(2)\ndouble.(3).(4)  # 24",
+        "highlightLines": [2, 9, 17, 22, 29, 38]
+      }
+    ]
+  },
+  {
+    "id": "closures",
+    "title": "クロージャとスコープ",
+    "description": "変数のキャプチャ・Enumerator・Fiber",
+    "codeBlocks": [
+      {
+        "language": "ruby",
+        "filename": "closures.rb",
+        "code": "# クロージャ（外部変数をキャプチャ）\ndef make_counter(start = 0)\n  count = start\n  increment = -> { count += 1; count }\n  decrement = -> { count -= 1; count }\n  value     = -> { count }\n  [increment, decrement, value]\nend\n\ninc, dec, val = make_counter(10)\ninc.call  # 11\ninc.call  # 12\ndec.call  # 11\nval.call  # 11\n\n# Enumerator（外部イテレータ）\nenum = [1, 2, 3].each   # Enumeratorオブジェクト\nenum.next  # 1\nenum.next  # 2\nenum.next  # 3\n# enum.next  # StopIteration\n\n# カスタムEnumerator\nfib = Enumerator.new do |yielder|\n  a, b = 0, 1\n  loop do\n    yielder << a     # yielder.yield(a) と同義\n    a, b = b, a + b\nend\nend\n\nfib.first(8)          # [0,1,1,2,3,5,8,13]\nfib.lazy.select(&:even?).first(5)  # [0,2,8,34,144]\n\n# Fiber（コルーチン）\nfiber = Fiber.new do\n  puts 'Step 1'\n  Fiber.yield\n  puts 'Step 2'\n  Fiber.yield\n  puts 'Step 3'\nend\n\nfiber.resume  # 'Step 1'\nfiber.resume  # 'Step 2'\nfiber.resume  # 'Step 3'",
+        "highlightLines": [2, 17, 23, 33, 43]
+      }
+    ]
+  }
+]

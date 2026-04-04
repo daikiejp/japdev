@@ -1,0 +1,41 @@
+[
+  {
+    "id": "exception-handling",
+    "title": "例外処理",
+    "description": "begin/rescue/ensure/raise・カスタム例外",
+    "codeBlocks": [
+      {
+        "language": "ruby",
+        "filename": "exceptions.rb",
+        "code": "# 基本構文\nbegin\n  result = 10 / 0\nrescue ZeroDivisionError => e\n  puts \"エラー: #{e.message}\"\nrescue TypeError, ArgumentError => e\n  puts \"型・引数エラー: #{e.message}\"\nrescue StandardError => e\n  puts \"その他のエラー: #{e.class}: #{e.message}\"\nelse\n  puts \"成功: #{result}\"  # 例外がなかった場合\nensure\n  puts '常に実行（リソース解放など）'\nend\n\n# メソッド内では begin/end を省略できる\ndef parse_json(str)\n  JSON.parse(str)\nrescue JSON::ParserError => e\n  logger.error \"JSON パースエラー: #{e.message}\"\n  nil\nend\n\n# 例外の発生\nraise ArgumentError, '引数が不正です'\nraise RuntimeError.new('カスタムメッセージ')\nraise  # 現在の例外を再送出（rescue 内で）\n\n# カスタム例外クラス\nclass AppError < StandardError\n  attr_reader :code\n\n  def initialize(message = 'アプリエラー', code: 500)\n    super(message)  # StandardError の initialize に渡す\n    @code = code\n  end\nend\n\nclass AuthenticationError < AppError\n  def initialize(msg = '認証失敗')\n    super(msg, code: 401)\n  end\nend\n\nclass NotFoundError < AppError\n  def initialize(resource = 'リソース')\n    super(\"#{resource}が見つかりません\", code: 404)\n  end\nend\n\n# 使用\nbegin\n  raise NotFoundError.new('ユーザー')\nrescue NotFoundError => e\n  puts \"#{e.message} (#{e.code})\"  # 'ユーザーが見つかりません (404)'\nrescue AppError => e\n  puts \"アプリエラー: #{e.code}\"\nend\n\n# retry\nattempts = 0\nbegin\n  attempts += 1\n  flaky_network_call()\nrescue NetworkError => e\n  retry if attempts < 3\n  raise  # 3回失敗したら再送出\nend",
+        "highlightLines": [2, 17, 25, 30, 50, 62]
+      }
+    ]
+  },
+  {
+    "id": "rspec",
+    "title": "RSpec",
+    "description": "describe・it・expect・matcher・mock",
+    "codeBlocks": [
+      {
+        "language": "ruby",
+        "filename": "spec/user_spec.rb",
+        "code": "require 'spec_helper'\n\nRSpec.describe User do\n  # shared setup\n  let(:user) { User.new(name: 'Alice', age: 30) }  # 遅延評価\n  let!(:saved_user) { create(:user) }               # 即時評価\n\n  subject { user }  # it { is_expected.to ... } で使える\n\n  describe '#name' do\n    it 'returns the name' do\n      expect(user.name).to eq('Alice')\n    end\n  end\n\n  describe '#adult?' do\n    context 'when age is 18 or over' do\n      it { is_expected.to be_adult }\n    end\n\n    context 'when age is under 18' do\n      let(:user) { User.new(name: 'Bob', age: 17) }\n      it { is_expected.not_to be_adult }\n    end\n  end\n\n  # よく使うマッチャー\n  it 'demonstrates matchers' do\n    expect(1 + 1).to eq(2)                     # 等値\n    expect('hello').to include('ell')           # 包含\n    expect([1,2,3]).to contain_exactly(3,2,1)  # 順不同で等値\n    expect(3.14).to be_within(0.01).of(Math::PI) # 近似値\n    expect { raise 'err' }.to raise_error(RuntimeError, 'err')  # 例外\n    expect { user.save }.to change(User, :count).by(1)  # 変化量\n    expect(user).to have_attributes(name: 'Alice', age: 30)\n    expect(nil).to be_nil\n    expect([]).to be_empty\n    expect(5).to be_between(1, 10).inclusive\n  end\n\n  # モックとスタブ\n  it 'sends a welcome email' do\n    mailer = instance_double(UserMailer)  # 型チェックあり\n    allow(UserMailer).to receive(:new).and_return(mailer)\n    allow(mailer).to receive(:welcome)\n\n    user.send_welcome_email\n\n    expect(mailer).to have_received(:welcome).once\n  end\n\n  # shared examples\n  shared_examples 'a valid entity' do\n    it { is_expected.to be_valid }\n    it { expect(subject.errors).to be_empty }\n  end\n\n  include_examples 'a valid entity'\nend",
+        "highlightLines": [3, 5, 10, 17, 27, 42, 52]
+      }
+    ]
+  },
+  {
+    "id": "minitest",
+    "title": "Minitest",
+    "description": "テストクラス・アサーション・モック",
+    "codeBlocks": [
+      {
+        "language": "ruby",
+        "filename": "test/user_test.rb",
+        "code": "require 'minitest/autorun'\nrequire 'minitest/mock'\n\nclass UserTest < Minitest::Test\n  def setup\n    @user = User.new(name: 'Alice', age: 30)  # 各テスト前に実行\n  end\n\n  def teardown\n    # 後片付け（必要な場合）\n  end\n\n  def test_name\n    assert_equal 'Alice', @user.name\n  end\n\n  def test_adult\n    assert @user.adult?,         '成人のはず'\n    refute User.new(name:'Bob', age:17).adult?, '未成年のはず'\n  end\n\n  # よく使うアサーション\n  def test_assertions\n    assert_equal    42,     value            # ==\n    assert_nil              value            # nil\n    assert_empty            collection       # 空\n    assert_includes [1,2,3], 2              # 包含\n    assert_match    /hello/, string         # 正規表現\n    assert_in_delta 3.14, Math::PI, 0.01   # 近似値\n    assert_raises(ArgumentError) { risky } # 例外\n    assert_respond_to @user, :name          # メソッド存在\n  end\n\n  # モック\n  def test_sends_email\n    mock_mailer = Minitest::Mock.new\n    mock_mailer.expect(:welcome, nil)  # welcomeが呼ばれることを期待\n\n    UserMailer.stub(:new, mock_mailer) do\n      @user.send_welcome_email\n    end\n\n    mock_mailer.verify\n  end\nend\n\n# Spec スタイル（RSpec 風）\ndescribe User do\n  it 'has a name' do\n    user = User.new(name: 'Alice')\n    _(user.name).must_equal 'Alice'\n    _(user).must_respond_to :adult?\n  end\nend",
+        "highlightLines": [4, 5, 13, 22, 35, 47]
+      }
+    ]
+  }
+]

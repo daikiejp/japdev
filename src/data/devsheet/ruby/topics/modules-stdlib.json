@@ -1,0 +1,41 @@
+[
+  {
+    "id": "modules-mixins",
+    "title": "モジュールの活用",
+    "description": "名前空間・Comparable・Enumerable の実装",
+    "codeBlocks": [
+      {
+        "language": "ruby",
+        "filename": "modules.rb",
+        "code": "# 名前空間としてのモジュール\nmodule MyApp\n  module Models\n    class User\n      attr_accessor :name, :age\n      def initialize(name, age)\n        @name, @age = name, age\n      end\n    end\n  end\n\n  module Services\n    class UserService\n      def find(id)\n        # ...\n      end\n    end\n  end\nend\n\nuser = MyApp::Models::User.new('Alice', 30)\n\n# Comparable を include してソート可能にする\nclass Box\n  include Comparable\n  attr_accessor :volume\n\n  def initialize(volume) = (@volume = volume)\n\n  # <=> を定義するだけで ==, <, >, <=, >=, between?, clamp が使える\n  def <=>(other)\n    volume <=> other.volume\n  end\nend\n\nboxes = [Box.new(10), Box.new(5), Box.new(20)]\nboxes.sort         # volume の昇順\nboxes.min          # volume 5 の Box\nboxes.max          # volume 20 の Box\n\n# Enumerable を include してコレクションを作る\nclass NumberSet\n  include Enumerable\n\n  def initialize(*nums) = (@nums = nums)\n\n  # each を定義するだけで map, select, sort, min, max... 全て使える\n  def each(&block) = @nums.each(&block)\nend\n\nns = NumberSet.new(3, 1, 4, 1, 5, 9, 2, 6)\nns.sort              # [1,1,2,3,4,5,6,9]\nns.select(&:odd?)    # [3,1,1,5,9]\nns.map { |x| x * 2 } # [6,2,8,2,10,18,4,12]",
+        "highlightLines": [2, 23, 30, 42, 49]
+      }
+    ]
+  },
+  {
+    "id": "file-io",
+    "title": "ファイル I/O",
+    "description": "File・Dir・Pathname・CSV・JSON",
+    "codeBlocks": [
+      {
+        "language": "ruby",
+        "filename": "file_io.rb",
+        "code": "require 'json'\nrequire 'csv'\nrequire 'pathname'\n\n# ファイルの読み書き\nFile.write('hello.txt', 'Hello, World!')  # 書き込み\ncontent = File.read('hello.txt')           # 全体読み込み\nlines   = File.readlines('data.txt', chomp: true)  # 行ごと\n\n# ブロック形式（確実にクローズ）\nFile.open('output.txt', 'w') do |f|\n  f.puts 'line 1'\n  f.puts 'line 2'\nend\n\nFile.foreach('data.txt') { |line| puts line.chomp }  # 大きなファイルに\n\n# ファイル情報\nFile.exist?('file.txt')    # true/false\nFile.size('file.txt')      # バイト数\nFile.mtime('file.txt')     # 更新時刻\nFile.basename('/path/to/file.txt')  # 'file.txt'\nFile.extname('file.txt')            # '.txt'\nFile.dirname('/path/to/file.txt')   # '/path/to'\nFile.join('dir', 'sub', 'file.txt') # 'dir/sub/file.txt'\n\n# Pathname（オブジェクト指向なパス操作）\npath = Pathname.new('dir/sub/file.txt')\npath.basename   # Pathname('file.txt')\npath.extname    # '.txt'\npath.parent     # Pathname('dir/sub')\npath.read       # ファイルの内容\n\n# Dir\nDir.mkdir('new_dir')\nDir.glob('**/*.rb')          # 再帰的にRubyファイルを取得\nDir.entries('.')             # ファイル一覧（.と..含む）\nDir.each_child('.') { |f| puts f }  # .と..を除く\n\n# JSON\ndata = { name: 'Alice', scores: [95, 87] }\njson_str = JSON.generate(data)\njson_str = JSON.pretty_generate(data)  # 整形\nparsed   = JSON.parse(json_str, symbolize_names: true)  # キーをシンボルに\n\nFile.write('data.json', JSON.pretty_generate(data))\nparsed = JSON.parse(File.read('data.json'), symbolize_names: true)\n\n# CSV\nCSV.foreach('data.csv', headers: true) do |row|\n  puts row['name']  # ヘッダーでアクセス\nend\n\nCSV.open('output.csv', 'w', headers: %w[name age], write_headers: true) do |csv|\n  csv << ['Alice', 30]\n  csv << ['Bob', 25]\nend",
+        "highlightLines": [6, 11, 17, 27, 36, 43, 52]
+      }
+    ]
+  },
+  {
+    "id": "stdlib-gems",
+    "title": "よく使う標準ライブラリ",
+    "description": "Struct・OpenStruct・SecureRandom・Benchmark",
+    "codeBlocks": [
+      {
+        "language": "ruby",
+        "filename": "stdlib.rb",
+        "code": "require 'securerandom'\nrequire 'benchmark'\require 'ostruct'\nrequire 'set'\n\n# Struct（軽量なデータクラス）\nPoint = Struct.new(:x, :y) do\n  def distance_to(other)\n    Math.sqrt((x - other.x)**2 + (y - other.y)**2)\n  end\nend\n\np1 = Point.new(0, 0)\np2 = Point.new(3, 4)\np1.distance_to(p2)  # 5.0\np1.to_a             # [0, 0]\np1.to_h             # {x: 0, y: 0}\nPoint.members       # [:x, :y]\n\n# Data（Ruby 3.2+、イミュータブルなStruct）\nMeasurement = Data.define(:value, :unit)\nm = Measurement.new(value: 100, unit: 'kg')\n# m.value = 200  # FrozenError!\n\n# Set\nrequire 'set'\nset = Set.new([1, 2, 3])\nset.add(4)\nset.include?(3)   # true\nset1 = Set.new([1,2,3])\nset2 = Set.new([2,3,4])\nset1 | set2       # Set{1,2,3,4}（和集合）\nset1 & set2       # Set{2,3}（積集合）\n\n# SecureRandom\nSecureRandom.uuid      # 'f47ac10b-58cc-4372-...'\nSecureRandom.hex(16)   # '3a7f...'（32文字の16進数）\nSecureRandom.base64(12) # ランダムなBase64文字列\n\n# Benchmark\nBenchmark.bm do |x|\n  x.report('sort:')  { (1..10000).to_a.shuffle.sort }\n  x.report('sort!:') { arr = (1..10000).to_a.shuffle; arr.sort! }\nend\n\n# Comparable で <=> を実装するだけで sort が使える\n# Benchmark.measure { heavy_computation }.real  # 秒数",
+        "highlightLines": [7, 21, 26, 36, 41]
+      }
+    ]
+  }
+]

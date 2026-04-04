@@ -1,0 +1,41 @@
+[
+  {
+    "id": "array",
+    "title": "Array",
+    "description": "作成・操作・Enumerable メソッド",
+    "codeBlocks": [
+      {
+        "language": "ruby",
+        "filename": "arrays.rb",
+        "code": "# 作成\narr = [1, 2, 3, 4, 5]\narr = Array.new(5, 0)        # [0,0,0,0,0]\narr = Array.new(5) { |i| i * 2 }  # [0,2,4,6,8]\narr = %w[apple banana cherry]      # ['apple','banana','cherry']\narr = %i[foo bar baz]              # [:foo,:bar,:baz]\n\n# アクセス\narr[0]        # 最初\narr[-1]       # 最後\narr[1..3]     # [2,3,4] (範囲)\narr[1, 2]     # [2,3] (start, length)\narr.first     # 最初の要素\narr.first(3)  # 最初の3要素\narr.last      # 最後の要素\narr.sample    # ランダムに1つ\narr.sample(3) # ランダムに3つ\n\n# 追加・削除\narr.push(6)           # 末尾追加\narr << 7              # 末尾追加（<<演算子）\narr.unshift(0)        # 先頭追加\narr.pop               # 末尾削除・返却\narr.shift             # 先頭削除・返却\narr.delete(3)         # 値で削除（全て）\narr.delete_at(0)      # インデックスで削除\narr.compact           # nil を除いた新配列\narr.flatten           # ネストを平坦化\narr.flatten(1)        # 1段階だけ平坦化\narr.uniq              # 重複排除\n\n# 変換\narr.map  { |x| x * 2 }       # 変換（collect も同義）\narr.select { |x| x.even? }   # 絞り込み（filter も同義）\narr.reject { |x| x.even? }   # 除外\narr.reduce(0) { |sum, x| sum + x }  # 畳み込み（inject も同義）\narr.reduce(:+)                # シンボルで演算子を指定\narr.each_with_object([]) { |x, memo| memo << x * 2 }\n\narr.flat_map { |x| [x, x * 2] } # map + flatten(1)\narr.zip([10,20,30])            # [[1,10],[2,20],[3,30]]\narr.each_slice(2).to_a         # [[1,2],[3,4],[5]]\narr.each_cons(3).to_a          # [[1,2,3],[2,3,4],[3,4,5]]\narr.group_by { |x| x % 3 }    # {1=>[1,4], 2=>[2,5], 0=>[3]}\narr.tally                      # 出現回数 {1=>1,2=>1,...}\n\narr.sort                       # 昇順\narr.sort_by { |x| -x }        # カスタムソート（降順）\narr.min; arr.max\narr.min_by { |x| x.abs }; arr.max_by { |x| x.abs }\narr.sum; arr.count; arr.any? { |x| x > 3 }; arr.all? { |x| x > 0 }",
+        "highlightLines": [5, 6, 19, 21, 32, 37, 44]
+      }
+    ]
+  },
+  {
+    "id": "hash",
+    "title": "Hash",
+    "description": "作成・操作・変換・マージ",
+    "codeBlocks": [
+      {
+        "language": "ruby",
+        "filename": "hashes.rb",
+        "code": "# 作成\nhash = { name: 'Alice', age: 30 }       # シンボルキー（推奨）\nhash = { 'name' => 'Alice', 1 => :one } # ハッシュロケット（文字列・数値キー）\nhash = Hash.new(0)                      # デフォルト値付き\n\n# アクセス\nhash[:name]               # 'Alice'\nhash[:missing]            # nil（KeyError は出ない）\nhash.fetch(:name)         # 'Alice'\nhash.fetch(:missing)      # KeyError!\nhash.fetch(:missing, 'N/A')           # デフォルト値\nhash.fetch(:missing) { |k| \"#{k} not found\" }  # ブロック\n\n# 更新\nhash[:email] = 'alice@example.com'  # 追加・更新\nhash.merge!(age: 31)                # 破壊的マージ\nhash.delete(:email)                 # 削除して返却\nhash.reject! { |k, v| v.nil? }     # 条件で削除\n\n# 確認\nhash.key?(:name)     # true（has_key? も同義）\nhash.value?('Alice') # true（has_value? も同義）\nhash.any? { |k, v| v.is_a?(Integer) }\nhash.all? { |k, v| v }\nhash.count { |k, v| v.is_a?(String) }\n\n# イテレーション\nhash.each { |key, val| puts \"#{key}: #{val}\" }\nhash.each_with_object({}) { |(k, v), memo| memo[k] = v.to_s }\n\n# 変換\nhash.keys          # [:name, :age]\nhash.values        # ['Alice', 30]\nhash.to_a          # [[:name,'Alice'],[:age,30]]\nhash.map { |k, v| [k, v.to_s] }.to_h\nhash.transform_keys(&:to_s)       # キーを変換\nhash.transform_values(&:to_s)     # 値を変換\nhash.filter_map { |k, v| [k, v * 2] if v.is_a?(Integer) }\nhash.select { |k, v| v.is_a?(String) }  # 絞り込み\nhash.reject { |k, v| v.nil? }           # 除外\n\n# マージ\ndefaults = { role: 'user', active: true }\noverride = { role: 'admin' }\nmerged = defaults.merge(override)        # overrideが優先\nmerged = defaults.merge(override) { |key, old, new_val| new_val } # ブロックで解決",
+        "highlightLines": [2, 9, 15, 22, 27, 33, 40]
+      }
+    ]
+  },
+  {
+    "id": "range-enumerable",
+    "title": "Range と Enumerable",
+    "description": "範囲オブジェクトと便利なメソッド集",
+    "codeBlocks": [
+      {
+        "language": "ruby",
+        "filename": "range_enumerable.rb",
+        "code": "# Range\n(1..10)          # 1から10まで（10を含む）\n(1...10)         # 1から9まで（10を含まない）\n('a'..'z')       # 文字の範囲\n(1.0..3.0)       # 浮動小数点\n\n(1..10).to_a     # [1,2,3,...,10]\n(1..10).sum      # 55\n(1..10).include?(5)  # true\n(1..10).cover?(5)    # true（数値の範囲に対して高速）\n\n# 範囲と case\ncase age\nwhen 0..17  then '未成年'\nwhen 18..64 then '成人'\nwhen 65..   then '高齢者'  # 下限のみの範囲\nend\n\n# Enumerable モジュールが提供するメソッド\nnums = [3, 1, 4, 1, 5, 9, 2, 6, 5, 3]\n\nnums.find   { |x| x > 4 }      # 5（最初の1つ）\nnums.count  { |x| x > 4 }      # 4\nnums.sum    { |x| x * 2 }      # 78\nnums.minmax                     # [1, 9]\nnums.minmax_by { |x| -x }      # [9, 1]\n\nnums.each_with_index { |v, i| puts \"#{i}: #{v}\" }\nnums.map.with_index  { |v, i| \"#{i}:#{v}\" }\n\nnums.chunk { |x| x > 3 }.to_a\n# [[false,[3,1]],[true,[4]],[false,[1]],[true,[5,9]],...]  \n\nnums.lazy.select { |x| x.odd? }.map { |x| x**2 }.first(3)\n# 遅延評価: 必要な分だけ処理\n\n# Comparable モジュール\nclass Temperature\n  include Comparable\n  attr_reader :degrees\n  def initialize(d) = (@degrees = d)\n  def <=>(other) = degrees <=> other.degrees\nend\n\nt1 = Temperature.new(20)\nt2 = Temperature.new(30)\nt1 < t2   # true\n[t2, t1].sort  # [t1, t2]（昇順）\nt1.clamp(Temperature.new(15), Temperature.new(25))  # t1",
+        "highlightLines": [2, 3, 13, 21, 28, 32, 36]
+      }
+    ]
+  }
+]

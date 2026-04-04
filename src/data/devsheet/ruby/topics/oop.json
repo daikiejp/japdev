@@ -1,0 +1,41 @@
+[
+  {
+    "id": "classes",
+    "title": "クラスの定義",
+    "description": "attr_accessor・initialize・可視性",
+    "codeBlocks": [
+      {
+        "language": "ruby",
+        "filename": "classes.rb",
+        "code": "class BankAccount\n  # アクセサの定義\n  attr_reader   :owner              # getter のみ\n  attr_writer   :email              # setter のみ\n  attr_accessor :balance            # getter + setter\n\n  # クラス変数・クラスインスタンス変数\n  @@count = 0                       # クラス変数（継承で共有）\n  @interest_rate = 0.02             # クラスインスタンス変数（継承で独立）\n\n  def initialize(owner, balance = 0)\n    @owner   = owner\n    @balance = balance.to_f\n    @@count += 1\n  end\n\n  # インスタンスメソッド\n  def deposit(amount)\n    @balance += amount\n    self  # メソッドチェーン用\n  end\n\n  # クラスメソッド\n  def self.count = @@count\n  def self.interest_rate = @interest_rate\n\n  # メソッドの可視性\n  def public_method = '誰でも呼べる'\n\n  protected\n  def protected_method = '同じクラス・サブクラスから呼べる'\n\n  private\n  def private_method = 'このクラスのインスタンスからのみ'\n  def validate_amount(amount)\n    raise ArgumentError, '金額は正の数' unless amount.positive?\n  end\n\n  # private は self. でも呼べない（Ruby 2.7 以前）\n  # Ruby 3.0+ は private メソッドに self. を使えない\nend\n\nacc = BankAccount.new('Alice', 1000)\nacc.deposit(500).deposit(200)  # メソッドチェーン\nputs BankAccount.count  # 1",
+        "highlightLines": [3, 4, 5, 8, 11, 24, 30, 33]
+      }
+    ]
+  },
+  {
+    "id": "inheritance",
+    "title": "継承とモジュール",
+    "description": "super・オーバーライド・include・extend・prepend",
+    "codeBlocks": [
+      {
+        "language": "ruby",
+        "filename": "inheritance.rb",
+        "code": "# 継承（単一継承）\nclass Animal\n  attr_reader :name\n  def initialize(name) = (@name = name)\n  def speak = raise NotImplementedError, \"#{self.class} must implement speak\"\n  def to_s  = \"#{self.class.name}(#{name})\"\nend\n\nclass Dog < Animal\n  def speak = 'ワン！'\n  def fetch(item)\n    \"#{name}が#{item}を取ってきた！\"\n  end\nend\n\nclass GoldenRetriever < Dog\n  def speak\n    super + ' ワン！'  # 親のメソッドを呼ぶ\n  end\nend\n\n# モジュール（Mixin）\nmodule Swimmable\n  def swim = \"#{name}が泳いでいる\"\nend\n\nmodule Runnable\n  def run(speed: 'fast') = \"#{name}が#{speed}で走っている\"\nend\n\nclass Duck < Animal\n  include Swimmable      # インスタンスメソッドを追加\n  include Runnable\n  def speak = 'クワッ！'\nend\n\nduck = Duck.new('ドナルド')\nduck.swim   # 'ドナルドが泳いでいる'\nduck.run    # 'ドナルドがfastで走っている'\n\n# extend: クラスメソッドとして追加\nmodule ClassMethods\n  def create(attrs)\n    new(attrs[:name])\n  end\nend\nDuck.extend(ClassMethods)\n\n# prepend: メソッドルックアップチェーンの前に挿入\nmodule Logging\n  def speak\n    result = super\n    puts \"[LOG] speak called, returned: #{result}\"\n    result\n  end\nend\nDog.prepend(Logging)\n\n# 祖先チェーン\nDuck.ancestors\n# [Duck, Runnable, Swimmable, Animal, Object, Kernel, BasicObject]",
+        "highlightLines": [2, 9, 16, 23, 32, 42, 50, 56]
+      }
+    ]
+  },
+  {
+    "id": "metaprogramming",
+    "title": "メタプログラミング",
+    "description": "method_missing・define_method・open class・respond_to_missing?",
+    "codeBlocks": [
+      {
+        "language": "ruby",
+        "filename": "metaprogramming.rb",
+        "code": "# オープンクラス（既存クラスの拡張）\nclass Integer\n  def factorial\n    return 1 if self <= 1\n    self * (self - 1).factorial\n  end\n\n  def times_do\n    i = 0\n    while i < self\n      yield i\n      i += 1\n    end\n  end\nend\n\n5.factorial  # 120\n\n# Refinements（スコープを絞ったオープンクラス）\nmodule StringExtensions\n  refine String do\n    def palindrome?\n      self == self.reverse\n    end\n  end\nend\n\nusing StringExtensions  # このファイル内でのみ有効\n'racecar'.palindrome?   # true\n\n# define_method（動的メソッド定義）\nclass MyClass\n  %w[foo bar baz].each do |name|\n    define_method(\"say_#{name}\") do\n      puts name\n    end\n  end\nend\n\nMyClass.new.say_foo  # 'foo'\n\n# method_missing（未定義メソッドの捕捉）\nclass DynamicFinder\n  def method_missing(name, *args)\n    if name.to_s.start_with?('find_by_')\n      attr = name.to_s.sub('find_by_', '')\n      \"#{attr}=#{args.first}で検索\"\n    else\n      super  # 処理できない場合は super を呼ぶ\n    end\n  end\n\n  def respond_to_missing?(name, include_private = false)\n    name.to_s.start_with?('find_by_') || super\n  end\nend\n\nfinder = DynamicFinder.new\nfinder.find_by_name('Alice')   # 'name=Aliceで検索'\nfinder.respond_to?(:find_by_id) # true",
+        "highlightLines": [2, 20, 32, 43, 51, 58]
+      }
+    ]
+  }
+]

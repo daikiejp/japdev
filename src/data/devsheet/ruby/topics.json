@@ -1,0 +1,9 @@
+[
+  { "id": "basics",         "name": "基本構文",          "description": "変数・型・制御フロー・メソッド" },
+  { "id": "strings",        "name": "文字列とシンボル",    "description": "String・Symbol・ヒアドキュメント・フォーマット" },
+  { "id": "collections",    "name": "コレクション",        "description": "Array・Hash・Range・Enumerable" },
+  { "id": "oop",            "name": "オブジェクト指向",    "description": "クラス・継承・モジュール・Mixin" },
+  { "id": "blocks",         "name": "ブロック・Proc・Lambda","description": "yield・block_given?・クロージャ" },
+  { "id": "modules-stdlib", "name": "モジュールと標準ライブラリ","description": "Comparable・Enumerable・File・JSON・Regexp" },
+  { "id": "exceptions",     "name": "例外処理とテスト",    "description": "begin/rescue・raise・RSpec・minitest" }
+]

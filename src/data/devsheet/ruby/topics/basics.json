@@ -1,0 +1,41 @@
+[
+  {
+    "id": "variables-types",
+    "title": "変数と型",
+    "description": "ローカル・インスタンス・クラス・グローバル変数と基本型",
+    "codeBlocks": [
+      {
+        "language": "ruby",
+        "filename": "variables.rb",
+        "code": "# 変数の種類\nlocal_var   = 'ローカル変数（小文字またはアンダースコア開始）'\n@instance   = 'インスタンス変数'\n@@class_var = 'クラス変数'\n$global     = 'グローバル変数（非推奨）'\nCONSTANT    = '定数（大文字開始）'\n\n# 基本型\nnum     = 42\nfloat   = 3.14\nstr     = 'hello'\nbool_t  = true\nbool_f  = false\nnothing = nil\nsym     = :symbol\n\n# 型確認\n42.class          # Integer\n3.14.class        # Float\n'hi'.class        # String\n:sym.class        # Symbol\n[].class          # Array\n{}.class          # Hash\ntrue.class        # TrueClass\nnil.class         # NilClass\n\n42.is_a?(Integer) # true\n42.is_a?(Numeric) # true（継承関係も確認）\n42.kind_of?(Float) # false\n42.respond_to?(:to_s) # true\n\n# 多重代入\na, b, c = 1, 2, 3\nfirst, *rest = [1, 2, 3, 4]   # first=1, rest=[2,3,4]\n*init, last  = [1, 2, 3, 4]   # init=[1,2,3], last=4\na, b = b, a                    # スワップ",
+        "highlightLines": [2, 3, 4, 9, 19, 32, 35]
+      }
+    ]
+  },
+  {
+    "id": "control-flow",
+    "title": "制御フロー",
+    "description": "if・unless・case・while・until・ループ",
+    "codeBlocks": [
+      {
+        "language": "ruby",
+        "filename": "control.rb",
+        "code": "# if / elsif / else\nx = 10\nif x > 0\n  puts '正'\nelsif x == 0\n  puts 'ゼロ'\nelse\n  puts '負'\nend\n\n# unless（if not）\nunless x.nil?\n  puts '値あり'\nend\n\n# 後置 if / unless（1行の場合）\nputs '偶数' if x.even?\nputs '奇数' unless x.even?\n\n# 三項演算子\nresult = x > 0 ? '正' : '非正'\n\n# case / when\nstatus = 200\nmessage = case status\n  when 200      then 'OK'\n  when 301, 302 then 'Redirect'\n  when 400..499 then 'Client Error'\n  when 500..599 then 'Server Error'\n  else               'Unknown'\nend\n\n# case with pattern matching（Ruby 3+）\ncase { name: 'Alice', role: 'admin' }\nin { name: String => name, role: 'admin' }\n  puts \"管理者: #{name}\"\nin { name: String => name }\n  puts \"ユーザー: #{name}\"\nend\n\n# ループ\n5.times { |i| print \"#{i} \" }       # 0 1 2 3 4\n1.upto(5)  { |i| print \"#{i} \" }    # 1 2 3 4 5\n5.downto(1){ |i| print \"#{i} \" }    # 5 4 3 2 1\n1.step(10, 2) { |i| print \"#{i} \" } # 1 3 5 7 9\n\n# while / until\ni = 0\nwhile i < 5\n  i += 1\nend\n\nuntil i == 10\n  i += 1\nend\n\n# loop（無限ループ）\nloop do\n  break if condition_met?\nend",
+        "highlightLines": [3, 12, 17, 21, 24, 33, 41, 47]
+      }
+    ]
+  },
+  {
+    "id": "methods",
+    "title": "メソッド",
+    "description": "引数・デフォルト値・キーワード引数・返り値",
+    "codeBlocks": [
+      {
+        "language": "ruby",
+        "filename": "methods.rb",
+        "code": "# 基本メソッド（最後の式が返り値）\ndef add(a, b)\n  a + b  # returnは省略可\nend\n\n# デフォルト引数\ndef greet(name, greeting = 'こんにちは')\n  \"#{greeting}、#{name}！\"\nend\n\n# キーワード引数（Ruby 2.0+）\ndef connect(host:, port: 3000, ssl: false)\n  \"#{ssl ? 'https' : 'http'}://#{host}:#{port}\"\nend\nconnect(host: 'localhost')\nconnect(host: 'example.com', port: 443, ssl: true)\n\n# スプラット演算子\ndef sum(*numbers)          # 可変長引数\n  numbers.sum\nend\nsum(1, 2, 3, 4)  # 10\n\ndef config(name, **options) # キーワード可変長引数\n  options.each { |k, v| puts \"#{k}: #{v}\" }\nend\nconfig('app', debug: true, env: 'prod')\n\n# 疑問符メソッド・感嘆符メソッド\n'hello'.empty?   # false（慣例: boolean を返す）\n[3,1,2].sort!    # 破壊的変更（慣例: レシーバを変更）\n\n# &.（safe navigation operator）\nuser&.name       # user が nil でも NoMethodError にならない\nuser&.address&.city\n\n# method object\nm = method(:puts)\nm.call('hello')  # puts 'hello'\n[1,2,3].each(&method(:puts))",
+        "highlightLines": [2, 7, 12, 19, 24, 29, 33]
+      }
+    ]
+  }
+]
