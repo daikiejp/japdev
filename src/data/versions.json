@@ -5,7 +5,7 @@
     "date": "2026-04-08",
     "description": "19.2.5 (April 8th, 2026)",
     "status": "new",
-    "stars": 244422,
+    "stars": 244423,
     "repoUrl": "https://github.com/facebook/react",
     "changelogUrl": "https://github.com/facebook/react/releases/tag/v19.2.5"
   },
@@ -45,7 +45,7 @@
     "date": "2026-04-08",
     "description": "@astrojs/cloudflare@13.1.8",
     "status": "new",
-    "stars": 58367,
+    "stars": 58369,
     "repoUrl": "https://github.com/withastro/astro",
     "changelogUrl": "https://github.com/withastro/astro/releases/tag/%40astrojs/cloudflare%4013.1.8"
   },
