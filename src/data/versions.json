@@ -5,7 +5,7 @@
     "date": "2026-04-08",
     "description": "19.2.5 (April 8th, 2026)",
     "status": "new",
-    "stars": 244475,
+    "stars": 244481,
     "repoUrl": "https://github.com/facebook/react",
     "changelogUrl": "https://github.com/facebook/react/releases/tag/v19.2.5"
   },
@@ -15,7 +15,7 @@
     "date": "2026-04-08",
     "description": "v16.2.3",
     "status": "new",
-    "stars": 138905,
+    "stars": 138909,
     "repoUrl": "https://github.com/vercel/next.js",
     "changelogUrl": "https://github.com/vercel/next.js/releases/tag/v16.2.3"
   },
@@ -25,7 +25,7 @@
     "date": "2026-04-01",
     "description": "2026-04-01, Version 25.9.0 (Current), @aduh95",
     "status": "new",
-    "stars": 116715,
+    "stars": 116719,
     "repoUrl": "https://github.com/nodejs/node",
     "changelogUrl": "https://github.com/nodejs/node/releases/tag/v25.9.0"
   },
@@ -35,7 +35,7 @@
     "date": "2026-03-23",
     "description": "TypeScript 6.0",
     "status": "new",
-    "stars": 108528,
+    "stars": 108535,
     "repoUrl": "https://github.com/microsoft/TypeScript",
     "changelogUrl": "https://github.com/microsoft/TypeScript/releases/tag/v6.0.2"
   },
@@ -45,7 +45,7 @@
     "date": "2026-04-13",
     "description": "@astrojs/cloudflare@13.1.9",
     "status": "new",
-    "stars": 58440,
+    "stars": 58446,
     "repoUrl": "https://github.com/withastro/astro",
     "changelogUrl": "https://github.com/withastro/astro/releases/tag/%40astrojs/cloudflare%4013.1.9"
   },
@@ -55,7 +55,7 @@
     "date": "2026-04-03",
     "description": "v3.5.32",
     "status": "new",
-    "stars": 53425,
+    "stars": 53427,
     "repoUrl": "https://github.com/vuejs/core",
     "changelogUrl": "https://github.com/vuejs/core/releases/tag/v3.5.32"
   },
@@ -65,7 +65,7 @@
     "date": "2026-04-09",
     "description": "@sveltejs/kit@2.57.1",
     "status": "new",
-    "stars": 20423,
+    "stars": 20424,
     "repoUrl": "https://github.com/sveltejs/kit",
     "changelogUrl": "https://github.com/sveltejs/kit/releases/tag/%40sveltejs/kit%402.57.1"
   }
