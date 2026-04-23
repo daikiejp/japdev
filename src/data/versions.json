@@ -5,7 +5,7 @@
     "date": "2026-04-08",
     "description": "19.2.5 (April 8th, 2026)",
     "status": "new",
-    "stars": 244610,
+    "stars": 244609,
     "repoUrl": "https://github.com/facebook/react",
     "changelogUrl": "https://github.com/facebook/react/releases/tag/v19.2.5"
   },
@@ -15,7 +15,7 @@
     "date": "2026-04-15",
     "description": "v16.2.4",
     "status": "new",
-    "stars": 139091,
+    "stars": 139092,
     "repoUrl": "https://github.com/vercel/next.js",
     "changelogUrl": "https://github.com/vercel/next.js/releases/tag/v16.2.4"
   },
@@ -45,7 +45,7 @@
     "date": "2026-04-22",
     "description": "@astrojs/netlify@7.0.8",
     "status": "new",
-    "stars": 58681,
+    "stars": 58684,
     "repoUrl": "https://github.com/withastro/astro",
     "changelogUrl": "https://github.com/withastro/astro/releases/tag/%40astrojs/netlify%407.0.8"
   },
@@ -55,7 +55,7 @@
     "date": "2026-04-22",
     "description": "v3.5.33",
     "status": "new",
-    "stars": 53500,
+    "stars": 53502,
     "repoUrl": "https://github.com/vuejs/core",
     "changelogUrl": "https://github.com/vuejs/core/releases/tag/v3.5.33"
   },
