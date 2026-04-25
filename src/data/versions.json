@@ -15,7 +15,7 @@
     "date": "2026-04-15",
     "description": "v16.2.4",
     "status": "new",
-    "stars": 139150,
+    "stars": 139151,
     "repoUrl": "https://github.com/vercel/next.js",
     "changelogUrl": "https://github.com/vercel/next.js/releases/tag/v16.2.4"
   },
@@ -25,7 +25,7 @@
     "date": "2026-04-01",
     "description": "2026-04-01, Version 25.9.0 (Current), @aduh95",
     "status": "new",
-    "stars": 116895,
+    "stars": 116894,
     "repoUrl": "https://github.com/nodejs/node",
     "changelogUrl": "https://github.com/nodejs/node/releases/tag/v25.9.0"
   },
@@ -35,7 +35,7 @@
     "date": "2026-04-16",
     "description": "TypeScript 6.0.3",
     "status": "new",
-    "stars": 108658,
+    "stars": 108660,
     "repoUrl": "https://github.com/microsoft/TypeScript",
     "changelogUrl": "https://github.com/microsoft/TypeScript/releases/tag/v6.0.3"
   },
@@ -45,7 +45,7 @@
     "date": "2026-04-23",
     "description": "@astrojs/cloudflare@13.2.1",
     "status": "new",
-    "stars": 58749,
+    "stars": 58753,
     "repoUrl": "https://github.com/withastro/astro",
     "changelogUrl": "https://github.com/withastro/astro/releases/tag/%40astrojs/cloudflare%4013.2.1"
   },
