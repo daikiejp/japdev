@@ -5,7 +5,7 @@
     "date": "2026-04-08",
     "description": "19.2.5 (April 8th, 2026)",
     "status": "new",
-    "stars": 244701,
+    "stars": 244707,
     "repoUrl": "https://github.com/facebook/react",
     "changelogUrl": "https://github.com/facebook/react/releases/tag/v19.2.5"
   },
@@ -25,7 +25,7 @@
     "date": "2026-04-01",
     "description": "2026-04-01, Version 25.9.0 (Current), @aduh95",
     "status": "new",
-    "stars": 116913,
+    "stars": 116917,
     "repoUrl": "https://github.com/nodejs/node",
     "changelogUrl": "https://github.com/nodejs/node/releases/tag/v25.9.0"
   },
@@ -45,7 +45,7 @@
     "date": "2026-04-23",
     "description": "@astrojs/cloudflare@13.2.1",
     "status": "new",
-    "stars": 58788,
+    "stars": 58789,
     "repoUrl": "https://github.com/withastro/astro",
     "changelogUrl": "https://github.com/withastro/astro/releases/tag/%40astrojs/cloudflare%4013.2.1"
   },
@@ -55,7 +55,7 @@
     "date": "2026-04-22",
     "description": "v3.5.33",
     "status": "new",
-    "stars": 53533,
+    "stars": 53534,
     "repoUrl": "https://github.com/vuejs/core",
     "changelogUrl": "https://github.com/vuejs/core/releases/tag/v3.5.33"
   },
