@@ -5,7 +5,7 @@
     "date": "2026-04-08",
     "description": "19.2.5 (April 8th, 2026)",
     "status": "new",
-    "stars": 244753,
+    "stars": 244751,
     "repoUrl": "https://github.com/facebook/react",
     "changelogUrl": "https://github.com/facebook/react/releases/tag/v19.2.5"
   },
@@ -25,7 +25,7 @@
     "date": "2026-04-01",
     "description": "2026-04-01, Version 25.9.0 (Current), @aduh95",
     "status": "new",
-    "stars": 116965,
+    "stars": 116964,
     "repoUrl": "https://github.com/nodejs/node",
     "changelogUrl": "https://github.com/nodejs/node/releases/tag/v25.9.0"
   },
@@ -45,7 +45,7 @@
     "date": "2026-04-28",
     "description": "@astrojs/cloudflare@13.2.2",
     "status": "new",
-    "stars": 58833,
+    "stars": 58834,
     "repoUrl": "https://github.com/withastro/astro",
     "changelogUrl": "https://github.com/withastro/astro/releases/tag/%40astrojs/cloudflare%4013.2.2"
   },
@@ -65,7 +65,7 @@
     "date": "2026-04-23",
     "description": "@sveltejs/kit@2.58.0",
     "status": "new",
-    "stars": 20466,
+    "stars": 20468,
     "repoUrl": "https://github.com/sveltejs/kit",
     "changelogUrl": "https://github.com/sveltejs/kit/releases/tag/%40sveltejs/kit%402.58.0"
   }
