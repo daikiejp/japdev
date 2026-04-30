@@ -15,7 +15,7 @@
     "date": "2026-04-15",
     "description": "v16.2.4",
     "status": "new",
-    "stars": 139231,
+    "stars": 139233,
     "repoUrl": "https://github.com/vercel/next.js",
     "changelogUrl": "https://github.com/vercel/next.js/releases/tag/v16.2.4"
   },
@@ -41,13 +41,13 @@
   },
   {
     "name": "Astro",
-    "version": "@astrojs/cloudflare@13.3.0",
+    "version": "astro@6.2.1",
     "date": "2026-04-30",
-    "description": "@astrojs/cloudflare@13.3.0",
+    "description": "astro@6.2.1",
     "status": "new",
-    "stars": 58861,
+    "stars": 58866,
     "repoUrl": "https://github.com/withastro/astro",
-    "changelogUrl": "https://github.com/withastro/astro/releases/tag/%40astrojs/cloudflare%4013.3.0"
+    "changelogUrl": "https://github.com/withastro/astro/releases/tag/astro%406.2.1"
   },
   {
     "name": "Vue",
@@ -55,7 +55,7 @@
     "date": "2026-04-22",
     "description": "v3.5.33",
     "status": "new",
-    "stars": 53568,
+    "stars": 53570,
     "repoUrl": "https://github.com/vuejs/core",
     "changelogUrl": "https://github.com/vuejs/core/releases/tag/v3.5.33"
   },
@@ -65,7 +65,7 @@
     "date": "2026-04-23",
     "description": "@sveltejs/kit@2.58.0",
     "status": "new",
-    "stars": 20470,
+    "stars": 20471,
     "repoUrl": "https://github.com/sveltejs/kit",
     "changelogUrl": "https://github.com/sveltejs/kit/releases/tag/%40sveltejs/kit%402.58.0"
   }
