@@ -15,7 +15,7 @@
     "date": "2026-04-15",
     "description": "v16.2.4",
     "status": "new",
-    "stars": 139233,
+    "stars": 139232,
     "repoUrl": "https://github.com/vercel/next.js",
     "changelogUrl": "https://github.com/vercel/next.js/releases/tag/v16.2.4"
   },
@@ -65,7 +65,7 @@
     "date": "2026-04-23",
     "description": "@sveltejs/kit@2.58.0",
     "status": "new",
-    "stars": 20472,
+    "stars": 20473,
     "repoUrl": "https://github.com/sveltejs/kit",
     "changelogUrl": "https://github.com/sveltejs/kit/releases/tag/%40sveltejs/kit%402.58.0"
   }
