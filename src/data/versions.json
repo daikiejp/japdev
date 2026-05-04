@@ -15,7 +15,7 @@
     "date": "2026-04-15",
     "description": "v16.2.4",
     "status": "new",
-    "stars": 139266,
+    "stars": 139267,
     "repoUrl": "https://github.com/vercel/next.js",
     "changelogUrl": "https://github.com/vercel/next.js/releases/tag/v16.2.4"
   },
@@ -45,7 +45,7 @@
     "date": "2026-04-30",
     "description": "astro@6.2.1",
     "status": "new",
-    "stars": 58956,
+    "stars": 58959,
     "repoUrl": "https://github.com/withastro/astro",
     "changelogUrl": "https://github.com/withastro/astro/releases/tag/astro%406.2.1"
   },
@@ -65,7 +65,7 @@
     "date": "2026-05-01",
     "description": "@sveltejs/kit@2.59.0",
     "status": "new",
-    "stars": 20478,
+    "stars": 20479,
     "repoUrl": "https://github.com/sveltejs/kit",
     "changelogUrl": "https://github.com/sveltejs/kit/releases/tag/%40sveltejs/kit%402.59.0"
   }
