@@ -25,7 +25,7 @@
     "date": "2026-04-01",
     "description": "2026-04-01, Version 25.9.0 (Current), @aduh95",
     "status": "new",
-    "stars": 117021,
+    "stars": 117024,
     "repoUrl": "https://github.com/nodejs/node",
     "changelogUrl": "https://github.com/nodejs/node/releases/tag/v25.9.0"
   },
@@ -45,7 +45,7 @@
     "date": "2026-04-30",
     "description": "astro@6.2.1",
     "status": "new",
-    "stars": 58959,
+    "stars": 58960,
     "repoUrl": "https://github.com/withastro/astro",
     "changelogUrl": "https://github.com/withastro/astro/releases/tag/astro%406.2.1"
   },
