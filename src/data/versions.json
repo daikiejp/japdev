@@ -5,7 +5,7 @@
     "date": "2026-05-06",
     "description": "19.2.6 (May 6th, 2026)",
     "status": "new",
-    "stars": 244834,
+    "stars": 244835,
     "repoUrl": "https://github.com/facebook/react",
     "changelogUrl": "https://github.com/facebook/react/releases/tag/v19.2.6"
   },
@@ -15,7 +15,7 @@
     "date": "2026-04-15",
     "description": "v16.2.4",
     "status": "new",
-    "stars": 139298,
+    "stars": 139301,
     "repoUrl": "https://github.com/vercel/next.js",
     "changelogUrl": "https://github.com/vercel/next.js/releases/tag/v16.2.4"
   },
@@ -45,7 +45,7 @@
     "date": "2026-05-04",
     "description": "@astrojs/cloudflare@13.3.1",
     "status": "new",
-    "stars": 59020,
+    "stars": 59027,
     "repoUrl": "https://github.com/withastro/astro",
     "changelogUrl": "https://github.com/withastro/astro/releases/tag/%40astrojs/cloudflare%4013.3.1"
   },
@@ -55,7 +55,7 @@
     "date": "2026-05-06",
     "description": "v3.5.34",
     "status": "new",
-    "stars": 53611,
+    "stars": 53612,
     "repoUrl": "https://github.com/vuejs/core",
     "changelogUrl": "https://github.com/vuejs/core/releases/tag/v3.5.34"
   },
