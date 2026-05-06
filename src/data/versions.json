@@ -1,13 +1,13 @@
 [
   {
     "name": "React",
-    "version": "19.2.5",
-    "date": "2026-04-08",
-    "description": "19.2.5 (April 8th, 2026)",
+    "version": "19.2.6",
+    "date": "2026-05-06",
+    "description": "19.2.6 (May 6th, 2026)",
     "status": "new",
-    "stars": 244833,
+    "stars": 244834,
     "repoUrl": "https://github.com/facebook/react",
-    "changelogUrl": "https://github.com/facebook/react/releases/tag/v19.2.5"
+    "changelogUrl": "https://github.com/facebook/react/releases/tag/v19.2.6"
   },
   {
     "name": "Next.js",
@@ -15,7 +15,7 @@
     "date": "2026-04-15",
     "description": "v16.2.4",
     "status": "new",
-    "stars": 139294,
+    "stars": 139298,
     "repoUrl": "https://github.com/vercel/next.js",
     "changelogUrl": "https://github.com/vercel/next.js/releases/tag/v16.2.4"
   },
@@ -25,7 +25,7 @@
     "date": "2026-05-05",
     "description": "2026-05-05, Version 26.0.0 (Current), @RafaelGSS",
     "status": "new",
-    "stars": 117056,
+    "stars": 117059,
     "repoUrl": "https://github.com/nodejs/node",
     "changelogUrl": "https://github.com/nodejs/node/releases/tag/v26.0.0"
   },
@@ -35,7 +35,7 @@
     "date": "2026-04-16",
     "description": "TypeScript 6.0.3",
     "status": "new",
-    "stars": 108764,
+    "stars": 108766,
     "repoUrl": "https://github.com/microsoft/TypeScript",
     "changelogUrl": "https://github.com/microsoft/TypeScript/releases/tag/v6.0.3"
   },
@@ -55,7 +55,7 @@
     "date": "2026-05-06",
     "description": "v3.5.34",
     "status": "new",
-    "stars": 53608,
+    "stars": 53611,
     "repoUrl": "https://github.com/vuejs/core",
     "changelogUrl": "https://github.com/vuejs/core/releases/tag/v3.5.34"
   },
