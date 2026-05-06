@@ -5,7 +5,7 @@
     "date": "2026-04-08",
     "description": "19.2.5 (April 8th, 2026)",
     "status": "new",
-    "stars": 244823,
+    "stars": 244822,
     "repoUrl": "https://github.com/facebook/react",
     "changelogUrl": "https://github.com/facebook/react/releases/tag/v19.2.5"
   },
@@ -25,7 +25,7 @@
     "date": "2026-05-05",
     "description": "2026-05-05, Version 26.0.0 (Current), @RafaelGSS",
     "status": "new",
-    "stars": 117043,
+    "stars": 117044,
     "repoUrl": "https://github.com/nodejs/node",
     "changelogUrl": "https://github.com/nodejs/node/releases/tag/v26.0.0"
   },
