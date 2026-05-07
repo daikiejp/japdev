@@ -5,7 +5,7 @@
     "date": "2026-05-06",
     "description": "19.2.6 (May 6th, 2026)",
     "status": "new",
-    "stars": 244855,
+    "stars": 244854,
     "repoUrl": "https://github.com/facebook/react",
     "changelogUrl": "https://github.com/facebook/react/releases/tag/v19.2.6"
   },
@@ -15,19 +15,19 @@
     "date": "2026-05-06",
     "description": "v16.2.5",
     "status": "new",
-    "stars": 139311,
+    "stars": 139309,
     "repoUrl": "https://github.com/vercel/next.js",
     "changelogUrl": "https://github.com/vercel/next.js/releases/tag/v16.2.5"
   },
   {
     "name": "Node.js",
-    "version": "26.0.0",
-    "date": "2026-05-05",
-    "description": "2026-05-05, Version 26.0.0 (Current), @RafaelGSS",
+    "version": "26.1.0",
+    "date": "2026-05-07",
+    "description": "2026-05-07, Version 26.1.0 (Current), @aduh95",
     "status": "new",
-    "stars": 117072,
+    "stars": 117069,
     "repoUrl": "https://github.com/nodejs/node",
-    "changelogUrl": "https://github.com/nodejs/node/releases/tag/v26.0.0"
+    "changelogUrl": "https://github.com/nodejs/node/releases/tag/v26.1.0"
   },
   {
     "name": "TypeScript",
@@ -35,19 +35,19 @@
     "date": "2026-04-16",
     "description": "TypeScript 6.0.3",
     "status": "new",
-    "stars": 108767,
+    "stars": 108770,
     "repoUrl": "https://github.com/microsoft/TypeScript",
     "changelogUrl": "https://github.com/microsoft/TypeScript/releases/tag/v6.0.3"
   },
   {
     "name": "Astro",
-    "version": "@astrojs/cloudflare@13.3.1",
-    "date": "2026-05-04",
-    "description": "@astrojs/cloudflare@13.3.1",
+    "version": "@astrojs/language-server@2.16.8",
+    "date": "2026-05-07",
+    "description": "@astrojs/language-server@2.16.8",
     "status": "new",
-    "stars": 59047,
+    "stars": 59054,
     "repoUrl": "https://github.com/withastro/astro",
-    "changelogUrl": "https://github.com/withastro/astro/releases/tag/%40astrojs/cloudflare%4013.3.1"
+    "changelogUrl": "https://github.com/withastro/astro/releases/tag/%40astrojs/language-server%402.16.8"
   },
   {
     "name": "Vue",
@@ -55,7 +55,7 @@
     "date": "2026-05-06",
     "description": "v3.5.34",
     "status": "new",
-    "stars": 53617,
+    "stars": 53619,
     "repoUrl": "https://github.com/vuejs/core",
     "changelogUrl": "https://github.com/vuejs/core/releases/tag/v3.5.34"
   },
@@ -65,7 +65,7 @@
     "date": "2026-05-05",
     "description": "@sveltejs/kit@2.59.1",
     "status": "new",
-    "stars": 20486,
+    "stars": 20485,
     "repoUrl": "https://github.com/sveltejs/kit",
     "changelogUrl": "https://github.com/sveltejs/kit/releases/tag/%40sveltejs/kit%402.59.1"
   }
