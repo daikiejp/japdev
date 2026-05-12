@@ -5,7 +5,7 @@
     "date": "2026-05-06",
     "description": "19.2.6 (May 6th, 2026)",
     "status": "new",
-    "stars": 244958,
+    "stars": 244961,
     "repoUrl": "https://github.com/facebook/react",
     "changelogUrl": "https://github.com/facebook/react/releases/tag/v19.2.6"
   },
@@ -25,7 +25,7 @@
     "date": "2026-05-07",
     "description": "2026-05-07, Version 26.1.0 (Current), @aduh95",
     "status": "new",
-    "stars": 117155,
+    "stars": 117156,
     "repoUrl": "https://github.com/nodejs/node",
     "changelogUrl": "https://github.com/nodejs/node/releases/tag/v26.1.0"
   },
@@ -35,7 +35,7 @@
     "date": "2026-04-16",
     "description": "TypeScript 6.0.3",
     "status": "new",
-    "stars": 108812,
+    "stars": 108813,
     "repoUrl": "https://github.com/microsoft/TypeScript",
     "changelogUrl": "https://github.com/microsoft/TypeScript/releases/tag/v6.0.3"
   },
@@ -65,7 +65,7 @@
     "date": "2026-05-05",
     "description": "@sveltejs/kit@2.59.1",
     "status": "new",
-    "stars": 20492,
+    "stars": 20494,
     "repoUrl": "https://github.com/sveltejs/kit",
     "changelogUrl": "https://github.com/sveltejs/kit/releases/tag/%40sveltejs/kit%402.59.1"
   }
