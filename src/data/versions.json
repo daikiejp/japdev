@@ -35,7 +35,7 @@
     "date": "2026-04-16",
     "description": "TypeScript 6.0.3",
     "status": "new",
-    "stars": 108869,
+    "stars": 108868,
     "repoUrl": "https://github.com/microsoft/TypeScript",
     "changelogUrl": "https://github.com/microsoft/TypeScript/releases/tag/v6.0.3"
   },
@@ -45,7 +45,7 @@
     "date": "2026-05-14",
     "description": "@astrojs/mdx@5.0.6",
     "status": "new",
-    "stars": 59311,
+    "stars": 59312,
     "repoUrl": "https://github.com/withastro/astro",
     "changelogUrl": "https://github.com/withastro/astro/releases/tag/%40astrojs/mdx%405.0.6"
   },
@@ -55,7 +55,7 @@
     "date": "2026-05-06",
     "description": "v3.5.34",
     "status": "new",
-    "stars": 53673,
+    "stars": 53672,
     "repoUrl": "https://github.com/vuejs/core",
     "changelogUrl": "https://github.com/vuejs/core/releases/tag/v3.5.34"
   },
