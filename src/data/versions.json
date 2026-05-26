@@ -25,7 +25,7 @@
     "date": "2026-05-20",
     "description": "2026-05-20, Version 26.2.0 (Current), @aduh95",
     "status": "new",
-    "stars": 117363,
+    "stars": 117367,
     "repoUrl": "https://github.com/nodejs/node",
     "changelogUrl": "https://github.com/nodejs/node/releases/tag/v26.2.0"
   },
@@ -41,13 +41,13 @@
   },
   {
     "name": "Astro",
-    "version": "@astrojs/cloudflare@13.5.4",
-    "date": "2026-05-21",
-    "description": "@astrojs/cloudflare@13.5.4",
+    "version": "@astrojs/language-server@2.16.10",
+    "date": "2026-05-26",
+    "description": "@astrojs/language-server@2.16.10",
     "status": "new",
-    "stars": 59568,
+    "stars": 59573,
     "repoUrl": "https://github.com/withastro/astro",
-    "changelogUrl": "https://github.com/withastro/astro/releases/tag/%40astrojs/cloudflare%4013.5.4"
+    "changelogUrl": "https://github.com/withastro/astro/releases/tag/%40astrojs/language-server%402.16.10"
   },
   {
     "name": "Vue",
