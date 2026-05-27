@@ -15,7 +15,7 @@
     "date": "2026-05-07",
     "description": "v16.2.6",
     "status": "new",
-    "stars": 139588,
+    "stars": 139584,
     "repoUrl": "https://github.com/vercel/next.js",
     "changelogUrl": "https://github.com/vercel/next.js/releases/tag/v16.2.6"
   },
@@ -45,7 +45,7 @@
     "date": "2026-05-26",
     "description": "@astrojs/language-server@2.16.10",
     "status": "new",
-    "stars": 59599,
+    "stars": 59600,
     "repoUrl": "https://github.com/withastro/astro",
     "changelogUrl": "https://github.com/withastro/astro/releases/tag/%40astrojs/language-server%402.16.10"
   },
@@ -55,7 +55,7 @@
     "date": "2026-05-27",
     "description": "v3.5.35",
     "status": "new",
-    "stars": 53721,
+    "stars": 53722,
     "repoUrl": "https://github.com/vuejs/core",
     "changelogUrl": "https://github.com/vuejs/core/releases/tag/v3.5.35"
   },
@@ -65,7 +65,7 @@
     "date": "2026-05-24",
     "description": "@sveltejs/kit@2.61.1",
     "status": "new",
-    "stars": 20531,
+    "stars": 20533,
     "repoUrl": "https://github.com/sveltejs/kit",
     "changelogUrl": "https://github.com/sveltejs/kit/releases/tag/%40sveltejs/kit%402.61.1"
   }
