@@ -25,7 +25,7 @@
     "date": "2026-05-20",
     "description": "2026-05-20, Version 26.2.0 (Current), @aduh95",
     "status": "new",
-    "stars": 117411,
+    "stars": 117413,
     "repoUrl": "https://github.com/nodejs/node",
     "changelogUrl": "https://github.com/nodejs/node/releases/tag/v26.2.0"
   },
@@ -45,7 +45,7 @@
     "date": "2026-05-28",
     "description": "astro@6.4.2",
     "status": "new",
-    "stars": 59656,
+    "stars": 59658,
     "repoUrl": "https://github.com/withastro/astro",
     "changelogUrl": "https://github.com/withastro/astro/releases/tag/astro%406.4.2"
   },
@@ -55,7 +55,7 @@
     "date": "2026-05-27",
     "description": "v3.5.35",
     "status": "new",
-    "stars": 53730,
+    "stars": 53731,
     "repoUrl": "https://github.com/vuejs/core",
     "changelogUrl": "https://github.com/vuejs/core/releases/tag/v3.5.35"
   },
