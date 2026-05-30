@@ -5,7 +5,7 @@
     "date": "2026-05-06",
     "description": "19.2.6 (May 6th, 2026)",
     "status": "new",
-    "stars": 245327,
+    "stars": 245330,
     "repoUrl": "https://github.com/facebook/react",
     "changelogUrl": "https://github.com/facebook/react/releases/tag/v19.2.6"
   },
@@ -15,7 +15,7 @@
     "date": "2026-05-07",
     "description": "v16.2.6",
     "status": "new",
-    "stars": 139605,
+    "stars": 139606,
     "repoUrl": "https://github.com/vercel/next.js",
     "changelogUrl": "https://github.com/vercel/next.js/releases/tag/v16.2.6"
   },
@@ -25,7 +25,7 @@
     "date": "2026-05-20",
     "description": "2026-05-20, Version 26.2.0 (Current), @aduh95",
     "status": "new",
-    "stars": 117421,
+    "stars": 117422,
     "repoUrl": "https://github.com/nodejs/node",
     "changelogUrl": "https://github.com/nodejs/node/releases/tag/v26.2.0"
   },
@@ -35,7 +35,7 @@
     "date": "2026-04-16",
     "description": "TypeScript 6.0.3",
     "status": "new",
-    "stars": 109008,
+    "stars": 109010,
     "repoUrl": "https://github.com/microsoft/TypeScript",
     "changelogUrl": "https://github.com/microsoft/TypeScript/releases/tag/v6.0.3"
   },
@@ -45,7 +45,7 @@
     "date": "2026-05-28",
     "description": "astro@6.4.2",
     "status": "new",
-    "stars": 59680,
+    "stars": 59689,
     "repoUrl": "https://github.com/withastro/astro",
     "changelogUrl": "https://github.com/withastro/astro/releases/tag/astro%406.4.2"
   },
@@ -55,7 +55,7 @@
     "date": "2026-05-27",
     "description": "v3.5.35",
     "status": "new",
-    "stars": 53738,
+    "stars": 53741,
     "repoUrl": "https://github.com/vuejs/core",
     "changelogUrl": "https://github.com/vuejs/core/releases/tag/v3.5.35"
   },
@@ -65,7 +65,7 @@
     "date": "2026-05-24",
     "description": "@sveltejs/kit@2.61.1",
     "status": "new",
-    "stars": 20541,
+    "stars": 20542,
     "repoUrl": "https://github.com/sveltejs/kit",
     "changelogUrl": "https://github.com/sveltejs/kit/releases/tag/%40sveltejs/kit%402.61.1"
   }
