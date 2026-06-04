@@ -5,7 +5,7 @@
     "date": "2026-06-01",
     "description": "19.2.7 (June 1st, 2026)",
     "status": "new",
-    "stars": 245420,
+    "stars": 245429,
     "repoUrl": "https://github.com/facebook/react",
     "changelogUrl": "https://github.com/facebook/react/releases/tag/v19.2.7"
   },
@@ -15,7 +15,7 @@
     "date": "2026-05-07",
     "description": "v16.2.6",
     "status": "new",
-    "stars": 139665,
+    "stars": 139668,
     "repoUrl": "https://github.com/vercel/next.js",
     "changelogUrl": "https://github.com/vercel/next.js/releases/tag/v16.2.6"
   },
@@ -25,7 +25,7 @@
     "date": "2026-06-01",
     "description": "2026-06-01, Version 26.3.0 (Current), @aduh95",
     "status": "new",
-    "stars": 117517,
+    "stars": 117523,
     "repoUrl": "https://github.com/nodejs/node",
     "changelogUrl": "https://github.com/nodejs/node/releases/tag/v26.3.0"
   },
@@ -45,7 +45,7 @@
     "date": "2026-06-03",
     "description": "astro@6.4.4",
     "status": "new",
-    "stars": 59806,
+    "stars": 59812,
     "repoUrl": "https://github.com/withastro/astro",
     "changelogUrl": "https://github.com/withastro/astro/releases/tag/astro%406.4.4"
   },
@@ -55,18 +55,18 @@
     "date": "2026-05-27",
     "description": "v3.5.35",
     "status": "new",
-    "stars": 53764,
+    "stars": 53763,
     "repoUrl": "https://github.com/vuejs/core",
     "changelogUrl": "https://github.com/vuejs/core/releases/tag/v3.5.35"
   },
   {
     "name": "SvelteKit",
-    "version": "@sveltejs/kit@2.62.0",
-    "date": "2026-06-02",
-    "description": "@sveltejs/kit@2.62.0",
+    "version": "@sveltejs/kit@2.63.0",
+    "date": "2026-06-04",
+    "description": "@sveltejs/kit@2.63.0",
     "status": "new",
-    "stars": 20553,
+    "stars": 20552,
     "repoUrl": "https://github.com/sveltejs/kit",
-    "changelogUrl": "https://github.com/sveltejs/kit/releases/tag/%40sveltejs/kit%402.62.0"
+    "changelogUrl": "https://github.com/sveltejs/kit/releases/tag/%40sveltejs/kit%402.63.0"
   }
 ]
