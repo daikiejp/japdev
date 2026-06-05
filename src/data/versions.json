@@ -5,7 +5,7 @@
     "date": "2026-06-01",
     "description": "19.2.7 (June 1st, 2026)",
     "status": "new",
-    "stars": 245458,
+    "stars": 245460,
     "repoUrl": "https://github.com/facebook/react",
     "changelogUrl": "https://github.com/facebook/react/releases/tag/v19.2.7"
   },
@@ -15,7 +15,7 @@
     "date": "2026-05-07",
     "description": "v16.2.6",
     "status": "new",
-    "stars": 139690,
+    "stars": 139693,
     "repoUrl": "https://github.com/vercel/next.js",
     "changelogUrl": "https://github.com/vercel/next.js/releases/tag/v16.2.6"
   },
@@ -45,7 +45,7 @@
     "date": "2026-06-03",
     "description": "astro@6.4.4",
     "status": "new",
-    "stars": 59842,
+    "stars": 59845,
     "repoUrl": "https://github.com/withastro/astro",
     "changelogUrl": "https://github.com/withastro/astro/releases/tag/astro%406.4.4"
   },
