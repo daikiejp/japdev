@@ -1,21 +1,11 @@
 [
   {
-    "name": "React",
-    "version": "19.2.7",
-    "date": "2026-06-01",
-    "description": "19.2.7 (June 1st, 2026)",
-    "status": "new",
-    "stars": 245699,
-    "repoUrl": "https://github.com/facebook/react",
-    "changelogUrl": "https://github.com/facebook/react/releases/tag/v19.2.7"
-  },
-  {
     "name": "Next.js",
     "version": "16.2.6",
     "date": "2026-05-07",
     "description": "v16.2.6",
     "status": "new",
-    "stars": 139905,
+    "stars": 139906,
     "repoUrl": "https://github.com/vercel/next.js",
     "changelogUrl": "https://github.com/vercel/next.js/releases/tag/v16.2.6"
   },
@@ -25,7 +15,7 @@
     "date": "2026-06-01",
     "description": "2026-06-01, Version 26.3.0 (Current), @aduh95",
     "status": "new",
-    "stars": 117703,
+    "stars": 117702,
     "repoUrl": "https://github.com/nodejs/node",
     "changelogUrl": "https://github.com/nodejs/node/releases/tag/v26.3.0"
   },
@@ -35,7 +25,7 @@
     "date": "2026-04-16",
     "description": "TypeScript 6.0.3",
     "status": "new",
-    "stars": 109170,
+    "stars": 109169,
     "repoUrl": "https://github.com/microsoft/TypeScript",
     "changelogUrl": "https://github.com/microsoft/TypeScript/releases/tag/v6.0.3"
   },
@@ -45,7 +35,7 @@
     "date": "2026-06-09",
     "description": "astro@6.4.5",
     "status": "new",
-    "stars": 59962,
+    "stars": 59969,
     "repoUrl": "https://github.com/withastro/astro",
     "changelogUrl": "https://github.com/withastro/astro/releases/tag/astro%406.4.5"
   },
@@ -55,7 +45,7 @@
     "date": "2026-05-27",
     "description": "v3.5.35",
     "status": "new",
-    "stars": 53793,
+    "stars": 53794,
     "repoUrl": "https://github.com/vuejs/core",
     "changelogUrl": "https://github.com/vuejs/core/releases/tag/v3.5.35"
   },
@@ -65,7 +55,7 @@
     "date": "2026-06-08",
     "description": "@sveltejs/kit@2.64.0",
     "status": "new",
-    "stars": 20566,
+    "stars": 20568,
     "repoUrl": "https://github.com/sveltejs/kit",
     "changelogUrl": "https://github.com/sveltejs/kit/releases/tag/%40sveltejs/kit%402.64.0"
   }
