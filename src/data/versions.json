@@ -5,7 +5,7 @@
     "date": "2026-06-10",
     "description": "v16.2.9",
     "status": "new",
-    "stars": 139922,
+    "stars": 139924,
     "repoUrl": "https://github.com/vercel/next.js",
     "changelogUrl": "https://github.com/vercel/next.js/releases/tag/v16.2.9"
   },
@@ -15,7 +15,7 @@
     "date": "2026-06-01",
     "description": "2026-06-01, Version 26.3.0 (Current), @aduh95",
     "status": "new",
-    "stars": 117715,
+    "stars": 117719,
     "repoUrl": "https://github.com/nodejs/node",
     "changelogUrl": "https://github.com/nodejs/node/releases/tag/v26.3.0"
   },
@@ -25,19 +25,19 @@
     "date": "2026-04-16",
     "description": "TypeScript 6.0.3",
     "status": "new",
-    "stars": 109178,
+    "stars": 109181,
     "repoUrl": "https://github.com/microsoft/TypeScript",
     "changelogUrl": "https://github.com/microsoft/TypeScript/releases/tag/v6.0.3"
   },
   {
     "name": "Astro",
-    "version": "astro@6.4.5",
-    "date": "2026-06-09",
-    "description": "astro@6.4.5",
+    "version": "@astrojs/netlify@7.0.13",
+    "date": "2026-06-10",
+    "description": "@astrojs/netlify@7.0.13",
     "status": "new",
-    "stars": 59997,
+    "stars": 60004,
     "repoUrl": "https://github.com/withastro/astro",
-    "changelogUrl": "https://github.com/withastro/astro/releases/tag/astro%406.4.5"
+    "changelogUrl": "https://github.com/withastro/astro/releases/tag/%40astrojs/netlify%407.0.13"
   },
   {
     "name": "Vue",
