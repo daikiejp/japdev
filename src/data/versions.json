@@ -5,7 +5,7 @@
     "date": "2026-06-10",
     "description": "v16.2.9",
     "status": "new",
-    "stars": 139928,
+    "stars": 139930,
     "repoUrl": "https://github.com/vercel/next.js",
     "changelogUrl": "https://github.com/vercel/next.js/releases/tag/v16.2.9"
   },
@@ -35,19 +35,19 @@
     "date": "2026-06-10",
     "description": "@astrojs/netlify@7.0.13",
     "status": "new",
-    "stars": 60023,
+    "stars": 60026,
     "repoUrl": "https://github.com/withastro/astro",
     "changelogUrl": "https://github.com/withastro/astro/releases/tag/%40astrojs/netlify%407.0.13"
   },
   {
     "name": "Vue",
-    "version": "3.5.35",
-    "date": "2026-05-27",
-    "description": "v3.5.35",
+    "version": "3.5.38",
+    "date": "2026-06-11",
+    "description": "v3.5.38",
     "status": "new",
     "stars": 53803,
     "repoUrl": "https://github.com/vuejs/core",
-    "changelogUrl": "https://github.com/vuejs/core/releases/tag/v3.5.35"
+    "changelogUrl": "https://github.com/vuejs/core/releases/tag/v3.5.38"
   },
   {
     "name": "SvelteKit",
