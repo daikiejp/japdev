@@ -5,7 +5,7 @@
     "date": "2026-06-10",
     "description": "v16.2.9",
     "status": "new",
-    "stars": 140074,
+    "stars": 140072,
     "repoUrl": "https://github.com/vercel/next.js",
     "changelogUrl": "https://github.com/vercel/next.js/releases/tag/v16.2.9"
   },
@@ -15,7 +15,7 @@
     "date": "2026-06-01",
     "description": "2026-06-01, Version 26.3.0 (Current), @aduh95",
     "status": "new",
-    "stars": 117818,
+    "stars": 117819,
     "repoUrl": "https://github.com/nodejs/node",
     "changelogUrl": "https://github.com/nodejs/node/releases/tag/v26.3.0"
   },
@@ -25,7 +25,7 @@
     "date": "2026-04-16",
     "description": "TypeScript 6.0.3",
     "status": "new",
-    "stars": 109289,
+    "stars": 109291,
     "repoUrl": "https://github.com/microsoft/TypeScript",
     "changelogUrl": "https://github.com/microsoft/TypeScript/releases/tag/v6.0.3"
   },
@@ -45,7 +45,7 @@
     "date": "2026-06-11",
     "description": "v3.5.38",
     "status": "new",
-    "stars": 53844,
+    "stars": 53843,
     "repoUrl": "https://github.com/vuejs/core",
     "changelogUrl": "https://github.com/vuejs/core/releases/tag/v3.5.38"
   },
@@ -55,7 +55,7 @@
     "date": "2026-06-16",
     "description": "@sveltejs/adapter-cloudflare@7.2.9",
     "status": "new",
-    "stars": 20590,
+    "stars": 20591,
     "repoUrl": "https://github.com/sveltejs/kit",
     "changelogUrl": "https://github.com/sveltejs/kit/releases/tag/%40sveltejs/adapter-cloudflare%407.2.9"
   }
