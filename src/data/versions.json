@@ -15,7 +15,7 @@
     "date": "2026-06-18",
     "description": "2026-06-18, Version 26.3.1 (Current), @aduh95",
     "status": "new",
-    "stars": 117906,
+    "stars": 117909,
     "repoUrl": "https://github.com/nodejs/node",
     "changelogUrl": "https://github.com/nodejs/node/releases/tag/v26.3.1"
   },
@@ -25,7 +25,7 @@
     "date": "2026-04-16",
     "description": "TypeScript 6.0.3",
     "status": "new",
-    "stars": 109358,
+    "stars": 109359,
     "repoUrl": "https://github.com/microsoft/TypeScript",
     "changelogUrl": "https://github.com/microsoft/TypeScript/releases/tag/v6.0.3"
   },
@@ -35,7 +35,7 @@
     "date": "2026-06-17",
     "description": "astro@6.4.8",
     "status": "new",
-    "stars": 60344,
+    "stars": 60347,
     "repoUrl": "https://github.com/withastro/astro",
     "changelogUrl": "https://github.com/withastro/astro/releases/tag/astro%406.4.8"
   },
@@ -55,7 +55,7 @@
     "date": "2026-06-18",
     "description": "@sveltejs/kit@2.66.0",
     "status": "new",
-    "stars": 20610,
+    "stars": 20611,
     "repoUrl": "https://github.com/sveltejs/kit",
     "changelogUrl": "https://github.com/sveltejs/kit/releases/tag/%40sveltejs/kit%402.66.0"
   }
