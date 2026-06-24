@@ -15,7 +15,7 @@
     "date": "2026-06-18",
     "description": "2026-06-18, Version 26.3.1 (Current), @aduh95",
     "status": "new",
-    "stars": 117987,
+    "stars": 117985,
     "repoUrl": "https://github.com/nodejs/node",
     "changelogUrl": "https://github.com/nodejs/node/releases/tag/v26.3.1"
   },
@@ -35,7 +35,7 @@
     "date": "2026-06-23",
     "description": "@astrojs/markdown-satteri@0.3.2",
     "status": "new",
-    "stars": 60446,
+    "stars": 60451,
     "repoUrl": "https://github.com/withastro/astro",
     "changelogUrl": "https://github.com/withastro/astro/releases/tag/%40astrojs/markdown-satteri%400.3.2"
   },
@@ -45,7 +45,7 @@
     "date": "2026-06-11",
     "description": "v3.5.38",
     "status": "new",
-    "stars": 53866,
+    "stars": 53867,
     "repoUrl": "https://github.com/vuejs/core",
     "changelogUrl": "https://github.com/vuejs/core/releases/tag/v3.5.38"
   },
@@ -55,7 +55,7 @@
     "date": "2026-06-22",
     "description": "@sveltejs/kit@2.67.0",
     "status": "new",
-    "stars": 20618,
+    "stars": 20619,
     "repoUrl": "https://github.com/sveltejs/kit",
     "changelogUrl": "https://github.com/sveltejs/kit/releases/tag/%40sveltejs/kit%402.67.0"
   }
