@@ -5,7 +5,7 @@
     "date": "2026-06-10",
     "description": "v16.2.9",
     "status": "new",
-    "stars": 140337,
+    "stars": 140338,
     "repoUrl": "https://github.com/vercel/next.js",
     "changelogUrl": "https://github.com/vercel/next.js/releases/tag/v16.2.9"
   },
@@ -15,7 +15,7 @@
     "date": "2026-06-24",
     "description": "2026-06-24, Version 26.4.0 (Current), @aduh95",
     "status": "new",
-    "stars": 118106,
+    "stars": 118104,
     "repoUrl": "https://github.com/nodejs/node",
     "changelogUrl": "https://github.com/nodejs/node/releases/tag/v26.4.0"
   },
@@ -35,19 +35,19 @@
     "date": "2026-06-23",
     "description": "@astrojs/markdown-satteri@0.3.2",
     "status": "new",
-    "stars": 60477,
+    "stars": 60483,
     "repoUrl": "https://github.com/withastro/astro",
     "changelogUrl": "https://github.com/withastro/astro/releases/tag/%40astrojs/markdown-satteri%400.3.2"
   },
   {
     "name": "Vue",
-    "version": "3.5.38",
-    "date": "2026-06-11",
-    "description": "v3.5.38",
+    "version": "3.5.39",
+    "date": "2026-06-25",
+    "description": "v3.5.39",
     "status": "new",
-    "stars": 53871,
+    "stars": 53868,
     "repoUrl": "https://github.com/vuejs/core",
-    "changelogUrl": "https://github.com/vuejs/core/releases/tag/v3.5.38"
+    "changelogUrl": "https://github.com/vuejs/core/releases/tag/v3.5.39"
   },
   {
     "name": "SvelteKit",
