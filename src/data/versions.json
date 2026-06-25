@@ -5,7 +5,7 @@
     "date": "2026-06-10",
     "description": "v16.2.9",
     "status": "new",
-    "stars": 140311,
+    "stars": 140317,
     "repoUrl": "https://github.com/vercel/next.js",
     "changelogUrl": "https://github.com/vercel/next.js/releases/tag/v16.2.9"
   },
@@ -15,7 +15,7 @@
     "date": "2026-06-24",
     "description": "2026-06-24, Version 26.4.0 (Current), @aduh95",
     "status": "new",
-    "stars": 118089,
+    "stars": 118088,
     "repoUrl": "https://github.com/nodejs/node",
     "changelogUrl": "https://github.com/nodejs/node/releases/tag/v26.4.0"
   },
@@ -35,7 +35,7 @@
     "date": "2026-06-23",
     "description": "@astrojs/markdown-satteri@0.3.2",
     "status": "new",
-    "stars": 60464,
+    "stars": 60466,
     "repoUrl": "https://github.com/withastro/astro",
     "changelogUrl": "https://github.com/withastro/astro/releases/tag/%40astrojs/markdown-satteri%400.3.2"
   },
@@ -45,7 +45,7 @@
     "date": "2026-06-11",
     "description": "v3.5.38",
     "status": "new",
-    "stars": 53869,
+    "stars": 53870,
     "repoUrl": "https://github.com/vuejs/core",
     "changelogUrl": "https://github.com/vuejs/core/releases/tag/v3.5.38"
   },
