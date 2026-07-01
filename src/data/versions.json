@@ -1,13 +1,13 @@
 [
   {
     "name": "Next.js",
-    "version": "16.2.9",
-    "date": "2026-06-10",
-    "description": "v16.2.9",
+    "version": "16.2.10",
+    "date": "2026-07-01",
+    "description": "v16.2.10",
     "status": "new",
-    "stars": 140206,
+    "stars": 140205,
     "repoUrl": "https://github.com/vercel/next.js",
-    "changelogUrl": "https://github.com/vercel/next.js/releases/tag/v16.2.9"
+    "changelogUrl": "https://github.com/vercel/next.js/releases/tag/v16.2.10"
   },
   {
     "name": "Node.js",
@@ -15,7 +15,7 @@
     "date": "2026-06-24",
     "description": "2026-06-24, Version 26.4.0 (Current), @aduh95",
     "status": "new",
-    "stars": 117949,
+    "stars": 117950,
     "repoUrl": "https://github.com/nodejs/node",
     "changelogUrl": "https://github.com/nodejs/node/releases/tag/v26.4.0"
   },
@@ -31,13 +31,13 @@
   },
   {
     "name": "Astro",
-    "version": "@astrojs/cloudflare@14.0.2",
-    "date": "2026-06-30",
-    "description": "@astrojs/cloudflare@14.0.2",
+    "version": "@astrojs/vercel@11.0.1",
+    "date": "2026-07-01",
+    "description": "@astrojs/vercel@11.0.1",
     "status": "new",
-    "stars": 60635,
+    "stars": 60636,
     "repoUrl": "https://github.com/withastro/astro",
-    "changelogUrl": "https://github.com/withastro/astro/releases/tag/%40astrojs/cloudflare%4014.0.2"
+    "changelogUrl": "https://github.com/withastro/astro/releases/tag/%40astrojs/vercel%4011.0.1"
   },
   {
     "name": "Vue",
