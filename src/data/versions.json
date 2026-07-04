@@ -25,7 +25,7 @@
     "date": "2026-04-16",
     "description": "TypeScript 6.0.3",
     "status": "new",
-    "stars": 109465,
+    "stars": 109467,
     "repoUrl": "https://github.com/microsoft/TypeScript",
     "changelogUrl": "https://github.com/microsoft/TypeScript/releases/tag/v6.0.3"
   },
@@ -35,7 +35,7 @@
     "date": "2026-07-02",
     "description": "@astrojs/language-server@2.16.11",
     "status": "new",
-    "stars": 60713,
+    "stars": 60712,
     "repoUrl": "https://github.com/withastro/astro",
     "changelogUrl": "https://github.com/withastro/astro/releases/tag/%40astrojs/language-server%402.16.11"
   },
@@ -45,7 +45,7 @@
     "date": "2026-06-25",
     "description": "v3.5.39",
     "status": "new",
-    "stars": 53912,
+    "stars": 53911,
     "repoUrl": "https://github.com/vuejs/core",
     "changelogUrl": "https://github.com/vuejs/core/releases/tag/v3.5.39"
   },
