@@ -5,7 +5,7 @@
     "date": "2026-07-01",
     "description": "v16.2.10",
     "status": "new",
-    "stars": 140354,
+    "stars": 140366,
     "repoUrl": "https://github.com/vercel/next.js",
     "changelogUrl": "https://github.com/vercel/next.js/releases/tag/v16.2.10"
   },
@@ -15,7 +15,7 @@
     "date": "2026-06-24",
     "description": "2026-06-24, Version 26.4.0 (Current), @aduh95",
     "status": "new",
-    "stars": 118082,
+    "stars": 118092,
     "repoUrl": "https://github.com/nodejs/node",
     "changelogUrl": "https://github.com/nodejs/node/releases/tag/v26.4.0"
   },
@@ -25,7 +25,7 @@
     "date": "2026-04-16",
     "description": "TypeScript 6.0.3",
     "status": "new",
-    "stars": 109506,
+    "stars": 109507,
     "repoUrl": "https://github.com/microsoft/TypeScript",
     "changelogUrl": "https://github.com/microsoft/TypeScript/releases/tag/v6.0.3"
   },
@@ -35,7 +35,7 @@
     "date": "2026-07-02",
     "description": "@astrojs/language-server@2.16.11",
     "status": "new",
-    "stars": 60778,
+    "stars": 60780,
     "repoUrl": "https://github.com/withastro/astro",
     "changelogUrl": "https://github.com/withastro/astro/releases/tag/%40astrojs/language-server%402.16.11"
   },
@@ -51,12 +51,12 @@
   },
   {
     "name": "SvelteKit",
-    "version": "@sveltejs/kit@2.69.1",
-    "date": "2026-07-06",
-    "description": "@sveltejs/kit@2.69.1",
+    "version": "@sveltejs/kit@2.69.2",
+    "date": "2026-07-08",
+    "description": "@sveltejs/kit@2.69.2",
     "status": "new",
     "stars": 20650,
     "repoUrl": "https://github.com/sveltejs/kit",
-    "changelogUrl": "https://github.com/sveltejs/kit/releases/tag/%40sveltejs/kit%402.69.1"
+    "changelogUrl": "https://github.com/sveltejs/kit/releases/tag/%40sveltejs/kit%402.69.2"
   }
 ]
