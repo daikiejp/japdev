@@ -5,7 +5,7 @@
     "date": "2026-07-01",
     "description": "v16.2.10",
     "status": "new",
-    "stars": 141034,
+    "stars": 141036,
     "repoUrl": "https://github.com/vercel/next.js",
     "changelogUrl": "https://github.com/vercel/next.js/releases/tag/v16.2.10"
   },
@@ -35,7 +35,7 @@
     "date": "2026-07-20",
     "description": "astro@7.1.3",
     "status": "new",
-    "stars": 61175,
+    "stars": 61177,
     "repoUrl": "https://github.com/withastro/astro",
     "changelogUrl": "https://github.com/withastro/astro/releases/tag/astro%407.1.3"
   },
