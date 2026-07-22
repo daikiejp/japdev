@@ -5,7 +5,7 @@
     "date": "2026-07-21",
     "description": "v16.2.11",
     "status": "new",
-    "stars": 141066,
+    "stars": 141068,
     "repoUrl": "https://github.com/vercel/next.js",
     "changelogUrl": "https://github.com/vercel/next.js/releases/tag/v16.2.11"
   },
@@ -35,7 +35,7 @@
     "date": "2026-07-21",
     "description": "@astrojs/language-server@2.16.13",
     "status": "new",
-    "stars": 61215,
+    "stars": 61218,
     "repoUrl": "https://github.com/withastro/astro",
     "changelogUrl": "https://github.com/withastro/astro/releases/tag/%40astrojs/language-server%402.16.13"
   },
