@@ -5,7 +5,7 @@
     "date": "2026-07-21",
     "description": "v16.2.11",
     "status": "new",
-    "stars": 141068,
+    "stars": 141069,
     "repoUrl": "https://github.com/vercel/next.js",
     "changelogUrl": "https://github.com/vercel/next.js/releases/tag/v16.2.11"
   },
@@ -15,7 +15,7 @@
     "date": "2026-07-08",
     "description": "2026-07-08, Version 26.5.0 (Current), @richardlau",
     "status": "new",
-    "stars": 118334,
+    "stars": 118322,
     "repoUrl": "https://github.com/nodejs/node",
     "changelogUrl": "https://github.com/nodejs/node/releases/tag/v26.5.0"
   },
@@ -25,7 +25,7 @@
     "date": "2026-04-16",
     "description": "TypeScript 6.0.3",
     "status": "new",
-    "stars": 109922,
+    "stars": 109923,
     "repoUrl": "https://github.com/microsoft/TypeScript",
     "changelogUrl": "https://github.com/microsoft/TypeScript/releases/tag/v6.0.3"
   },
@@ -35,7 +35,7 @@
     "date": "2026-07-21",
     "description": "@astrojs/language-server@2.16.13",
     "status": "new",
-    "stars": 61218,
+    "stars": 61224,
     "repoUrl": "https://github.com/withastro/astro",
     "changelogUrl": "https://github.com/withastro/astro/releases/tag/%40astrojs/language-server%402.16.13"
   },
