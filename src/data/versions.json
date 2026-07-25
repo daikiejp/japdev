@@ -15,7 +15,7 @@
     "date": "2026-07-08",
     "description": "2026-07-08, Version 26.5.0 (Current), @richardlau",
     "status": "new",
-    "stars": 118377,
+    "stars": 118380,
     "repoUrl": "https://github.com/nodejs/node",
     "changelogUrl": "https://github.com/nodejs/node/releases/tag/v26.5.0"
   },
@@ -35,7 +35,7 @@
     "date": "2026-07-21",
     "description": "@astrojs/language-server@2.16.13",
     "status": "new",
-    "stars": 61302,
+    "stars": 61303,
     "repoUrl": "https://github.com/withastro/astro",
     "changelogUrl": "https://github.com/withastro/astro/releases/tag/%40astrojs/language-server%402.16.13"
   },
@@ -45,7 +45,7 @@
     "date": "2026-07-16",
     "description": "v3.5.40",
     "status": "new",
-    "stars": 54024,
+    "stars": 54026,
     "repoUrl": "https://github.com/vuejs/core",
     "changelogUrl": "https://github.com/vuejs/core/releases/tag/v3.5.40"
   },
