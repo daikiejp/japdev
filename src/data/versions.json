@@ -1,13 +1,13 @@
 [
   {
     "name": "Next.js",
-    "version": "16.2.11",
-    "date": "2026-07-21",
-    "description": "v16.2.11",
+    "version": "16.2.12",
+    "date": "2026-07-25",
+    "description": "v16.2.12",
     "status": "new",
-    "stars": 141130,
+    "stars": 141133,
     "repoUrl": "https://github.com/vercel/next.js",
-    "changelogUrl": "https://github.com/vercel/next.js/releases/tag/v16.2.11"
+    "changelogUrl": "https://github.com/vercel/next.js/releases/tag/v16.2.12"
   },
   {
     "name": "Node.js",
@@ -15,7 +15,7 @@
     "date": "2026-07-08",
     "description": "2026-07-08, Version 26.5.0 (Current), @richardlau",
     "status": "new",
-    "stars": 118380,
+    "stars": 118384,
     "repoUrl": "https://github.com/nodejs/node",
     "changelogUrl": "https://github.com/nodejs/node/releases/tag/v26.5.0"
   },
@@ -35,7 +35,7 @@
     "date": "2026-07-21",
     "description": "@astrojs/language-server@2.16.13",
     "status": "new",
-    "stars": 61303,
+    "stars": 61306,
     "repoUrl": "https://github.com/withastro/astro",
     "changelogUrl": "https://github.com/withastro/astro/releases/tag/%40astrojs/language-server%402.16.13"
   },
@@ -55,7 +55,7 @@
     "date": "2026-07-19",
     "description": "@sveltejs/kit@2.70.1",
     "status": "new",
-    "stars": 20687,
+    "stars": 20688,
     "repoUrl": "https://github.com/sveltejs/kit",
     "changelogUrl": "https://github.com/sveltejs/kit/releases/tag/%40sveltejs/kit%402.70.1"
   }
