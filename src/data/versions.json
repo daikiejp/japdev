@@ -15,7 +15,7 @@
     "date": "2026-07-08",
     "description": "2026-07-08, Version 26.5.0 (Current), @richardlau",
     "status": "new",
-    "stars": 118549,
+    "stars": 118548,
     "repoUrl": "https://github.com/nodejs/node",
     "changelogUrl": "https://github.com/nodejs/node/releases/tag/v26.5.0"
   },
@@ -35,7 +35,7 @@
     "date": "2026-07-27",
     "description": "@astrojs/cloudflare@14.1.5",
     "status": "new",
-    "stars": 61348,
+    "stars": 61347,
     "repoUrl": "https://github.com/withastro/astro",
     "changelogUrl": "https://github.com/withastro/astro/releases/tag/%40astrojs/cloudflare%4014.1.5"
   },
