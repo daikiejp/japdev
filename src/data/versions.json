@@ -15,7 +15,7 @@
     "date": "2026-07-29",
     "description": "2026-07-29, Version 26.5.1 (Current), @RafaelGSS",
     "status": "new",
-    "stars": 118603,
+    "stars": 118605,
     "repoUrl": "https://github.com/nodejs/node",
     "changelogUrl": "https://github.com/nodejs/node/releases/tag/v26.5.1"
   },
@@ -25,7 +25,7 @@
     "date": "2026-04-16",
     "description": "TypeScript 6.0.3",
     "status": "new",
-    "stars": 110028,
+    "stars": 110031,
     "repoUrl": "https://github.com/microsoft/TypeScript",
     "changelogUrl": "https://github.com/microsoft/TypeScript/releases/tag/v6.0.3"
   },
@@ -35,7 +35,7 @@
     "date": "2026-07-29",
     "description": "@astrojs/cloudflare@14.1.7",
     "status": "new",
-    "stars": 61442,
+    "stars": 61448,
     "repoUrl": "https://github.com/withastro/astro",
     "changelogUrl": "https://github.com/withastro/astro/releases/tag/%40astrojs/cloudflare%4014.1.7"
   },
@@ -45,7 +45,7 @@
     "date": "2026-07-16",
     "description": "v3.5.40",
     "status": "new",
-    "stars": 54078,
+    "stars": 54080,
     "repoUrl": "https://github.com/vuejs/core",
     "changelogUrl": "https://github.com/vuejs/core/releases/tag/v3.5.40"
   },
