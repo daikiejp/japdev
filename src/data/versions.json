@@ -5,7 +5,7 @@
     "date": "2026-07-25",
     "description": "v16.2.12",
     "status": "new",
-    "stars": 141221,
+    "stars": 141217,
     "repoUrl": "https://github.com/vercel/next.js",
     "changelogUrl": "https://github.com/vercel/next.js/releases/tag/v16.2.12"
   },
@@ -15,7 +15,7 @@
     "date": "2026-07-29",
     "description": "2026-07-29, Version 26.5.1 (Current), @RafaelGSS",
     "status": "new",
-    "stars": 118609,
+    "stars": 118612,
     "repoUrl": "https://github.com/nodejs/node",
     "changelogUrl": "https://github.com/nodejs/node/releases/tag/v26.5.1"
   },
@@ -35,7 +35,7 @@
     "date": "2026-07-29",
     "description": "@astrojs/cloudflare@14.1.7",
     "status": "new",
-    "stars": 61450,
+    "stars": 61456,
     "repoUrl": "https://github.com/withastro/astro",
     "changelogUrl": "https://github.com/withastro/astro/releases/tag/%40astrojs/cloudflare%4014.1.7"
   },
@@ -45,7 +45,7 @@
     "date": "2026-07-16",
     "description": "v3.5.40",
     "status": "new",
-    "stars": 54083,
+    "stars": 54084,
     "repoUrl": "https://github.com/vuejs/core",
     "changelogUrl": "https://github.com/vuejs/core/releases/tag/v3.5.40"
   },
