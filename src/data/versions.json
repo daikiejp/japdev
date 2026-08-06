@@ -5,7 +5,7 @@
     "date": "2026-08-03",
     "description": "",
     "status": "new",
-    "stars": 141626,
+    "stars": 141640,
     "repoUrl": "https://github.com/vercel/next.js",
     "changelogUrl": "https://github.com/vercel/next.js/releases/tag/v16.3.0"
   },
@@ -15,7 +15,7 @@
     "date": "2026-08-05",
     "description": "2026-08-05, Version 26.7.0 (Current), @aduh95",
     "status": "new",
-    "stars": 118797,
+    "stars": 118800,
     "repoUrl": "https://github.com/nodejs/node",
     "changelogUrl": "https://github.com/nodejs/node/releases/tag/v26.7.0"
   },
@@ -25,19 +25,19 @@
     "date": "2026-04-16",
     "description": "TypeScript 6.0.3",
     "status": "new",
-    "stars": 110077,
+    "stars": 110081,
     "repoUrl": "https://github.com/microsoft/TypeScript",
     "changelogUrl": "https://github.com/microsoft/TypeScript/releases/tag/v6.0.3"
   },
   {
     "name": "Astro",
-    "version": "@astrojs/cloudflare@14.1.7",
-    "date": "2026-07-29",
-    "description": "@astrojs/cloudflare@14.1.7",
+    "version": "@astrojs/solid-js@7.0.2",
+    "date": "2026-08-06",
+    "description": "@astrojs/solid-js@7.0.2",
     "status": "new",
-    "stars": 61575,
+    "stars": 61578,
     "repoUrl": "https://github.com/withastro/astro",
-    "changelogUrl": "https://github.com/withastro/astro/releases/tag/%40astrojs/cloudflare%4014.1.7"
+    "changelogUrl": "https://github.com/withastro/astro/releases/tag/%40astrojs/solid-js%407.0.2"
   },
   {
     "name": "Vue",
@@ -45,7 +45,7 @@
     "date": "2026-08-05",
     "description": "v3.5.41",
     "status": "new",
-    "stars": 54128,
+    "stars": 54131,
     "repoUrl": "https://github.com/vuejs/core",
     "changelogUrl": "https://github.com/vuejs/core/releases/tag/v3.5.41"
   },
