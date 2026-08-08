@@ -5,7 +5,7 @@
     "date": "2026-08-03",
     "description": "",
     "status": "new",
-    "stars": 141681,
+    "stars": 141686,
     "repoUrl": "https://github.com/vercel/next.js",
     "changelogUrl": "https://github.com/vercel/next.js/releases/tag/v16.3.0"
   },
@@ -15,7 +15,7 @@
     "date": "2026-08-05",
     "description": "2026-08-05, Version 26.7.0 (Current), @aduh95",
     "status": "new",
-    "stars": 118827,
+    "stars": 118828,
     "repoUrl": "https://github.com/nodejs/node",
     "changelogUrl": "https://github.com/nodejs/node/releases/tag/v26.7.0"
   },
@@ -35,7 +35,7 @@
     "date": "2026-08-06",
     "description": "@astrojs/solid-js@7.0.2",
     "status": "new",
-    "stars": 61630,
+    "stars": 61634,
     "repoUrl": "https://github.com/withastro/astro",
     "changelogUrl": "https://github.com/withastro/astro/releases/tag/%40astrojs/solid-js%407.0.2"
   },
@@ -45,7 +45,7 @@
     "date": "2026-08-05",
     "description": "v3.5.41",
     "status": "new",
-    "stars": 54158,
+    "stars": 54159,
     "repoUrl": "https://github.com/vuejs/core",
     "changelogUrl": "https://github.com/vuejs/core/releases/tag/v3.5.41"
   },
