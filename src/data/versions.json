@@ -5,7 +5,7 @@
     "date": "2026-08-03",
     "description": "",
     "status": "new",
-    "stars": 141690,
+    "stars": 141692,
     "repoUrl": "https://github.com/vercel/next.js",
     "changelogUrl": "https://github.com/vercel/next.js/releases/tag/v16.3.0"
   },
@@ -45,7 +45,7 @@
     "date": "2026-08-05",
     "description": "v3.5.41",
     "status": "new",
-    "stars": 54187,
+    "stars": 54190,
     "repoUrl": "https://github.com/vuejs/core",
     "changelogUrl": "https://github.com/vuejs/core/releases/tag/v3.5.41"
   },
@@ -55,7 +55,7 @@
     "date": "2026-07-29",
     "description": "@sveltejs/kit@2.70.2",
     "status": "new",
-    "stars": 20729,
+    "stars": 20730,
     "repoUrl": "https://github.com/sveltejs/kit",
     "changelogUrl": "https://github.com/sveltejs/kit/releases/tag/%40sveltejs/kit%402.70.2"
   }
