@@ -5,7 +5,7 @@
     "date": "2026-08-03",
     "description": "",
     "status": "new",
-    "stars": 141764,
+    "stars": 141767,
     "repoUrl": "https://github.com/vercel/next.js",
     "changelogUrl": "https://github.com/vercel/next.js/releases/tag/v16.3.0"
   },
@@ -15,7 +15,7 @@
     "date": "2026-08-05",
     "description": "2026-08-05, Version 26.7.0 (Current), @aduh95",
     "status": "new",
-    "stars": 118918,
+    "stars": 118920,
     "repoUrl": "https://github.com/nodejs/node",
     "changelogUrl": "https://github.com/nodejs/node/releases/tag/v26.7.0"
   },
@@ -25,19 +25,19 @@
     "date": "2026-04-16",
     "description": "TypeScript 6.0.3",
     "status": "new",
-    "stars": 110168,
+    "stars": 110169,
     "repoUrl": "https://github.com/microsoft/TypeScript",
     "changelogUrl": "https://github.com/microsoft/TypeScript/releases/tag/v6.0.3"
   },
   {
     "name": "Astro",
-    "version": "@astrojs/cloudflare@14.2.1",
-    "date": "2026-08-11",
-    "description": "@astrojs/cloudflare@14.2.1",
+    "version": "@astrojs/node@11.1.2",
+    "date": "2026-08-13",
+    "description": "@astrojs/node@11.1.2",
     "status": "new",
-    "stars": 61750,
+    "stars": 61759,
     "repoUrl": "https://github.com/withastro/astro",
-    "changelogUrl": "https://github.com/withastro/astro/releases/tag/%40astrojs/cloudflare%4014.2.1"
+    "changelogUrl": "https://github.com/withastro/astro/releases/tag/%40astrojs/node%4011.1.2"
   },
   {
     "name": "Vue",
@@ -55,7 +55,7 @@
     "date": "2026-07-29",
     "description": "@sveltejs/kit@2.70.2",
     "status": "new",
-    "stars": 20739,
+    "stars": 20740,
     "repoUrl": "https://github.com/sveltejs/kit",
     "changelogUrl": "https://github.com/sveltejs/kit/releases/tag/%40sveltejs/kit%402.70.2"
   }
