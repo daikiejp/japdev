@@ -1,13 +1,13 @@
 [
   {
     "name": "Next.js",
-    "version": "16.3.0",
-    "date": "2026-08-03",
-    "description": "",
+    "version": "16.3.1",
+    "date": "2026-08-13",
+    "description": "v16.3.1",
     "status": "new",
-    "stars": 141767,
+    "stars": 141770,
     "repoUrl": "https://github.com/vercel/next.js",
-    "changelogUrl": "https://github.com/vercel/next.js/releases/tag/v16.3.0"
+    "changelogUrl": "https://github.com/vercel/next.js/releases/tag/v16.3.1"
   },
   {
     "name": "Node.js",
@@ -15,7 +15,7 @@
     "date": "2026-08-05",
     "description": "2026-08-05, Version 26.7.0 (Current), @aduh95",
     "status": "new",
-    "stars": 118920,
+    "stars": 118922,
     "repoUrl": "https://github.com/nodejs/node",
     "changelogUrl": "https://github.com/nodejs/node/releases/tag/v26.7.0"
   },
@@ -25,7 +25,7 @@
     "date": "2026-04-16",
     "description": "TypeScript 6.0.3",
     "status": "new",
-    "stars": 110169,
+    "stars": 110171,
     "repoUrl": "https://github.com/microsoft/TypeScript",
     "changelogUrl": "https://github.com/microsoft/TypeScript/releases/tag/v6.0.3"
   },
@@ -35,7 +35,7 @@
     "date": "2026-08-13",
     "description": "@astrojs/node@11.1.2",
     "status": "new",
-    "stars": 61759,
+    "stars": 61762,
     "repoUrl": "https://github.com/withastro/astro",
     "changelogUrl": "https://github.com/withastro/astro/releases/tag/%40astrojs/node%4011.1.2"
   },
@@ -45,7 +45,7 @@
     "date": "2026-08-05",
     "description": "v3.5.41",
     "status": "new",
-    "stars": 54229,
+    "stars": 54228,
     "repoUrl": "https://github.com/vuejs/core",
     "changelogUrl": "https://github.com/vuejs/core/releases/tag/v3.5.41"
   },
