@@ -5,7 +5,7 @@
     "date": "2026-08-13",
     "description": "v16.3.1",
     "status": "new",
-    "stars": 141843,
+    "stars": 141847,
     "repoUrl": "https://github.com/vercel/next.js",
     "changelogUrl": "https://github.com/vercel/next.js/releases/tag/v16.3.1"
   },
@@ -15,7 +15,7 @@
     "date": "2026-08-05",
     "description": "2026-08-05, Version 26.7.0 (Current), @aduh95",
     "status": "new",
-    "stars": 119007,
+    "stars": 119009,
     "repoUrl": "https://github.com/nodejs/node",
     "changelogUrl": "https://github.com/nodejs/node/releases/tag/v26.7.0"
   },
@@ -25,19 +25,19 @@
     "date": "2026-04-16",
     "description": "TypeScript 6.0.3",
     "status": "new",
-    "stars": 110187,
+    "stars": 110189,
     "repoUrl": "https://github.com/microsoft/TypeScript",
     "changelogUrl": "https://github.com/microsoft/TypeScript/releases/tag/v6.0.3"
   },
   {
     "name": "Astro",
-    "version": "@astrojs/node@11.1.2",
-    "date": "2026-08-13",
-    "description": "@astrojs/node@11.1.2",
+    "version": "@astrojs/preact@6.0.3",
+    "date": "2026-08-18",
+    "description": "@astrojs/preact@6.0.3",
     "status": "new",
-    "stars": 61839,
+    "stars": 61844,
     "repoUrl": "https://github.com/withastro/astro",
-    "changelogUrl": "https://github.com/withastro/astro/releases/tag/%40astrojs/node%4011.1.2"
+    "changelogUrl": "https://github.com/withastro/astro/releases/tag/%40astrojs/preact%406.0.3"
   },
   {
     "name": "Vue",
@@ -51,12 +51,12 @@
   },
   {
     "name": "SvelteKit",
-    "version": "@sveltejs/kit@2.70.2",
-    "date": "2026-07-29",
-    "description": "@sveltejs/kit@2.70.2",
+    "version": "@sveltejs/kit@2.70.3",
+    "date": "2026-08-18",
+    "description": "@sveltejs/kit@2.70.3",
     "status": "new",
     "stars": 20743,
     "repoUrl": "https://github.com/sveltejs/kit",
-    "changelogUrl": "https://github.com/sveltejs/kit/releases/tag/%40sveltejs/kit%402.70.2"
+    "changelogUrl": "https://github.com/sveltejs/kit/releases/tag/%40sveltejs/kit%402.70.3"
   }
 ]
