@@ -5,7 +5,7 @@
     "date": "2026-08-13",
     "description": "v16.3.1",
     "status": "new",
-    "stars": 141847,
+    "stars": 141851,
     "repoUrl": "https://github.com/vercel/next.js",
     "changelogUrl": "https://github.com/vercel/next.js/releases/tag/v16.3.1"
   },
@@ -25,7 +25,7 @@
     "date": "2026-04-16",
     "description": "TypeScript 6.0.3",
     "status": "new",
-    "stars": 110189,
+    "stars": 110192,
     "repoUrl": "https://github.com/microsoft/TypeScript",
     "changelogUrl": "https://github.com/microsoft/TypeScript/releases/tag/v6.0.3"
   },
@@ -35,7 +35,7 @@
     "date": "2026-08-18",
     "description": "@astrojs/preact@6.0.3",
     "status": "new",
-    "stars": 61844,
+    "stars": 61851,
     "repoUrl": "https://github.com/withastro/astro",
     "changelogUrl": "https://github.com/withastro/astro/releases/tag/%40astrojs/preact%406.0.3"
   },
