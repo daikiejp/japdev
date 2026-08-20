@@ -15,19 +15,19 @@
     "date": "2026-08-05",
     "description": "2026-08-05, Version 26.7.0 (Current), @aduh95",
     "status": "new",
-    "stars": 119048,
+    "stars": 119051,
     "repoUrl": "https://github.com/nodejs/node",
     "changelogUrl": "https://github.com/nodejs/node/releases/tag/v26.7.0"
   },
   {
     "name": "TypeScript",
-    "version": "6.0.3",
-    "date": "2026-04-16",
-    "description": "TypeScript 6.0.3",
+    "version": "7.0.2",
+    "date": "2026-08-20",
+    "description": "TypeScript 7.0.2",
     "status": "new",
-    "stars": 110286,
+    "stars": 110302,
     "repoUrl": "https://github.com/microsoft/TypeScript",
-    "changelogUrl": "https://github.com/microsoft/TypeScript/releases/tag/v6.0.3"
+    "changelogUrl": "https://github.com/microsoft/TypeScript/releases/tag/v7.0.2"
   },
   {
     "name": "Astro",
@@ -35,7 +35,7 @@
     "date": "2026-08-19",
     "description": "@astrojs/react@6.0.4",
     "status": "new",
-    "stars": 61892,
+    "stars": 61897,
     "repoUrl": "https://github.com/withastro/astro",
     "changelogUrl": "https://github.com/withastro/astro/releases/tag/%40astrojs/react%406.0.4"
   },
