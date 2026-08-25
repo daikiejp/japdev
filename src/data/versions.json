@@ -5,7 +5,7 @@
     "date": "2026-08-21",
     "description": "",
     "status": "new",
-    "stars": 141919,
+    "stars": 141924,
     "repoUrl": "https://github.com/vercel/next.js",
     "changelogUrl": "https://github.com/vercel/next.js/releases/tag/v16.3.2"
   },
@@ -15,7 +15,7 @@
     "date": "2026-08-05",
     "description": "2026-08-05, Version 26.7.0 (Current), @aduh95",
     "status": "new",
-    "stars": 119502,
+    "stars": 119547,
     "repoUrl": "https://github.com/nodejs/node",
     "changelogUrl": "https://github.com/nodejs/node/releases/tag/v26.7.0"
   },
@@ -25,7 +25,7 @@
     "date": "2026-08-20",
     "description": "TypeScript 7.0.2",
     "status": "new",
-    "stars": 110663,
+    "stars": 110665,
     "repoUrl": "https://github.com/microsoft/TypeScript",
     "changelogUrl": "https://github.com/microsoft/TypeScript/releases/tag/v7.0.2"
   },
@@ -45,7 +45,7 @@
     "date": "2026-08-05",
     "description": "v3.5.41",
     "status": "new",
-    "stars": 54244,
+    "stars": 54245,
     "repoUrl": "https://github.com/vuejs/core",
     "changelogUrl": "https://github.com/vuejs/core/releases/tag/v3.5.41"
   },
