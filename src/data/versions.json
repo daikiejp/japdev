@@ -5,19 +5,19 @@
     "date": "2026-08-25",
     "description": "v16.3.3",
     "status": "new",
-    "stars": 141945,
+    "stars": 141950,
     "repoUrl": "https://github.com/vercel/next.js",
     "changelogUrl": "https://github.com/vercel/next.js/releases/tag/v16.3.3"
   },
   {
     "name": "Node.js",
-    "version": "26.8.0",
+    "version": "26.8.1",
     "date": "2026-08-26",
-    "description": "2026-08-26, Version 26.8.0 (Current), @aduh95",
+    "description": "2026-08-26, Version 26.8.1 (Current), @aduh95",
     "status": "new",
-    "stars": 119566,
+    "stars": 119568,
     "repoUrl": "https://github.com/nodejs/node",
-    "changelogUrl": "https://github.com/nodejs/node/releases/tag/v26.8.0"
+    "changelogUrl": "https://github.com/nodejs/node/releases/tag/v26.8.1"
   },
   {
     "name": "TypeScript",
@@ -25,7 +25,7 @@
     "date": "2026-08-20",
     "description": "TypeScript 7.0.2",
     "status": "new",
-    "stars": 110713,
+    "stars": 110715,
     "repoUrl": "https://github.com/microsoft/TypeScript",
     "changelogUrl": "https://github.com/microsoft/TypeScript/releases/tag/v7.0.2"
   },
@@ -35,7 +35,7 @@
     "date": "2026-08-26",
     "description": "astro@7.2.8",
     "status": "new",
-    "stars": 62075,
+    "stars": 62077,
     "repoUrl": "https://github.com/withastro/astro",
     "changelogUrl": "https://github.com/withastro/astro/releases/tag/astro%407.2.8"
   },
@@ -55,7 +55,7 @@
     "date": "2026-08-18",
     "description": "@sveltejs/kit@2.70.3",
     "status": "new",
-    "stars": 20759,
+    "stars": 20760,
     "repoUrl": "https://github.com/sveltejs/kit",
     "changelogUrl": "https://github.com/sveltejs/kit/releases/tag/%40sveltejs/kit%402.70.3"
   }
