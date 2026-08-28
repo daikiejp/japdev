@@ -5,7 +5,7 @@
     "date": "2026-08-25",
     "description": "v16.3.3",
     "status": "new",
-    "stars": 141964,
+    "stars": 141965,
     "repoUrl": "https://github.com/vercel/next.js",
     "changelogUrl": "https://github.com/vercel/next.js/releases/tag/v16.3.3"
   },
@@ -25,7 +25,7 @@
     "date": "2026-08-20",
     "description": "TypeScript 7.0.2",
     "status": "new",
-    "stars": 110743,
+    "stars": 110746,
     "repoUrl": "https://github.com/microsoft/TypeScript",
     "changelogUrl": "https://github.com/microsoft/TypeScript/releases/tag/v7.0.2"
   },
@@ -35,7 +35,7 @@
     "date": "2026-08-27",
     "description": "astro@7.2.9",
     "status": "new",
-    "stars": 62105,
+    "stars": 62108,
     "repoUrl": "https://github.com/withastro/astro",
     "changelogUrl": "https://github.com/withastro/astro/releases/tag/astro%407.2.9"
   },
@@ -45,7 +45,7 @@
     "date": "2026-08-27",
     "description": "v3.5.42",
     "status": "new",
-    "stars": 54257,
+    "stars": 54256,
     "repoUrl": "https://github.com/vuejs/core",
     "changelogUrl": "https://github.com/vuejs/core/releases/tag/v3.5.42"
   },
@@ -55,7 +55,7 @@
     "date": "2026-08-18",
     "description": "@sveltejs/kit@2.70.3",
     "status": "new",
-    "stars": 20765,
+    "stars": 20766,
     "repoUrl": "https://github.com/sveltejs/kit",
     "changelogUrl": "https://github.com/sveltejs/kit/releases/tag/%40sveltejs/kit%402.70.3"
   }
