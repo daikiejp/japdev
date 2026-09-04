@@ -5,7 +5,7 @@
     "date": "2026-08-31",
     "description": "v16.3.4",
     "status": "new",
-    "stars": 142094,
+    "stars": 142095,
     "repoUrl": "https://github.com/vercel/next.js",
     "changelogUrl": "https://github.com/vercel/next.js/releases/tag/v16.3.4"
   },
@@ -15,7 +15,7 @@
     "date": "2026-08-26",
     "description": "2026-08-26, Version 26.8.1 (Current), @aduh95",
     "status": "new",
-    "stars": 120621,
+    "stars": 120625,
     "repoUrl": "https://github.com/nodejs/node",
     "changelogUrl": "https://github.com/nodejs/node/releases/tag/v26.8.1"
   },
@@ -35,7 +35,7 @@
     "date": "2026-09-03",
     "description": "astro@7.3.1",
     "status": "new",
-    "stars": 62293,
+    "stars": 62296,
     "repoUrl": "https://github.com/withastro/astro",
     "changelogUrl": "https://github.com/withastro/astro/releases/tag/astro%407.3.1"
   },
